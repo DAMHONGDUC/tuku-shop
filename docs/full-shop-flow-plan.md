@@ -104,13 +104,13 @@ Current non-clothing categories (Toys, Cards, P&A, Pre-loved Luxury) and their i
 
 | Item | Choice |
 |---|---|
-| Sources | Unsplash and Pexels (both free for commercial use, no attribution required) |
+| Sources | Unsplash, free (non-Plus) photos only; credits kept in the manifest |
 | Avoid | Visible brand logos or trademarks on garments |
 | Format | JPEG, 800 px long edge, quality 75 (≈60–120 KB each) |
-| Volume | ~70 products × 2–3 photos + 8 banners + 14 category thumbs ≈ 230 files, budget ≤ 20 MB |
-| Layout | `assets/images/catalog/<categoryId>/<productId>_<n>.jpg`, `assets/images/category/<categoryId>.jpg`, `assets/images/banner/b_<n>.jpg` |
+| Volume | 69 products × 1–2 photos + 8 banners = 144 files, ≈ 19 MB (review photos recompressed to 0.6 MB) |
+| Layout | `assets/images/catalog/<categoryId>/<productId>_<n>.jpg` (category cards reuse one product photo), `assets/images/banner/b_<n>.jpg` |
 | Manifest | `tool/mock_images.csv`: asset path, source URL, photographer, license |
-| Fetch | `tool/fetch_mock_images.sh` downloads every manifest row, resizes with `sips`, skips existing files |
+| Fetch | `tool/fetch_mock_images.sh` downloads every manifest row at 800 px via the Unsplash image CDN, skips existing files |
 | Old assets | Delete the replaced PNGs (`assets/images/product/p3–p6`, `category/c0–c5`, non-fashion banners) |
 
 ## Features

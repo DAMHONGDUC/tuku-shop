@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:tuku_shop/src/features/order/data/models/order_model.dart';
 
-const _kMockProductPath = 'assets/images/product/';
+const _kCatalogPath = 'assets/images/catalog/';
 
 /// Products as the order service saw them at purchase time. Ids match the
 /// catalog so an order can link back to its product.
@@ -25,96 +25,76 @@ class OrderMock {
   static final _random = Random(42);
   static var _nextOrderNumber = 100001;
 
-  static const _sizes = ['S', 'M', 'L', 'XL', 'XXL'];
+  static const _sizes = ['S', 'M', 'L', 'XL'];
 
   static const _products = [
     _ProductSnapshot(
-      id: '1',
-      name: 'Margaux Leather',
-      price: 195.00,
+      id: 'wd1',
+      name: 'Floral Midi Dress',
+      price: 69.00,
       colors: [
         (
-          name: 'Onyx',
-          code: '#2C2C2C',
-          imageUrl: '${_kMockProductPath}p1_1.png',
+          name: 'Black Floral',
+          code: '#2B2B2B',
+          imageUrl: '${_kCatalogPath}women-dresses/wd1_1.jpg',
         ),
         (
-          name: 'Orche',
-          code: '#DAA520',
-          imageUrl: '${_kMockProductPath}p1_2.png',
-        ),
-        (
-          name: 'Mocha',
-          code: '#8B4513',
-          imageUrl: '${_kMockProductPath}p1_4.png',
+          name: 'Cream Floral',
+          code: '#F3E9DC',
+          imageUrl: '${_kCatalogPath}women-dresses/wd1_2.jpg',
         ),
       ],
     ),
     _ProductSnapshot(
-      id: '2',
-      name: 'Vancouver Crossbody',
-      price: 143.45,
+      id: 'mt1',
+      name: 'Essential Crew Tee',
+      price: 19.90,
       colors: [
         (
-          name: 'Onyx',
-          code: '#2C2C2C',
-          imageUrl: '${_kMockProductPath}p2_1.png',
-        ),
-        (
-          name: 'Orche',
-          code: '#DAA520',
-          imageUrl: '${_kMockProductPath}p2_2.png',
+          name: 'White',
+          code: '#FAFAFA',
+          imageUrl: '${_kCatalogPath}men-tshirts/mt1_1.jpg',
         ),
       ],
     ),
     _ProductSnapshot(
-      id: '3',
-      name: 'Shoulder Bag Beach',
-      price: 195.00,
+      id: 'jn1',
+      name: 'Slim Fit Jeans',
+      price: 59.00,
       colors: [
         (
-          name: 'Onyx',
-          code: '#2C2C2C',
-          imageUrl: '${_kMockProductPath}p3_1.png',
+          name: 'Light Wash',
+          code: '#9DB4D0',
+          imageUrl: '${_kCatalogPath}jeans/jn1_1.jpg',
+        ),
+        (
+          name: 'Mid Wash',
+          code: '#5D7DA8',
+          imageUrl: '${_kCatalogPath}jeans/jn1_2.jpg',
         ),
       ],
     ),
     _ProductSnapshot(
-      id: '4',
-      name: 'Everyday Leather',
-      price: 143.45,
+      id: 'jk1',
+      name: 'Classic Denim Jacket',
+      price: 89.00,
       colors: [
         (
-          name: 'Onyx',
-          code: '#2C2C2C',
-          imageUrl: '${_kMockProductPath}p4_1.png',
-        ),
-        (
-          name: 'Burgundy',
-          code: '#800020',
-          imageUrl: '${_kMockProductPath}p4_2.png',
-        ),
-        (
-          name: 'Navy',
-          code: '#1F2937',
-          imageUrl: '${_kMockProductPath}p4_3.png',
+          name: 'Indigo',
+          code: '#2E3A59',
+          imageUrl: '${_kCatalogPath}jackets/jk1_1.jpg',
         ),
       ],
     ),
     _ProductSnapshot(
-      id: '6',
-      name: 'Melanie Suede',
-      price: 143.45,
+      id: 'hd1',
+      name: 'Classic Pullover Hoodie',
+      price: 54.00,
       colors: [
         (
-          name: 'Brown',
-          code: '#8B4513',
-          imageUrl: '${_kMockProductPath}p6_1.png',
-        ),
-        (
-          name: 'Light Brown',
-          code: '#D2B48C',
-          imageUrl: '${_kMockProductPath}p6_2.png',
+          name: 'Black',
+          code: '#1C1C1C',
+          imageUrl: '${_kCatalogPath}hoodies/hd1_1.jpg',
         ),
       ],
     ),

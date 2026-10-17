@@ -48,8 +48,20 @@ flutter:
     - assets/google_fonts/
     - assets/icons/
     - assets/images/banner/
-    - assets/images/product/
-    - assets/images/category/
+    - assets/images/catalog/accessories/
+    - assets/images/catalog/activewear/
+    - assets/images/catalog/bags/
+    - assets/images/catalog/hoodies/
+    - assets/images/catalog/jackets/
+    - assets/images/catalog/jeans/
+    - assets/images/catalog/kids/
+    - assets/images/catalog/men-shirts/
+    - assets/images/catalog/men-tshirts/
+    - assets/images/catalog/shoes/
+    - assets/images/catalog/trousers/
+    - assets/images/catalog/women-dresses/
+    - assets/images/catalog/women-skirts/
+    - assets/images/catalog/women-tops/
     - assets/images/review_comment/
     - assets/images/common/
     - assets/videos/review_comment/

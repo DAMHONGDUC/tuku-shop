@@ -7,6 +7,8 @@ export 'entities/recommend_products_data.dart';
 export 'entities/search_products_filter_params.dart';
 export 'entities/description.dart';
 export 'entities/review_comment.dart';
+export 'entities/product_tag.dart';
+export 'entities/product_variant.dart';
 
 // repository
 export 'repositories/product_repository.dart';
