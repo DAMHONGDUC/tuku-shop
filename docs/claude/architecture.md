@@ -11,11 +11,11 @@
 | Repositories and usecases return `Either<Failure, T>` (dartz) | Uniform error flow up to the Cubit | `lib/src/core/usecase/usecase.dart` |
 | Usecases extend `UseCase<Type, Params>`, one per action, named `<Action>Usecase` | Single-purpose domain calls | `GetMyOrderUsecase` |
 | Data sources return models; `data/mapper/` converts models → entities | Entities stay free of DTO shape | `order_model_to_order_entity_mapper.dart` |
-| Mock data lives in `data/mock/` behind the data source | Stand-in for a real API | `data/mock/order_mock.dart` |
+| Mock data lives in `data/mock/` behind the data source; every data source call starts with `await MockLatency.wait()` (1 s) and nothing else delays | Stand-in for a real API with one latency knob | `data/mock/order_mock.dart` |
 | Each feature registers its chain in `<feature>_di.dart` via `getIt`, called from `lib/src/di/injector.dart` | One DI entry per feature | `OrderDi.config()` |
 | Data sources / repositories / usecases: `registerLazySingleton`; controllers: `registerFactory` | Fresh Cubit per screen | `order_di.dart` |
 | Screen folder: `<screen>_screen.dart`, `<screen>_controller.dart`, `<screen>_state.dart`, `components/`, `config/` | Predictable screen layout | `presentation/my_order/` |
-| Routes are `SdRouterV5` constants in `config/<screen>_routes.dart` | Route names/paths defined once | `MyOrderRoutes.myOrder` |
+| Routes are `SdRouterV5` constants in `lib/src/core/navigation/routes/<screen>_routes.dart`; the screen's `config/<screen>_stack.dart` builds the `GoRoute` | Any feature can navigate without importing another feature's `presentation/` | `MyOrderRoutes.myOrder` |
 | Cross-cutting code goes in `lib/src/core/` (constants, enums, l10n, navigation, resources, widgets) | No business logic in core | `lib/src/core/core.dart` |
 
 ## Never
