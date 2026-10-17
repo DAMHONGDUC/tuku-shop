@@ -66,5 +66,192 @@
   "password_weak": "Weak",
   "password_fair": "Fair",
   "password_good": "Good",
-  "password_strong": "Strong"
+  "password_strong": "Strong",
+  "action_shop_now": "Shop now",
+  "action_see_all": "See all",
+  "home_categories": "Categories",
+  "badge_new": "NEW",
+  "wishlist_add": "Save to wishlist",
+  "wishlist_remove": "Remove from wishlist",
+  "sort_recommended": "Recommended",
+  "sort_newest": "Newest",
+  "sort_price_low": "Price: low to high",
+  "sort_price_high": "Price: high to low",
+  "sort_top_rated": "Top rated",
+  "sort_best_selling": "Best selling",
+  "gender_all": "All",
+  "gender_men": "Men",
+  "gender_women": "Women",
+  "gender_unisex": "Unisex",
+  "home_flash_sale": "Flash sale",
+  "home_flash_sale_subtitle": "Deepest markdowns, for a few hours only",
+  "home_flash_sale_all": "Shop the whole sale",
+  "home_flash_sale_ends": "Sale ends in {time}",
+  "@home_flash_sale_ends": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "home_recommended": "Picked for you",
+  "home_recommended_subtitle": "Based on what's trending this week",
+  "search_hint": "Search hoodies, leggings, bags…",
+  "home_greeting_morning": "Good morning",
+  "home_greeting_afternoon": "Good afternoon",
+  "home_greeting_evening": "Good evening",
+  "home_guest": "there",
+  "notifications_title": "Notifications",
+  "perk_shipping": "Free shipping\nover $75",
+  "perk_returns": "30-day\nreturns",
+  "perk_secure": "Secure\ncheckout",
+  "home_new_arrivals": "New arrivals",
+  "home_new_arrivals_subtitle": "Fresh drops this week",
+  "home_best_sellers": "Best sellers",
+  "home_lookbook": "Shop the look",
+  "home_lookbook_subtitle": "Edits from our studio",
+  "home_look_women": "Studio to street",
+  "home_look_men": "Built for the coast",
+  "home_look_performance": "Performance edit",
+  "home_look_performance_caption": "Our highest-rated pieces",
+  "browse_empty_title": "Nothing matches yet",
+  "browse_empty_message": "Try a different category or loosen your filters.",
+  "browse_end": "That's all {count} pieces",
+  "@browse_end": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "browse_all_categories": "All",
+  "browse_loading": "Loading…",
+  "browse_count": "{count, plural, =0{No items} =1{1 item} other{{count} items}}",
+  "@browse_count": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "sort_title": "Sort by",
+  "filter_title": "Filters",
+  "filter_reset": "Reset",
+  "filter_clear": "Clear filters",
+  "filter_apply": "Show results",
+  "filter_price": "Price",
+  "filter_size": "Size",
+  "filter_color": "Colour",
+  "filter_on_sale": "On sale only",
+  "filter_new_only": "New arrivals only",
+  "shop_title": "Shop",
+  "search_title": "Search",
+  "search_clear": "Clear",
+  "search_recent": "Recent searches",
+  "search_clear_recent": "Clear",
+  "search_trending": "Trending now",
+  "action_share": "Share",
+  "action_decrease": "Decrease",
+  "action_increase": "Increase",
+  "detail_link_copied": "Product link copied",
+  "detail_related": "You may also like",
+  "badge_eco": "Eco",
+  "badge_best_seller": "Best seller",
+  "detail_rating": "Rated {rating} out of 5",
+  "@detail_rating": {
+    "placeholders": {
+      "rating": {
+        "type": "String"
+      }
+    }
+  },
+  "detail_reviews": "{count, plural, =1{1 review} other{{count} reviews}}",
+  "@detail_reviews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "detail_sold": "{sold} sold",
+  "@detail_sold": {
+    "placeholders": {
+      "sold": {
+        "type": "String"
+      }
+    }
+  },
+  "detail_save": "Save {amount}",
+  "@detail_save": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "detail_color": "Colour",
+  "detail_size": "Size",
+  "detail_size_pick": "Pick a size",
+  "detail_size_guide": "Size guide",
+  "detail_quantity": "Quantity",
+  "size_guide_tops": "Body measurements in inches. Between sizes? Size up for a relaxed fit.",
+  "size_guide_bottoms": "Waist measurement in inches.",
+  "size_guide_note": "Free exchanges within 30 days if the fit isn't right.",
+  "size_chest": "Chest",
+  "size_waist": "Waist",
+  "size_hips": "Hips",
+  "detail_perk_shipping": "Free delivery over $75",
+  "detail_perk_shipping_sub": "Arrives in 3–5 business days",
+  "detail_perk_returns": "Free 30-day returns",
+  "detail_perk_returns_sub": "Not the right fit? Send it back on us",
+  "detail_description": "Description",
+  "detail_material": "Material",
+  "detail_read_more": "Read more",
+  "detail_read_less": "Show less",
+  "review_variant": "Size {size} · {color}",
+  "@review_variant": {
+    "placeholders": {
+      "color": {
+        "type": "String"
+      },
+      "size": {
+        "type": "String"
+      }
+    }
+  },
+  "review_helpful": "{count} found this helpful",
+  "@review_helpful": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "detail_reviews_title": "Reviews",
+  "detail_all_reviews": "Read all {count} reviews",
+  "@detail_all_reviews": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "detail_choose_size": "Choose a size first",
+  "detail_added": "Added to your bag",
+  "detail_view_bag": "View bag",
+  "detail_add_to_bag": "Add to bag",
+  "reviews_empty": "No reviews with this rating yet",
+  "wishlist_title": "Saved",
+  "wishlist_count": "{count, plural, =0{Nothing saved yet} =1{1 piece saved} other{{count} pieces saved}}",
+  "@wishlist_count": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "wishlist_empty_title": "Your wishlist is empty",
+  "wishlist_empty_message": "Tap the heart on anything you love and it'll wait for you here.",
+  "wishlist_move_to_bag": "Add to bag",
+  "action_start_shopping": "Start shopping"
 }

@@ -6,7 +6,6 @@ import 'package:tuku_shop/src/features/banner/banner_di.dart';
 import 'package:tuku_shop/src/features/cart/cart_di.dart';
 import 'package:tuku_shop/src/features/category/category_di.dart';
 import 'package:tuku_shop/src/features/checkout/checkout_di.dart';
-import 'package:tuku_shop/src/features/home/home_di.dart';
 import 'package:tuku_shop/src/features/notification/notification_di.dart';
 import 'package:tuku_shop/src/features/order/order_di.dart';
 import 'package:tuku_shop/src/features/product/product_di.dart';
@@ -35,7 +34,6 @@ class Injector {
     CheckoutDi.config();
     OrderDi.config();
     NotificationDi.config();
-    HomeDi.config();
     ProfileDi.config();
     SplashDi.config();
     AppDi.config();

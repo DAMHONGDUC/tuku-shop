@@ -1,3 +1,5 @@
+import 'route_args.dart';
+
 /// One route of the app: the name `go_router` knows it by and its path.
 class AppRoute {
   const AppRoute(this.name, this.path);
@@ -55,4 +57,15 @@ abstract final class AppRoutes {
 
   /// The path parameter every `:id` route reads.
   static const String idParam = 'id';
+
+  static String productPath(String id) => '/product/$id';
+
+  static String productReviewsPath(String id) => '/product/$id/reviews';
+
+  static String orderPath(String id) => '/orders/$id';
+
+  static String orderSuccessPath(String id) => '/order-success/$id';
+
+  static String productListPath(ProductListArgs args) =>
+      Uri(path: productList.path, queryParameters: args.toQuery()).toString();
 }

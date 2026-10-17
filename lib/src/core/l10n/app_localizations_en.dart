@@ -200,4 +200,372 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get password_strong => 'Strong';
+
+  @override
+  String get action_shop_now => 'Shop now';
+
+  @override
+  String get action_see_all => 'See all';
+
+  @override
+  String get home_categories => 'Categories';
+
+  @override
+  String get badge_new => 'NEW';
+
+  @override
+  String get wishlist_add => 'Save to wishlist';
+
+  @override
+  String get wishlist_remove => 'Remove from wishlist';
+
+  @override
+  String get sort_recommended => 'Recommended';
+
+  @override
+  String get sort_newest => 'Newest';
+
+  @override
+  String get sort_price_low => 'Price: low to high';
+
+  @override
+  String get sort_price_high => 'Price: high to low';
+
+  @override
+  String get sort_top_rated => 'Top rated';
+
+  @override
+  String get sort_best_selling => 'Best selling';
+
+  @override
+  String get gender_all => 'All';
+
+  @override
+  String get gender_men => 'Men';
+
+  @override
+  String get gender_women => 'Women';
+
+  @override
+  String get gender_unisex => 'Unisex';
+
+  @override
+  String get home_flash_sale => 'Flash sale';
+
+  @override
+  String get home_flash_sale_subtitle =>
+      'Deepest markdowns, for a few hours only';
+
+  @override
+  String get home_flash_sale_all => 'Shop the whole sale';
+
+  @override
+  String home_flash_sale_ends(String time) {
+    return 'Sale ends in $time';
+  }
+
+  @override
+  String get home_recommended => 'Picked for you';
+
+  @override
+  String get home_recommended_subtitle => 'Based on what\'s trending this week';
+
+  @override
+  String get search_hint => 'Search hoodies, leggings, bags…';
+
+  @override
+  String get home_greeting_morning => 'Good morning';
+
+  @override
+  String get home_greeting_afternoon => 'Good afternoon';
+
+  @override
+  String get home_greeting_evening => 'Good evening';
+
+  @override
+  String get home_guest => 'there';
+
+  @override
+  String get notifications_title => 'Notifications';
+
+  @override
+  String get perk_shipping => 'Free shipping\nover \$75';
+
+  @override
+  String get perk_returns => '30-day\nreturns';
+
+  @override
+  String get perk_secure => 'Secure\ncheckout';
+
+  @override
+  String get home_new_arrivals => 'New arrivals';
+
+  @override
+  String get home_new_arrivals_subtitle => 'Fresh drops this week';
+
+  @override
+  String get home_best_sellers => 'Best sellers';
+
+  @override
+  String get home_lookbook => 'Shop the look';
+
+  @override
+  String get home_lookbook_subtitle => 'Edits from our studio';
+
+  @override
+  String get home_look_women => 'Studio to street';
+
+  @override
+  String get home_look_men => 'Built for the coast';
+
+  @override
+  String get home_look_performance => 'Performance edit';
+
+  @override
+  String get home_look_performance_caption => 'Our highest-rated pieces';
+
+  @override
+  String get browse_empty_title => 'Nothing matches yet';
+
+  @override
+  String get browse_empty_message =>
+      'Try a different category or loosen your filters.';
+
+  @override
+  String browse_end(int count) {
+    return 'That\'s all $count pieces';
+  }
+
+  @override
+  String get browse_all_categories => 'All';
+
+  @override
+  String get browse_loading => 'Loading…';
+
+  @override
+  String browse_count(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count items',
+      one: '1 item',
+      zero: 'No items',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get sort_title => 'Sort by';
+
+  @override
+  String get filter_title => 'Filters';
+
+  @override
+  String get filter_reset => 'Reset';
+
+  @override
+  String get filter_clear => 'Clear filters';
+
+  @override
+  String get filter_apply => 'Show results';
+
+  @override
+  String get filter_price => 'Price';
+
+  @override
+  String get filter_size => 'Size';
+
+  @override
+  String get filter_color => 'Colour';
+
+  @override
+  String get filter_on_sale => 'On sale only';
+
+  @override
+  String get filter_new_only => 'New arrivals only';
+
+  @override
+  String get shop_title => 'Shop';
+
+  @override
+  String get search_title => 'Search';
+
+  @override
+  String get search_clear => 'Clear';
+
+  @override
+  String get search_recent => 'Recent searches';
+
+  @override
+  String get search_clear_recent => 'Clear';
+
+  @override
+  String get search_trending => 'Trending now';
+
+  @override
+  String get action_share => 'Share';
+
+  @override
+  String get action_decrease => 'Decrease';
+
+  @override
+  String get action_increase => 'Increase';
+
+  @override
+  String get detail_link_copied => 'Product link copied';
+
+  @override
+  String get detail_related => 'You may also like';
+
+  @override
+  String get badge_eco => 'Eco';
+
+  @override
+  String get badge_best_seller => 'Best seller';
+
+  @override
+  String detail_rating(String rating) {
+    return 'Rated $rating out of 5';
+  }
+
+  @override
+  String detail_reviews(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count reviews',
+      one: '1 review',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String detail_sold(String sold) {
+    return '$sold sold';
+  }
+
+  @override
+  String detail_save(String amount) {
+    return 'Save $amount';
+  }
+
+  @override
+  String get detail_color => 'Colour';
+
+  @override
+  String get detail_size => 'Size';
+
+  @override
+  String get detail_size_pick => 'Pick a size';
+
+  @override
+  String get detail_size_guide => 'Size guide';
+
+  @override
+  String get detail_quantity => 'Quantity';
+
+  @override
+  String get size_guide_tops =>
+      'Body measurements in inches. Between sizes? Size up for a relaxed fit.';
+
+  @override
+  String get size_guide_bottoms => 'Waist measurement in inches.';
+
+  @override
+  String get size_guide_note =>
+      'Free exchanges within 30 days if the fit isn\'t right.';
+
+  @override
+  String get size_chest => 'Chest';
+
+  @override
+  String get size_waist => 'Waist';
+
+  @override
+  String get size_hips => 'Hips';
+
+  @override
+  String get detail_perk_shipping => 'Free delivery over \$75';
+
+  @override
+  String get detail_perk_shipping_sub => 'Arrives in 3–5 business days';
+
+  @override
+  String get detail_perk_returns => 'Free 30-day returns';
+
+  @override
+  String get detail_perk_returns_sub => 'Not the right fit? Send it back on us';
+
+  @override
+  String get detail_description => 'Description';
+
+  @override
+  String get detail_material => 'Material';
+
+  @override
+  String get detail_read_more => 'Read more';
+
+  @override
+  String get detail_read_less => 'Show less';
+
+  @override
+  String review_variant(String color, String size) {
+    return 'Size $size · $color';
+  }
+
+  @override
+  String review_helpful(int count) {
+    return '$count found this helpful';
+  }
+
+  @override
+  String get detail_reviews_title => 'Reviews';
+
+  @override
+  String detail_all_reviews(int count) {
+    return 'Read all $count reviews';
+  }
+
+  @override
+  String get detail_choose_size => 'Choose a size first';
+
+  @override
+  String get detail_added => 'Added to your bag';
+
+  @override
+  String get detail_view_bag => 'View bag';
+
+  @override
+  String get detail_add_to_bag => 'Add to bag';
+
+  @override
+  String get reviews_empty => 'No reviews with this rating yet';
+
+  @override
+  String get wishlist_title => 'Saved';
+
+  @override
+  String wishlist_count(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count pieces saved',
+      one: '1 piece saved',
+      zero: 'Nothing saved yet',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String get wishlist_empty_title => 'Your wishlist is empty';
+
+  @override
+  String get wishlist_empty_message =>
+      'Tap the heart on anything you love and it\'ll wait for you here.';
+
+  @override
+  String get wishlist_move_to_bag => 'Add to bag';
+
+  @override
+  String get action_start_shopping => 'Start shopping';
 }
