@@ -1,6 +1,9 @@
 abstract final class AppConstants {
   static const String appName = 'Tuku Shop';
 
+  /// Shown in Settings. Keep in step with `version:` in pubspec.yaml.
+  static const String appVersion = '1.0.0';
+
   /// The lower-case wordmark drawn on the splash and sign-in screens.
   static const String wordmark = 'tuku';
 

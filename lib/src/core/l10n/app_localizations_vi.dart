@@ -896,4 +896,174 @@ class AppLocalizationsVi extends AppLocalizations {
   String time_days_ago(int n) {
     return '$n ngày trước';
   }
+
+  @override
+  String get profile_title => 'Tài khoản';
+
+  @override
+  String profile_member_since(String date) {
+    return 'Thành viên từ $date';
+  }
+
+  @override
+  String get profile_points_title => 'Điểm Tuku';
+
+  @override
+  String get profile_points_hint => 'Cứ mỗi 1 đô la chi tiêu được 1 điểm';
+
+  @override
+  String profile_points_value(int points) {
+    return '$points điểm';
+  }
+
+  @override
+  String get profile_orders => 'Đơn hàng';
+
+  @override
+  String get profile_saved => 'Đã lưu';
+
+  @override
+  String get profile_section_shopping => 'Mua sắm';
+
+  @override
+  String get profile_section_account => 'Tài khoản';
+
+  @override
+  String get profile_logout => 'Đăng xuất';
+
+  @override
+  String get profile_logout_title => 'Đăng xuất?';
+
+  @override
+  String get profile_logout_message =>
+      'Giỏ hàng và các món đã lưu vẫn được giữ trên máy này.';
+
+  @override
+  String get edit_profile_title => 'Sửa hồ sơ';
+
+  @override
+  String get edit_profile_save => 'Lưu thay đổi';
+
+  @override
+  String get edit_profile_saved => 'Đã cập nhật hồ sơ';
+
+  @override
+  String get validation_phone => 'Nhập số điện thoại hợp lệ';
+
+  @override
+  String get settings_title => 'Cài đặt';
+
+  @override
+  String get settings_appearance => 'Giao diện';
+
+  @override
+  String get settings_theme_light => 'Sáng';
+
+  @override
+  String get settings_theme_dark => 'Tối';
+
+  @override
+  String get settings_theme_system => 'Theo hệ thống';
+
+  @override
+  String get settings_language => 'Ngôn ngữ';
+
+  @override
+  String get settings_language_en => 'English';
+
+  @override
+  String get settings_language_vi => 'Tiếng Việt';
+
+  @override
+  String get settings_notifications => 'Thông báo';
+
+  @override
+  String get settings_push => 'Thông báo đẩy';
+
+  @override
+  String get settings_push_hint => 'Cập nhật đơn hàng và hàng mới về';
+
+  @override
+  String get settings_email => 'Email cập nhật';
+
+  @override
+  String get settings_email_hint => 'Ưu đãi và tuyển chọn hằng tuần';
+
+  @override
+  String get settings_about => 'Thông tin';
+
+  @override
+  String get settings_version => 'Phiên bản';
+
+  @override
+  String get help_title => 'Trung tâm trợ giúp';
+
+  @override
+  String get help_faq => 'Câu hỏi thường gặp';
+
+  @override
+  String get help_q_shipping => 'Giao hàng mất bao lâu?';
+
+  @override
+  String get help_a_shipping =>
+      'Giao tiêu chuẩn mất 3–5 ngày làm việc, giao nhanh 1–2 ngày. Đơn từ \$75 được miễn phí vận chuyển.';
+
+  @override
+  String get help_q_returns => 'Tôi có thể trả hàng không?';
+
+  @override
+  String get help_a_returns =>
+      'Có, trong vòng 30 ngày kể từ khi nhận, sản phẩm chưa mặc và còn nguyên tem. Tiền được hoàn về phương thức thanh toán ban đầu.';
+
+  @override
+  String get help_q_track => 'Đơn hàng của tôi đang ở đâu?';
+
+  @override
+  String get help_a_track =>
+      'Vào Tài khoản → Đơn hàng của tôi và chạm vào đơn để xem từng bước vận chuyển.';
+
+  @override
+  String get help_q_cancel => 'Tôi có thể hủy đơn không?';
+
+  @override
+  String get help_a_cancel =>
+      'Đơn có thể hủy cho đến khi được gửi đi. Mở đơn hàng và chạm Hủy đơn.';
+
+  @override
+  String get help_q_promo => 'Mã giảm giá dùng thế nào?';
+
+  @override
+  String get help_a_promo =>
+      'Nhập mã trong giỏ hàng. Mỗi đơn dùng một mã; một số mã yêu cầu giá trị đơn tối thiểu.';
+
+  @override
+  String get help_q_points => 'Điểm Tuku là gì?';
+
+  @override
+  String get help_a_points =>
+      'Bạn nhận 1 điểm cho mỗi đô la chi tiêu. Điểm hiển thị trong trang tài khoản.';
+
+  @override
+  String get help_contact => 'Vẫn cần hỗ trợ?';
+
+  @override
+  String get help_chat => 'Chat với chúng tôi';
+
+  @override
+  String get help_chat_hint => 'Trả lời trong vài phút';
+
+  @override
+  String get help_email => 'Gửi email';
+
+  @override
+  String get help_email_hint => 'Trả lời trong một ngày';
+
+  @override
+  String get help_call => 'Gọi cho chúng tôi';
+
+  @override
+  String get help_call_hint => '9h–18h, thứ Hai đến thứ Bảy';
+
+  @override
+  String get help_contact_demo => 'Liên hệ đã tắt trong bản demo.';
 }

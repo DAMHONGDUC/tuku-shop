@@ -930,4 +930,174 @@ class AppLocalizationsEn extends AppLocalizations {
   String time_days_ago(int n) {
     return '${n}d ago';
   }
+
+  @override
+  String get profile_title => 'Profile';
+
+  @override
+  String profile_member_since(String date) {
+    return 'Member since $date';
+  }
+
+  @override
+  String get profile_points_title => 'Tuku Points';
+
+  @override
+  String get profile_points_hint => '1 point for every dollar you spend';
+
+  @override
+  String profile_points_value(int points) {
+    return '$points pts';
+  }
+
+  @override
+  String get profile_orders => 'Orders';
+
+  @override
+  String get profile_saved => 'Saved';
+
+  @override
+  String get profile_section_shopping => 'Shopping';
+
+  @override
+  String get profile_section_account => 'Account';
+
+  @override
+  String get profile_logout => 'Log out';
+
+  @override
+  String get profile_logout_title => 'Log out?';
+
+  @override
+  String get profile_logout_message =>
+      'Your bag and saved pieces stay on this device.';
+
+  @override
+  String get edit_profile_title => 'Edit profile';
+
+  @override
+  String get edit_profile_save => 'Save changes';
+
+  @override
+  String get edit_profile_saved => 'Profile updated';
+
+  @override
+  String get validation_phone => 'Enter a valid phone number';
+
+  @override
+  String get settings_title => 'Settings';
+
+  @override
+  String get settings_appearance => 'Appearance';
+
+  @override
+  String get settings_theme_light => 'Light';
+
+  @override
+  String get settings_theme_dark => 'Dark';
+
+  @override
+  String get settings_theme_system => 'Match system';
+
+  @override
+  String get settings_language => 'Language';
+
+  @override
+  String get settings_language_en => 'English';
+
+  @override
+  String get settings_language_vi => 'Tiếng Việt';
+
+  @override
+  String get settings_notifications => 'Notifications';
+
+  @override
+  String get settings_push => 'Push notifications';
+
+  @override
+  String get settings_push_hint => 'Order updates and new drops';
+
+  @override
+  String get settings_email => 'Email updates';
+
+  @override
+  String get settings_email_hint => 'Offers and the weekly edit';
+
+  @override
+  String get settings_about => 'About';
+
+  @override
+  String get settings_version => 'Version';
+
+  @override
+  String get help_title => 'Help center';
+
+  @override
+  String get help_faq => 'Frequently asked';
+
+  @override
+  String get help_q_shipping => 'How long does delivery take?';
+
+  @override
+  String get help_a_shipping =>
+      'Standard delivery takes 3–5 business days and express 1–2. Orders over \$75 ship free.';
+
+  @override
+  String get help_q_returns => 'Can I return an item?';
+
+  @override
+  String get help_a_returns =>
+      'Yes, within 30 days of delivery, unworn and with tags on. Refunds go back to the original payment method.';
+
+  @override
+  String get help_q_track => 'Where is my order?';
+
+  @override
+  String get help_a_track =>
+      'Open Profile → My orders and tap the order to see every step of its journey.';
+
+  @override
+  String get help_q_cancel => 'Can I cancel an order?';
+
+  @override
+  String get help_a_cancel =>
+      'Orders can be cancelled until they ship. Open the order and tap Cancel order.';
+
+  @override
+  String get help_q_promo => 'How do promo codes work?';
+
+  @override
+  String get help_a_promo =>
+      'Enter the code in your bag. One code per order; some need a minimum subtotal.';
+
+  @override
+  String get help_q_points => 'What are Tuku Points?';
+
+  @override
+  String get help_a_points =>
+      'You earn 1 point for every dollar you spend. Points show on your profile.';
+
+  @override
+  String get help_contact => 'Still need help?';
+
+  @override
+  String get help_chat => 'Chat with us';
+
+  @override
+  String get help_chat_hint => 'Replies in a few minutes';
+
+  @override
+  String get help_email => 'Email us';
+
+  @override
+  String get help_email_hint => 'Replies within a day';
+
+  @override
+  String get help_call => 'Call us';
+
+  @override
+  String get help_call_hint => '9am–6pm, Monday to Saturday';
+
+  @override
+  String get help_contact_demo => 'Contact is off in this demo.';
 }

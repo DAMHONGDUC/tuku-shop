@@ -452,5 +452,72 @@
         "type": "int"
       }
     }
-  }
+  },
+  "profile_title": "Profile",
+  "profile_member_since": "Member since {date}",
+  "@profile_member_since": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "profile_points_title": "Tuku Points",
+  "profile_points_hint": "1 point for every dollar you spend",
+  "profile_points_value": "{points} pts",
+  "@profile_points_value": {
+    "placeholders": {
+      "points": {
+        "type": "int"
+      }
+    }
+  },
+  "profile_orders": "Orders",
+  "profile_saved": "Saved",
+  "profile_section_shopping": "Shopping",
+  "profile_section_account": "Account",
+  "profile_logout": "Log out",
+  "profile_logout_title": "Log out?",
+  "profile_logout_message": "Your bag and saved pieces stay on this device.",
+  "edit_profile_title": "Edit profile",
+  "edit_profile_save": "Save changes",
+  "edit_profile_saved": "Profile updated",
+  "validation_phone": "Enter a valid phone number",
+  "settings_title": "Settings",
+  "settings_appearance": "Appearance",
+  "settings_theme_light": "Light",
+  "settings_theme_dark": "Dark",
+  "settings_theme_system": "Match system",
+  "settings_language": "Language",
+  "settings_language_en": "English",
+  "settings_language_vi": "Tiếng Việt",
+  "settings_notifications": "Notifications",
+  "settings_push": "Push notifications",
+  "settings_push_hint": "Order updates and new drops",
+  "settings_email": "Email updates",
+  "settings_email_hint": "Offers and the weekly edit",
+  "settings_about": "About",
+  "settings_version": "Version",
+  "help_title": "Help center",
+  "help_faq": "Frequently asked",
+  "help_q_shipping": "How long does delivery take?",
+  "help_a_shipping": "Standard delivery takes 3–5 business days and express 1–2. Orders over $75 ship free.",
+  "help_q_returns": "Can I return an item?",
+  "help_a_returns": "Yes, within 30 days of delivery, unworn and with tags on. Refunds go back to the original payment method.",
+  "help_q_track": "Where is my order?",
+  "help_a_track": "Open Profile → My orders and tap the order to see every step of its journey.",
+  "help_q_cancel": "Can I cancel an order?",
+  "help_a_cancel": "Orders can be cancelled until they ship. Open the order and tap Cancel order.",
+  "help_q_promo": "How do promo codes work?",
+  "help_a_promo": "Enter the code in your bag. One code per order; some need a minimum subtotal.",
+  "help_q_points": "What are Tuku Points?",
+  "help_a_points": "You earn 1 point for every dollar you spend. Points show on your profile.",
+  "help_contact": "Still need help?",
+  "help_chat": "Chat with us",
+  "help_chat_hint": "Replies in a few minutes",
+  "help_email": "Email us",
+  "help_email_hint": "Replies within a day",
+  "help_call": "Call us",
+  "help_call_hint": "9am–6pm, Monday to Saturday",
+  "help_contact_demo": "Contact is off in this demo."
 }

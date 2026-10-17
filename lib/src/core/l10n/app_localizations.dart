@@ -1729,6 +1729,324 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{n}d ago'**
   String time_days_ago(int n);
+
+  /// No description provided for @profile_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get profile_title;
+
+  /// No description provided for @profile_member_since.
+  ///
+  /// In en, this message translates to:
+  /// **'Member since {date}'**
+  String profile_member_since(String date);
+
+  /// No description provided for @profile_points_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuku Points'**
+  String get profile_points_title;
+
+  /// No description provided for @profile_points_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'1 point for every dollar you spend'**
+  String get profile_points_hint;
+
+  /// No description provided for @profile_points_value.
+  ///
+  /// In en, this message translates to:
+  /// **'{points} pts'**
+  String profile_points_value(int points);
+
+  /// No description provided for @profile_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get profile_orders;
+
+  /// No description provided for @profile_saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved'**
+  String get profile_saved;
+
+  /// No description provided for @profile_section_shopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shopping'**
+  String get profile_section_shopping;
+
+  /// No description provided for @profile_section_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Account'**
+  String get profile_section_account;
+
+  /// No description provided for @profile_logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get profile_logout;
+
+  /// No description provided for @profile_logout_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out?'**
+  String get profile_logout_title;
+
+  /// No description provided for @profile_logout_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Your bag and saved pieces stay on this device.'**
+  String get profile_logout_message;
+
+  /// No description provided for @edit_profile_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get edit_profile_title;
+
+  /// No description provided for @edit_profile_save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get edit_profile_save;
+
+  /// No description provided for @edit_profile_saved.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile updated'**
+  String get edit_profile_saved;
+
+  /// No description provided for @validation_phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a valid phone number'**
+  String get validation_phone;
+
+  /// No description provided for @settings_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings_title;
+
+  /// No description provided for @settings_appearance.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get settings_appearance;
+
+  /// No description provided for @settings_theme_light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get settings_theme_light;
+
+  /// No description provided for @settings_theme_dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get settings_theme_dark;
+
+  /// No description provided for @settings_theme_system.
+  ///
+  /// In en, this message translates to:
+  /// **'Match system'**
+  String get settings_theme_system;
+
+  /// No description provided for @settings_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get settings_language;
+
+  /// No description provided for @settings_language_en.
+  ///
+  /// In en, this message translates to:
+  /// **'English'**
+  String get settings_language_en;
+
+  /// No description provided for @settings_language_vi.
+  ///
+  /// In en, this message translates to:
+  /// **'Tiếng Việt'**
+  String get settings_language_vi;
+
+  /// No description provided for @settings_notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get settings_notifications;
+
+  /// No description provided for @settings_push.
+  ///
+  /// In en, this message translates to:
+  /// **'Push notifications'**
+  String get settings_push;
+
+  /// No description provided for @settings_push_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Order updates and new drops'**
+  String get settings_push_hint;
+
+  /// No description provided for @settings_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email updates'**
+  String get settings_email;
+
+  /// No description provided for @settings_email_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers and the weekly edit'**
+  String get settings_email_hint;
+
+  /// No description provided for @settings_about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get settings_about;
+
+  /// No description provided for @settings_version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get settings_version;
+
+  /// No description provided for @help_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Help center'**
+  String get help_title;
+
+  /// No description provided for @help_faq.
+  ///
+  /// In en, this message translates to:
+  /// **'Frequently asked'**
+  String get help_faq;
+
+  /// No description provided for @help_q_shipping.
+  ///
+  /// In en, this message translates to:
+  /// **'How long does delivery take?'**
+  String get help_q_shipping;
+
+  /// No description provided for @help_a_shipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Standard delivery takes 3–5 business days and express 1–2. Orders over \$75 ship free.'**
+  String get help_a_shipping;
+
+  /// No description provided for @help_q_returns.
+  ///
+  /// In en, this message translates to:
+  /// **'Can I return an item?'**
+  String get help_q_returns;
+
+  /// No description provided for @help_a_returns.
+  ///
+  /// In en, this message translates to:
+  /// **'Yes, within 30 days of delivery, unworn and with tags on. Refunds go back to the original payment method.'**
+  String get help_a_returns;
+
+  /// No description provided for @help_q_track.
+  ///
+  /// In en, this message translates to:
+  /// **'Where is my order?'**
+  String get help_q_track;
+
+  /// No description provided for @help_a_track.
+  ///
+  /// In en, this message translates to:
+  /// **'Open Profile → My orders and tap the order to see every step of its journey.'**
+  String get help_a_track;
+
+  /// No description provided for @help_q_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Can I cancel an order?'**
+  String get help_q_cancel;
+
+  /// No description provided for @help_a_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders can be cancelled until they ship. Open the order and tap Cancel order.'**
+  String get help_a_cancel;
+
+  /// No description provided for @help_q_promo.
+  ///
+  /// In en, this message translates to:
+  /// **'How do promo codes work?'**
+  String get help_q_promo;
+
+  /// No description provided for @help_a_promo.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter the code in your bag. One code per order; some need a minimum subtotal.'**
+  String get help_a_promo;
+
+  /// No description provided for @help_q_points.
+  ///
+  /// In en, this message translates to:
+  /// **'What are Tuku Points?'**
+  String get help_q_points;
+
+  /// No description provided for @help_a_points.
+  ///
+  /// In en, this message translates to:
+  /// **'You earn 1 point for every dollar you spend. Points show on your profile.'**
+  String get help_a_points;
+
+  /// No description provided for @help_contact.
+  ///
+  /// In en, this message translates to:
+  /// **'Still need help?'**
+  String get help_contact;
+
+  /// No description provided for @help_chat.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat with us'**
+  String get help_chat;
+
+  /// No description provided for @help_chat_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Replies in a few minutes'**
+  String get help_chat_hint;
+
+  /// No description provided for @help_email.
+  ///
+  /// In en, this message translates to:
+  /// **'Email us'**
+  String get help_email;
+
+  /// No description provided for @help_email_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Replies within a day'**
+  String get help_email_hint;
+
+  /// No description provided for @help_call.
+  ///
+  /// In en, this message translates to:
+  /// **'Call us'**
+  String get help_call;
+
+  /// No description provided for @help_call_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'9am–6pm, Monday to Saturday'**
+  String get help_call_hint;
+
+  /// No description provided for @help_contact_demo.
+  ///
+  /// In en, this message translates to:
+  /// **'Contact is off in this demo.'**
+  String get help_contact_demo;
 }
 
 class _AppLocalizationsDelegate
