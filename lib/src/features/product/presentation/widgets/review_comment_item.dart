@@ -23,7 +23,12 @@ class ReviewCommentItem extends StatelessWidget {
         Row(
           children: [
             // User
-            Text(review.userName, style: SdTextStyleV5.body14().wSemiBold()),
+            Text(
+              review.userName,
+              style: SdTextStyleV5.body14().wSemiBold().wColor(
+                context.colorTheme.textDefault,
+              ),
+            ),
             const SdHorizontalSpacingV5(xRatio: 0.5),
             // Rating
             Row(
@@ -33,8 +38,8 @@ class ReviewCommentItem extends StatelessWidget {
                   index < review.rating.round()
                       ? Icons.star
                       : Icons.star_border,
-                  color: Colors.amber,
-                  size: 16,
+                  color: context.colorTheme.warning,
+                  size: 14,
                 ),
               ),
             ),
@@ -42,7 +47,7 @@ class ReviewCommentItem extends StatelessWidget {
             // Date
             Text(
               SdDateTimeHelperV5.dateTimeToDDMMYY(review.createdAt),
-              style: SdTextStyleV5.heading12().copyWith(
+              style: SdTextStyleV5.body12().copyWith(
                 color: context.colorTheme.textSubTitle,
               ),
             ),
@@ -51,7 +56,10 @@ class ReviewCommentItem extends StatelessWidget {
         const SdVerticalSpacingV5(xRatio: 0.25),
 
         // Comment
-        Text(review.comment, style: SdTextStyleV5.body14()),
+        Text(
+          review.comment,
+          style: SdTextStyleV5.body14().wColor(context.colorTheme.textDefault),
+        ),
 
         const SdVerticalSpacingV5(xRatio: 0.25),
 

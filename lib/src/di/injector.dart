@@ -7,6 +7,7 @@ import 'package:tuku_shop/src/features/product/product_di.dart';
 import 'package:tuku_shop/src/features/profile/profile_di.dart';
 import 'package:tuku_shop/src/features/splash/config/splash_di.dart';
 import 'package:tuku_shop/src/features/tutorial/config/tutorial_di.dart';
+import 'package:tuku_shop/src/features/wishlist/wishlist_di.dart';
 import 'package:get_it/get_it.dart';
 
 final getIt = GetIt.instance;
@@ -26,5 +27,6 @@ class Injector {
     ProfileDi.config();
     SplashDi.config();
     TutorialDi.config();
+    WishlistDi.config();
   }
 }

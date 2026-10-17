@@ -5,6 +5,7 @@ import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:tuku_shop/src/features/order/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/profile/domain/domain.dart';
+import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MockGetBannersUsecase extends Mock implements GetBannersUsecase {}
@@ -16,11 +17,6 @@ class MockGetNotificationsUsecase extends Mock
 
 class MockGetProfileSettingsUsecase extends Mock
     implements GetProfileSettingsUsecase {}
-
-class MockGetRecommendProductUsecase extends Mock
-    implements GetRecommendProductUsecase {}
-
-class MockSearchProductsUsecase extends Mock implements SearchProductsUsecase {}
 
 class MockGetMyOrderUsecase extends Mock implements GetMyOrderUsecase {}
 
@@ -37,3 +33,18 @@ class MockGetCurrentUserUsecase extends Mock implements GetCurrentUserUsecase {}
 class MockLoginUsecase extends Mock implements LoginUsecase {}
 
 class MockLogoutUsecase extends Mock implements LogoutUsecase {}
+
+class MockGetProductsUsecase extends Mock implements GetProductsUsecase {}
+
+class MockGetProductReviewsUsecase extends Mock
+    implements GetProductReviewsUsecase {}
+
+class MockGetProductsByIdsUsecase extends Mock
+    implements GetProductsByIdsUsecase {}
+
+class MockGetWishlistIdsUsecase extends Mock implements GetWishlistIdsUsecase {}
+
+class MockWatchWishlistIdsUsecase extends Mock
+    implements WatchWishlistIdsUsecase {}
+
+class MockToggleWishlistUsecase extends Mock implements ToggleWishlistUsecase {}

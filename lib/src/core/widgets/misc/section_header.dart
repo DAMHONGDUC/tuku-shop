@@ -1,6 +1,6 @@
-import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design/index.dart' hide SdContextV2X;
+import 'package:system_design/index.dart';
+import 'package:tuku_shop/src/core/core.dart';
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -18,23 +18,35 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(title, style: context.textTheme.heading16),
+    final colors = context.colorTheme;
+    final showAction = onActionTap != null && (actionText ?? '').isNotEmpty;
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: hasBottomSpacing ? SdSpacingV5.s12 : 0),
+      child: Row(
+        children: [
+          Expanded(
+            child: Text(
+              title,
+              style: SdTextStyleV5.heading16().wColor(colors.textDefault),
+            ),
+          ),
+          if (showAction)
             GestureDetector(
+              behavior: HitTestBehavior.opaque,
               onTap: onActionTap,
-              child: Text(
-                actionText ?? 'See All',
-                style: context.textTheme.heading12.wColor(AppColors.primary),
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: SdSpacingV5.s4),
+                child: Text(
+                  actionText!,
+                  style: SdTextStyleV5.body14().wSemiBold().wColor(
+                    colors.primary,
+                  ),
+                ),
               ),
             ),
-          ],
-        ),
-        if (hasBottomSpacing) SdVerticalSpacingV5(),
-      ],
+        ],
+      ),
     );
   }
 }

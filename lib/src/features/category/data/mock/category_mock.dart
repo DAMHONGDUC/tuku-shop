@@ -6,7 +6,7 @@ class CategoryMock {
   static const List<CategoryModel> categories = [
     CategoryModel(
       id: 'women-tops',
-      name: 'Tops & Blouses',
+      name: 'Tops',
       imageUrl: '${_kCatalogPath}women-tops/wt3_1.jpg',
       numOfProduct: 5,
       colorHex: '#F6E7E1',
@@ -48,7 +48,7 @@ class CategoryMock {
     ),
     CategoryModel(
       id: 'trousers',
-      name: 'Trousers & Shorts',
+      name: 'Trousers',
       imageUrl: '${_kCatalogPath}trousers/tr1_1.jpg',
       numOfProduct: 5,
       colorHex: '#EEF0E2',
@@ -62,7 +62,7 @@ class CategoryMock {
     ),
     CategoryModel(
       id: 'jackets',
-      name: 'Jackets & Coats',
+      name: 'Outerwear',
       imageUrl: '${_kCatalogPath}jackets/jk3_1.jpg',
       numOfProduct: 5,
       colorHex: '#F2ECE3',

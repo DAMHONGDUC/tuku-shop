@@ -10,6 +10,7 @@ import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:tuku_shop/src/features/order/data/data_sources/order_remote_data_source.dart';
 import 'package:tuku_shop/src/features/order/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/data/data_sources/product_remote_data_source.dart';
+import 'package:tuku_shop/src/features/product/data/data_sources/search_history_local_data_source.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:tuku_shop/src/features/profile/domain/domain.dart';
@@ -50,3 +51,6 @@ class MockAuthRepository extends Mock implements AuthRepository {}
 class MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource {}
 
 class MockAuthLocalDataSource extends Mock implements AuthLocalDataSource {}
+
+class MockSearchHistoryLocalDataSource extends Mock
+    implements SearchHistoryLocalDataSource {}

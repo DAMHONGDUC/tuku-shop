@@ -217,6 +217,390 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not log out. Please try again'**
   String get logout_failed;
+
+  /// No description provided for @common_retry.
+  ///
+  /// In en, this message translates to:
+  /// **'Retry'**
+  String get common_retry;
+
+  /// No description provided for @common_load_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t load this. Check your connection and try again.'**
+  String get common_load_failed;
+
+  /// No description provided for @common_see_all.
+  ///
+  /// In en, this message translates to:
+  /// **'See all'**
+  String get common_see_all;
+
+  /// No description provided for @common_items_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} items'**
+  String common_items_count(int count);
+
+  /// No description provided for @common_start_shopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Start shopping'**
+  String get common_start_shopping;
+
+  /// No description provided for @nav_home.
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
+  String get nav_home;
+
+  /// No description provided for @nav_categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get nav_categories;
+
+  /// No description provided for @nav_wishlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Wishlist'**
+  String get nav_wishlist;
+
+  /// No description provided for @nav_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart'**
+  String get nav_cart;
+
+  /// No description provided for @nav_profile.
+  ///
+  /// In en, this message translates to:
+  /// **'Profile'**
+  String get nav_profile;
+
+  /// No description provided for @home_search_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search dresses, jeans…'**
+  String get home_search_hint;
+
+  /// No description provided for @home_categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get home_categories;
+
+  /// No description provided for @home_flash_sale.
+  ///
+  /// In en, this message translates to:
+  /// **'Flash sale'**
+  String get home_flash_sale;
+
+  /// No description provided for @home_new_arrivals.
+  ///
+  /// In en, this message translates to:
+  /// **'New arrivals'**
+  String get home_new_arrivals;
+
+  /// No description provided for @home_best_sellers.
+  ///
+  /// In en, this message translates to:
+  /// **'Best sellers'**
+  String get home_best_sellers;
+
+  /// No description provided for @home_just_for_you.
+  ///
+  /// In en, this message translates to:
+  /// **'Just for you'**
+  String get home_just_for_you;
+
+  /// No description provided for @categories_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get categories_title;
+
+  /// No description provided for @products_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} products'**
+  String products_count(int count);
+
+  /// No description provided for @sort_recommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended'**
+  String get sort_recommended;
+
+  /// No description provided for @sort_newest.
+  ///
+  /// In en, this message translates to:
+  /// **'Newest'**
+  String get sort_newest;
+
+  /// No description provided for @sort_price_low.
+  ///
+  /// In en, this message translates to:
+  /// **'Price: low to high'**
+  String get sort_price_low;
+
+  /// No description provided for @sort_price_high.
+  ///
+  /// In en, this message translates to:
+  /// **'Price: high to low'**
+  String get sort_price_high;
+
+  /// No description provided for @sort_rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Top rated'**
+  String get sort_rating;
+
+  /// No description provided for @filter_on_sale.
+  ///
+  /// In en, this message translates to:
+  /// **'On sale'**
+  String get filter_on_sale;
+
+  /// No description provided for @products_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Nothing here yet'**
+  String get products_empty_title;
+
+  /// No description provided for @products_empty_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Try another filter or category.'**
+  String get products_empty_message;
+
+  /// No description provided for @search_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Search products'**
+  String get search_hint;
+
+  /// No description provided for @search_recent.
+  ///
+  /// In en, this message translates to:
+  /// **'Recent'**
+  String get search_recent;
+
+  /// No description provided for @search_clear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get search_clear;
+
+  /// No description provided for @search_trending.
+  ///
+  /// In en, this message translates to:
+  /// **'Trending'**
+  String get search_trending;
+
+  /// No description provided for @search_recommended.
+  ///
+  /// In en, this message translates to:
+  /// **'Recommended for you'**
+  String get search_recommended;
+
+  /// No description provided for @search_no_results_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No matches'**
+  String get search_no_results_title;
+
+  /// No description provided for @search_no_results_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Check the spelling or try a broader word, like \"dress\" or \"jeans\".'**
+  String get search_no_results_message;
+
+  /// No description provided for @badge_new.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get badge_new;
+
+  /// No description provided for @badge_discount.
+  ///
+  /// In en, this message translates to:
+  /// **'-{percent}%'**
+  String badge_discount(int percent);
+
+  /// No description provided for @pdp_color.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get pdp_color;
+
+  /// No description provided for @pdp_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get pdp_size;
+
+  /// No description provided for @pdp_only_left.
+  ///
+  /// In en, this message translates to:
+  /// **'Only {count} left'**
+  String pdp_only_left(int count);
+
+  /// No description provided for @pdp_sold_out.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold out'**
+  String get pdp_sold_out;
+
+  /// No description provided for @pdp_select_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a size first'**
+  String get pdp_select_size;
+
+  /// No description provided for @pdp_free_shipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Free shipping'**
+  String get pdp_free_shipping;
+
+  /// No description provided for @pdp_free_shipping_sub.
+  ///
+  /// In en, this message translates to:
+  /// **'over \$100'**
+  String get pdp_free_shipping_sub;
+
+  /// No description provided for @pdp_delivery.
+  ///
+  /// In en, this message translates to:
+  /// **'2–4 days'**
+  String get pdp_delivery;
+
+  /// No description provided for @pdp_delivery_sub.
+  ///
+  /// In en, this message translates to:
+  /// **'delivery'**
+  String get pdp_delivery_sub;
+
+  /// No description provided for @pdp_returns.
+  ///
+  /// In en, this message translates to:
+  /// **'30 days'**
+  String get pdp_returns;
+
+  /// No description provided for @pdp_returns_sub.
+  ///
+  /// In en, this message translates to:
+  /// **'free returns'**
+  String get pdp_returns_sub;
+
+  /// No description provided for @pdp_details.
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
+  String get pdp_details;
+
+  /// No description provided for @pdp_material.
+  ///
+  /// In en, this message translates to:
+  /// **'Material'**
+  String get pdp_material;
+
+  /// No description provided for @pdp_fit.
+  ///
+  /// In en, this message translates to:
+  /// **'Fit'**
+  String get pdp_fit;
+
+  /// No description provided for @pdp_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Reviews'**
+  String get pdp_reviews;
+
+  /// No description provided for @pdp_reviews_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} reviews'**
+  String pdp_reviews_count(int count);
+
+  /// No description provided for @pdp_show_more_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'Show more reviews'**
+  String get pdp_show_more_reviews;
+
+  /// No description provided for @pdp_related.
+  ///
+  /// In en, this message translates to:
+  /// **'You may also like'**
+  String get pdp_related;
+
+  /// No description provided for @pdp_add_to_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to cart'**
+  String get pdp_add_to_cart;
+
+  /// No description provided for @pdp_buy_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy now'**
+  String get pdp_buy_now;
+
+  /// No description provided for @pdp_sold.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sold'**
+  String pdp_sold(int count);
+
+  /// No description provided for @wishlist_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Wishlist'**
+  String get wishlist_title;
+
+  /// No description provided for @wishlist_title_count.
+  ///
+  /// In en, this message translates to:
+  /// **'Wishlist ({count})'**
+  String wishlist_title_count(int count);
+
+  /// No description provided for @wishlist_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Save what you love'**
+  String get wishlist_empty_title;
+
+  /// No description provided for @wishlist_empty_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the heart on any item to keep it here for later.'**
+  String get wishlist_empty_message;
+
+  /// No description provided for @cart_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart'**
+  String get cart_title;
+
+  /// No description provided for @cart_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get cart_empty_title;
+
+  /// No description provided for @cart_empty_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Find something you like and add it here.'**
+  String get cart_empty_message;
+
+  /// No description provided for @notifications_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications_title;
 }
 
 class _AppLocalizationsDelegate

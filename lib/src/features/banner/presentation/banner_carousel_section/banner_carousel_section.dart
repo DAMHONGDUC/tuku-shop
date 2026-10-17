@@ -2,6 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart' hide SdContextV2X;
 
 import 'banner_carousel_controller.dart';
@@ -31,7 +32,9 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
         if (state is BannerCarouselLoading) {
           return _BannerSkeleton();
         } else if (state is BannerCarouselError) {
-          return EmptyView(message: state.errorMsg);
+          return SectionError(
+            onRetry: () => context.read<BannerCarouselController>().getData(),
+          );
         } else if (state is BannerCarouselSuccess) {
           return Column(
             children: [
@@ -40,68 +43,68 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
                   final contentColor = SdColorHelperV5.getColorFromHex(
                     banner.contentColor,
                   );
+                  final darkText = contentColor.computeLuminance() < 0.5;
 
-                  return Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                          UIConstants.bannerBorderRadius,
-                        ),
-                        child: Image.asset(
-                          banner.imageUrl,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
+                  return GestureDetector(
+                    onTap: banner.categoryId.isEmpty
+                        ? null
+                        : () => context.push(
+                            ProductRoutes.productListLocation(
+                              title: banner.title,
+                              categoryId: banner.categoryId,
+                            ),
+                          ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(
+                        UIConstants.bannerBorderRadius,
                       ),
-                      Positioned(
-                        left: SdSpacingV5.s16,
-                        top: SdSpacingV5.s16,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: SdSpacingV5.s8,
-                                vertical: SdSpacingV5.s4,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          CatalogImage(path: banner.imageUrl),
+                          DecoratedBox(
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  (darkText
+                                          ? SdColorsV5.white
+                                          : SdColorsV5.black)
+                                      .withValues(alpha: 0.55),
+                                  SdColorsV5.transparent,
+                                ],
+                                stops: const [0, 0.75],
                               ),
-                              width: UIConstants.bannerTagWidth,
-                              decoration: BoxDecoration(
-                                color: banner.tagType.color,
-                                borderRadius: BorderRadius.circular(
-                                  SdSpacingV5.s12,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(SdSpacingV5.s16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TagChip(
+                                  label: banner.tag,
+                                  color: banner.tagType.color,
                                 ),
-                              ),
-                              alignment: Alignment.center,
-                              child: Text(
-                                banner.tag,
-                                style: context.textTheme.heading14.whiteText(),
-                              ),
+                                SdVerticalSpacingV5(value: SdSpacingV5.s8),
+                                Text(
+                                  banner.title,
+                                  style: SdTextStyleV5.heading20().wColor(
+                                    contentColor,
+                                  ),
+                                ),
+                                Text(
+                                  '${banner.subtitle} · ${banner.price}',
+                                  style: SdTextStyleV5.body12().wColor(
+                                    contentColor,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SdVerticalSpacingV5(),
-                            Text(
-                              banner.title,
-                              style: context.textTheme.heading14.wColor(
-                                contentColor,
-                              ),
-                            ),
-                            Text(
-                              banner.subtitle,
-                              style: context.textTheme.body12.wColor(
-                                contentColor,
-                              ),
-                            ),
-                            SizedBox(height: SdSpacingV5.s8),
-                            Text(
-                              banner.price,
-                              style: context.textTheme.heading16
-                                  .wColor(contentColor)
-                                  .wBold(),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   );
                 }).toList(),
                 carouselController: _controller,
@@ -156,7 +159,7 @@ class _BannerIndicator extends StatelessWidget {
           child: Container(
             width: SdSpacingV5.s6,
             height: SdSpacingV5.s6,
-            margin: EdgeInsets.symmetric(horizontal: SdSpacingV5.s4),
+            margin: EdgeInsets.symmetric(horizontal: SdSpacingV5.s2),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: colorBuilder?.call(index),
@@ -175,9 +178,9 @@ class _BannerSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SdSkeletonV5(
+        const SkeletonBox(
           height: UIConstants.bannerHeight,
-          borderRadiusValue: UIConstants.bannerBorderRadius,
+          radius: UIConstants.bannerBorderRadius,
         ),
         SdVerticalSpacingV5(),
         _BannerIndicator(

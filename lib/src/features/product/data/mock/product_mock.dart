@@ -105,6 +105,7 @@ class ProductMock {
       ratingCount: _between(18, 480),
       reviewComments: ReviewCommentMock.generateRandomReviews(
         reviewsPerProduct,
+        photos: row.images,
       ),
       description: DescriptionModel(
         content: ProductDescriptionMock.generate(

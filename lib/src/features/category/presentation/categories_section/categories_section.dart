@@ -58,7 +58,9 @@ class _CategoriesSectionState extends State<CategoriesSection> {
         if (state is CategoriesLoading) {
           return const _ListCategorySkeleton();
         } else if (state is CategoriesError) {
-          return EmptyView(message: state.errorMsg);
+          return SectionError(
+            onRetry: () => context.read<CategoriesController>().getData(),
+          );
         } else if (state is CategoriesLoaded) {
           return Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -67,7 +69,7 @@ class _CategoriesSectionState extends State<CategoriesSection> {
                 height: UIConstants.categoriesListHeight,
                 child: ListView.separated(
                   separatorBuilder: (context, index) {
-                    return SdHorizontalSpacingV5(xRatio: 2);
+                    return SdHorizontalSpacingV5(value: SdSpacingV5.s8);
                   },
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
@@ -140,7 +142,7 @@ class _ListCategorySkeleton extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) {
-              return SdHorizontalSpacingV5(xRatio: 2);
+              return SdHorizontalSpacingV5(value: SdSpacingV5.s8);
             },
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
@@ -155,7 +157,7 @@ class _ListCategorySkeleton extends StatelessWidget {
           width: 60,
           height: 4,
           decoration: BoxDecoration(
-            color: SdColorsV5.grey.withValues(alpha: 0.3),
+            color: context.colorTheme.indicatorBg,
             borderRadius: BorderRadius.circular(2),
           ),
         ),

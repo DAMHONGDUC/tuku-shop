@@ -19,5 +19,118 @@
     "login_error_password_empty": "Please enter your password",
     "login_error_invalid_credentials": "Incorrect email or password",
     "login_error_unknown": "Something went wrong. Please try again",
-    "logout_failed": "Could not log out. Please try again"
+    "logout_failed": "Could not log out. Please try again",
+    "common_retry": "Retry",
+    "common_load_failed": "Couldn't load this. Check your connection and try again.",
+    "common_see_all": "See all",
+    "common_items_count": "{count} items",
+    "@common_items_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "common_start_shopping": "Start shopping",
+    "nav_home": "Home",
+    "nav_categories": "Categories",
+    "nav_wishlist": "Wishlist",
+    "nav_cart": "Cart",
+    "nav_profile": "Profile",
+    "home_search_hint": "Search dresses, jeans…",
+    "home_categories": "Categories",
+    "home_flash_sale": "Flash sale",
+    "home_new_arrivals": "New arrivals",
+    "home_best_sellers": "Best sellers",
+    "home_just_for_you": "Just for you",
+    "categories_title": "Categories",
+    "products_count": "{count} products",
+    "@products_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sort_recommended": "Recommended",
+    "sort_newest": "Newest",
+    "sort_price_low": "Price: low to high",
+    "sort_price_high": "Price: high to low",
+    "sort_rating": "Top rated",
+    "filter_on_sale": "On sale",
+    "products_empty_title": "Nothing here yet",
+    "products_empty_message": "Try another filter or category.",
+    "search_hint": "Search products",
+    "search_recent": "Recent",
+    "search_clear": "Clear",
+    "search_trending": "Trending",
+    "search_recommended": "Recommended for you",
+    "search_no_results_title": "No matches",
+    "search_no_results_message": "Check the spelling or try a broader word, like \"dress\" or \"jeans\".",
+    "badge_new": "New",
+    "badge_discount": "-{percent}%",
+    "@badge_discount": {
+        "placeholders": {
+            "percent": {
+                "type": "int"
+            }
+        }
+    },
+    "pdp_color": "Color",
+    "pdp_size": "Size",
+    "pdp_only_left": "Only {count} left",
+    "@pdp_only_left": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pdp_sold_out": "Sold out",
+    "pdp_select_size": "Pick a size first",
+    "pdp_free_shipping": "Free shipping",
+    "pdp_free_shipping_sub": "over $100",
+    "pdp_delivery": "2–4 days",
+    "pdp_delivery_sub": "delivery",
+    "pdp_returns": "30 days",
+    "pdp_returns_sub": "free returns",
+    "pdp_details": "Details",
+    "pdp_material": "Material",
+    "pdp_fit": "Fit",
+    "pdp_reviews": "Reviews",
+    "pdp_reviews_count": "{count} reviews",
+    "@pdp_reviews_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pdp_show_more_reviews": "Show more reviews",
+    "pdp_related": "You may also like",
+    "pdp_add_to_cart": "Add to cart",
+    "pdp_buy_now": "Buy now",
+    "pdp_sold": "{count} sold",
+    "@pdp_sold": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "wishlist_title": "Wishlist",
+    "wishlist_title_count": "Wishlist ({count})",
+    "@wishlist_title_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "wishlist_empty_title": "Save what you love",
+    "wishlist_empty_message": "Tap the heart on any item to keep it here for later.",
+    "cart_title": "Cart",
+    "cart_empty_title": "Your cart is empty",
+    "cart_empty_message": "Find something you like and add it here.",
+    "notifications_title": "Notifications"
 }

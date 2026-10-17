@@ -86,9 +86,11 @@ class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
   }
 
   // Light theme
-  static AppTextThemeExt light() {
-    final lightTextColor = AppColors.textDefaultLight;
+  static AppTextThemeExt light() => _build(AppColors.textDefaultLight);
 
+  static AppTextThemeExt dark() => _build(AppColors.textDefaultDark);
+
+  static AppTextThemeExt _build(Color lightTextColor) {
     return AppTextThemeExt(
       // Body styles
       body6: _applyFont(SdTextStyleV5.body6().wColor(lightTextColor)),
@@ -125,13 +127,6 @@ class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
       heading64: _applyFont(SdTextStyleV5.heading64().wColor(lightTextColor)),
       heading72: _applyFont(SdTextStyleV5.heading72().wColor(lightTextColor)),
     );
-  }
-
-  // Dark theme
-  // TODO: create text theme for dark theme
-  // for now it's have same value with light
-  static AppTextThemeExt dark() {
-    return AppTextThemeExt.light();
   }
 
   @override

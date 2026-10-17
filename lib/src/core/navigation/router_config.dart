@@ -1,6 +1,7 @@
 import 'package:tuku_shop/src/core/navigation/extra_codec_config.dart';
 import 'package:tuku_shop/src/features/bottom_tab/bottom_tab_stack.dart';
 import 'package:tuku_shop/src/features/auth/presentation/login/config/login_stack.dart';
+import 'package:tuku_shop/src/features/notification/presentation/notifications/config/notifications_stack.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/config/product_stack.dart';
 import 'package:tuku_shop/src/features/register/config/register_stack.dart';
 import 'package:tuku_shop/src/core/navigation/routes/splash_routes.dart';
@@ -15,10 +16,12 @@ final GlobalKey<NavigatorState> kRootNavigatorKey = GlobalKey<NavigatorState>(
 
 final GlobalKey<NavigatorState> kHomeTabNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'homeTabNav');
-final GlobalKey<NavigatorState> kMyOrderTabNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'myOrderTabNav');
-final GlobalKey<NavigatorState> kFavoriteTabNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'favoriteTabNav');
+final GlobalKey<NavigatorState> kCategoriesTabNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'categoriesTabNav');
+final GlobalKey<NavigatorState> kWishlistTabNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'wishlistTabNav');
+final GlobalKey<NavigatorState> kCartTabNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'cartTabNav');
 final GlobalKey<NavigatorState> kProfileTabNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'profileTabNav');
 
@@ -34,6 +37,7 @@ final GoRouter kAppRouter = GoRouter(
     ...LoginStack.routes,
     ...RegisterStack.routes,
     ...ProductStack.routes,
+    ...NotificationsStack.routes,
     BottomTabStack.statefulShellRoute,
   ],
 );

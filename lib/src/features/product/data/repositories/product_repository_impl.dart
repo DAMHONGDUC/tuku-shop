@@ -1,86 +1,109 @@
 import 'package:dartz/dartz.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/data/data_sources/product_remote_data_source.dart';
+import 'package:tuku_shop/src/features/product/data/data_sources/search_history_local_data_source.dart';
 import 'package:tuku_shop/src/features/product/data/mapper/product_model_to_product_entity_mapper.dart';
 import 'package:tuku_shop/src/features/product/data/mapper/products_data_model_to_products_data_entity_mapper.dart';
-import 'package:tuku_shop/src/features/product/data/mapper/recommend_products_data_model_to_recommend_products_data_entity_mapper.dart';
+import 'package:tuku_shop/src/features/product/data/mapper/review_comment_model_to_review_comment_entity_mapper.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
-  const ProductRepositoryImpl({required this.dataSource});
+  const ProductRepositoryImpl({
+    required this.dataSource,
+    required this.searchHistory,
+  });
 
   final ProductRemoteDataSource dataSource;
+  final SearchHistoryLocalDataSource searchHistory;
 
-  @override
-  Future<Either<Failure, RecommendProductsData>> getRecommendProducts({
-    required GetRecommendProjectFilterParams params,
-  }) async {
+  Future<Either<Failure, T>> _guard<T>(Future<T> Function() run) async {
     try {
-      final result = await dataSource.getRecommendProducts(params: params);
-      return Right(
-        RecommendProductsDataModelToRecommendProductsDataEntityMapper.toEntity(
-          result,
-        ),
-      );
-    } on ServerException {
-      return Left(ServerFailure());
+      return Right(await run());
+    } on CacheException {
+      return Left(CacheFailure());
     } catch (e) {
       return Left(ServerFailure());
     }
   }
 
   @override
-  Future<Either<Failure, ProductsData>> searchProducts({
-    required SearchProductsFilterParams params,
-  }) async {
-    try {
-      final result = await dataSource.searchProducts(params: params);
-
-      return Right(
-        ProductsDataModelToProductsDataEntityMapper.toEntity(result),
-      );
-    } on ServerException {
-      return Left(ServerFailure());
-    } catch (e) {
-      return Left(ServerFailure());
-    }
-  }
+  Future<Either<Failure, ProductsData>> getProducts(ProductQuery query) =>
+      _guard(() async {
+        final result = await dataSource.getProducts(query);
+        return ProductsDataModelToProductsDataEntityMapper.toEntity(result);
+      });
 
   @override
   Future<Either<Failure, ProductEntity>> getProductDetail({
     required String productId,
-  }) async {
-    try {
-      final result = await dataSource.getProductDetail(productId: productId);
-
-      return Right(ProductModelToProductEntityMapper.toEntity(result));
-    } on ServerException {
-      return Left(ServerFailure());
-    } catch (e) {
-      return Left(ServerFailure());
-    }
-  }
+  }) => _guard(() async {
+    final result = await dataSource.getProductDetail(productId: productId);
+    return ProductModelToProductEntityMapper.toEntity(result);
+  });
 
   @override
   Future<Either<Failure, List<ProductEntity>>> getRelatedProducts({
     required String productId,
     int? limit,
-  }) async {
-    try {
-      final result = await dataSource.getRelatedProducts(
-        productId: productId,
-        limit: limit,
-      );
+  }) => _guard(() async {
+    final result = await dataSource.getRelatedProducts(
+      productId: productId,
+      limit: limit,
+    );
+    return result.map(ProductModelToProductEntityMapper.toEntity).toList();
+  });
 
-      return Right(
-        result
-            .map((e) => ProductModelToProductEntityMapper.toEntity(e))
-            .toList(),
-      );
-    } on ServerException {
-      return Left(ServerFailure());
-    } catch (e) {
-      return Left(ServerFailure());
-    }
-  }
+  @override
+  Future<Either<Failure, List<ProductEntity>>> getProductsByIds(
+    List<String> ids,
+  ) => _guard(() async {
+    final result = await dataSource.getProductsByIds(ids);
+    return result.map(ProductModelToProductEntityMapper.toEntity).toList();
+  });
+
+  @override
+  Future<Either<Failure, ReviewsPage>> getProductReviews({
+    required String productId,
+    required int page,
+    required int pageSize,
+  }) => _guard(() async {
+    final result = await dataSource.getProductReviews(
+      productId: productId,
+      page: page,
+      pageSize: pageSize,
+    );
+    return ReviewsPage(
+      items:
+          result.items
+              ?.map(ReviewCommentModelToReviewCommentEntityMapper.toEntity)
+              .toList() ??
+          [],
+      currentPage: result.currentPage ?? page,
+      totalPage: result.totalPage ?? 0,
+      totalRecord: result.totalRecord ?? 0,
+    );
+  });
+
+  @override
+  Future<Either<Failure, SearchSuggestions>> getSearchSuggestions() =>
+      _guard(() async {
+        final results = await Future.wait([
+          searchHistory.getRecent(),
+          dataSource.getTrendingSearches(),
+        ]);
+        return SearchSuggestions(recent: results[0], trending: results[1]);
+      });
+
+  @override
+  Future<Either<Failure, Unit>> saveRecentSearch(String keyword) =>
+      _guard(() async {
+        await searchHistory.add(keyword);
+        return unit;
+      });
+
+  @override
+  Future<Either<Failure, Unit>> clearRecentSearches() => _guard(() async {
+    await searchHistory.clear();
+    return unit;
+  });
 }

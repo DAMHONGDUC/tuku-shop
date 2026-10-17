@@ -1,5 +1,6 @@
 import 'package:tuku_shop/src/features/profile/presentation/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:tuku_shop/src/features/order/presentation/my_order/config/my_order_stack.dart';
 import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 
@@ -13,7 +14,7 @@ class ProfileStack {
       builder: (BuildContext context, GoRouterState state) {
         return const ProfileScreen();
       },
-      routes: <RouteBase>[],
+      routes: <RouteBase>[...MyOrderStack.routes],
     ),
   ];
 }
