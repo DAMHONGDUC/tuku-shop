@@ -253,5 +253,204 @@
   "wishlist_empty_title": "Your wishlist is empty",
   "wishlist_empty_message": "Tap the heart on anything you love and it'll wait for you here.",
   "wishlist_move_to_bag": "Add to bag",
-  "action_start_shopping": "Start shopping"
+  "action_start_shopping": "Start shopping",
+  "cart_title": "Bag",
+  "cart_count": "{count, plural, =1{1 item} other{{count} items}}",
+  "@cart_count": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "cart_empty_title": "Your bag is empty",
+  "cart_empty_message": "Everything you add will show up here, ready for checkout.",
+  "cart_removed": "Removed {name}",
+  "@cart_removed": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "cart_checkout": "Checkout",
+  "cart_free_shipping_unlocked": "You've unlocked free shipping",
+  "cart_free_shipping_more": "Add {amount} more for free shipping",
+  "@cart_free_shipping_more": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "action_remove": "Remove",
+  "action_apply": "Apply",
+  "promo_label": "Promo code",
+  "promo_hint": "Try TUKU10",
+  "promo_applied": "Promo code applied",
+  "promo_error_invalid": "That code isn't valid. Try TUKU10, WELCOME20 or FREESHIP.",
+  "promo_error_minimum": "This code needs a subtotal of $100 or more.",
+  "promo_free_shipping": "Free shipping",
+  "promo_percent_off": "{percent}% off your order",
+  "@promo_percent_off": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
+  "summary_subtotal": "Subtotal",
+  "summary_discount": "Discount",
+  "summary_shipping": "Shipping",
+  "summary_free": "Free",
+  "summary_total": "Total",
+  "summary_savings": "You save {amount}",
+  "@summary_savings": {
+    "placeholders": {
+      "amount": {
+        "type": "String"
+      }
+    }
+  },
+  "checkout_title": "Checkout",
+  "checkout_address": "Shipping address",
+  "checkout_delivery": "Delivery",
+  "checkout_payment": "Payment",
+  "checkout_items": "{count, plural, =1{1 item} other{{count} items}}",
+  "@checkout_items": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "checkout_place_order": "Place order",
+  "checkout_secure_note": "Payments are encrypted. This demo never charges a real card.",
+  "checkout_failed": "We couldn't place your order. Please try again.",
+  "action_change": "Change",
+  "address_add": "Add a new address",
+  "delivery_standard": "Standard",
+  "delivery_express": "Express",
+  "delivery_next_day": "Next day",
+  "delivery_eta_range": "Arrives {from} – {to}",
+  "@delivery_eta_range": {
+    "placeholders": {
+      "from": {
+        "type": "String"
+      },
+      "to": {
+        "type": "String"
+      }
+    }
+  },
+  "delivery_eta_single": "Arrives {date}",
+  "@delivery_eta_single": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "payment_cod": "Cash on delivery",
+  "success_title": "Order placed!",
+  "success_message": "Thank you for shopping with Tuku. We've emailed your receipt and will let you know when it ships.",
+  "success_order_number": "Order number",
+  "success_eta": "Estimated delivery",
+  "success_track": "Track my order",
+  "success_continue": "Continue shopping",
+  "action_cancel": "Cancel",
+  "addresses_title": "Addresses",
+  "addresses_empty": "No saved addresses yet",
+  "address_default": "DEFAULT",
+  "address_make_default": "Set as default",
+  "address_delete_title": "Delete this address?",
+  "address_new_title": "New address",
+  "address_edit_title": "Edit address",
+  "address_saved": "Address saved",
+  "address_label": "Save as",
+  "address_label_home": "Home",
+  "address_label_office": "Office",
+  "address_label_other": "Other",
+  "address_save": "Save address",
+  "field_phone": "Phone",
+  "field_street": "Street address",
+  "field_city": "City",
+  "field_postal": "Postal code",
+  "field_country": "Country",
+  "payment_title": "Payment methods",
+  "payment_methods": "Saved methods",
+  "payment_add_card": "Add a card",
+  "payment_add_demo": "Adding cards is off in this demo.",
+  "orders_title": "My orders",
+  "orders_filter_all": "All",
+  "orders_filter_active": "In progress",
+  "orders_filter_delivered": "Delivered",
+  "orders_filter_cancelled": "Cancelled",
+  "orders_empty_title": "No orders here",
+  "orders_empty_message": "When you place an order, you can follow it from here.",
+  "order_status_placed": "Placed",
+  "order_status_processing": "Processing",
+  "order_status_shipped": "Shipped",
+  "order_status_out": "Out for delivery",
+  "order_status_delivered": "Delivered",
+  "order_status_cancelled": "Cancelled",
+  "order_detail_title": "Order",
+  "order_shipping_info": "Delivery & payment",
+  "order_tracking": "Tracking",
+  "order_delivered_on": "Delivered {date}",
+  "@order_delivered_on": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "order_arriving": "Arriving by {date}",
+  "@order_arriving": {
+    "placeholders": {
+      "date": {
+        "type": "String"
+      }
+    }
+  },
+  "order_cancelled_note": "Refunded to your original payment method",
+  "order_cancel": "Cancel order",
+  "order_cancel_title": "Cancel this order?",
+  "order_cancel_message": "It hasn't shipped yet, so you'll get a full refund.",
+  "order_cancel_confirm": "Yes, cancel it",
+  "order_keep": "Keep my order",
+  "order_cancelled_toast": "Order cancelled",
+  "order_buy_again": "Buy again",
+  "order_bought_again": "Items added to your bag",
+  "order_write_review": "Write a review",
+  "order_review_thanks": "Reviews open in the full app — thanks for trying the demo!",
+  "order_help": "Need help with this order?",
+  "notifications_mark_all": "Mark all read",
+  "notifications_empty": "You're all caught up",
+  "notifications_today": "Today",
+  "notifications_earlier": "Earlier",
+  "time_minutes_ago": "{n}m ago",
+  "@time_minutes_ago": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "time_hours_ago": "{n}h ago",
+  "@time_hours_ago": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  },
+  "time_days_ago": "{n}d ago",
+  "@time_days_ago": {
+    "placeholders": {
+      "n": {
+        "type": "int"
+      }
+    }
+  }
 }

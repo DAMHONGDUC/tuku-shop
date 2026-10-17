@@ -547,4 +547,353 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get action_start_shopping => 'Bắt đầu mua sắm';
+
+  @override
+  String get cart_title => 'Giỏ hàng';
+
+  @override
+  String cart_count(int count) {
+    return '$count sản phẩm';
+  }
+
+  @override
+  String get cart_empty_title => 'Giỏ hàng trống';
+
+  @override
+  String get cart_empty_message =>
+      'Sản phẩm bạn thêm sẽ hiển thị ở đây, sẵn sàng để thanh toán.';
+
+  @override
+  String cart_removed(String name) {
+    return 'Đã xóa $name';
+  }
+
+  @override
+  String get cart_checkout => 'Thanh toán';
+
+  @override
+  String get cart_free_shipping_unlocked => 'Bạn được miễn phí giao hàng';
+
+  @override
+  String cart_free_shipping_more(String amount) {
+    return 'Mua thêm $amount để được miễn phí giao hàng';
+  }
+
+  @override
+  String get action_remove => 'Xóa';
+
+  @override
+  String get action_apply => 'Áp dụng';
+
+  @override
+  String get promo_label => 'Mã giảm giá';
+
+  @override
+  String get promo_hint => 'Thử TUKU10';
+
+  @override
+  String get promo_applied => 'Đã áp dụng mã giảm giá';
+
+  @override
+  String get promo_error_invalid =>
+      'Mã không hợp lệ. Thử TUKU10, WELCOME20 hoặc FREESHIP.';
+
+  @override
+  String get promo_error_minimum => 'Mã này áp dụng cho đơn từ \$100.';
+
+  @override
+  String get promo_free_shipping => 'Miễn phí giao hàng';
+
+  @override
+  String promo_percent_off(int percent) {
+    return 'Giảm $percent% cho đơn hàng';
+  }
+
+  @override
+  String get summary_subtotal => 'Tạm tính';
+
+  @override
+  String get summary_discount => 'Giảm giá';
+
+  @override
+  String get summary_shipping => 'Phí giao hàng';
+
+  @override
+  String get summary_free => 'Miễn phí';
+
+  @override
+  String get summary_total => 'Tổng cộng';
+
+  @override
+  String summary_savings(String amount) {
+    return 'Bạn tiết kiệm $amount';
+  }
+
+  @override
+  String get checkout_title => 'Thanh toán';
+
+  @override
+  String get checkout_address => 'Địa chỉ giao hàng';
+
+  @override
+  String get checkout_delivery => 'Phương thức giao hàng';
+
+  @override
+  String get checkout_payment => 'Thanh toán';
+
+  @override
+  String checkout_items(int count) {
+    return '$count sản phẩm';
+  }
+
+  @override
+  String get checkout_place_order => 'Đặt hàng';
+
+  @override
+  String get checkout_secure_note =>
+      'Thanh toán được mã hóa. Bản demo không trừ tiền thẻ thật.';
+
+  @override
+  String get checkout_failed => 'Không thể đặt hàng. Vui lòng thử lại.';
+
+  @override
+  String get action_change => 'Thay đổi';
+
+  @override
+  String get address_add => 'Thêm địa chỉ mới';
+
+  @override
+  String get delivery_standard => 'Tiêu chuẩn';
+
+  @override
+  String get delivery_express => 'Nhanh';
+
+  @override
+  String get delivery_next_day => 'Ngày hôm sau';
+
+  @override
+  String delivery_eta_range(String from, String to) {
+    return 'Nhận hàng $from – $to';
+  }
+
+  @override
+  String delivery_eta_single(String date) {
+    return 'Nhận hàng $date';
+  }
+
+  @override
+  String get payment_cod => 'Thanh toán khi nhận hàng';
+
+  @override
+  String get success_title => 'Đặt hàng thành công!';
+
+  @override
+  String get success_message =>
+      'Cảm ơn bạn đã mua sắm tại Tuku. Hóa đơn đã được gửi qua email, chúng tôi sẽ báo khi đơn được giao.';
+
+  @override
+  String get success_order_number => 'Mã đơn hàng';
+
+  @override
+  String get success_eta => 'Dự kiến giao';
+
+  @override
+  String get success_track => 'Theo dõi đơn hàng';
+
+  @override
+  String get success_continue => 'Tiếp tục mua sắm';
+
+  @override
+  String get action_cancel => 'Hủy';
+
+  @override
+  String get addresses_title => 'Sổ địa chỉ';
+
+  @override
+  String get addresses_empty => 'Chưa có địa chỉ nào';
+
+  @override
+  String get address_default => 'MẶC ĐỊNH';
+
+  @override
+  String get address_make_default => 'Đặt làm mặc định';
+
+  @override
+  String get address_delete_title => 'Xóa địa chỉ này?';
+
+  @override
+  String get address_new_title => 'Địa chỉ mới';
+
+  @override
+  String get address_edit_title => 'Sửa địa chỉ';
+
+  @override
+  String get address_saved => 'Đã lưu địa chỉ';
+
+  @override
+  String get address_label => 'Lưu dưới tên';
+
+  @override
+  String get address_label_home => 'Nhà riêng';
+
+  @override
+  String get address_label_office => 'Văn phòng';
+
+  @override
+  String get address_label_other => 'Khác';
+
+  @override
+  String get address_save => 'Lưu địa chỉ';
+
+  @override
+  String get field_phone => 'Số điện thoại';
+
+  @override
+  String get field_street => 'Địa chỉ';
+
+  @override
+  String get field_city => 'Thành phố';
+
+  @override
+  String get field_postal => 'Mã bưu chính';
+
+  @override
+  String get field_country => 'Quốc gia';
+
+  @override
+  String get payment_title => 'Phương thức thanh toán';
+
+  @override
+  String get payment_methods => 'Đã lưu';
+
+  @override
+  String get payment_add_card => 'Thêm thẻ';
+
+  @override
+  String get payment_add_demo => 'Tính năng thêm thẻ đã tắt trong bản demo.';
+
+  @override
+  String get orders_title => 'Đơn hàng của tôi';
+
+  @override
+  String get orders_filter_all => 'Tất cả';
+
+  @override
+  String get orders_filter_active => 'Đang xử lý';
+
+  @override
+  String get orders_filter_delivered => 'Đã giao';
+
+  @override
+  String get orders_filter_cancelled => 'Đã hủy';
+
+  @override
+  String get orders_empty_title => 'Chưa có đơn hàng';
+
+  @override
+  String get orders_empty_message =>
+      'Khi bạn đặt hàng, bạn có thể theo dõi đơn tại đây.';
+
+  @override
+  String get order_status_placed => 'Đã đặt';
+
+  @override
+  String get order_status_processing => 'Đang chuẩn bị';
+
+  @override
+  String get order_status_shipped => 'Đã gửi đi';
+
+  @override
+  String get order_status_out => 'Đang giao';
+
+  @override
+  String get order_status_delivered => 'Đã giao';
+
+  @override
+  String get order_status_cancelled => 'Đã hủy';
+
+  @override
+  String get order_detail_title => 'Đơn hàng';
+
+  @override
+  String get order_shipping_info => 'Giao hàng & thanh toán';
+
+  @override
+  String get order_tracking => 'Hành trình đơn hàng';
+
+  @override
+  String order_delivered_on(String date) {
+    return 'Đã giao ngày $date';
+  }
+
+  @override
+  String order_arriving(String date) {
+    return 'Dự kiến giao trước $date';
+  }
+
+  @override
+  String get order_cancelled_note =>
+      'Đã hoàn tiền về phương thức thanh toán ban đầu';
+
+  @override
+  String get order_cancel => 'Hủy đơn hàng';
+
+  @override
+  String get order_cancel_title => 'Hủy đơn hàng này?';
+
+  @override
+  String get order_cancel_message =>
+      'Đơn chưa được gửi đi, bạn sẽ được hoàn tiền đầy đủ.';
+
+  @override
+  String get order_cancel_confirm => 'Đồng ý hủy';
+
+  @override
+  String get order_keep => 'Giữ đơn hàng';
+
+  @override
+  String get order_cancelled_toast => 'Đã hủy đơn hàng';
+
+  @override
+  String get order_buy_again => 'Mua lại';
+
+  @override
+  String get order_bought_again => 'Đã thêm sản phẩm vào giỏ';
+
+  @override
+  String get order_write_review => 'Viết đánh giá';
+
+  @override
+  String get order_review_thanks =>
+      'Tính năng đánh giá có trong bản đầy đủ — cảm ơn bạn đã dùng thử!';
+
+  @override
+  String get order_help => 'Cần hỗ trợ đơn hàng này?';
+
+  @override
+  String get notifications_mark_all => 'Đánh dấu đã đọc';
+
+  @override
+  String get notifications_empty => 'Bạn đã xem hết thông báo';
+
+  @override
+  String get notifications_today => 'Hôm nay';
+
+  @override
+  String get notifications_earlier => 'Trước đó';
+
+  @override
+  String time_minutes_ago(int n) {
+    return '$n phút trước';
+  }
+
+  @override
+  String time_hours_ago(int n) {
+    return '$n giờ trước';
+  }
+
+  @override
+  String time_days_ago(int n) {
+    return '$n ngày trước';
+  }
 }
