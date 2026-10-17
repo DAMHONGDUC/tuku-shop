@@ -44,13 +44,9 @@ scripts:
     description: Generate localizations (app only).
     run: dart run melos exec --scope=tuku_shop -- "flutter gen-l10n"
 
-  gen:build:
-    description: Run build_runner in packages that depend on it.
-    run: dart run melos exec --depends-on=build_runner -- "dart run build_runner build --delete-conflicting-outputs"
-
   gen:all:
-    description: Run all code generation (l10n + build_runner).
-    run: dart run melos run gen:l10n && dart run melos run gen:build
+    description: Run all code generation (l10n is the only one).
+    run: dart run melos run gen:l10n
 
   clean:flutter:
     description: flutter clean in every package.

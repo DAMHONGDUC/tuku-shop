@@ -1,55 +1,78 @@
 name: tuku_shop
-description: "A new Flutter project."
+description: "Tuku Shop — a fashion storefront demo built on Flutter."
 publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.12.2
 
 dependencies:
+  collection: ^1.19.1
+  cupertino_icons: ^1.0.8
+  dartz: ^0.10.1
+  equatable: ^2.0.7
+  firebase_core: ^4.2.1
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.1.1
   flutter_localizations:
     sdk: flutter
-  intl: ^0.20.2
-  dartz: ^0.10.1
-  system_design_flutter:
-    path: packages/system_design_flutter
-  cupertino_icons: ^1.0.8
-  go_router: ^15.1.2
-  flutter_bloc: ^9.1.1
-  injectable: ^2.5.0
+  # The design system reads every dimension through screenutil, so the app
+  # installs ScreenUtilInit above MaterialApp (lib/src/app/tuku_app.dart).
+  flutter_screenutil: ^5.9.3
   get_it: ^8.0.3
-  equatable: ^2.0.7
-  google_fonts: ^6.2.1
-  adaptive_theme: ^3.7.0
-  ionicons: ^0.2.2
-  carousel_slider: ^5.1.1
-  collection: ^1.19.1
-  sliver_tools: ^0.2.12
-  uuid: ^4.5.2
-  firebase_core: ^4.2.1
+  go_router: ^17.0.0
+  intl: ^0.20.2
+  material_symbols_icons: ^4.2960.0
+  # Session, theme, language and onboarding flags — the only state that
+  # outlives an app restart in this demo.
+  shared_preferences: ^2.5.3
+  # The shared design system, a git submodule. Tuku Shop renders on its v5
+  # generation and never touches v2-v4.
+  system_design:
+    path: packages/flutter-system-design-kit
 
 dev_dependencies:
+  bloc_test: ^10.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
-  build_runner: ^2.4.15
-  injectable_generator: ^2.7.0
   melos: ^6.3.2
   mocktail: ^1.0.4
-  bloc_test: ^10.0.0
 
 flutter:
   uses-material-design: true
   generate: true
+
   assets:
-    - assets/google_fonts/
-    - assets/icons/
     - assets/images/banner/
-    - assets/images/product/
     - assets/images/category/
-    - assets/images/review_comment/
     - assets/images/common/
-    - assets/videos/review_comment/
+    - assets/images/lookbook/
+    - assets/images/product/
+
+  # Bundled rather than fetched at runtime, so a demo on a phone with no
+  # signal still opens in the right typeface. Both cover Vietnamese.
+  fonts:
+    - family: Plus Jakarta Sans
+      fonts:
+        - asset: assets/fonts/PlusJakartaSans-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/PlusJakartaSans-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/PlusJakartaSans-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/PlusJakartaSans-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/PlusJakartaSans-ExtraBold.ttf
+          weight: 800
+    - family: Playfair Display
+      fonts:
+        - asset: assets/fonts/PlayfairDisplay-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/PlayfairDisplay-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+        - asset: assets/fonts/PlayfairDisplay-Bold.ttf
+          weight: 700
