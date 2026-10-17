@@ -1,64 +1,22 @@
-import 'package:flutter/material.dart';
-
+/// Where an order is in its life, in the order it moves through them.
 enum OrderStatus {
-  waitingForConfirmation,
-  waitingForPickup,
-  waitingForDelivery,
+  placed,
+  processing,
+  shipped,
+  outForDelivery,
   delivered,
-  rolledBack,
-  cancelled,
-  none,
-}
+  cancelled;
 
-extension OrderStatusExt on OrderStatus {
-  static const OrderStatus defaultFirstTab = OrderStatus.waitingForConfirmation;
+  static OrderStatus fromName(String? value) => OrderStatus.values.firstWhere(
+    (OrderStatus e) => e.name == value,
+    orElse: () => OrderStatus.placed,
+  );
 
-  static List<OrderStatus> get tabs =>
-      OrderStatus.values.where((e) => e != OrderStatus.none).toList();
+  /// Still on its way — the "Active" tab of My Orders.
+  bool get isActive =>
+      this != OrderStatus.delivered && this != OrderStatus.cancelled;
 
-  String get label {
-    switch (this) {
-      case OrderStatus.waitingForConfirmation:
-        return 'Waiting for Confirmation';
-      case OrderStatus.waitingForPickup:
-        return 'Waiting for Pickup';
-      case OrderStatus.waitingForDelivery:
-        return 'Waiting for Delivery';
-      case OrderStatus.delivered:
-        return 'Delivered';
-      case OrderStatus.rolledBack:
-        return 'Rolled Back';
-      case OrderStatus.cancelled:
-        return 'Cancelled';
-      case OrderStatus.none:
-        return 'None';
-    }
-  }
-
-  static OrderStatus fromIndex(int index) {
-    if (index >= 0 && index <= tabs.length) {
-      return tabs[index];
-    }
-
-    return OrderStatus.none;
-  }
-
-  Color get color {
-    switch (this) {
-      case OrderStatus.waitingForConfirmation:
-        return Colors.orangeAccent;
-      case OrderStatus.waitingForPickup:
-        return Colors.blueAccent;
-      case OrderStatus.waitingForDelivery:
-        return Colors.teal;
-      case OrderStatus.delivered:
-        return Colors.green;
-      case OrderStatus.rolledBack:
-        return Colors.deepPurple;
-      case OrderStatus.cancelled:
-        return Colors.redAccent;
-      case OrderStatus.none:
-        return Colors.grey;
-    }
-  }
+  /// A customer may still cancel it.
+  bool get isCancellable =>
+      this == OrderStatus.placed || this == OrderStatus.processing;
 }
