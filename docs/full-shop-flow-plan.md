@@ -234,6 +234,8 @@ Every screen is redesigned with the `mobile-app-ui-design` skill before it is co
 | Review | Published as a private Artifact so the owner (and the client, if shared) can comment |
 | Images | Real catalog photos from phase 1, so mockups match the shipped app |
 | Gate | Phases 3–9 build screens to the approved mockups; changes go back to the mockup first |
+| Source | [`docs/design/tuku-shop-mockups.html`](design/tuku-shop-mockups.html) (images in `docs/design/img/`), published as Artifact `https://claude.ai/artifact/73W1w6xh7Q7kVWCyEDurMm` |
+| Palette | Light: page `#F4F4F7`, card `#FFFFFF`, ink `#15151A`, secondary `#6B6B78`, line `#E6E6EE`, brand `#504EB7`, sale `#E5484D`, success `#2E9E6B`. Dark: page `#0F0F14`, card `#1A1A22`, ink `#F2F2F7`, secondary `#9A9AAA`, line `#2A2A35`, brand `#8B89F0` |
 
 ## Phases
 
@@ -271,6 +273,7 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 |---|---|---|
 | Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) | 2026-10-18 |
 | Bottom nav widget | App-side V5 clone of the V3 floating bar; no V3 imports | 2026-10-18 |
+| Mockups approved | Owner asked to run phases 1–9 without review stops; mockups v1 taken as approved | 2026-10-18 |
 | UI redesign | New phase 2: `mobile-app-ui-design` skill mockups gate all screen work; later phases renumbered 3–9 | 2026-10-18 |
 
 ## Open decisions
