@@ -5,25 +5,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ios-simu-dev",
+      "name": "dev-17-pro-max",
       "request": "launch",
       "type": "dart",
       "program": "lib/main.dart",
-      "toolArgs": ["--dart-define-from-file=env/dev.json"]
+      "toolArgs": [
+        "--dart-define-from-file=env/dev.json"
+      ],
+      "deviceId": "A1435826-B732-4BE8-A6BC-E360A720E0D5"
     },
-    {
-      "name": "android-emu-dev",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/main.dart",  
-      "toolArgs": ["--dart-define-from-file=env/dev.json"]
-    },
-    {
-      "name": "android-real-dev",
-      "request": "launch",
-      "type": "dart",
-      "program": "lib/main.dart",
-      "toolArgs": ["--dart-define-from-file=env/dev.json"]
-    }
   ]
 }
