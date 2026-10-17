@@ -9,8 +9,9 @@ Feature-based Clean Architecture: each feature owns its `domain` / `data` / `pre
 | `lib/src/features/product/` | Product detail, search, recommended products |
 | `lib/src/features/order/` | My orders + order detail |
 | `lib/src/features/banner/`, `category/`, `notification/`, `profile/` | Feature slices |
+| `lib/src/features/auth/` | Login screen + session; first launch saves the demo user, so the app opens signed in |
 | `lib/src/features/home/` | Presentation only: composes banner / category / product sections |
-| `lib/src/features/splash/`, `tutorial/`, `login/`, `register/`, `bottom_tab/`, `preview_media/` | Screen flows |
+| `lib/src/features/splash/`, `tutorial/`, `register/`, `bottom_tab/`, `preview_media/` | Screen flows |
 | `lib/src/core/` | Constants, enums, env, exceptions, failures, l10n, navigation, resources, usecase base, utils, shared widgets |
 | `lib/src/di/injector.dart` | Calls each feature's `<Feature>Di.config()` |
 

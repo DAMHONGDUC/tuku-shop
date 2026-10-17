@@ -1,8 +1,10 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/profile/presentation/profile/components/setting_section.dart';
+import 'package:tuku_shop/src/features/splash/config/splash_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 
 import 'components/profile_app_bar.dart';
@@ -38,7 +40,14 @@ class _ProfileView extends StatelessWidget {
       appBar: ProfileAppBar(),
       child: BlocConsumer<ProfileController, ProfileState>(
         listener: (context, state) {
-          // TODO: implement listener
+          if (state is ProfileLoggedOutState) {
+            // Splash finds no session and routes to login.
+            context.go(SplashRoutes.splash.fullPath);
+          } else if (state is ProfileLogoutFailedState) {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(context.loc.logout_failed)));
+          }
         },
         buildWhen: (previous, current) {
           return current is ProfileLoadingState ||
@@ -62,6 +71,9 @@ class _ProfileView extends StatelessWidget {
                 itemBuilder: (_, index) {
                   return SettingSection(
                     settingSection: state.listSettingSection[index],
+                    onItemTap: (item) => context
+                        .read<ProfileController>()
+                        .onSettingTapped(item.itemType),
                   );
                 },
               ),

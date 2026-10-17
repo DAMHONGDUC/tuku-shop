@@ -4,14 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:system_design/index.dart';
 
 class SettingCard extends StatelessWidget {
-  const SettingCard({super.key, required this.setting});
+  const SettingCard({super.key, required this.setting, this.onTap});
 
   final SettingItemEntity setting;
+  final ValueChanged<SettingItemEntity>? onTap;
 
   @override
   Widget build(BuildContext context) {
     return SdInkWellV5(
-      onTap: () {},
+      onTap: () => onTap?.call(setting),
       containerBg: context.colorTheme.cardDefault,
       borderRadius: SdSpacingV5.s12,
       contentPadding: EdgeInsets.all(SdSpacingV5.s12),

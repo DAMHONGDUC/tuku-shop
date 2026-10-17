@@ -10,6 +10,7 @@ import '../../../../helpers/mock_usecases.dart';
 
 void main() {
   late MockGetProfileSettingsUsecase usecase;
+  late MockLogoutUsecase logoutUsecase;
   late ProfileController controller;
 
   final tSections = [
@@ -22,7 +23,8 @@ void main() {
 
   setUp(() {
     usecase = MockGetProfileSettingsUsecase();
-    controller = ProfileController(usecase);
+    logoutUsecase = MockLogoutUsecase();
+    controller = ProfileController(usecase, logoutUsecase);
   });
 
   tearDown(() => controller.close());
@@ -55,5 +57,37 @@ void main() {
       ProfileLoadingState(),
       ProfileErrorState(errorMsg: 'something wrong'),
     ],
+  );
+
+  blocTest<ProfileController, ProfileState>(
+    'emits [LoggedOut] when the logout item is tapped and logout succeeds',
+    setUp: () {
+      when(
+        () => logoutUsecase.call(NoParams()),
+      ).thenAnswer((_) async => const Right(unit));
+    },
+    build: () => controller,
+    act: (c) => c.onSettingTapped(SettingItemType.logout),
+    expect: () => [ProfileLoggedOutState()],
+  );
+
+  blocTest<ProfileController, ProfileState>(
+    'emits [LogoutFailed] when logout fails',
+    setUp: () {
+      when(
+        () => logoutUsecase.call(NoParams()),
+      ).thenAnswer((_) async => Left(CacheFailure()));
+    },
+    build: () => controller,
+    act: (c) => c.logout(),
+    expect: () => [ProfileLogoutFailedState()],
+  );
+
+  blocTest<ProfileController, ProfileState>(
+    'does nothing for a setting item other than logout',
+    build: () => controller,
+    act: (c) => c.onSettingTapped(SettingItemType.editProfile),
+    expect: () => <ProfileState>[],
+    verify: (_) => verifyNever(() => logoutUsecase.call(NoParams())),
   );
 }

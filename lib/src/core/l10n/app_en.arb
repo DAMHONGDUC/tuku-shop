@@ -1,5 +1,23 @@
 {
     "@@locale": "en",
     "app_name": "Tuku Shop",
-    "splash_description": "Any shopping just from home"
+    "splash_description": "Any shopping just from home",
+    "login_title": "Welcome back",
+    "login_subtitle": "Sign in to continue shopping",
+    "login_email_label": "Email",
+    "login_email_hint": "you@example.com",
+    "login_password_label": "Password",
+    "login_password_hint": "Enter your password",
+    "login_button": "Sign in",
+    "login_signing_in": "Signing in...",
+    "login_no_account": "Don't have an account?",
+    "login_register": "Register",
+    "login_demo_title": "Demo account",
+    "login_demo_fill": "Use demo account",
+    "login_error_email_empty": "Please enter your email",
+    "login_error_email_invalid": "Please enter a valid email",
+    "login_error_password_empty": "Please enter your password",
+    "login_error_invalid_credentials": "Incorrect email or password",
+    "login_error_unknown": "Something went wrong. Please try again",
+    "logout_failed": "Could not log out. Please try again"
 }

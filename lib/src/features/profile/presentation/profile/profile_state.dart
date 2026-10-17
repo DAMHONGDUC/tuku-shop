@@ -26,3 +26,7 @@ class ProfileErrorState extends ProfileState {
   @override
   List<Object?> get props => [errorMsg];
 }
+
+class ProfileLoggedOutState extends ProfileState {}
+
+class ProfileLogoutFailedState extends ProfileState {}

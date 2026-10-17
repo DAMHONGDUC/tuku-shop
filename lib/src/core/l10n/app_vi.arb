@@ -1,5 +1,23 @@
 {
     "@@locale": "vi",
     "app_name": "Tuku Shop",
-    "splash_description": "Any shopping just from home"
+    "splash_description": "Any shopping just from home",
+    "login_title": "Chào mừng trở lại",
+    "login_subtitle": "Đăng nhập để tiếp tục mua sắm",
+    "login_email_label": "Email",
+    "login_email_hint": "ban@example.com",
+    "login_password_label": "Mật khẩu",
+    "login_password_hint": "Nhập mật khẩu",
+    "login_button": "Đăng nhập",
+    "login_signing_in": "Đang đăng nhập...",
+    "login_no_account": "Chưa có tài khoản?",
+    "login_register": "Đăng ký",
+    "login_demo_title": "Tài khoản demo",
+    "login_demo_fill": "Dùng tài khoản demo",
+    "login_error_email_empty": "Vui lòng nhập email",
+    "login_error_email_invalid": "Email không hợp lệ",
+    "login_error_password_empty": "Vui lòng nhập mật khẩu",
+    "login_error_invalid_credentials": "Email hoặc mật khẩu không đúng",
+    "login_error_unknown": "Đã có lỗi xảy ra. Vui lòng thử lại",
+    "logout_failed": "Không thể đăng xuất. Vui lòng thử lại"
 }

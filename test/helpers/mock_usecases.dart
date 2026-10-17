@@ -1,3 +1,4 @@
+import 'package:tuku_shop/src/features/auth/domain/domain.dart';
 import 'package:tuku_shop/src/features/banner/domain/domain.dart';
 import 'package:tuku_shop/src/features/category/domain/domain.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
@@ -30,3 +31,9 @@ class MockGetProductDetailUsecase extends Mock
 
 class MockGetRelatedProductUsecase extends Mock
     implements GetRelatedProductUsecase {}
+
+class MockGetCurrentUserUsecase extends Mock implements GetCurrentUserUsecase {}
+
+class MockLoginUsecase extends Mock implements LoginUsecase {}
+
+class MockLogoutUsecase extends Mock implements LogoutUsecase {}

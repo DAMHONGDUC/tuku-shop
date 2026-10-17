@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:system_design/index.dart';
 
 class SettingSection extends StatelessWidget {
-  const SettingSection({super.key, required this.settingSection});
+  const SettingSection({
+    super.key,
+    required this.settingSection,
+    this.onItemTap,
+  });
   final SettingSectionEntity settingSection;
+  final ValueChanged<SettingItemEntity>? onItemTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +27,10 @@ class SettingSection extends StatelessWidget {
             return SdVerticalSpacingV5();
           },
           itemBuilder: (_, index) {
-            return SettingCard(setting: settingSection.items[index]);
+            return SettingCard(
+              setting: settingSection.items[index],
+              onTap: onItemTap,
+            );
           },
         ),
       ],

@@ -109,6 +109,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Any shopping just from home'**
   String get splash_description;
+
+  /// No description provided for @login_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome back'**
+  String get login_title;
+
+  /// No description provided for @login_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in to continue shopping'**
+  String get login_subtitle;
+
+  /// No description provided for @login_email_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
+  String get login_email_label;
+
+  /// No description provided for @login_email_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'you@example.com'**
+  String get login_email_hint;
+
+  /// No description provided for @login_password_label.
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
+  String get login_password_label;
+
+  /// No description provided for @login_password_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter your password'**
+  String get login_password_hint;
+
+  /// No description provided for @login_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in'**
+  String get login_button;
+
+  /// No description provided for @login_signing_in.
+  ///
+  /// In en, this message translates to:
+  /// **'Signing in...'**
+  String get login_signing_in;
+
+  /// No description provided for @login_no_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Don\'t have an account?'**
+  String get login_no_account;
+
+  /// No description provided for @login_register.
+  ///
+  /// In en, this message translates to:
+  /// **'Register'**
+  String get login_register;
+
+  /// No description provided for @login_demo_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo account'**
+  String get login_demo_title;
+
+  /// No description provided for @login_demo_fill.
+  ///
+  /// In en, this message translates to:
+  /// **'Use demo account'**
+  String get login_demo_fill;
+
+  /// No description provided for @login_error_email_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get login_error_email_empty;
+
+  /// No description provided for @login_error_email_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get login_error_email_invalid;
+
+  /// No description provided for @login_error_password_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your password'**
+  String get login_error_password_empty;
+
+  /// No description provided for @login_error_invalid_credentials.
+  ///
+  /// In en, this message translates to:
+  /// **'Incorrect email or password'**
+  String get login_error_invalid_credentials;
+
+  /// No description provided for @login_error_unknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong. Please try again'**
+  String get login_error_unknown;
+
+  /// No description provided for @logout_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not log out. Please try again'**
+  String get logout_failed;
 }
 
 class _AppLocalizationsDelegate

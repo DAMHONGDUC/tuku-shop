@@ -1,3 +1,6 @@
+import 'package:tuku_shop/src/features/auth/data/data_sources/auth_local_data_source.dart';
+import 'package:tuku_shop/src/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:tuku_shop/src/features/auth/domain/domain.dart';
 import 'package:tuku_shop/src/features/banner/data/data_sources/banner_remote_data_source.dart';
 import 'package:tuku_shop/src/features/banner/domain/domain.dart';
 import 'package:tuku_shop/src/features/category/data/data_sources/category_remote_data_source.dart';
@@ -41,3 +44,9 @@ class MockOrderRemoteDataSource extends Mock implements OrderRemoteDataSource {}
 
 class MockProfileRemoteDataSource extends Mock
     implements ProfileRemoteDataSource {}
+
+class MockAuthRepository extends Mock implements AuthRepository {}
+
+class MockAuthRemoteDataSource extends Mock implements AuthRemoteDataSource {}
+
+class MockAuthLocalDataSource extends Mock implements AuthLocalDataSource {}

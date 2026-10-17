@@ -1,4 +1,5 @@
 import 'package:tuku_shop/src/di/injector.dart';
+import 'package:tuku_shop/src/features/auth/domain/domain.dart';
 import 'package:tuku_shop/src/features/profile/data/data_sources/profile_remote_data_source.dart';
 import 'package:tuku_shop/src/features/profile/data/repositories/profile_repository_impl.dart';
 import 'package:tuku_shop/src/features/profile/domain/domain.dart';
@@ -19,7 +20,10 @@ class ProfileDi {
     );
 
     getIt.registerFactory<ProfileController>(
-      () => ProfileController(getIt<GetProfileSettingsUsecase>()),
+      () => ProfileController(
+        getIt<GetProfileSettingsUsecase>(),
+        getIt<LogoutUsecase>(),
+      ),
     );
   }
 }

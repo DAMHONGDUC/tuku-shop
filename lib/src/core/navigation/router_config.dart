@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/navigation/extra_codec_config.dart';
 import 'package:tuku_shop/src/features/bottom_tab/bottom_tab_stack.dart';
-import 'package:tuku_shop/src/features/login/config/login_stack.dart';
+import 'package:tuku_shop/src/features/auth/presentation/login/config/login_stack.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/config/product_stack.dart';
 import 'package:tuku_shop/src/features/register/config/register_stack.dart';
 import 'package:tuku_shop/src/features/splash/config/splash_routes.dart';
