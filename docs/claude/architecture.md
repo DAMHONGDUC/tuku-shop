@@ -15,7 +15,7 @@
 | Each feature registers its chain in `<feature>_di.dart` via `getIt`, called from `lib/src/di/injector.dart` | One DI entry per feature | `OrderDi.config()` |
 | Data sources / repositories / usecases: `registerLazySingleton`; controllers: `registerFactory` | Fresh Cubit per screen | `order_di.dart` |
 | Screen folder: `<screen>_screen.dart`, `<screen>_controller.dart`, `<screen>_state.dart`, `components/`, `config/` | Predictable screen layout | `presentation/my_order/` |
-| Routes are `SdRouter` constants in `config/<screen>_routes.dart` | Route names/paths defined once | `MyOrderRoutes.myOrder` |
+| Routes are `SdRouterV5` constants in `config/<screen>_routes.dart` | Route names/paths defined once | `MyOrderRoutes.myOrder` |
 | Cross-cutting code goes in `lib/src/core/` (constants, enums, l10n, navigation, resources, widgets) | No business logic in core | `lib/src/core/core.dart` |
 
 ## Never
@@ -24,5 +24,5 @@
 |---|---|
 | Import another feature's `data/`, or its `presentation/` outside `home/` / `bottom_tab/` | Use its `domain/domain.dart` barrel |
 | Edit generated `app_localizations*.dart` | Edit `app_en.arb` / `app_vi.arb`, run `fvm dart run melos run gen:l10n` |
-| Change code inside `packages/system_design_flutter` from this repo | It is a submodule with its own repo; bump the pointer instead |
+| Change code inside `packages/flutter-system-design-kit` from this repo | It is a submodule with its own repo; bump the pointer instead |
 | Hardcode app ids or the app name | Ids: see README "App IDs"; name: `AppConstants.appName` / `app_name` in ARB |
