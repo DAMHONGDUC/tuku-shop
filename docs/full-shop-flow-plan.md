@@ -25,6 +25,7 @@ Turn Tuku Shop into a working clothing-store demo for client review: browse → 
 | Lists page 10 items and load more on scroll | First rows show after 1 s, not after the whole list | `SdListViewLoadMoreV5` / grid equivalent |
 | Mock catalog is deterministic (fixed ids, a seeded `Random` per mock file) | The client sees the same app on every launch | `product/data/mock/` |
 | No feature imports another feature's `data/` | Architecture rule; fixes current `order_mock.dart` → `product_mock.dart` import | `docs/claude/architecture.md` |
+| UI uses design-kit V5 only; a missing V5 widget is cloned into `lib/src/core/widgets/` from V5 tokens, never imported from V2/V3/V4 | One generation, consistent look | `lib/src/core/widgets/navigation/` |
 | UI strings go through ARB (en + vi); catalog content stays English | Matches the existing l10n setup | `lib/src/core/l10n/` |
 
 ## Progressive loading
@@ -171,12 +172,20 @@ Cart, wishlist, orders, addresses and profile edits change while the app runs; e
 | Cart | Cart |
 | Profile | Profile (My orders with status counters, addresses, settings) |
 
+An app-side clone of the V3 bar's look and behavior, built only from V5 tokens; nothing `*V3` is imported.
+
 | Item | Choice |
 |---|---|
-| Bar widget | `SdBottomNavigationV3` (glass, glyph-only, 5 equal segments, hides on scroll, swipe between tabs) |
-| Destinations | `SdNavDestinationV3` with outline `icon`, filled `selectedIcon`, and an ARB `label` for screen readers |
-| Tab screens | Pad content with `SdContentPaddingV3.floatingBarInset` so the last row clears the floating bar |
-| Cart count | V3 cells have no badge; the count shows on the Home app-bar cart icon and the Cart screen title (a nav badge needs a kit change upstream) |
+| Widget | `FloatingBottomNav` (shell: hide on scroll + tab swipe) and `FloatingBottomNavBar` (the bar) in `lib/src/core/widgets/navigation/` |
+| Bar shape | Floating stadium: height `SdSpacingV5.s56`, radius `s28`, side margin `s16`, bottom offset = safe-area bottom clamped to `s16`–`s20` |
+| Surface | `BackdropFilter` blur over `colorTheme.surfaceDefault` at 80 % + `borderDefault` hairline + `boxShadowDefault` (stands in for V3 liquid glass; no new package) |
+| Selected tab | Tinted capsule one segment wide, inset `s4`, `colorTheme.primary` at 22 %, slides with `AnimatedAlign` 250 ms `easeInOutCubic` |
+| Items | Glyph only, outline icon → filled icon when selected, `SdIconV5` size `s24`, `primary` vs `iconSecondary`; ARB label as semantics label |
+| Badge | `SdBadgeV5` on the Cart (count) and Wishlist (count) glyphs |
+| Hide on scroll | Bar follows the tab's main vertical list, settles shown/hidden on scroll end (250 ms `easeOutCubic`), always reappears on tab change, at list top, or when the list cannot scroll |
+| Swipe | Horizontal drag ≥ `s48` switches to the adjacent tab |
+| Content inset | `FloatingBottomNav.contentInset(context)` (offset + bar height) pads the bottom of every tab screen so the last row clears the bar |
+| Motion constants | `UIConstants.navFast` 150 ms, `navNormal` 250 ms, in `lib/src/core/constants/ui_constants.dart` |
 | Route constants | `lib/src/core/navigation/routes/`, so any feature navigates without importing another feature's `presentation/` |
 
 ## Phases
@@ -187,7 +196,7 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 |---|---|---|---|
 | 0 · Foundations | `MockLatency` (1 s) in every data source; drop controller delays; route constants to core; fix `order_mock` cross-feature import; seeded random | `core/constants/`, `core/navigation/routes/`, all `*_data_source*.dart` | Data source tests assert ~1 s latency with `fakeAsync` |
 | 1 · Catalog & images | Manifest + fetch script; new categories, products, banners; product model fields; remove old assets | `tool/`, `assets/images/`, `category/data/mock/`, `product/data/` | Mock integrity test: every asset path in mocks exists in `pubspec` assets |
-| 2 · Browse | `SdBottomNavigationV3` with the 5 tabs (Wishlist / Cart show an empty state until phases 3–4), Categories tab, category products (sort/filter/paged), home sections, search upgrade, PDP gallery + variant picker + paged reviews | `category/`, `product/`, `home/` | Usecases, repos, Cubits (`bloc_test`) incl. load-more |
+| 2 · Browse | `FloatingBottomNav` (V5 clone of the V3 bar) with the 5 tabs (Wishlist / Cart show an empty state until phases 3–4), Categories tab, category products (sort/filter/paged), home sections, search upgrade, PDP gallery + variant picker + paged reviews | `category/`, `product/`, `home/` | Usecases, repos, Cubits (`bloc_test`) incl. load-more |
 | 3 · Wishlist | Feature + heart on cards + tab | `wishlist/` | Toggle, stream, persistence |
 | 4 · Cart | Feature, add-to-cart sheet, badge, cart screen | `cart/`, `product/.../bottom_action_section.dart` | Add / merge same variant / qty bounds / stock |
 | 5 · Checkout & address | Address CRUD, checkout sections, voucher, place order, success | `checkout/`, `address/`, `order/` | Totals math, voucher rules, cart cleared after order |
@@ -213,7 +222,7 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | Decision | Choice | Date |
 |---|---|---|
 | Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) | 2026-10-18 |
-| Bottom nav widget | `SdBottomNavigationV3` from the design kit | 2026-10-18 |
+| Bottom nav widget | App-side V5 clone of the V3 floating bar; no V3 imports | 2026-10-18 |
 
 ## Open decisions
 

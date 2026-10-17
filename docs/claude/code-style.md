@@ -16,3 +16,4 @@
 |---|---|
 | Put business logic in widgets | Move it to the Cubit or a usecase |
 | Call a data source or repository from a Cubit | Call a usecase |
+| Use a V2 / V3 / V4 design-kit widget, token or helper | Use V5; if V5 lacks it, clone it into `lib/src/core/widgets/` from V5 tokens |
