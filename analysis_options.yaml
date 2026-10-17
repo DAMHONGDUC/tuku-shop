@@ -16,6 +16,8 @@ analyzer:
     - windows/**
     - macos/**
     - linux/**
+    # Shared shell tooling; its Dart helper resolves its own packages when a script runs it.
+    - packages/script-tools/**
 include: package:flutter_lints/flutter.yaml
 
 linter:

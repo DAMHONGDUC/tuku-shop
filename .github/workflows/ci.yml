@@ -14,19 +14,30 @@ jobs:
         with:
           submodules: recursive
 
+      - name: Check submodules are checked out
+        run: |
+          test -f packages/flutter-system-design-kit/pubspec.yaml
+          test -f packages/script-tools/flutter/lib/common.sh
+
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.38.8"
+          flutter-version: "3.47.2"
           channel: "stable"
 
       - name: Install dependencies
-        run: flutter pub get
+        run: |
+          flutter pub get
+          (cd packages/flutter-system-design-kit && flutter pub get)
 
-      - name: Bootstrap workspace (melos)
-        run: dart run melos bootstrap
+      - name: Generate code
+        run: bash packages/script-tools/flutter/generate_code.sh
 
       - name: Analyze
-        run: dart run melos run analyze
+        run: bash packages/script-tools/flutter/analyze_code.sh
 
-      - name: Run tests
-        run: dart run melos run test
+      - name: Test app
+        run: bash packages/script-tools/flutter/run_tests.sh
+
+      - name: Test design system
+        working-directory: packages/flutter-system-design-kit
+        run: flutter test
