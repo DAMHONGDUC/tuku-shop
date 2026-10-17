@@ -25,6 +25,7 @@ Turn Tuku Shop into a working clothing-store demo for client review: browse → 
 | Lists page 10 items and load more on scroll | First rows show after 1 s, not after the whole list | `SdListViewLoadMoreV5` / grid equivalent |
 | Mock catalog is deterministic (fixed ids, a seeded `Random` per mock file) | The client sees the same app on every launch | `product/data/mock/` |
 | No feature imports another feature's `data/` | Architecture rule; fixes current `order_mock.dart` → `product_mock.dart` import | `docs/claude/architecture.md` |
+| Screens follow the approved mockups from phase 2 (`mobile-app-ui-design` skill) | Polished, consistent demo for the client | `docs/design/` |
 | UI uses design-kit V5 only; a missing V5 widget is cloned into `lib/src/core/widgets/` from V5 tokens, never imported from V2/V3/V4 | One generation, consistent look | `lib/src/core/widgets/navigation/` |
 | UI strings go through ARB (en + vi); catalog content stays English | Matches the existing l10n setup | `lib/src/core/l10n/` |
 
@@ -188,6 +189,52 @@ An app-side clone of the V3 bar's look and behavior, built only from V5 tokens; 
 | Motion constants | `UIConstants.navFast` 150 ms, `navNormal` 250 ms, in `lib/src/core/constants/ui_constants.dart` |
 | Route constants | `lib/src/core/navigation/routes/`, so any feature navigates without importing another feature's `presentation/` |
 
+## UI redesign
+
+Every screen is redesigned with the `mobile-app-ui-design` skill before it is coded, then built only from V5 tokens.
+
+### Design language (skill rule → V5)
+
+| Skill rule | Applied as |
+|---|---|
+| 1 font family, ≤ 4 sizes, ≤ 2 weights | Lato via `SdTextStyleV5`: `body12`, `body14`, `heading16`, `heading24`; regular + semibold only |
+| Prices and stats in a tabular style | Prices use `FontFeature.tabularFigures()`; values larger than their labels |
+| 60 / 30 / 10 color | 60 % `pageDefault` / `cardDefault`, 30 % `textDefault`, 10 % `primary` on CTAs, active states, badges |
+| Text hierarchy by opacity | `textDefault` 100 % headings, 80 % body, 60 % `textSubTitle` secondary |
+| Accent at 5 % for secondary surfaces | Secondary buttons, chips and highlighted cards use `primary` at 5–8 % with a 5 % `primary` border |
+| 8-point grid | Only `SdSpacingV5` `s4` `s8` `s12` `s16` `s24` `s32` `s48` `s64`; card padding `s16`–`s24`; related 16 → unrelated 32 |
+| Soft tinted shadows | `boxShadowDefault` tinted to the surface, large blur, low alpha; no pure black shadows |
+| Thumb zone | Primary CTAs (Add to cart, Checkout, Place order) pinned at the bottom of the screen |
+| Rounded modern cards | Card radius `s16`, image radius `s12`, sheets `s24` top corners |
+| Tap targets ≥ 44 pt | Icon buttons sized to `s44` minimum |
+| Visual cues | Category cards with soft color backgrounds + isolated product photo; avatars for reviewers |
+| Every state designed | Loading skeleton, empty (illustration + CTA), error (message + Retry), success for each section |
+
+### Screens and their key pattern
+
+| Screen | Pattern from the skill |
+|---|---|
+| Home | Clear hierarchy: search → banner → categories → flash sale → new arrivals; content shown directly, no extra taps |
+| Categories | Color-coded cards with isolated images in a steady grid rhythm |
+| Category products / Search | Search never blank: recent searches, trending, recommended; filter chips over modal filters |
+| Product detail | Large photography, rating + review count + delivery estimate as trust signals, sticky Add to cart in the thumb zone |
+| Add-to-cart sheet | Tappable size / color chips instead of text input; out-of-stock chips disabled |
+| Wishlist / Cart | Empty states with guidance and a "Start shopping" CTA; cart total and Checkout pinned at the bottom |
+| Checkout | One scroll, sections in decision order; Place order pinned at the bottom |
+| Order success | **Peak moment**: check animation + order summary card + "Track order" / "Continue shopping" (**end** moment) |
+| Orders / Order detail | Confident status headline, visual timeline instead of a date list |
+| Profile | Avatar header, order-status shortcuts with counts, grouped settings |
+| Login | Already built; refreshed to the same language in phase 8 |
+
+### Mockup deliverable
+
+| Item | Choice |
+|---|---|
+| Format | HTML mockups at 375 pt width (skill baseline), one page per flow, in `docs/design/` |
+| Review | Published as a private Artifact so the owner (and the client, if shared) can comment |
+| Images | Real catalog photos from phase 1, so mockups match the shipped app |
+| Gate | Phases 3–9 build screens to the approved mockups; changes go back to the mockup first |
+
 ## Phases
 
 Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its tests passing.
@@ -196,13 +243,14 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 |---|---|---|---|
 | 0 · Foundations | `MockLatency` (1 s) in every data source; drop controller delays; route constants to core; fix `order_mock` cross-feature import; seeded random | `core/constants/`, `core/navigation/routes/`, all `*_data_source*.dart` | Data source tests assert ~1 s latency with `fakeAsync` |
 | 1 · Catalog & images | Manifest + fetch script; new categories, products, banners; product model fields; remove old assets | `tool/`, `assets/images/`, `category/data/mock/`, `product/data/` | Mock integrity test: every asset path in mocks exists in `pubspec` assets |
-| 2 · Browse | `FloatingBottomNav` (V5 clone of the V3 bar) with the 5 tabs (Wishlist / Cart show an empty state until phases 3–4), Categories tab, category products (sort/filter/paged), home sections, search upgrade, PDP gallery + variant picker + paged reviews | `category/`, `product/`, `home/` | Usecases, repos, Cubits (`bloc_test`) incl. load-more |
-| 3 · Wishlist | Feature + heart on cards + tab | `wishlist/` | Toggle, stream, persistence |
-| 4 · Cart | Feature, add-to-cart sheet, badge, cart screen | `cart/`, `product/.../bottom_action_section.dart` | Add / merge same variant / qty bounds / stock |
-| 5 · Checkout & address | Address CRUD, checkout sections, voucher, place order, success | `checkout/`, `address/`, `order/` | Totals math, voucher rules, cart cleared after order |
-| 6 · Orders & notifications | Paged status tabs, timeline, cancel, buy again, notification on order events | `order/`, `notification/` | Status transitions, counters |
-| 7 · Profile & settings | Header, edit profile, theme, language (en/vi), reset demo data | `profile/`, `auth/` | Reset clears every store back to seed |
-| 8 · Polish & demo script | Empty / error states review, snackbars, app icon name check, screenshots, demo walkthrough in `docs/screenshots.md` | all | Full `melos run test` |
+| 2 · UI design | Run the `mobile-app-ui-design` skill: design language mapped to V5 tokens, HTML mockups of every screen in [UI redesign](#ui-redesign), published as a private Artifact for review; coding of later phases starts only after approval | `docs/design/` | — (design review gate) |
+| 3 · Browse | `FloatingBottomNav` (V5 clone of the V3 bar) with the 5 tabs (Wishlist / Cart show an empty state until phases 4–5), Categories tab, category products (sort/filter/paged), home sections, search upgrade, PDP gallery + variant picker + paged reviews; Home, PDP and Search rebuilt to the approved mockups | `category/`, `product/`, `home/`, `core/widgets/` | Usecases, repos, Cubits (`bloc_test`) incl. load-more |
+| 4 · Wishlist | Feature + heart on cards + tab | `wishlist/` | Toggle, stream, persistence |
+| 5 · Cart | Feature, add-to-cart sheet, badge, cart screen | `cart/`, `product/.../bottom_action_section.dart` | Add / merge same variant / qty bounds / stock |
+| 6 · Checkout & address | Address CRUD, checkout sections, voucher, place order, success (the peak moment) | `checkout/`, `address/`, `order/` | Totals math, voucher rules, cart cleared after order |
+| 7 · Orders & notifications | Paged status tabs, visual timeline, cancel, buy again, notification on order events; Orders and Notifications rebuilt to the mockups | `order/`, `notification/` | Status transitions, counters |
+| 8 · Profile & settings | Header, edit profile, theme, language (en/vi), reset demo data; Profile and Login rebuilt to the mockups | `profile/`, `auth/` | Reset clears every store back to seed |
+| 9 · Polish & demo script | Design QA of every screen against its mockup, empty / error states review, snackbars, screenshots, demo walkthrough in `docs/screenshots.md` | all | Full `melos run test` |
 
 ## Mock business rules
 
@@ -223,6 +271,7 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 |---|---|---|
 | Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) | 2026-10-18 |
 | Bottom nav widget | App-side V5 clone of the V3 floating bar; no V3 imports | 2026-10-18 |
+| UI redesign | New phase 2: `mobile-app-ui-design` skill mockups gate all screen work; later phases renumbered 3–9 | 2026-10-18 |
 
 ## Open decisions
 
