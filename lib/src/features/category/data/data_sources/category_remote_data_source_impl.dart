@@ -1,7 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/category/data/mock/category_mock.dart';
 import 'package:tuku_shop/src/features/category/data/models/category_model.dart';
-import 'package:system_design/index.dart';
 
 import 'category_remote_data_source.dart';
 
@@ -11,7 +10,7 @@ class CategoryRemoteDataSourceImpl implements CategoryRemoteDataSource {
   @override
   Future<List<CategoryModel>> getCategories() async {
     try {
-      await SdHelperV5.delayLoading();
+      await MockLatency.wait();
       return CategoryMock.categories;
     } catch (e) {
       throw ServerException(e.toString());

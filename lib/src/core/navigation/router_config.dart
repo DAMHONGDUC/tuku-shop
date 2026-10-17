@@ -3,7 +3,7 @@ import 'package:tuku_shop/src/features/bottom_tab/bottom_tab_stack.dart';
 import 'package:tuku_shop/src/features/auth/presentation/login/config/login_stack.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/config/product_stack.dart';
 import 'package:tuku_shop/src/features/register/config/register_stack.dart';
-import 'package:tuku_shop/src/features/splash/config/splash_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/splash_routes.dart';
 import 'package:tuku_shop/src/features/splash/config/splash_stack.dart';
 import 'package:tuku_shop/src/features/tutorial/config/tutorial_stack.dart';
 import 'package:flutter/material.dart';

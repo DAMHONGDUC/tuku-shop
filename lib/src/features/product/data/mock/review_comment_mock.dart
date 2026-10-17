@@ -5,7 +5,8 @@ const kImgReviewPath = 'assets/images/review_comment/';
 const kVidReviewPath = 'assets/videos/review_comment/';
 
 class ReviewCommentMock {
-  static final _random = Random();
+  // Fixed seed: the same text on every launch.
+  static final _random = Random(7);
 
   static final _names = [
     'Alice',

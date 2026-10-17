@@ -4,7 +4,6 @@ import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/notification/data/models/notification_category_model.dart';
 import 'package:tuku_shop/src/features/notification/data/models/notification_model.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class NotificationsMock {
   static List<NotificationCategoryModel> generateMockCategories() {
@@ -48,8 +47,8 @@ class NotificationsMock {
   }
 
   static List<NotificationModel> generateMockNotifications({int count = 20}) {
-    final random = Random();
-    final uuid = const Uuid();
+    // Fixed seed: the same notifications on every launch.
+    final random = Random(23);
 
     // === Order-related notifications ===
     final orderTitles = [
@@ -139,8 +138,8 @@ class NotificationsMock {
       final timestamp = DateTime.now().subtract(
         Duration(minutes: random.nextInt(60 * 24 * 30)), // up to 30 days old
       );
-      final relatedId = uuid.v4();
-      final id = uuid.v4();
+      final relatedId = 'TK${100001 + index}';
+      final id = 'N${index + 1}';
 
       String title;
       String body;

@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 
 import '../tutorial_screen.dart';
-import 'tutorial_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/tutorial_routes.dart';
 
 class TutorialStack {
   static final routes = [

@@ -2,7 +2,7 @@ import 'package:tuku_shop/src/core/enums/order_status.dart';
 import 'package:tuku_shop/src/core/resources/resources.dart';
 import 'package:tuku_shop/src/features/order/presentation/widgets/title_content_row.dart';
 import 'package:tuku_shop/src/features/order/domain/domain.dart';
-import 'package:tuku_shop/src/features/order/presentation/my_order/config/my_order_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/my_order_routes.dart';
 import 'package:tuku_shop/src/features/order/presentation/my_order/my_order_detail/my_order_detail_args.dart';
 import 'package:tuku_shop/src/core/utils/helper.dart';
 import 'package:flutter/material.dart';

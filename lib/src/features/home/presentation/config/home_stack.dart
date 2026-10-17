@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 
-import 'home_routes.dart';
-
 class HomeStack {
   static final List<GoRoute> routes = [
     SdGoRouteV5(

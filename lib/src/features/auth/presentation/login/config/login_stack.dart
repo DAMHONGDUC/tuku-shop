@@ -4,7 +4,7 @@ import 'package:system_design/index.dart';
 
 import '../login_screen.dart';
 import '../otp/login_otp_screen.dart';
-import 'login_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/login_routes.dart';
 
 class LoginStack {
   static final List<GoRoute> routes = [

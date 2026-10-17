@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 
 import '../splash_screen.dart';
-import 'splash_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/splash_routes.dart';
 
 class SplashStack {
   static final routes = [

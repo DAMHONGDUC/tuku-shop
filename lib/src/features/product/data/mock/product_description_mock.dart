@@ -1,7 +1,8 @@
 import 'dart:math';
 
 class ProductDescriptionMock {
-  static final _random = Random();
+  // Fixed seed: the same text on every launch.
+  static final _random = Random(11);
 
   static final _sentences = [
     'This product is made from high-quality materials, ensuring durability and longevity.',

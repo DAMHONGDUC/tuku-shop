@@ -5,8 +5,6 @@ import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/auth/domain/domain.dart';
-import 'package:tuku_shop/src/features/home/presentation/config/home_routes.dart';
-import 'package:tuku_shop/src/features/register/config/register_routes.dart';
 
 import 'components/demo_account_card.dart';
 import 'components/login_text_field.dart';

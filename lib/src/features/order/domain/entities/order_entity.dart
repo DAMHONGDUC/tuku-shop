@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:tuku_shop/src/core/core.dart';
-import 'package:tuku_shop/src/features/product/domain/entities/product_color.dart';
-import 'package:tuku_shop/src/features/product/domain/entities/product_size.dart';
+import 'package:tuku_shop/src/features/product/domain/domain.dart';
 
 class OrderEntity extends Equatable {
   final String id;

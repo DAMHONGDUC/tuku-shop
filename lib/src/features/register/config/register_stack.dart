@@ -4,7 +4,7 @@ import 'package:system_design/index.dart';
 
 import '../otp/register_otp_screen.dart';
 import '../register_screen.dart';
-import 'register_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/register_routes.dart';
 
 class RegisterStack {
   static final List<GoRoute> routes = [

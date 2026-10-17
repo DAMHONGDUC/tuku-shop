@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 
-import 'my_order_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/my_order_routes.dart';
 
 class MyOrderStack {
   static final List<GoRoute> routes = [

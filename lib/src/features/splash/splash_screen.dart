@@ -1,7 +1,5 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/di/injector.dart';
-import 'package:tuku_shop/src/features/home/presentation/config/home_routes.dart';
-import 'package:tuku_shop/src/features/auth/presentation/login/config/login_routes.dart';
 import 'package:tuku_shop/src/features/splash/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

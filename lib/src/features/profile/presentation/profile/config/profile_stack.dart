@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 
-import 'profile_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/profile_routes.dart';
 
 class ProfileStack {
   static final List<GoRoute> routes = [

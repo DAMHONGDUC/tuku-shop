@@ -1,4 +1,4 @@
-import 'package:tuku_shop/src/features/register/config/register_routes.dart';
+import 'package:tuku_shop/src/core/navigation/routes/register_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 

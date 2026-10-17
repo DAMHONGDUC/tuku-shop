@@ -1,6 +1,5 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_args.dart';
-import 'package:tuku_shop/src/features/product/presentation/product_detail/config/product_routes.dart';
 import 'package:tuku_shop/src/features/product/presentation/widgets/product_card.dart';
 import 'package:tuku_shop/src/features/product/presentation/widgets/product_grid_skeleton.dart';
 import 'package:flutter/material.dart';

@@ -1,7 +1,7 @@
-import 'package:tuku_shop/src/features/product/data/models/product_color_model.dart';
-import 'package:tuku_shop/src/features/product/data/models/product_size_model.dart';
 import 'package:tuku_shop/src/core/core.dart';
 
+/// An order line as the order service stores it: a snapshot of the product
+/// at purchase time, not a live reference to the catalog.
 class OrderModel {
   final String? id;
   final String? productName;
@@ -10,8 +10,9 @@ class OrderModel {
   final OrderStatus? status;
   final double? totalPrice;
   final String? productThumbnailUrl;
-  final ProductColorModel? productColor;
-  final ProductSizeModel? productSize;
+  final String? colorName;
+  final String? colorCode;
+  final String? sizeName;
 
   const OrderModel({
     this.id,
@@ -21,8 +22,9 @@ class OrderModel {
     this.status,
     this.totalPrice,
     this.productThumbnailUrl,
-    this.productColor,
-    this.productSize,
+    this.colorName,
+    this.colorCode,
+    this.sizeName,
   });
 
   OrderModel copyWith({
@@ -33,8 +35,9 @@ class OrderModel {
     OrderStatus? status,
     double? totalPrice,
     String? productThumbnailUrl,
-    ProductColorModel? productColor,
-    ProductSizeModel? productSize,
+    String? colorName,
+    String? colorCode,
+    String? sizeName,
   }) {
     return OrderModel(
       id: id ?? this.id,
@@ -44,8 +47,9 @@ class OrderModel {
       status: status ?? this.status,
       totalPrice: totalPrice ?? this.totalPrice,
       productThumbnailUrl: productThumbnailUrl ?? this.productThumbnailUrl,
-      productColor: productColor ?? this.productColor,
-      productSize: productSize ?? this.productSize,
+      colorName: colorName ?? this.colorName,
+      colorCode: colorCode ?? this.colorCode,
+      sizeName: sizeName ?? this.sizeName,
     );
   }
 }
