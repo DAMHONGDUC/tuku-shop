@@ -1,21 +1,32 @@
-import 'package:tuku_shop/src/core/core.dart';
-
 class NotificationModel {
-  final String? id;
-  final String? title;
-  final String? body;
-  final DateTime? timestamp;
-  final bool? isRead;
-  final NotificationType? type;
-  final String? relatedItemId;
-
   const NotificationModel({
     this.id,
+    this.type,
     this.title,
     this.body,
-    this.timestamp,
+    this.createdAt,
     this.isRead,
-    this.type,
-    this.relatedItemId,
+    this.image,
+    this.link,
   });
+
+  final String? id;
+  final String? type;
+  final String? title;
+  final String? body;
+  final DateTime? createdAt;
+  final bool? isRead;
+  final String? image;
+  final String? link;
+
+  NotificationModel copyWith({bool? isRead}) => NotificationModel(
+    id: id,
+    type: type,
+    title: title,
+    body: body,
+    createdAt: createdAt,
+    isRead: isRead ?? this.isRead,
+    image: image,
+    link: link,
+  );
 }

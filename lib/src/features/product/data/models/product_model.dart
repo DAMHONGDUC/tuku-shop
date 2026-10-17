@@ -1,32 +1,45 @@
-import 'package:tuku_shop/src/features/product/data/models/description_model.dart';
-import 'package:tuku_shop/src/features/product/data/models/product_color_model.dart';
-import 'package:tuku_shop/src/features/product/data/models/product_size_model.dart';
-import 'package:tuku_shop/src/features/product/data/models/review_comment_model.dart';
+import 'product_color_model.dart';
 
 class ProductModel {
-  final String? id;
-  final String? name;
-  final String? brand;
-  final double? price;
-  final String? imageUrl;
-  final int? purchaserCount;
-  final double? averageRating;
-  final List<ProductColorModel>? productColors;
-  final List<ProductSizeModel>? productSizes;
-  final DescriptionModel? description;
-  final List<ReviewCommentModel>? reviewComments;
-
   const ProductModel({
     this.id,
     this.name,
     this.brand,
+    this.categoryId,
+    this.gender,
     this.price,
-    this.imageUrl,
-    this.purchaserCount,
-    this.averageRating,
-    this.productColors,
-    this.productSizes,
+    this.compareAtPrice,
+    this.rating,
+    this.reviewCount,
+    this.soldCount,
+    this.material,
     this.description,
-    this.reviewComments,
+    this.highlights,
+    this.sizes,
+    this.colors,
+    this.isNew,
+    this.isBestSeller,
+    this.isEco,
+    this.createdAt,
   });
+
+  final String? id;
+  final String? name;
+  final String? brand;
+  final String? categoryId;
+  final String? gender;
+  final double? price;
+  final double? compareAtPrice;
+  final double? rating;
+  final int? reviewCount;
+  final int? soldCount;
+  final String? material;
+  final String? description;
+  final List<String>? highlights;
+  final List<String>? sizes;
+  final List<ProductColorModel>? colors;
+  final bool? isNew;
+  final bool? isBestSeller;
+  final bool? isEco;
+  final String? createdAt;
 }

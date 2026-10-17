@@ -1,14 +1,15 @@
 import 'package:dartz/dartz.dart';
 import 'package:tuku_shop/src/core/core.dart';
-import 'package:tuku_shop/src/features/order/domain/domain.dart';
+
+import '../entities/order_entity.dart';
+import '../repositories/order_repository.dart';
 
 class GetOrderDetailUsecase implements UseCase<OrderEntity, String> {
-  final OrderRepository repository;
-
   GetOrderDetailUsecase(this.repository);
 
+  final OrderRepository repository;
+
   @override
-  Future<Either<Failure, OrderEntity>> call(String orderId) async {
-    return await repository.getOrderDetail(orderId: orderId);
-  }
+  Future<Either<Failure, OrderEntity>> call(String params) =>
+      repository.getOrder(params);
 }

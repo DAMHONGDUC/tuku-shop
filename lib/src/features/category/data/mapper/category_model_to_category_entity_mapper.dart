@@ -4,12 +4,10 @@ import 'package:tuku_shop/src/features/category/domain/domain.dart';
 class CategoryModelToCategoryEntityMapper {
   const CategoryModelToCategoryEntityMapper._();
 
-  static CategoryEntity toEntity(CategoryModel model) {
-    return CategoryEntity(
-      id: model.id ?? 0,
-      name: model.name ?? '',
-      imageUrl: model.imageUrl ?? '',
-      numOfProduct: model.numOfProduct ?? 0,
-    );
-  }
+  static CategoryEntity toEntity(CategoryModel model) => CategoryEntity(
+    id: model.id ?? '',
+    name: model.name ?? '',
+    image: model.image ?? '',
+    productCount: model.productCount ?? 0,
+  );
 }

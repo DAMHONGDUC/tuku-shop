@@ -2,92 +2,105 @@ import 'package:collection/collection.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/order/data/mock/order_mock.dart';
 import 'package:tuku_shop/src/features/order/data/models/order_model.dart';
-import 'package:tuku_shop/src/features/order/data/models/orders_data_model.dart';
-import 'package:tuku_shop/src/features/order/domain/entities/get_my_order_filter_params.dart';
-import 'package:system_design_flutter/index.dart';
 
 abstract class OrderRemoteDataSource {
-  Future<OrdersDataModel> getMyOrder({required GetMyOrderFilterParams params});
+  Future<List<OrderModel>> getOrders();
 
-  Future<OrderModel?> getOrderDetail({required String orderId});
+  Future<OrderModel> getOrder(String id);
+
+  Future<OrderModel> placeOrder(OrderModel order);
+
+  Future<OrderModel> cancelOrder(String id);
 }
 
 class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
-  OrderRemoteDataSourceImpl();
+  OrderRemoteDataSourceImpl({DateTime Function()? clock})
+    : _clock = clock ?? DateTime.now {
+    _orders = OrderMock.seed(_clock());
+  }
 
-  // Singleton-like static cache — resets when the app restarts
-  static final Map<OrderStatus, List<OrderModel>> _cachedOrders = {};
-
-  // Config: fixed number of mock records per status
-  static const _mockCountPerStatus = {
-    OrderStatus.waitingForConfirmation: 20,
-    OrderStatus.waitingForPickup: 0,
-    OrderStatus.waitingForDelivery: 7,
-    OrderStatus.delivered: 32,
-    OrderStatus.rolledBack: 5,
-    OrderStatus.cancelled: 12,
-  };
+  final DateTime Function() _clock;
+  late List<OrderModel> _orders;
+  int _sequence = 1049;
 
   @override
-  Future<OrdersDataModel> getMyOrder({
-    required GetMyOrderFilterParams params,
-  }) async {
-    try {
-      await SdHelper.delayLoading();
+  Future<List<OrderModel>> getOrders() async {
+    await MockLatency.normal();
 
-      _initializeMockDataIfNeeded();
-
-      final allOrders = _cachedOrders[params.status] ?? [];
-
-      final startIndex = (params.pageNumber - 1) * params.itemCount;
-      final endIndex = startIndex + params.itemCount;
-      final paginatedItems = (startIndex < allOrders.length)
-          ? allOrders.sublist(startIndex, endIndex.clamp(0, allOrders.length))
-          : <OrderModel>[];
-
-      final totalRecords = allOrders.length;
-      final totalPage = (totalRecords / params.itemCount).ceil();
-
-      return OrdersDataModel(
-        items: paginatedItems,
-        totalPage: totalPage,
-        currentPage: params.pageNumber,
-        totalRecord: totalRecords,
-      );
-    } catch (e) {
-      throw ServerException(e.toString());
-    }
+    return List<OrderModel>.of(_orders)..sort(
+      (OrderModel a, OrderModel b) =>
+          (b.createdAt ?? DateTime(0)).compareTo(a.createdAt ?? DateTime(0)),
+    );
   }
 
   @override
-  Future<OrderModel?> getOrderDetail({required String orderId}) async {
-    try {
-      await SdHelper.delayLoading();
+  Future<OrderModel> getOrder(String id) async {
+    await MockLatency.short();
 
-      _initializeMockDataIfNeeded();
+    final OrderModel? order = _orders.firstWhereOrNull(
+      (OrderModel o) => o.id == id,
+    );
 
-      return _cachedOrders.values
-          .expand((orders) => orders)
-          .firstWhereOrNull((e) => e.id == orderId);
-    } catch (e) {
-      throw ServerException(e.toString());
-    }
+    if (order == null) throw ServerException('Order $id not found');
+    return order;
   }
 
-  // Initialize once per app run
-  void _initializeMockDataIfNeeded() {
-    if (_cachedOrders.isNotEmpty) return;
+  @override
+  Future<OrderModel> placeOrder(OrderModel order) async {
+    await MockLatency.long();
 
-    for (final entry in _mockCountPerStatus.entries) {
-      final status = entry.key;
-      final count = entry.value;
+    final DateTime now = _clock();
+    final int number = _sequence++;
+    final OrderModel placed = OrderModel(
+      id: 'o_$number',
+      code: 'TK-26$number',
+      createdAt: now,
+      status: 'placed',
+      items: order.items,
+      recipient: order.recipient,
+      phone: order.phone,
+      address: order.address,
+      paymentType: order.paymentType,
+      paymentLabel: order.paymentLabel,
+      deliveryOptionId: order.deliveryOptionId,
+      subtotal: order.subtotal,
+      shippingFee: order.shippingFee,
+      discount: order.discount,
+      promoCode: order.promoCode,
+      estimatedDelivery: order.estimatedDelivery,
+      tracking: OrderMock.trackingFor('placed', now),
+    );
 
-      _cachedOrders[status] = OrderMock.generateOrders(
-        count: count,
-      ).map((e) => e.copyWith(status: status)).toList();
-    }
+    _orders = <OrderModel>[placed, ..._orders];
+    return placed;
   }
 
-  // Optional: to clear mock cache manually (e.g., for testing)
-  static void clearMockCache() => _cachedOrders.clear();
+  @override
+  Future<OrderModel> cancelOrder(String id) async {
+    await MockLatency.normal();
+
+    final int index = _orders.indexWhere((OrderModel o) => o.id == id);
+
+    if (index < 0) throw ServerException('Order $id not found');
+
+    final OrderModel order = _orders[index];
+
+    if (order.status != 'placed' && order.status != 'processing') {
+      throw const ValidationException(FailureCodes.notCancellable);
+    }
+
+    final OrderModel cancelled = order.copyWith(
+      status: 'cancelled',
+      tracking: <TrackingEventModel>[
+        ...?order.tracking,
+        TrackingEventModel(
+          status: 'cancelled',
+          time: _clock(),
+          location: 'Cancelled at your request',
+        ),
+      ],
+    );
+    _orders[index] = cancelled;
+    return cancelled;
+  }
 }

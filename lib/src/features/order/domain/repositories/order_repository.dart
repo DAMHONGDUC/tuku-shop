@@ -1,15 +1,16 @@
 import 'package:dartz/dartz.dart';
 import 'package:tuku_shop/src/core/core.dart';
-import 'package:tuku_shop/src/features/order/domain/entities/get_my_order_filter_params.dart';
-import 'package:tuku_shop/src/features/order/domain/entities/order_entity.dart';
-import 'package:tuku_shop/src/features/order/domain/entities/orders_data.dart';
+
+import '../entities/order_entity.dart';
+import '../usecases/place_order_usecase.dart';
 
 abstract class OrderRepository {
-  Future<Either<Failure, OrdersData>> getMyOrder({
-    required GetMyOrderFilterParams params,
-  });
+  /// Newest first.
+  Future<Either<Failure, List<OrderEntity>>> getOrders();
 
-  Future<Either<Failure, OrderEntity>> getOrderDetail({
-    required String orderId,
-  });
+  Future<Either<Failure, OrderEntity>> getOrder(String id);
+
+  Future<Either<Failure, OrderEntity>> placeOrder(PlaceOrderParams params);
+
+  Future<Either<Failure, OrderEntity>> cancelOrder(String id);
 }

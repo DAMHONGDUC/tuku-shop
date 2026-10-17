@@ -1,44 +1,14 @@
+import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/category/data/models/category_model.dart';
 
-final kMockCategoryPath = 'assets/images/category/';
-
-class CategoryMock {
-  static final List<CategoryModel> categories = [
-    CategoryModel(
-      id: 0,
-      name: 'Luxury',
-      imageUrl: '${kMockCategoryPath}c0.png',
-      numOfProduct: 120,
-    ),
-    CategoryModel(
-      id: 1,
-      name: 'Sneakers',
-      imageUrl: '${kMockCategoryPath}c1.png',
-      numOfProduct: 120,
-    ),
-    CategoryModel(
-      id: 2,
-      name: 'Toys',
-      imageUrl: '${kMockCategoryPath}c2.png',
-      numOfProduct: 150,
-    ),
-    CategoryModel(
-      id: 3,
-      name: 'Pre-loved Luxury',
-      imageUrl: '${kMockCategoryPath}c3.png',
-      numOfProduct: 150,
-    ),
-    CategoryModel(
-      id: 4,
-      name: 'Cards',
-      imageUrl: '${kMockCategoryPath}c4.png',
-      numOfProduct: 90,
-    ),
-    CategoryModel(
-      id: 5,
-      name: 'P&A',
-      imageUrl: '${kMockCategoryPath}c5.png',
-      numOfProduct: 70,
-    ),
+abstract final class CategoryMock {
+  static final List<CategoryModel> categories = <CategoryModel>[
+    CategoryModel(id: 'hoodies', name: 'Hoodies', image: AppAssets.category('hoodies'), productCount: 8),
+    CategoryModel(id: 'jackets', name: 'Jackets', image: AppAssets.category('jackets'), productCount: 8),
+    CategoryModel(id: 'tees', name: 'Tees', image: AppAssets.category('tees'), productCount: 8),
+    CategoryModel(id: 'tanks', name: 'Tanks & Bras', image: AppAssets.category('tanks'), productCount: 8),
+    CategoryModel(id: 'pants', name: 'Pants', image: AppAssets.category('pants'), productCount: 8),
+    CategoryModel(id: 'shorts', name: 'Shorts', image: AppAssets.category('shorts'), productCount: 8),
+    CategoryModel(id: 'bags', name: 'Bags', image: AppAssets.category('bags'), productCount: 6),
   ];
 }

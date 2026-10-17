@@ -1,7 +1,7 @@
 class ProductColorModel {
-  final String? colorName;
-  final String? imageUrl;
-  final String? colorCode;
+  const ProductColorModel({this.name, this.hex, this.images});
 
-  const ProductColorModel({this.colorName, this.imageUrl, this.colorCode});
+  final String? name;
+  final String? hex;
+  final List<String>? images;
 }
