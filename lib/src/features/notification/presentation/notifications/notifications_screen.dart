@@ -18,7 +18,8 @@ class NotificationsScreen extends StatelessWidget {
     create: (BuildContext _) => getIt<NotificationsController>()..load(),
     child: BlocBuilder<NotificationsController, NotificationsState>(
       builder: (BuildContext context, NotificationsState state) {
-        final NotificationsController controller = context.read<NotificationsController>();
+        final NotificationsController controller = context
+            .read<NotificationsController>();
         final DateTime today = DateUtils.dateOnly(DateTime.now());
         final List<NotificationEntity> recent = state.items
             .where((NotificationEntity n) => !n.createdAt.isBefore(today))
@@ -71,17 +72,22 @@ class NotificationsScreen extends StatelessWidget {
                         ),
                         child: Text(
                           title.toUpperCase(),
-                          style: context.textTheme5.labelSmall!.faint5(context).copyWith(
-                            letterSpacing: 1.2,
-                          ),
+                          style: context.textTheme5.labelSmall!
+                              .faint5(context)
+                              .copyWith(letterSpacing: 1.2),
                         ),
                       ),
                       for (final (int i, NotificationEntity n) in group.indexed)
                         Padding(
-                          padding: EdgeInsets.only(bottom: SdSpacingConstant.h8),
+                          padding: EdgeInsets.only(
+                            bottom: SdSpacingConstant.h8,
+                          ),
                           child: SdFadeInV5(
                             index: i,
-                            child: NotificationTile(notification: n, onTap: () => open(n)),
+                            child: NotificationTile(
+                              notification: n,
+                              onTap: () => open(n),
+                            ),
                           ),
                         ),
                     ],

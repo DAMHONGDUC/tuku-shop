@@ -13,8 +13,14 @@ extension CheckoutLabels on BuildContext {
 
   String deliveryEta(DeliveryOptionEntity option) {
     final DateTime now = DateTime.now();
-    final String from = Formatters.date(now.add(Duration(days: option.minDays)), localeName);
-    final String to = Formatters.date(now.add(Duration(days: option.maxDays)), localeName);
+    final String from = Formatters.date(
+      now.add(Duration(days: option.minDays)),
+      localeName,
+    );
+    final String to = Formatters.date(
+      now.add(Duration(days: option.maxDays)),
+      localeName,
+    );
 
     return option.minDays == option.maxDays
         ? loc.delivery_eta_single(from)

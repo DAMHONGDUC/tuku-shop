@@ -21,9 +21,13 @@ class TukuApp extends StatelessWidget {
   Widget build(BuildContext context) => MultiBlocProvider(
     providers: <BlocProvider<dynamic>>[
       BlocProvider<SessionController>.value(value: getIt<SessionController>()),
-      BlocProvider<SettingsController>.value(value: getIt<SettingsController>()),
+      BlocProvider<SettingsController>.value(
+        value: getIt<SettingsController>(),
+      ),
       BlocProvider<CartController>.value(value: getIt<CartController>()),
-      BlocProvider<WishlistController>.value(value: getIt<WishlistController>()),
+      BlocProvider<WishlistController>.value(
+        value: getIt<WishlistController>(),
+      ),
       BlocProvider<UnreadNotificationsController>.value(
         value: getIt<UnreadNotificationsController>(),
       ),

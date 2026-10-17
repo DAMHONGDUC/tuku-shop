@@ -22,12 +22,15 @@ class OrderDetailScreen extends StatelessWidget {
     create: (BuildContext _) => getIt<OrderDetailController>()..load(orderId),
     child: BlocBuilder<OrderDetailController, OrderDetailState>(
       builder: (BuildContext context, OrderDetailState state) => SdScaffoldV5(
-        appBar: SdAppBarV5(title: state.order?.code ?? context.loc.order_detail_title),
+        appBar: SdAppBarV5(
+          title: state.order?.code ?? context.loc.order_detail_title,
+        ),
         body: FadeSwitcher(
           child: switch (state.status) {
             LoadStatus.loading => const Center(child: SdLoadingV5()),
             LoadStatus.failure => ErrorView(
-              onRetry: () => context.read<OrderDetailController>().load(orderId),
+              onRetry: () =>
+                  context.read<OrderDetailController>().load(orderId),
             ),
             LoadStatus.success => _Body(order: state.order!),
           },
@@ -66,24 +69,35 @@ class _Body extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(bottom: SdSpacingConstant.h12),
                     child: SdPressableV5(
-                      onTap: () => context.push(AppRoutes.productPath(i.productId)),
+                      onTap: () =>
+                          context.push(AppRoutes.productPath(i.productId)),
                       child: Row(
                         children: <Widget>[
                           SizedBox(
                             width: SdSpacingConstant.w56,
                             height: SdSpacingConstant.w56 / 0.8,
-                            child: AppImage(i.image, borderRadius: SdRadiusV5.thumbnailAll),
+                            child: AppImage(
+                              i.image,
+                              borderRadius: SdRadiusV5.thumbnailAll,
+                            ),
                           ),
                           SizedBox(width: SdSpacingConstant.w12),
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text(i.name, maxLines: 1, overflow: TextOverflow.ellipsis, style: context.textTheme5.titleSmall),
+                                Text(
+                                  i.name,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: context.textTheme5.titleSmall,
+                                ),
                                 SizedBox(height: SdSpacingConstant.h2),
                                 Text(
                                   context.loc.review_variant(i.size, i.color),
-                                  style: context.textTheme5.bodySmall!.muted5(context),
+                                  style: context.textTheme5.bodySmall!.muted5(
+                                    context,
+                                  ),
                                 ),
                               ],
                             ),
@@ -91,10 +105,15 @@ class _Body extends StatelessWidget {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: <Widget>[
-                              Text(Formatters.currency(i.lineTotal), style: context.textTheme5.labelLarge!.tabular5),
+                              Text(
+                                Formatters.currency(i.lineTotal),
+                                style: context.textTheme5.labelLarge!.tabular5,
+                              ),
                               Text(
                                 '${i.quantity} × ${Formatters.currency(i.unitPrice)}',
-                                style: context.textTheme5.labelSmall!.faint5(context),
+                                style: context.textTheme5.labelSmall!.faint5(
+                                  context,
+                                ),
                               ),
                             ],
                           ),
@@ -115,9 +134,15 @@ class _Body extends StatelessWidget {
               layer: SdCardLayerV5.sunken,
               child: Column(
                 children: <Widget>[
-                  _InfoRow(icon: Symbols.person_rounded, text: '${order.recipient}  ·  ${order.phone}'),
+                  _InfoRow(
+                    icon: Symbols.person_rounded,
+                    text: '${order.recipient}  ·  ${order.phone}',
+                  ),
                   SizedBox(height: SdSpacingConstant.h10),
-                  _InfoRow(icon: Symbols.location_on_rounded, text: order.address),
+                  _InfoRow(
+                    icon: Symbols.location_on_rounded,
+                    text: order.address,
+                  ),
                   SizedBox(height: SdSpacingConstant.h10),
                   _InfoRow(
                     icon: Symbols.credit_card_rounded,
@@ -175,7 +200,11 @@ class _InfoRow extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      SdIconV5(icon, size: SdIconV5.smallSize * 1.1, color: context.sdTheme5.textSecondary),
+      SdIconV5(
+        icon,
+        size: SdIconV5.smallSize * 1.1,
+        color: context.sdTheme5.textSecondary,
+      ),
       SizedBox(width: SdSpacingConstant.w12),
       Expanded(child: Text(text, style: context.textTheme5.bodyMedium)),
     ],

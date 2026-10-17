@@ -23,7 +23,17 @@ class FilterSheet extends StatefulWidget {
   static const double maxPrice = 100;
 
   static const List<String> sizes = <String>[
-    'XS', 'S', 'M', 'L', 'XL', '28', '29', '30', '32', '34', '36',
+    'XS',
+    'S',
+    'M',
+    'L',
+    'XL',
+    '28',
+    '29',
+    '30',
+    '32',
+    '34',
+    '36',
   ];
 
   static const List<(String, String)> colors = <(String, String)>[
@@ -50,7 +60,11 @@ class _FilterSheetState extends State<FilterSheet> {
     _draft.maxPrice ?? FilterSheet.maxPrice,
   );
 
-  void _toggle(Set<String> set, String value, ProductQuery Function(Set<String>) apply) {
+  void _toggle(
+    Set<String> set,
+    String value,
+    ProductQuery Function(Set<String>) apply,
+  ) {
     final Set<String> next = Set<String>.of(set);
 
     if (!next.remove(value)) next.add(value);
@@ -96,7 +110,9 @@ class _FilterSheetState extends State<FilterSheet> {
               activeTrackColor: context.sdTheme5.textPrimary,
               inactiveTrackColor: context.sdTheme5.surfaceSunken,
               thumbColor: context.sdTheme5.textPrimary,
-              overlayColor: context.sdTheme5.textPrimary.withValues(alpha: 0.08),
+              overlayColor: context.sdTheme5.textPrimary.withValues(
+                alpha: 0.08,
+              ),
               trackHeight: SdSpacingConstant.h4,
             ),
             child: RangeSlider(
@@ -157,7 +173,8 @@ class _FilterSheetState extends State<FilterSheet> {
             trailing: SdSwitchV5(
               value: _draft.onSaleOnly,
               semanticLabel: context.loc.filter_on_sale,
-              onChanged: (bool v) => setState(() => _draft = _draft.copyWith(onSaleOnly: v)),
+              onChanged: (bool v) =>
+                  setState(() => _draft = _draft.copyWith(onSaleOnly: v)),
             ),
           ),
           SdListTileV5(
@@ -165,7 +182,8 @@ class _FilterSheetState extends State<FilterSheet> {
             trailing: SdSwitchV5(
               value: _draft.newOnly,
               semanticLabel: context.loc.filter_new_only,
-              onChanged: (bool v) => setState(() => _draft = _draft.copyWith(newOnly: v)),
+              onChanged: (bool v) =>
+                  setState(() => _draft = _draft.copyWith(newOnly: v)),
             ),
           ),
         ],

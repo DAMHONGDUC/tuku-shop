@@ -40,7 +40,9 @@ class HomeHeader extends StatelessWidget {
             onTap: () => context.go(AppRoutes.profile.path),
             child: SdAvatarV5(
               initials: user?.initials ?? '',
-              image: user?.avatar == null ? null : AppImage.provider(user!.avatar!),
+              image: user?.avatar == null
+                  ? null
+                  : AppImage.provider(user!.avatar!),
               size: SdSpacingConstant.r44,
             ),
           ),

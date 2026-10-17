@@ -36,7 +36,9 @@ class _PromoCodeFieldState extends State<PromoCodeField> {
       _error = null;
     });
 
-    final Failure? failure = await context.read<CartController>().applyPromo(_code.text);
+    final Failure? failure = await context.read<CartController>().applyPromo(
+      _code.text,
+    );
 
     if (!mounted) return;
 
@@ -77,11 +79,16 @@ class _PromoCodeFieldState extends State<PromoCodeField> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(widget.promo!.code, style: context.textTheme5.labelLarge!.bold5),
+                      Text(
+                        widget.promo!.code,
+                        style: context.textTheme5.labelLarge!.bold5,
+                      ),
                       Text(
                         widget.promo!.freeShipping
                             ? context.loc.promo_free_shipping
-                            : context.loc.promo_percent_off((widget.promo!.percentOff * 100).round()),
+                            : context.loc.promo_percent_off(
+                                (widget.promo!.percentOff * 100).round(),
+                              ),
                         style: context.textTheme5.bodySmall!.muted5(context),
                       ),
                     ],
@@ -125,7 +132,10 @@ class _PromoCodeFieldState extends State<PromoCodeField> {
               ),
               if (_error != null)
                 Padding(
-                  padding: EdgeInsets.only(top: SdSpacingConstant.h6, left: SdSpacingConstant.w4),
+                  padding: EdgeInsets.only(
+                    top: SdSpacingConstant.h6,
+                    left: SdSpacingConstant.w4,
+                  ),
                   child: Text(
                     _error!,
                     style: context.textTheme5.bodySmall!.copyWith(

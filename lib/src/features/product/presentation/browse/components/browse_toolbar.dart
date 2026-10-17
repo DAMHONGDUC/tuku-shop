@@ -60,7 +60,11 @@ class BrowseToolbarDelegate extends SliverPersistentHeaderDelegate {
                 alignment: Alignment.centerLeft,
                 child: SdTabsV5(
                   labels: <String>[
-                    for (final Gender g in <Gender>[Gender.all, Gender.women, Gender.men])
+                    for (final Gender g in <Gender>[
+                      Gender.all,
+                      Gender.women,
+                      Gender.men,
+                    ])
                       context.genderLabel(g),
                   ],
                   selectedIndex: <Gender>[

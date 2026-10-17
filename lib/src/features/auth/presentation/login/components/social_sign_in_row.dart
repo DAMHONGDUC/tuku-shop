@@ -10,7 +10,8 @@ class SocialSignInRow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    void notice() => SdSnackBarUtilsV5.info(context, context.loc.login_social_demo);
+    void notice() =>
+        SdSnackBarUtilsV5.info(context, context.loc.login_social_demo);
 
     return Column(
       children: <Widget>[

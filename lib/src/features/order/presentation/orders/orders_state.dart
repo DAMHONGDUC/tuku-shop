@@ -15,11 +15,16 @@ class OrdersState extends Equatable {
 
   List<OrderEntity> get visible => switch (filter) {
     OrdersFilter.all => orders,
-    OrdersFilter.active => orders.where((OrderEntity o) => o.status.isActive).toList(),
+    OrdersFilter.active =>
+      orders.where((OrderEntity o) => o.status.isActive).toList(),
     OrdersFilter.delivered =>
-      orders.where((OrderEntity o) => o.status == OrderStatus.delivered).toList(),
+      orders
+          .where((OrderEntity o) => o.status == OrderStatus.delivered)
+          .toList(),
     OrdersFilter.cancelled =>
-      orders.where((OrderEntity o) => o.status == OrderStatus.cancelled).toList(),
+      orders
+          .where((OrderEntity o) => o.status == OrderStatus.cancelled)
+          .toList(),
   };
 
   OrdersState copyWith({

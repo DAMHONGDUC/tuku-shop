@@ -11,17 +11,12 @@ part 'checkout_state.dart';
 
 class CheckoutController extends Cubit<CheckoutState> {
   CheckoutController({
-    required GetAddressesUsecase getAddresses,
-    required GetPaymentMethodsUsecase getPaymentMethods,
-    required GetDeliveryOptionsUsecase getDeliveryOptions,
-    required PlaceOrderUsecase placeOrder,
-    required ClearCartUsecase clearCart,
-  }) : _getAddresses = getAddresses,
-       _getPaymentMethods = getPaymentMethods,
-       _getDeliveryOptions = getDeliveryOptions,
-       _placeOrder = placeOrder,
-       _clearCart = clearCart,
-       super(const CheckoutState());
+    required this._getAddresses,
+    required this._getPaymentMethods,
+    required this._getDeliveryOptions,
+    required this._placeOrder,
+    required this._clearCart,
+  }) : super(const CheckoutState());
 
   final GetAddressesUsecase _getAddresses;
   final GetPaymentMethodsUsecase _getPaymentMethods;
@@ -47,7 +42,9 @@ class CheckoutController extends Cubit<CheckoutState> {
       return;
     }
 
-    final List<AddressEntity> a = addresses.getOrElse(() => const <AddressEntity>[]);
+    final List<AddressEntity> a = addresses.getOrElse(
+      () => const <AddressEntity>[],
+    );
     final List<PaymentMethodEntity> p = payments.getOrElse(
       () => const <PaymentMethodEntity>[],
     );
@@ -61,9 +58,14 @@ class CheckoutController extends Cubit<CheckoutState> {
         addresses: a,
         payments: p,
         deliveryOptions: d,
-        addressId: (a.firstWhereOrNull((AddressEntity e) => e.isDefault) ?? a.firstOrNull)?.id,
+        addressId:
+            (a.firstWhereOrNull((AddressEntity e) => e.isDefault) ??
+                    a.firstOrNull)
+                ?.id,
         paymentId:
-            (p.firstWhereOrNull((PaymentMethodEntity e) => e.isDefault) ?? p.firstOrNull)?.id,
+            (p.firstWhereOrNull((PaymentMethodEntity e) => e.isDefault) ??
+                    p.firstOrNull)
+                ?.id,
         deliveryId: d.firstOrNull?.id,
       ),
     );
@@ -101,7 +103,10 @@ class CheckoutController extends Cubit<CheckoutState> {
     final PaymentMethodEntity? payment = state.payment;
     final DeliveryOptionEntity? delivery = state.delivery;
 
-    if (address == null || payment == null || delivery == null || state.placing) {
+    if (address == null ||
+        payment == null ||
+        delivery == null ||
+        state.placing) {
       return;
     }
 
@@ -126,9 +131,10 @@ class CheckoutController extends Cubit<CheckoutState> {
         phone: address.phone,
         address: address.oneLine,
         paymentType: payment.type,
-        paymentLabel: <String?>[payment.label, payment.detail?.split(' · ').first]
-            .whereType<String>()
-            .join(' '),
+        paymentLabel: <String?>[
+          payment.label,
+          payment.detail?.split(' · ').first,
+        ].whereType<String>().join(' '),
         deliveryOptionId: delivery.id,
         deliveryMaxDays: delivery.maxDays,
         subtotal: cart.subtotal,
@@ -139,7 +145,8 @@ class CheckoutController extends Cubit<CheckoutState> {
     );
 
     await result.fold(
-      (Failure f) async => emit(state.copyWith(placing: false, failure: () => f)),
+      (Failure f) async =>
+          emit(state.copyWith(placing: false, failure: () => f)),
       (OrderEntity order) async {
         await _clearCart(const NoParams());
         emit(state.copyWith(placing: false, placedOrderId: order.id));

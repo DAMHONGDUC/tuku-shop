@@ -44,7 +44,11 @@ class OnboardingPage extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: <Color>[Color(0x33000000), Color(0x00000000), Color(0xE6000000)],
+              colors: <Color>[
+                Color(0x33000000),
+                Color(0x00000000),
+                Color(0xE6000000),
+              ],
               stops: <double>[0, 0.35, 1],
             ),
           ),
@@ -52,7 +56,8 @@ class OnboardingPage extends StatelessWidget {
         Positioned(
           left: SdContentPaddingV5.horizontal,
           right: SdContentPaddingV5.horizontal,
-          bottom: SdContentPaddingV5.detailBottom(context) + SdSpacingConstant.h96,
+          bottom:
+              SdContentPaddingV5.detailBottom(context) + SdSpacingConstant.h96,
           child: Opacity(
             opacity: visible,
             child: Transform.translate(

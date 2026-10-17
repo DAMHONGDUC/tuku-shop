@@ -29,8 +29,9 @@ class ProductRailSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<ProductRailController>(
-    create: (BuildContext _) => getIt<ProductRailController>()
-      ..load(ProductQuery.fromArgs(args).copyWith(pageSize: limit)),
+    create: (BuildContext _) =>
+        getIt<ProductRailController>()
+          ..load(ProductQuery.fromArgs(args).copyWith(pageSize: limit)),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
@@ -48,7 +49,10 @@ class ProductRailSection extends StatelessWidget {
           builder: (BuildContext context, ProductRailState state) =>
               FadeSwitcher(
                 child: state.status == LoadStatus.success
-                    ? ProductRail(products: state.products, heroPrefix: heroPrefix)
+                    ? ProductRail(
+                        products: state.products,
+                        heroPrefix: heroPrefix,
+                      )
                     : const ProductRailSkeleton(),
               ),
         ),

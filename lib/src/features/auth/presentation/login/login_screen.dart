@@ -74,7 +74,8 @@ class _LoginViewState extends State<_LoginView> {
 
     return BlocConsumer<LoginController, LoginState>(
       listenWhen: (LoginState a, LoginState b) =>
-          a.status != b.status || (b.failure != null && a.failure != b.failure) ||
+          a.status != b.status ||
+          (b.failure != null && a.failure != b.failure) ||
           a.demo != b.demo,
       listener: (BuildContext context, LoginState state) {
         if (state.demo != null && _email.text.isEmpty) _fillDemo(state);
@@ -151,7 +152,8 @@ class _LoginViewState extends State<_LoginView> {
                               child: SdCheckboxV5(
                                 value: _remember,
                                 label: context.loc.login_remember,
-                                onChanged: (bool v) => setState(() => _remember = v),
+                                onChanged: (bool v) =>
+                                    setState(() => _remember = v),
                               ),
                             ),
                             SdButtonV5(
@@ -160,10 +162,13 @@ class _LoginViewState extends State<_LoginView> {
                               label: context.loc.login_forgot,
                               onPressed: () => showSdBottomSheetV5<void>(
                                 context: context,
-                                builder: (BuildContext _) => BlocProvider<LoginController>.value(
-                                  value: context.read<LoginController>(),
-                                  child: ForgotPasswordSheet(initialEmail: _email.text),
-                                ),
+                                builder: (BuildContext _) =>
+                                    BlocProvider<LoginController>.value(
+                                      value: context.read<LoginController>(),
+                                      child: ForgotPasswordSheet(
+                                        initialEmail: _email.text,
+                                      ),
+                                    ),
                               ),
                             ),
                           ],

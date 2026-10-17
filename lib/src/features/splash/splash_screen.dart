@@ -94,7 +94,10 @@ class _SplashViewState extends State<_SplashView>
                     Opacity(
                       opacity: tagline,
                       child: Transform.translate(
-                        offset: Offset(0, (1 - tagline) * SdSpacingConstant.h12),
+                        offset: Offset(
+                          0,
+                          (1 - tagline) * SdSpacingConstant.h12,
+                        ),
                         child: Text(
                           context.loc.splash_tagline.toUpperCase(),
                           style: context.textTheme5.labelMedium!.copyWith(
@@ -110,7 +113,9 @@ class _SplashViewState extends State<_SplashView>
               Positioned(
                 left: SdSpacingConstant.w64 * 1.5,
                 right: SdSpacingConstant.w64 * 1.5,
-                bottom: SdContentPaddingV5.detailBottom(context) + SdSpacingConstant.h40,
+                bottom:
+                    SdContentPaddingV5.detailBottom(context) +
+                    SdSpacingConstant.h40,
                 child: ClipRRect(
                   borderRadius: SdRadiusV5.fullAll,
                   child: LinearProgressIndicator(

@@ -34,9 +34,9 @@ class _ForgotPasswordSheetState extends State<ForgotPasswordSheet> {
       _error = null;
     });
 
-    final bool sent = await context.read<LoginController>().requestPasswordReset(
-      _email.text,
-    );
+    final bool sent = await context
+        .read<LoginController>()
+        .requestPasswordReset(_email.text);
 
     if (!mounted) return;
 
@@ -49,7 +49,10 @@ class _ForgotPasswordSheetState extends State<ForgotPasswordSheet> {
     }
 
     Navigator.of(context).pop();
-    SdSnackBarUtilsV5.success(context, context.loc.forgot_sent(_email.text.trim()));
+    SdSnackBarUtilsV5.success(
+      context,
+      context.loc.forgot_sent(_email.text.trim()),
+    );
   }
 
   @override

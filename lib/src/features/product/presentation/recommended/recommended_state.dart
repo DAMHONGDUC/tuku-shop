@@ -24,5 +24,11 @@ class RecommendedState extends Equatable {
   );
 
   @override
-  List<Object> get props => <Object>[status, products, page, hasMore, loadingMore];
+  List<Object> get props => <Object>[
+    status,
+    products,
+    page,
+    hasMore,
+    loadingMore,
+  ];
 }

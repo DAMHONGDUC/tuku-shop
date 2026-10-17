@@ -23,7 +23,8 @@ class PaymentMethodsScreen extends StatelessWidget {
       body: BlocBuilder<PaymentMethodsController, PaymentMethodsState>(
         builder: (BuildContext context, PaymentMethodsState state) {
           final PaymentMethodEntity? card = state.methods.firstWhereOrNull(
-            (PaymentMethodEntity m) => m.isDefault && m.type == PaymentMethodType.card,
+            (PaymentMethodEntity m) =>
+                m.isDefault && m.type == PaymentMethodType.card,
           );
 
           return FadeSwitcher(
@@ -39,24 +40,36 @@ class PaymentMethodsScreen extends StatelessWidget {
                         duration: SdMotionV5.of(context, SdMotionV5.slow),
                         child: card == null
                             ? const SizedBox.shrink()
-                            : _CardArt(key: ValueKey<String>(card.id), method: card),
+                            : _CardArt(
+                                key: ValueKey<String>(card.id),
+                                method: card,
+                              ),
                       ),
                       SizedBox(height: SdSpacingConstant.h24),
-                      Text(context.loc.payment_methods, style: context.textTheme5.titleMedium),
+                      Text(
+                        context.loc.payment_methods,
+                        style: context.textTheme5.titleMedium,
+                      ),
                       SizedBox(height: SdSpacingConstant.h12),
                       for (final PaymentMethodEntity m in state.methods)
                         Padding(
-                          padding: EdgeInsets.only(bottom: SdSpacingConstant.h10),
+                          padding: EdgeInsets.only(
+                            bottom: SdSpacingConstant.h10,
+                          ),
                           child: SdSelectableCardV5(
                             title: context.paymentName(m),
                             subtitle: m.detail,
                             icon: paymentIcon(m.type),
                             selected: m.isDefault,
                             trailing: m.isDefault
-                                ? SdBadgeV5(label: context.loc.address_default, tone: SdBadgeToneV5.inverse)
+                                ? SdBadgeV5(
+                                    label: context.loc.address_default,
+                                    tone: SdBadgeToneV5.inverse,
+                                  )
                                 : null,
-                            onSelected: () =>
-                                context.read<PaymentMethodsController>().makeDefault(m.id),
+                            onSelected: () => context
+                                .read<PaymentMethodsController>()
+                                .makeDefault(m.id),
                           ),
                         ),
                       SizedBox(height: SdSpacingConstant.h8),
@@ -65,8 +78,10 @@ class PaymentMethodsScreen extends StatelessWidget {
                         label: context.loc.payment_add_card,
                         icon: Symbols.add_card_rounded,
                         expand: true,
-                        onPressed: () =>
-                            SdSnackBarUtilsV5.info(context, context.loc.payment_add_demo),
+                        onPressed: () => SdSnackBarUtilsV5.info(
+                          context,
+                          context.loc.payment_add_demo,
+                        ),
                       ),
                     ],
                   ),
@@ -95,7 +110,11 @@ class _CardArt extends StatelessWidget {
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: <Color>[Color(0xFF1C1C1E), Color(0xFF3A3530), Color(0xFF7A5C3E)],
+            colors: <Color>[
+              Color(0xFF1C1C1E),
+              Color(0xFF3A3530),
+              Color(0xFF7A5C3E),
+            ],
           ),
           boxShadow: SdElevationV5.high(context),
         ),
@@ -134,7 +153,9 @@ class _CardArt extends StatelessWidget {
             SizedBox(height: SdSpacingConstant.h8),
             Text(
               parts.length > 1 ? parts[1] : '',
-              style: context.textTheme5.labelMedium!.copyWith(color: Colors.white70),
+              style: context.textTheme5.labelMedium!.copyWith(
+                color: Colors.white70,
+              ),
             ),
           ],
         ),

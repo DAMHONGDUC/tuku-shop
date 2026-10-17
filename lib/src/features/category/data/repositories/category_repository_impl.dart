@@ -18,7 +18,12 @@ class CategoryRepositoryImpl implements CategoryRepository {
           .toList();
       return Right<Failure, List<CategoryEntity>>(categories);
     } catch (e, stackTrace) {
-      SdLogger.error('CategoryRepository', 'Load failed', error: e, stackTrace: stackTrace);
+      SdLogger.error(
+        'CategoryRepository',
+        'Load failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       return const Left<Failure, List<CategoryEntity>>(ServerFailure());
     }
   }

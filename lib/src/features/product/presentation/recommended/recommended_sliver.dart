@@ -14,37 +14,42 @@ class RecommendedSliver extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       BlocBuilder<RecommendedController, RecommendedState>(
-        builder: (BuildContext context, RecommendedState state) => SliverMainAxisGroup(
-          slivers: <Widget>[
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: SdContentPaddingV5.gutter.copyWith(
-                  bottom: SdSpacingConstant.h14,
+        builder: (BuildContext context, RecommendedState state) =>
+            SliverMainAxisGroup(
+              slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: SdContentPaddingV5.gutter.copyWith(
+                      bottom: SdSpacingConstant.h14,
+                    ),
+                    child: SdSectionHeaderV5(
+                      title: context.loc.home_recommended,
+                      subtitle: context.loc.home_recommended_subtitle,
+                    ),
+                  ),
                 ),
-                child: SdSectionHeaderV5(
-                  title: context.loc.home_recommended,
-                  subtitle: context.loc.home_recommended_subtitle,
-                ),
-              ),
+                switch (state.status) {
+                  LoadStatus.loading => const ProductSliverGridSkeleton(),
+                  LoadStatus.failure => SliverToBoxAdapter(
+                    child: ErrorView(
+                      onRetry: context.read<RecommendedController>().load,
+                    ),
+                  ),
+                  LoadStatus.success => ProductSliverGrid(
+                    products: state.products,
+                    heroPrefix: 'recommended',
+                  ),
+                },
+                if (state.loadingMore)
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        vertical: SdSpacingConstant.h20,
+                      ),
+                      child: const SdLoadingV5(),
+                    ),
+                  ),
+              ],
             ),
-            switch (state.status) {
-              LoadStatus.loading => const ProductSliverGridSkeleton(),
-              LoadStatus.failure => SliverToBoxAdapter(
-                child: ErrorView(onRetry: context.read<RecommendedController>().load),
-              ),
-              LoadStatus.success => ProductSliverGrid(
-                products: state.products,
-                heroPrefix: 'recommended',
-              ),
-            },
-            if (state.loadingMore)
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: SdSpacingConstant.h20),
-                  child: const SdLoadingV5(),
-                ),
-              ),
-          ],
-        ),
       );
 }

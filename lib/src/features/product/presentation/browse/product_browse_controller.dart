@@ -11,11 +11,9 @@ part 'product_browse_state.dart';
 /// list and search results all run on this.
 class ProductBrowseController extends Cubit<ProductBrowseState> {
   ProductBrowseController({
-    required GetProductsUsecase getProducts,
-    required GetCategoriesUsecase getCategories,
-  }) : _getProducts = getProducts,
-       _getCategories = getCategories,
-       super(const ProductBrowseState());
+    required this._getProducts,
+    required this._getCategories,
+  }) : super(const ProductBrowseState());
 
   final GetProductsUsecase _getProducts;
   final GetCategoriesUsecase _getCategories;
@@ -89,7 +87,9 @@ class ProductBrowseController extends Cubit<ProductBrowseState> {
   }
 
   Future<void> loadMore() async {
-    if (state.status != LoadStatus.success || !state.hasMore || state.loadingMore) {
+    if (state.status != LoadStatus.success ||
+        !state.hasMore ||
+        state.loadingMore) {
       return;
     }
 

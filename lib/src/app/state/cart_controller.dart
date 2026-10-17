@@ -9,19 +9,13 @@ import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 class CartController extends Cubit<CartEntity> {
   CartController({
     required WatchCartUsecase watchCart,
-    required AddToCartUsecase addToCart,
-    required UpdateCartQuantityUsecase updateQuantity,
-    required RemoveCartItemUsecase removeItem,
-    required ApplyPromoUsecase applyPromo,
-    required RemovePromoUsecase removePromo,
-    required ClearCartUsecase clearCart,
-  }) : _addToCart = addToCart,
-       _updateQuantity = updateQuantity,
-       _removeItem = removeItem,
-       _applyPromo = applyPromo,
-       _removePromo = removePromo,
-       _clearCart = clearCart,
-       super(const CartEntity()) {
+    required this._addToCart,
+    required this._updateQuantity,
+    required this._removeItem,
+    required this._applyPromo,
+    required this._removePromo,
+    required this._clearCart,
+  }) : super(const CartEntity()) {
     _subscription = watchCart(const NoParams()).listen(emit);
   }
 
@@ -41,7 +35,6 @@ class CartController extends Cubit<CartEntity> {
   );
 
   Future<void> remove(String itemId) => _removeItem(itemId);
-
 
   /// Null on success, the failure otherwise.
   Future<Failure?> applyPromo(String code) async {

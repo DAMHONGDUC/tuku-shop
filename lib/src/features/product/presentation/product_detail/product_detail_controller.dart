@@ -9,15 +9,11 @@ part 'product_detail_state.dart';
 
 class ProductDetailController extends Cubit<ProductDetailState> {
   ProductDetailController({
-    required GetProductDetailUsecase getProductDetail,
-    required GetRelatedProductsUsecase getRelatedProducts,
-    required GetProductReviewsUsecase getReviews,
-    required AddToCartUsecase addToCart,
-  }) : _getProductDetail = getProductDetail,
-       _getRelatedProducts = getRelatedProducts,
-       _getReviews = getReviews,
-       _addToCart = addToCart,
-       super(const ProductDetailState());
+    required this._getProductDetail,
+    required this._getRelatedProducts,
+    required this._getReviews,
+    required this._addToCart,
+  }) : super(const ProductDetailState());
 
   final GetProductDetailUsecase _getProductDetail;
   final GetRelatedProductsUsecase _getRelatedProducts;

@@ -16,7 +16,8 @@ extension AuthMessages on BuildContext {
   String failureMessage(Failure failure) => switch (failure) {
     ValidationFailure(code: FailureCodes.invalidCredentials) =>
       loc.auth_error_credentials,
-    ValidationFailure(code: FailureCodes.emailTaken) => loc.auth_error_email_taken,
+    ValidationFailure(code: FailureCodes.emailTaken) =>
+      loc.auth_error_email_taken,
     _ => loc.error_message,
   };
 }

@@ -29,7 +29,10 @@ class OrderStatusHeader extends StatelessWidget {
       SdBadgeToneV5.warning => context.sdTheme5.warning,
       _ => context.sdTheme5.info,
     };
-    final String date = Formatters.date(order.estimatedDelivery, context.localeName);
+    final String date = Formatters.date(
+      order.estimatedDelivery,
+      context.localeName,
+    );
 
     return SdCardV5(
       child: Column(
@@ -44,22 +47,30 @@ class OrderStatusHeader extends StatelessWidget {
                   color: tint.withValues(alpha: 0.12),
                   shape: BoxShape.circle,
                 ),
-                child: Center(child: SdIconV5(orderStatusIcon(order.status), color: tint, fill: 1)),
+                child: Center(
+                  child: SdIconV5(
+                    orderStatusIcon(order.status),
+                    color: tint,
+                    fill: 1,
+                  ),
+                ),
               ),
               SizedBox(width: SdSpacingConstant.w14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(context.orderStatusLabel(order.status), style: context.textTheme5.titleLarge),
                     Text(
-                      switch (order.status) {
-                        OrderStatus.delivered => context.loc.order_delivered_on(date),
-                        OrderStatus.cancelled => context.loc.order_cancelled_note,
-                        _ => context.loc.order_arriving(date),
-                      },
-                      style: context.textTheme5.bodySmall!.muted5(context),
+                      context.orderStatusLabel(order.status),
+                      style: context.textTheme5.titleLarge,
                     ),
+                    Text(switch (order.status) {
+                      OrderStatus.delivered => context.loc.order_delivered_on(
+                        date,
+                      ),
+                      OrderStatus.cancelled => context.loc.order_cancelled_note,
+                      _ => context.loc.order_arriving(date),
+                    }, style: context.textTheme5.bodySmall!.muted5(context)),
                   ],
                 ),
               ),
@@ -74,17 +85,20 @@ class OrderStatusHeader extends StatelessWidget {
                   Expanded(
                     child: TweenAnimationBuilder<double>(
                       tween: Tween<double>(begin: 0, end: i <= reached ? 1 : 0),
-                      duration: SdMotionV5.of(context, SdMotionV5.slow) * (1 + i * 0.5),
+                      duration:
+                          SdMotionV5.of(context, SdMotionV5.slow) *
+                          (1 + i * 0.5),
                       curve: SdMotionV5.standard,
-                      builder: (BuildContext context, double v, Widget? _) => ClipRRect(
-                        borderRadius: SdRadiusV5.fullAll,
-                        child: LinearProgressIndicator(
-                          value: v,
-                          minHeight: SdSpacingConstant.h6,
-                          color: tint,
-                          backgroundColor: context.sdTheme5.surfaceSunken,
-                        ),
-                      ),
+                      builder: (BuildContext context, double v, Widget? _) =>
+                          ClipRRect(
+                            borderRadius: SdRadiusV5.fullAll,
+                            child: LinearProgressIndicator(
+                              value: v,
+                              minHeight: SdSpacingConstant.h6,
+                              color: tint,
+                              backgroundColor: context.sdTheme5.surfaceSunken,
+                            ),
+                          ),
                     ),
                   ),
                 ],

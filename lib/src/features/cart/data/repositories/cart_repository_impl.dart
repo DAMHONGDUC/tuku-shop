@@ -103,6 +103,5 @@ class CartRepositoryImpl implements CartRepository {
       _set(_cart.copyWith(promo: () => null));
 
   @override
-  Future<Either<Failure, CartEntity>> clear() async =>
-      _set(const CartEntity());
+  Future<Either<Failure, CartEntity>> clear() async => _set(const CartEntity());
 }

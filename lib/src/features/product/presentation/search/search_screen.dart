@@ -60,7 +60,8 @@ class _SearchViewState extends State<_SearchView> {
   }
 
   void _search(String value, {bool remember = true}) {
-    final ProductBrowseController browse = context.read<ProductBrowseController>();
+    final ProductBrowseController browse = context
+        .read<ProductBrowseController>();
 
     if (!_started) {
       _started = true;

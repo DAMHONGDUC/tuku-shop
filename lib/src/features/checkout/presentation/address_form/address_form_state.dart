@@ -15,15 +15,24 @@ class AddressFormState extends Equatable {
   final bool saving;
   final String? savedId;
 
-  AddressFormState copyWith({Set<String>? missing, bool? saving, String? savedId}) =>
-      AddressFormState(
-        ready: ready,
-        existing: existing,
-        missing: missing ?? this.missing,
-        saving: saving ?? this.saving,
-        savedId: savedId ?? this.savedId,
-      );
+  AddressFormState copyWith({
+    Set<String>? missing,
+    bool? saving,
+    String? savedId,
+  }) => AddressFormState(
+    ready: ready,
+    existing: existing,
+    missing: missing ?? this.missing,
+    saving: saving ?? this.saving,
+    savedId: savedId ?? this.savedId,
+  );
 
   @override
-  List<Object?> get props => <Object?>[ready, existing, missing, saving, savedId];
+  List<Object?> get props => <Object?>[
+    ready,
+    existing,
+    missing,
+    saving,
+    savedId,
+  ];
 }

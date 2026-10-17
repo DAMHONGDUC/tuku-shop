@@ -82,8 +82,12 @@ class _DescriptionSectionState extends State<DescriptionSection> {
         SdButtonV5(
           variant: SdButtonVariantV5.text,
           size: SdButtonSizeV5.small,
-          label: _open ? context.loc.detail_read_less : context.loc.detail_read_more,
-          trailingIcon: _open ? Symbols.expand_less_rounded : Symbols.expand_more_rounded,
+          label: _open
+              ? context.loc.detail_read_less
+              : context.loc.detail_read_more,
+          trailingIcon: _open
+              ? Symbols.expand_less_rounded
+              : Symbols.expand_more_rounded,
           onPressed: () => setState(() => _open = !_open),
         ),
       ],

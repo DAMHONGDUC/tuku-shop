@@ -32,7 +32,10 @@ class DetailTopBar extends StatelessWidget {
       animation: scroll,
       builder: (BuildContext context, Widget? _) {
         final double offset = scroll.hasClients ? scroll.offset : 0;
-        final double t = ((offset - fadeAfter) / SdSpacingConstant.h56).clamp(0, 1);
+        final double t = ((offset - fadeAfter) / SdSpacingConstant.h56).clamp(
+          0,
+          1,
+        );
 
         return Container(
           padding: EdgeInsets.fromLTRB(
@@ -54,7 +57,9 @@ class DetailTopBar extends StatelessWidget {
               SdIconButtonV5(
                 icon: Symbols.arrow_back_ios_new_rounded,
                 tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-                variant: t < 1 ? SdIconButtonVariantV5.floating : SdIconButtonVariantV5.plain,
+                variant: t < 1
+                    ? SdIconButtonVariantV5.floating
+                    : SdIconButtonVariantV5.plain,
                 size: SdSpacingConstant.r40,
                 onPressed: () => context.pop(),
               ),
@@ -73,17 +78,24 @@ class DetailTopBar extends StatelessWidget {
               SdIconButtonV5(
                 icon: Symbols.ios_share_rounded,
                 tooltip: context.loc.action_share,
-                variant: t < 1 ? SdIconButtonVariantV5.floating : SdIconButtonVariantV5.plain,
+                variant: t < 1
+                    ? SdIconButtonVariantV5.floating
+                    : SdIconButtonVariantV5.plain,
                 size: SdSpacingConstant.r40,
                 onPressed: productId == null
                     ? null
-                    : () => SdSnackBarUtilsV5.info(context, context.loc.detail_link_copied),
+                    : () => SdSnackBarUtilsV5.info(
+                        context,
+                        context.loc.detail_link_copied,
+                      ),
               ),
               SizedBox(width: SdSpacingConstant.w8),
               SdIconButtonV5(
                 icon: Symbols.shopping_bag_rounded,
                 tooltip: context.loc.tab_bag,
-                variant: t < 1 ? SdIconButtonVariantV5.floating : SdIconButtonVariantV5.plain,
+                variant: t < 1
+                    ? SdIconButtonVariantV5.floating
+                    : SdIconButtonVariantV5.plain,
                 size: SdSpacingConstant.r40,
                 badgeCount: bagCount,
                 onPressed: () => context.go(AppRoutes.cart.path),

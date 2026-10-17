@@ -34,9 +34,10 @@ class OrderTracking extends StatelessWidget {
           steps: <SdTimelineStepV5>[
             for (final OrderStatus status in path)
               () {
-                final TrackingEventEntity? event = order.tracking.firstWhereOrNull(
-                  (TrackingEventEntity e) => e.status == status,
-                );
+                final TrackingEventEntity? event = order.tracking
+                    .firstWhereOrNull(
+                      (TrackingEventEntity e) => e.status == status,
+                    );
 
                 return SdTimelineStepV5(
                   title: context.orderStatusLabel(status),

@@ -29,8 +29,9 @@ class ProductDetailState extends Equatable {
   /// Bumped on each successful add, so the button can celebrate.
   final int addedCount;
 
-  ProductColor? get color =>
-      product == null || product!.colors.isEmpty ? null : product!.colors[colorIndex];
+  ProductColor? get color => product == null || product!.colors.isEmpty
+      ? null
+      : product!.colors[colorIndex];
 
   List<String> get images => color?.images ?? const <String>[];
 

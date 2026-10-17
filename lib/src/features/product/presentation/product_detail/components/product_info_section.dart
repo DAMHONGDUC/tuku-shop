@@ -18,9 +18,9 @@ class ProductInfoSection extends StatelessWidget {
         children: <Widget>[
           Text(
             product.brand.toUpperCase(),
-            style: context.textTheme5.labelMedium!.faint5(context).copyWith(
-              letterSpacing: 1.2,
-            ),
+            style: context.textTheme5.labelMedium!
+                .faint5(context)
+                .copyWith(letterSpacing: 1.2),
           ),
           const Spacer(),
           if (product.isEco)
@@ -46,7 +46,9 @@ class ProductInfoSection extends StatelessWidget {
         children: <Widget>[
           SdRatingV5(
             rating: product.rating,
-            semanticLabel: context.loc.detail_rating(product.rating.toStringAsFixed(1)),
+            semanticLabel: context.loc.detail_rating(
+              product.rating.toStringAsFixed(1),
+            ),
           ),
           SizedBox(width: SdSpacingConstant.w6),
           Text(

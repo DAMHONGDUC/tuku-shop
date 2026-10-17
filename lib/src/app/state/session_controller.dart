@@ -12,11 +12,9 @@ part 'session_state.dart';
 class SessionController extends Cubit<SessionState> {
   SessionController({
     required WatchUserUsecase watchUser,
-    required RestoreSessionUsecase restoreSession,
-    required LogoutUsecase logout,
-  }) : _restoreSession = restoreSession,
-       _logout = logout,
-       super(const SessionState()) {
+    required this._restoreSession,
+    required this._logout,
+  }) : super(const SessionState()) {
     _subscription = watchUser(const NoParams()).listen(
       (UserEntity? user) => emit(
         SessionState(
@@ -39,7 +37,10 @@ class SessionController extends Cubit<SessionState> {
       const NoParams(),
     );
 
-    return result.fold((Failure _) => false, (UserEntity? user) => user != null);
+    return result.fold(
+      (Failure _) => false,
+      (UserEntity? user) => user != null,
+    );
   }
 
   Future<void> logout() => _logout(const NoParams());

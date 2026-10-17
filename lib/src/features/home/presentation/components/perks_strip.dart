@@ -18,9 +18,18 @@ class PerksStrip extends StatelessWidget {
       ),
       child: Row(
         children: <Widget>[
-          _Perk(icon: Symbols.local_shipping_rounded, label: context.loc.perk_shipping),
-          _Perk(icon: Symbols.autorenew_rounded, label: context.loc.perk_returns),
-          _Perk(icon: Symbols.verified_user_rounded, label: context.loc.perk_secure),
+          _Perk(
+            icon: Symbols.local_shipping_rounded,
+            label: context.loc.perk_shipping,
+          ),
+          _Perk(
+            icon: Symbols.autorenew_rounded,
+            label: context.loc.perk_returns,
+          ),
+          _Perk(
+            icon: Symbols.verified_user_rounded,
+            label: context.loc.perk_secure,
+          ),
         ],
       ),
     ),

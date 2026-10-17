@@ -16,5 +16,10 @@ class PromoEntity extends Equatable {
   final double minSubtotal;
 
   @override
-  List<Object> get props => <Object>[code, percentOff, freeShipping, minSubtotal];
+  List<Object> get props => <Object>[
+    code,
+    percentOff,
+    freeShipping,
+    minSubtotal,
+  ];
 }

@@ -13,24 +13,26 @@ class CategoriesSection extends StatelessWidget {
   const CategoriesSection({super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      BlocProvider<CategoriesSectionController>(
-        create: (BuildContext _) => getIt<CategoriesSectionController>()..load(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Padding(
-              padding: SdContentPaddingV5.gutter,
-              child: SdSectionHeaderV5(
-                title: context.loc.home_categories,
-                actionLabel: context.loc.action_see_all,
-                onAction: () => context.go(AppRoutes.shop.path),
-              ),
-            ),
-            SizedBox(height: SdSpacingConstant.h14),
-            SizedBox(
-              height: _CategoryTile.height,
-              child: BlocBuilder<CategoriesSectionController, CategoriesSectionState>(
+  Widget build(
+    BuildContext context,
+  ) => BlocProvider<CategoriesSectionController>(
+    create: (BuildContext _) => getIt<CategoriesSectionController>()..load(),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Padding(
+          padding: SdContentPaddingV5.gutter,
+          child: SdSectionHeaderV5(
+            title: context.loc.home_categories,
+            actionLabel: context.loc.action_see_all,
+            onAction: () => context.go(AppRoutes.shop.path),
+          ),
+        ),
+        SizedBox(height: SdSpacingConstant.h14),
+        SizedBox(
+          height: _CategoryTile.height,
+          child:
+              BlocBuilder<CategoriesSectionController, CategoriesSectionState>(
                 builder: (BuildContext context, CategoriesSectionState state) =>
                     FadeSwitcher(
                       child: state.status == LoadStatus.success
@@ -38,10 +40,10 @@ class CategoriesSection extends StatelessWidget {
                           : const _CategorySkeleton(),
                     ),
               ),
-            ),
-          ],
         ),
-      );
+      ],
+    ),
+  );
 }
 
 class _CategoryList extends StatelessWidget {
@@ -122,9 +124,15 @@ class _CategorySkeleton extends StatelessWidget {
       separatorBuilder: (_, _) => SizedBox(width: SdSpacingConstant.w14),
       itemBuilder: (_, _) => Column(
         children: <Widget>[
-          SdSkeletonV5(width: _CategoryTile.diameter, height: _CategoryTile.diameter),
+          SdSkeletonV5(
+            width: _CategoryTile.diameter,
+            height: _CategoryTile.diameter,
+          ),
           SizedBox(height: SdSpacingConstant.h8),
-          SdSkeletonV5(width: _CategoryTile.diameter * 0.7, height: SdSpacingConstant.h12),
+          SdSkeletonV5(
+            width: _CategoryTile.diameter * 0.7,
+            height: SdSpacingConstant.h12,
+          ),
         ],
       ),
     ),

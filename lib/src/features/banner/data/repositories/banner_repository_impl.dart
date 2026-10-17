@@ -18,7 +18,12 @@ class BannerRepositoryImpl implements BannerRepository {
           .toList();
       return Right<Failure, List<BannerEntity>>(banners);
     } catch (e, stackTrace) {
-      SdLogger.error('BannerRepository', 'Load failed', error: e, stackTrace: stackTrace);
+      SdLogger.error(
+        'BannerRepository',
+        'Load failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       return const Left<Failure, List<BannerEntity>>(ServerFailure());
     }
   }

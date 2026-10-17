@@ -64,7 +64,10 @@ class _DetailGalleryState extends State<DetailGallery> {
                             images: images,
                             initialIndex: i,
                           ),
-                          child: AppImage(images[i], alignment: Alignment.topCenter),
+                          child: AppImage(
+                            images[i],
+                            alignment: Alignment.topCenter,
+                          ),
                         );
 
                         return i == 0 && state.colorIndex == 0
@@ -86,10 +89,15 @@ class _DetailGalleryState extends State<DetailGallery> {
                           vertical: SdSpacingConstant.h6,
                         ),
                         decoration: BoxDecoration(
-                          color: context.sdTheme5.surface.withValues(alpha: 0.85),
+                          color: context.sdTheme5.surface.withValues(
+                            alpha: 0.85,
+                          ),
                           borderRadius: SdRadiusV5.fullAll,
                         ),
-                        child: SdPageIndicatorV5(count: images.length, index: _index),
+                        child: SdPageIndicatorV5(
+                          count: images.length,
+                          index: _index,
+                        ),
                       ),
                     ),
                   ),

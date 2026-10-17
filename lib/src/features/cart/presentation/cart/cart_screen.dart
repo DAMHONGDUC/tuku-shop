@@ -40,11 +40,16 @@ class _Bag extends StatelessWidget {
       children: <Widget>[
         ListView(
           padding: SdContentPaddingV5.gutter.copyWith(
-            top: SdContentPaddingV5.statusBarInset(context) + SdSpacingConstant.h16,
+            top:
+                SdContentPaddingV5.statusBarInset(context) +
+                SdSpacingConstant.h16,
             bottom: barSpace + SdSpacingConstant.h16,
           ),
           children: <Widget>[
-            Text(context.loc.cart_title, style: context.textTheme5.displaySmall),
+            Text(
+              context.loc.cart_title,
+              style: context.textTheme5.displaySmall,
+            ),
             SizedBox(height: SdSpacingConstant.h4),
             Text(
               context.loc.cart_count(cart.itemCount),
@@ -57,7 +62,10 @@ class _Bag extends StatelessWidget {
               Padding(
                 key: ValueKey<String>(item.id),
                 padding: EdgeInsets.only(bottom: SdContentPaddingV5.itemGap),
-                child: SdFadeInV5(index: i, child: CartItemTile(item: item)),
+                child: SdFadeInV5(
+                  index: i,
+                  child: CartItemTile(item: item),
+                ),
               ),
             SizedBox(height: SdSpacingConstant.h8),
             PromoCodeField(promo: cart.promo),
@@ -75,7 +83,8 @@ class _Bag extends StatelessWidget {
         Positioned(
           left: SdContentPaddingV5.horizontal,
           right: SdContentPaddingV5.horizontal,
-          bottom: SdContentPaddingV5.aboveNavBar(context) - SdSpacingConstant.h4,
+          bottom:
+              SdContentPaddingV5.aboveNavBar(context) - SdSpacingConstant.h4,
           child: CheckoutBar(
             total: cart.total,
             onCheckout: () => context.push(AppRoutes.checkout.path),

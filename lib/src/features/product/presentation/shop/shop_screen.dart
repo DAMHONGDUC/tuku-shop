@@ -29,7 +29,8 @@ class ShopScreen extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: SdContentPaddingV5.gutter.copyWith(
-                      top: SdContentPaddingV5.statusBarInset(context) +
+                      top:
+                          SdContentPaddingV5.statusBarInset(context) +
                           SdSpacingConstant.h16,
                     ),
                     child: Column(

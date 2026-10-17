@@ -37,7 +37,9 @@ class _SizeGuideSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Text(
-            letters ? context.loc.size_guide_tops : context.loc.size_guide_bottoms,
+            letters
+                ? context.loc.size_guide_tops
+                : context.loc.size_guide_bottoms,
             style: context.textTheme5.bodyMedium!.muted5(context),
           ),
           SizedBox(height: SdSpacingConstant.h16),
@@ -47,16 +49,22 @@ class _SizeGuideSheet extends StatelessWidget {
             child: Table(
               children: <TableRow>[
                 TableRow(
-                  decoration: BoxDecoration(color: context.sdTheme5.surfaceSunken),
+                  decoration: BoxDecoration(
+                    color: context.sdTheme5.surfaceSunken,
+                  ),
                   children: <Widget>[
-                    for (final String h in letters
-                        ? <String>[
-                            context.loc.detail_size,
-                            context.loc.size_chest,
-                            context.loc.size_waist,
-                            context.loc.size_hips,
-                          ]
-                        : <String>[context.loc.detail_size, context.loc.size_waist])
+                    for (final String h
+                        in letters
+                            ? <String>[
+                                context.loc.detail_size,
+                                context.loc.size_chest,
+                                context.loc.size_waist,
+                                context.loc.size_hips,
+                              ]
+                            : <String>[
+                                context.loc.detail_size,
+                                context.loc.size_waist,
+                              ])
                       _Cell(text: h, style: head),
                   ],
                 ),

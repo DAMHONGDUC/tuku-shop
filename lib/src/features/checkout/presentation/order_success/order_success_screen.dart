@@ -54,12 +54,17 @@ class OrderSuccessScreen extends StatelessWidget {
                             child: Text(
                               context.loc.success_message,
                               textAlign: TextAlign.center,
-                              style: context.textTheme5.bodyMedium!.muted5(context),
+                              style: context.textTheme5.bodyMedium!.muted5(
+                                context,
+                              ),
                             ),
                           ),
                           SizedBox(height: SdSpacingConstant.h24),
                           if (state.order != null)
-                            SdFadeInV5(index: 8, child: _OrderFacts(order: state.order!)),
+                            SdFadeInV5(
+                              index: 8,
+                              child: _OrderFacts(order: state.order!),
+                            ),
                           const Spacer(flex: 3),
                           SdFadeInV5(
                             index: 9,
@@ -73,7 +78,9 @@ class OrderSuccessScreen extends StatelessWidget {
                                   ? null
                                   : () {
                                       context.go(AppRoutes.home.path);
-                                      context.push(AppRoutes.orderPath(state.order!.id));
+                                      context.push(
+                                        AppRoutes.orderPath(state.order!.id),
+                                      );
                                     },
                             ),
                           ),
@@ -117,7 +124,10 @@ class _OrderFacts extends StatelessWidget {
           value: Formatters.date(order.estimatedDelivery, context.localeName),
         ),
         SdDividerV5(spacing: SdSpacingConstant.h20),
-        _Fact(label: context.loc.summary_total, value: Formatters.currency(order.total)),
+        _Fact(
+          label: context.loc.summary_total,
+          value: Formatters.currency(order.total),
+        ),
       ],
     ),
   );
@@ -132,7 +142,12 @@ class _Fact extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Row(
     children: <Widget>[
-      Expanded(child: Text(label, style: context.textTheme5.bodyMedium!.muted5(context))),
+      Expanded(
+        child: Text(
+          label,
+          style: context.textTheme5.bodyMedium!.muted5(context),
+        ),
+      ),
       Text(value, style: context.textTheme5.titleSmall!.tabular5),
     ],
   );

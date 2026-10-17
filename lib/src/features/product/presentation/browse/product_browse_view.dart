@@ -26,9 +26,11 @@ class ProductBrowseSlivers extends StatelessWidget {
   final double bottomInset;
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<ProductBrowseController, ProductBrowseState>(
-        builder: (BuildContext context, ProductBrowseState state) => SliverMainAxisGroup(
+  Widget build(
+    BuildContext context,
+  ) => BlocBuilder<ProductBrowseController, ProductBrowseState>(
+    builder: (BuildContext context, ProductBrowseState state) =>
+        SliverMainAxisGroup(
           slivers: <Widget>[
             SliverPersistentHeader(
               pinned: true,
@@ -48,26 +50,27 @@ class ProductBrowseSlivers extends StatelessWidget {
                   onRetry: context.read<ProductBrowseController>().refresh,
                 ),
               ),
-              LoadStatus.success when state.products.isEmpty => SliverFillRemaining(
-                hasScrollBody: false,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: bottomInset),
-                  child: SdEmptyStateV5(
-                    icon: Symbols.search_off_rounded,
-                    title: context.loc.browse_empty_title,
-                    message: context.loc.browse_empty_message,
-                    action: state.query.activeFilterCount == 0
-                        ? null
-                        : SdButtonV5(
-                            variant: SdButtonVariantV5.outlined,
-                            label: context.loc.filter_clear,
-                            onPressed: context
-                                .read<ProductBrowseController>()
-                                .clearFilters,
-                          ),
+              LoadStatus.success when state.products.isEmpty =>
+                SliverFillRemaining(
+                  hasScrollBody: false,
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: bottomInset),
+                    child: SdEmptyStateV5(
+                      icon: Symbols.search_off_rounded,
+                      title: context.loc.browse_empty_title,
+                      message: context.loc.browse_empty_message,
+                      action: state.query.activeFilterCount == 0
+                          ? null
+                          : SdButtonV5(
+                              variant: SdButtonVariantV5.outlined,
+                              label: context.loc.filter_clear,
+                              onPressed: context
+                                  .read<ProductBrowseController>()
+                                  .clearFilters,
+                            ),
+                    ),
                   ),
                 ),
-              ),
               LoadStatus.success => ProductSliverGrid(
                 products: state.products,
                 heroPrefix: heroPrefix,
@@ -76,7 +79,9 @@ class ProductBrowseSlivers extends StatelessWidget {
             if (state.loadingMore)
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: SdSpacingConstant.h20),
+                  padding: EdgeInsets.symmetric(
+                    vertical: SdSpacingConstant.h20,
+                  ),
                   child: const SdLoadingV5(),
                 ),
               ),
@@ -85,7 +90,9 @@ class ProductBrowseSlivers extends StatelessWidget {
                 state.products.length > AppConstants.pageSize)
               SliverToBoxAdapter(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: SdSpacingConstant.h24),
+                  padding: EdgeInsets.symmetric(
+                    vertical: SdSpacingConstant.h24,
+                  ),
                   child: Text(
                     context.loc.browse_end(state.total),
                     textAlign: TextAlign.center,
@@ -96,7 +103,7 @@ class ProductBrowseSlivers extends StatelessWidget {
             SliverToBoxAdapter(child: SizedBox(height: bottomInset)),
           ],
         ),
-      );
+  );
 }
 
 /// Calls `loadMore` as the grid nears its end.
@@ -106,13 +113,14 @@ class BrowseScrollListener extends StatelessWidget {
   final Widget child;
 
   @override
-  Widget build(BuildContext context) => NotificationListener<ScrollNotification>(
-    onNotification: (ScrollNotification n) {
-      if (n.metrics.axis == Axis.vertical && n.metrics.extentAfter < 500) {
-        context.read<ProductBrowseController>().loadMore();
-      }
-      return false;
-    },
-    child: child,
-  );
+  Widget build(BuildContext context) =>
+      NotificationListener<ScrollNotification>(
+        onNotification: (ScrollNotification n) {
+          if (n.metrics.axis == Axis.vertical && n.metrics.extentAfter < 500) {
+            context.read<ProductBrowseController>().loadMore();
+          }
+          return false;
+        },
+        child: child,
+      );
 }

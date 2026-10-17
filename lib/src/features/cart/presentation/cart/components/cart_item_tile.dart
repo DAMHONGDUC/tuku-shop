@@ -55,7 +55,10 @@ class CartItemTile extends StatelessWidget {
             child: SizedBox(
               width: SdSpacingConstant.w64 * 1.35,
               height: SdSpacingConstant.w64 * 1.35 / 0.8,
-              child: AppImage(item.image, borderRadius: SdRadiusV5.thumbnailAll),
+              child: AppImage(
+                item.image,
+                borderRadius: SdRadiusV5.thumbnailAll,
+              ),
             ),
           ),
           SizedBox(width: SdSpacingConstant.w14),
@@ -95,7 +98,9 @@ class CartItemTile extends StatelessWidget {
                         price: Formatters.currency(item.lineTotal),
                         compareAt: item.compareAtPrice == null
                             ? null
-                            : Formatters.currency(item.compareAtPrice! * item.quantity),
+                            : Formatters.currency(
+                                item.compareAtPrice! * item.quantity,
+                              ),
                         size: SdPriceSizeV5.small,
                       ),
                     ),
@@ -111,7 +116,10 @@ class CartItemTile extends StatelessWidget {
                           _remove(context);
                           return;
                         }
-                        context.read<CartController>().updateQuantity(item.id, q);
+                        context.read<CartController>().updateQuantity(
+                          item.id,
+                          q,
+                        );
                       },
                     ),
                   ],

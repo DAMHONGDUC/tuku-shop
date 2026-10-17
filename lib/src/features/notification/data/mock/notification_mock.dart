@@ -9,7 +9,8 @@ abstract final class NotificationMock {
       id: 'n1',
       type: 'order',
       title: 'Your order is on its way',
-      body: 'TK-261031 has left our fulfilment centre. Track it live from My Orders.',
+      body:
+          'TK-261031 has left our fulfilment centre. Track it live from My Orders.',
       createdAt: now.subtract(const Duration(minutes: 25)),
       isRead: false,
       image: '${_p}mj01_orange_0.webp',
@@ -19,7 +20,8 @@ abstract final class NotificationMock {
       id: 'n2',
       type: 'promotion',
       title: 'Flash sale: up to 40% off',
-      body: 'Our biggest markdowns of the season end tonight. Your favourites are in it.',
+      body:
+          'Our biggest markdowns of the season end tonight. Your favourites are in it.',
       createdAt: now.subtract(const Duration(hours: 3)),
       isRead: false,
       image: AppAssets.bannerSale,
@@ -39,7 +41,8 @@ abstract final class NotificationMock {
       id: 'n4',
       type: 'newArrival',
       title: 'Just landed: Autumn Essentials',
-      body: 'Soft fleece, warm layers and new colourways in hoodies and jackets.',
+      body:
+          'Soft fleece, warm layers and new colourways in hoodies and jackets.',
       createdAt: now.subtract(const Duration(days: 1, hours: 2)),
       isRead: true,
       image: AppAssets.bannerNew,
@@ -49,7 +52,8 @@ abstract final class NotificationMock {
       id: 'n5',
       type: 'account',
       title: 'You earned 120 points',
-      body: 'Thanks for your last order. You are 520 points away from Gold status.',
+      body:
+          'Thanks for your last order. You are 520 points away from Gold status.',
       createdAt: now.subtract(const Duration(days: 2)),
       isRead: true,
     ),

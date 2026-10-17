@@ -11,7 +11,9 @@ import 'presentation/register/register_controller.dart';
 
 class AuthDi {
   static void config() {
-    getIt.registerLazySingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl.new);
+    getIt.registerLazySingleton<AuthRemoteDataSource>(
+      AuthRemoteDataSourceImpl.new,
+    );
     getIt.registerLazySingleton<AuthLocalDataSource>(
       () => AuthLocalDataSourceImpl(getIt()),
     );
@@ -20,7 +22,9 @@ class AuthDi {
     );
 
     getIt.registerLazySingleton<LoginUsecase>(() => LoginUsecase(getIt()));
-    getIt.registerLazySingleton<RegisterUsecase>(() => RegisterUsecase(getIt()));
+    getIt.registerLazySingleton<RegisterUsecase>(
+      () => RegisterUsecase(getIt()),
+    );
     getIt.registerLazySingleton<LogoutUsecase>(() => LogoutUsecase(getIt()));
     getIt.registerLazySingleton<RestoreSessionUsecase>(
       () => RestoreSessionUsecase(getIt()),
@@ -34,7 +38,9 @@ class AuthDi {
     getIt.registerLazySingleton<GetDemoAccountUsecase>(
       () => GetDemoAccountUsecase(getIt()),
     );
-    getIt.registerLazySingleton<WatchUserUsecase>(() => WatchUserUsecase(getIt()));
+    getIt.registerLazySingleton<WatchUserUsecase>(
+      () => WatchUserUsecase(getIt()),
+    );
 
     getIt.registerFactory<LoginController>(
       () => LoginController(

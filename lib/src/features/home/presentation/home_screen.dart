@@ -121,7 +121,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 SliverToBoxAdapter(child: SizedBox(height: gap)),
                 const RecommendedSliver(),
                 SliverToBoxAdapter(
-                  child: SizedBox(height: SdContentPaddingV5.aboveNavBar(context)),
+                  child: SizedBox(
+                    height: SdContentPaddingV5.aboveNavBar(context),
+                  ),
                 ),
               ],
             ),

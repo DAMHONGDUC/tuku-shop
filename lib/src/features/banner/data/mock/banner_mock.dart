@@ -9,7 +9,11 @@ abstract final class BannerMock {
       title: 'Autumn\nEssentials',
       subtitle: 'Layers built for crisp mornings',
       image: AppAssets.bannerNew,
-      target: <String, String>{'title': 'New arrivals', 'new': '1', 'sort': 'newest'},
+      target: <String, String>{
+        'title': 'New arrivals',
+        'new': '1',
+        'sort': 'newest',
+      },
     ),
     BannerModel(
       id: 'b_sale',

@@ -16,7 +16,9 @@ import 'presentation/wishlist/wishlist_controller.dart';
 
 class ProductDi {
   static void config() {
-    getIt.registerLazySingleton<ProductRemoteDataSource>(ProductRemoteDataSourceImpl.new);
+    getIt.registerLazySingleton<ProductRemoteDataSource>(
+      ProductRemoteDataSourceImpl.new,
+    );
     getIt.registerLazySingleton<ProductLocalDataSource>(
       () => ProductLocalDataSource(getIt()),
     );
@@ -24,7 +26,9 @@ class ProductDi {
       () => ProductRepositoryImpl(remote: getIt(), local: getIt()),
     );
 
-    getIt.registerLazySingleton<GetProductsUsecase>(() => GetProductsUsecase(getIt()));
+    getIt.registerLazySingleton<GetProductsUsecase>(
+      () => GetProductsUsecase(getIt()),
+    );
     getIt.registerLazySingleton<GetProductDetailUsecase>(
       () => GetProductDetailUsecase(getIt()),
     );
@@ -34,7 +38,9 @@ class ProductDi {
     getIt.registerLazySingleton<GetRelatedProductsUsecase>(
       () => GetRelatedProductsUsecase(getIt()),
     );
-    getIt.registerLazySingleton<GetFlashSaleUsecase>(() => GetFlashSaleUsecase(getIt()));
+    getIt.registerLazySingleton<GetFlashSaleUsecase>(
+      () => GetFlashSaleUsecase(getIt()),
+    );
     getIt.registerLazySingleton<GetProductReviewsUsecase>(
       () => GetProductReviewsUsecase(getIt()),
     );
@@ -51,11 +57,18 @@ class ProductDi {
       () => ClearRecentSearchesUsecase(getIt()),
     );
 
-    getIt.registerFactory<FlashSaleController>(() => FlashSaleController(getIt()));
-    getIt.registerFactory<ProductRailController>(() => ProductRailController(getIt()));
-    getIt.registerFactory<RecommendedController>(() => RecommendedController(getIt()));
+    getIt.registerFactory<FlashSaleController>(
+      () => FlashSaleController(getIt()),
+    );
+    getIt.registerFactory<ProductRailController>(
+      () => ProductRailController(getIt()),
+    );
+    getIt.registerFactory<RecommendedController>(
+      () => RecommendedController(getIt()),
+    );
     getIt.registerFactory<ProductBrowseController>(
-      () => ProductBrowseController(getProducts: getIt(), getCategories: getIt()),
+      () =>
+          ProductBrowseController(getProducts: getIt(), getCategories: getIt()),
     );
     getIt.registerFactory<ProductSearchController>(
       () => ProductSearchController(

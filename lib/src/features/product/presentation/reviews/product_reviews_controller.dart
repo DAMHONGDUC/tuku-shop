@@ -7,7 +7,8 @@ import 'package:tuku_shop/src/features/product/domain/domain.dart';
 part 'product_reviews_state.dart';
 
 class ProductReviewsController extends Cubit<ProductReviewsState> {
-  ProductReviewsController(this._getReviews) : super(const ProductReviewsState());
+  ProductReviewsController(this._getReviews)
+    : super(const ProductReviewsState());
 
   final GetProductReviewsUsecase _getReviews;
   late String _productId;
@@ -19,7 +20,9 @@ class ProductReviewsController extends Cubit<ProductReviewsState> {
   }
 
   Future<void> loadMore() async {
-    if (state.status != LoadStatus.success || !state.hasMore || state.loadingMore) {
+    if (state.status != LoadStatus.success ||
+        !state.hasMore ||
+        state.loadingMore) {
       return;
     }
 
@@ -27,7 +30,8 @@ class ProductReviewsController extends Cubit<ProductReviewsState> {
     await _fetch(state.page + 1);
   }
 
-  void setStarFilter(int? stars) => emit(state.copyWith(starFilter: () => stars));
+  void setStarFilter(int? stars) =>
+      emit(state.copyWith(starFilter: () => stars));
 
   Future<void> _fetch(int page) async {
     final Either<Failure, ReviewsPage> result = await _getReviews(

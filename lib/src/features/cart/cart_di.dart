@@ -13,16 +13,26 @@ class CartDi {
       () => CartRepositoryImpl(remote: getIt(), initial: CartMock.seed),
     );
 
-    getIt.registerLazySingleton<WatchCartUsecase>(() => WatchCartUsecase(getIt()));
-    getIt.registerLazySingleton<AddToCartUsecase>(() => AddToCartUsecase(getIt()));
+    getIt.registerLazySingleton<WatchCartUsecase>(
+      () => WatchCartUsecase(getIt()),
+    );
+    getIt.registerLazySingleton<AddToCartUsecase>(
+      () => AddToCartUsecase(getIt()),
+    );
     getIt.registerLazySingleton<UpdateCartQuantityUsecase>(
       () => UpdateCartQuantityUsecase(getIt()),
     );
     getIt.registerLazySingleton<RemoveCartItemUsecase>(
       () => RemoveCartItemUsecase(getIt()),
     );
-    getIt.registerLazySingleton<ApplyPromoUsecase>(() => ApplyPromoUsecase(getIt()));
-    getIt.registerLazySingleton<RemovePromoUsecase>(() => RemovePromoUsecase(getIt()));
-    getIt.registerLazySingleton<ClearCartUsecase>(() => ClearCartUsecase(getIt()));
+    getIt.registerLazySingleton<ApplyPromoUsecase>(
+      () => ApplyPromoUsecase(getIt()),
+    );
+    getIt.registerLazySingleton<RemovePromoUsecase>(
+      () => RemovePromoUsecase(getIt()),
+    );
+    getIt.registerLazySingleton<ClearCartUsecase>(
+      () => ClearCartUsecase(getIt()),
+    );
   }
 }

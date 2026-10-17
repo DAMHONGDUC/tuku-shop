@@ -28,8 +28,14 @@ class CheckoutBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Text(context.loc.summary_total, style: context.textTheme5.labelMedium!.muted5(context)),
-              Text(Formatters.currency(total), style: context.textTheme5.titleLarge!.tabular5),
+              Text(
+                context.loc.summary_total,
+                style: context.textTheme5.labelMedium!.muted5(context),
+              ),
+              Text(
+                Formatters.currency(total),
+                style: context.textTheme5.titleLarge!.tabular5,
+              ),
             ],
           ),
         ),

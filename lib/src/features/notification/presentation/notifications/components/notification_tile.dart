@@ -7,7 +7,11 @@ import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 /// A notification: picture or glyph, title, body, how long ago, and a dot
 /// while unread. Unread rows sit on a card; read ones fade back to the page.
 class NotificationTile extends StatelessWidget {
-  const NotificationTile({required this.notification, required this.onTap, super.key});
+  const NotificationTile({
+    required this.notification,
+    required this.onTap,
+    super.key,
+  });
 
   final NotificationEntity notification;
   final VoidCallback onTap;
@@ -15,7 +19,9 @@ class NotificationTile extends StatelessWidget {
   String _ago(BuildContext context) {
     final Duration d = DateTime.now().difference(notification.createdAt);
 
-    if (d.inMinutes < 60) return context.loc.time_minutes_ago(d.inMinutes.clamp(1, 59));
+    if (d.inMinutes < 60) {
+      return context.loc.time_minutes_ago(d.inMinutes.clamp(1, 59));
+    }
     if (d.inHours < 24) return context.loc.time_hours_ago(d.inHours);
     return context.loc.time_days_ago(d.inDays);
   }
@@ -24,10 +30,22 @@ class NotificationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final NotificationEntity n = notification;
     final (IconData icon, Color tint) = switch (n.type) {
-      NotificationType.order => (Symbols.local_shipping_rounded, context.sdTheme5.info),
-      NotificationType.promotion => (Symbols.sell_rounded, context.sdTheme5.accent),
-      NotificationType.newArrival => (Symbols.new_releases_rounded, context.sdTheme5.success),
-      NotificationType.account => (Symbols.stars_rounded, context.sdTheme5.rating),
+      NotificationType.order => (
+        Symbols.local_shipping_rounded,
+        context.sdTheme5.info,
+      ),
+      NotificationType.promotion => (
+        Symbols.sell_rounded,
+        context.sdTheme5.accent,
+      ),
+      NotificationType.newArrival => (
+        Symbols.new_releases_rounded,
+        context.sdTheme5.success,
+      ),
+      NotificationType.account => (
+        Symbols.stars_rounded,
+        context.sdTheme5.rating,
+      ),
     };
 
     return SdPressableV5(
@@ -51,7 +69,9 @@ class NotificationTile extends StatelessWidget {
                         color: tint.withValues(alpha: 0.12),
                         borderRadius: SdRadiusV5.thumbnailAll,
                       ),
-                      child: Center(child: SdIconV5(icon, color: tint, fill: 1)),
+                      child: Center(
+                        child: SdIconV5(icon, color: tint, fill: 1),
+                      ),
                     )
                   : AppImage(n.image!, borderRadius: SdRadiusV5.thumbnailAll),
             ),
@@ -70,7 +90,10 @@ class NotificationTile extends StatelessWidget {
                           style: context.textTheme5.titleSmall,
                         ),
                       ),
-                      Text(_ago(context), style: context.textTheme5.labelSmall!.faint5(context)),
+                      Text(
+                        _ago(context),
+                        style: context.textTheme5.labelSmall!.faint5(context),
+                      ),
                     ],
                   ),
                   SizedBox(height: SdSpacingConstant.h4),
@@ -91,7 +114,10 @@ class NotificationTile extends StatelessWidget {
                 margin: EdgeInsets.only(top: SdSpacingConstant.h6),
                 width: SdSpacingConstant.r8,
                 height: SdSpacingConstant.r8,
-                decoration: BoxDecoration(color: context.sdTheme5.accent, shape: BoxShape.circle),
+                decoration: BoxDecoration(
+                  color: context.sdTheme5.accent,
+                  shape: BoxShape.circle,
+                ),
               ),
             ),
           ],

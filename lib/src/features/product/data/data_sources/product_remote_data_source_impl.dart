@@ -16,9 +16,11 @@ import 'product_remote_data_source.dart';
 /// The catalogue "server": filters, sorts and pages [ProductMock.products]
 /// the way a search API would.
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
-  ProductRemoteDataSourceImpl({List<ProductModel>? catalogue, DateTime Function()? clock})
-    : _catalogue = catalogue ?? ProductMock.products,
-      _clock = clock ?? DateTime.now;
+  ProductRemoteDataSourceImpl({
+    List<ProductModel>? catalogue,
+    DateTime Function()? clock,
+  }) : _catalogue = catalogue ?? ProductMock.products,
+       _clock = clock ?? DateTime.now;
 
   final List<ProductModel> _catalogue;
   final DateTime Function() _clock;
@@ -29,7 +31,10 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   Future<ProductPageModel> getProducts(ProductQuery query) async {
     await MockLatency.normal();
 
-    final List<ProductModel> matched = sort(filter(_catalogue, query), query.sort);
+    final List<ProductModel> matched = sort(
+      filter(_catalogue, query),
+      query.sort,
+    );
     final int total = matched.length;
     final int totalPages = total == 0 ? 0 : (total / query.pageSize).ceil();
     final int start = (query.page - 1) * query.pageSize;
@@ -79,8 +84,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
     final List<ProductModel> sameCategory = _catalogue
         .where(
-          (ProductModel p) =>
-              p.id != id && p.categoryId == product.categoryId,
+          (ProductModel p) => p.id != id && p.categoryId == product.categoryId,
         )
         .toList();
     final List<ProductModel> sameGender = _catalogue
@@ -110,9 +114,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
       (now.hour ~/ 6 + 1) * 6,
     );
     final List<ProductModel> onSale =
-        _catalogue
-            .where((ProductModel p) => p.compareAtPrice != null)
-            .toList()
+        _catalogue.where((ProductModel p) => p.compareAtPrice != null).toList()
           ..sort(
             (ProductModel a, ProductModel b) =>
                 _discount(b).compareTo(_discount(a)),
@@ -207,14 +209,20 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         return false;
       }
 
-      return tokens.every((String token) => _haystack(p).contains(_stem(token)));
+      return tokens.every(
+        (String token) => _haystack(p).contains(_stem(token)),
+      );
     }).toList();
   }
 
-  static List<ProductModel> sort(List<ProductModel> products, ProductSort sort) {
+  static List<ProductModel> sort(
+    List<ProductModel> products,
+    ProductSort sort,
+  ) {
     final List<ProductModel> sorted = List<ProductModel>.of(products);
 
-    int byScore(ProductModel a, ProductModel b) => _score(b).compareTo(_score(a));
+    int byScore(ProductModel a, ProductModel b) =>
+        _score(b).compareTo(_score(a));
 
     switch (sort) {
       case ProductSort.recommended:
@@ -268,8 +276,9 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   ].whereType<String>().join(' ').toLowerCase();
 
   /// "hoodies" finds "hoodie", "shorts" still finds "shorts".
-  static String _stem(String token) =>
-      token.length > 4 && token.endsWith('s') ? token.substring(0, token.length - 1) : token;
+  static String _stem(String token) => token.length > 4 && token.endsWith('s')
+      ? token.substring(0, token.length - 1)
+      : token;
 
   static double _score(ProductModel p) =>
       (p.rating ?? 0) * 20 +

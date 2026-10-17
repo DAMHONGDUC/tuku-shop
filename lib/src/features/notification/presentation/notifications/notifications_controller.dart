@@ -8,22 +8,18 @@ part 'notifications_state.dart';
 
 class NotificationsController extends Cubit<NotificationsState> {
   NotificationsController({
-    required GetNotificationsUsecase getNotifications,
-    required MarkNotificationReadUsecase markRead,
-    required MarkAllNotificationsReadUsecase markAllRead,
-  }) : _getNotifications = getNotifications,
-       _markRead = markRead,
-       _markAllRead = markAllRead,
-       super(const NotificationsState());
+    required this._getNotifications,
+    required this._markRead,
+    required this._markAllRead,
+  }) : super(const NotificationsState());
 
   final GetNotificationsUsecase _getNotifications;
   final MarkNotificationReadUsecase _markRead;
   final MarkAllNotificationsReadUsecase _markAllRead;
 
   Future<void> load() async {
-    final Either<Failure, List<NotificationEntity>> result = await _getNotifications(
-      const NoParams(),
-    );
+    final Either<Failure, List<NotificationEntity>> result =
+        await _getNotifications(const NoParams());
     result.fold(
       (Failure _) => emit(const NotificationsState(status: LoadStatus.failure)),
       (List<NotificationEntity> items) =>
@@ -42,6 +38,9 @@ class NotificationsController extends Cubit<NotificationsState> {
   }
 
   void _set(NotificationEntity Function(NotificationEntity) update) => emit(
-    NotificationsState(status: state.status, items: state.items.map(update).toList()),
+    NotificationsState(
+      status: state.status,
+      items: state.items.map(update).toList(),
+    ),
   );
 }

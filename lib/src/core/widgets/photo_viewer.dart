@@ -70,7 +70,8 @@ class _PhotoViewerState extends State<PhotoViewer> {
           ),
         ),
         Positioned(
-          top: SdContentPaddingV5.statusBarInset(context) + SdSpacingConstant.h8,
+          top:
+              SdContentPaddingV5.statusBarInset(context) + SdSpacingConstant.h8,
           right: SdContentPaddingV5.horizontal,
           child: SdIconButtonV5(
             icon: Symbols.close_rounded,
@@ -83,7 +84,9 @@ class _PhotoViewerState extends State<PhotoViewer> {
           Positioned(
             left: 0,
             right: 0,
-            bottom: SdContentPaddingV5.detailBottom(context) + SdSpacingConstant.h12,
+            bottom:
+                SdContentPaddingV5.detailBottom(context) +
+                SdSpacingConstant.h12,
             child: Center(
               child: SdPageIndicatorV5(
                 count: widget.images.length,

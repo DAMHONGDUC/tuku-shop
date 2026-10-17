@@ -44,7 +44,9 @@ class _PasswordFieldState extends State<PasswordField> {
     onChanged: widget.onChanged,
     autofillHints: const <String>[AutofillHints.password],
     suffix: SdIconButtonV5(
-      icon: _hidden ? Symbols.visibility_rounded : Symbols.visibility_off_rounded,
+      icon: _hidden
+          ? Symbols.visibility_rounded
+          : Symbols.visibility_off_rounded,
       tooltip: _hidden ? context.loc.password_show : context.loc.password_hide,
       size: SdSpacingConstant.r40,
       color: context.sdTheme5.textTertiary,

@@ -19,7 +19,9 @@ class RecommendedController extends Cubit<RecommendedState> {
   }
 
   Future<void> loadMore() async {
-    if (!state.hasMore || state.loadingMore || state.status != LoadStatus.success) {
+    if (!state.hasMore ||
+        state.loadingMore ||
+        state.status != LoadStatus.success) {
       return;
     }
 

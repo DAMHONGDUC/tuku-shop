@@ -27,7 +27,10 @@ class OrderSummaryCard extends StatelessWidget {
   Widget build(BuildContext context) => SdCardV5(
     child: Column(
       children: <Widget>[
-        SummaryRow(label: context.loc.summary_subtotal, value: Formatters.currency(subtotal)),
+        SummaryRow(
+          label: context.loc.summary_subtotal,
+          value: Formatters.currency(subtotal),
+        ),
         if (discount > 0)
           SummaryRow(
             label: promoCode == null
@@ -38,7 +41,9 @@ class OrderSummaryCard extends StatelessWidget {
           ),
         SummaryRow(
           label: context.loc.summary_shipping,
-          value: shipping == 0 ? context.loc.summary_free : Formatters.currency(shipping),
+          value: shipping == 0
+              ? context.loc.summary_free
+              : Formatters.currency(shipping),
           valueColor: shipping == 0 ? context.sdTheme5.success : null,
         ),
         SdDividerV5(spacing: SdSpacingConstant.h24),
@@ -52,7 +57,9 @@ class OrderSummaryCard extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: SdBadgeV5(
-              label: context.loc.summary_savings(Formatters.currency(savings + discount)),
+              label: context.loc.summary_savings(
+                Formatters.currency(savings + discount),
+              ),
               tone: SdBadgeToneV5.success,
             ),
           ),
@@ -92,9 +99,12 @@ class SummaryRow extends StatelessWidget {
             child: Text(
               value,
               key: ValueKey<String>(value),
-              style: (emphasized ? style : context.textTheme5.bodyMedium!.semiBold5)
-                  .tabular5
-                  .copyWith(color: valueColor),
+              style:
+                  (emphasized
+                          ? style
+                          : context.textTheme5.bodyMedium!.semiBold5)
+                      .tabular5
+                      .copyWith(color: valueColor),
             ),
           ),
         ],

@@ -75,7 +75,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             itemBuilder: (BuildContext context, int i) => AnimatedBuilder(
               animation: _pages,
               builder: (BuildContext context, Widget? _) {
-                final double page = _pages.hasClients && _pages.position.haveDimensions
+                final double page =
+                    _pages.hasClients && _pages.position.haveDimensions
                     ? _pages.page ?? 0
                     : 0;
 
@@ -84,7 +85,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
           Positioned(
-            top: SdContentPaddingV5.statusBarInset(context) + SdSpacingConstant.h8,
+            top:
+                SdContentPaddingV5.statusBarInset(context) +
+                SdSpacingConstant.h8,
             right: SdContentPaddingV5.horizontal,
             child: AnimatedOpacity(
               opacity: _index == _count - 1 ? 0 : 1,
@@ -100,7 +103,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Positioned(
             left: SdContentPaddingV5.horizontal,
             right: SdContentPaddingV5.horizontal,
-            bottom: SdContentPaddingV5.detailBottom(context) + SdSpacingConstant.h12,
+            bottom:
+                SdContentPaddingV5.detailBottom(context) +
+                SdSpacingConstant.h12,
             child: Row(
               children: <Widget>[
                 SdPageIndicatorV5(
@@ -130,14 +135,21 @@ class _NextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SdPressableV5(
     onTap: onPressed,
-    semanticLabel: last ? context.loc.onboarding_start : context.loc.action_next,
+    semanticLabel: last
+        ? context.loc.onboarding_start
+        : context.loc.action_next,
     child: AnimatedContainer(
       duration: SdMotionV5.of(context, SdMotionV5.slow),
       curve: SdMotionV5.emphasized,
       height: SdSpacingConstant.h56,
-      padding: EdgeInsets.symmetric(horizontal: last ? SdSpacingConstant.w24 : 0),
+      padding: EdgeInsets.symmetric(
+        horizontal: last ? SdSpacingConstant.w24 : 0,
+      ),
       constraints: BoxConstraints(minWidth: SdSpacingConstant.h56),
-      decoration: BoxDecoration(color: Colors.white, borderRadius: SdRadiusV5.fullAll),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: SdRadiusV5.fullAll,
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,

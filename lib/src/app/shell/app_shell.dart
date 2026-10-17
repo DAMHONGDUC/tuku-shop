@@ -38,8 +38,14 @@ class AppShell extends StatelessWidget {
         selectedIndex: navigationShell.currentIndex,
         onSelected: _onSelected,
         destinations: <SdNavDestinationV5>[
-          SdNavDestinationV5(icon: Symbols.home_rounded, label: context.loc.tab_home),
-          SdNavDestinationV5(icon: Symbols.grid_view_rounded, label: context.loc.tab_shop),
+          SdNavDestinationV5(
+            icon: Symbols.home_rounded,
+            label: context.loc.tab_home,
+          ),
+          SdNavDestinationV5(
+            icon: Symbols.grid_view_rounded,
+            label: context.loc.tab_shop,
+          ),
           SdNavDestinationV5(
             icon: Symbols.favorite_rounded,
             label: context.loc.tab_wishlist,
@@ -50,7 +56,10 @@ class AppShell extends StatelessWidget {
             label: context.loc.tab_bag,
             badgeCount: bagCount,
           ),
-          SdNavDestinationV5(icon: Symbols.person_rounded, label: context.loc.tab_profile),
+          SdNavDestinationV5(
+            icon: Symbols.person_rounded,
+            label: context.loc.tab_profile,
+          ),
         ],
       ),
     );
@@ -103,4 +112,3 @@ class _Branch extends StatelessWidget {
     ),
   );
 }
-

@@ -16,19 +16,22 @@ class ProductReviewsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<ProductReviewsController>(
-    create: (BuildContext _) => getIt<ProductReviewsController>()..load(productId),
+    create: (BuildContext _) =>
+        getIt<ProductReviewsController>()..load(productId),
     child: SdScaffoldV5(
       appBar: SdAppBarV5(title: context.loc.detail_reviews_title),
       body: BlocBuilder<ProductReviewsController, ProductReviewsState>(
-        builder: (BuildContext context, ProductReviewsState state) => FadeSwitcher(
-          child: switch (state.status) {
-            LoadStatus.loading => const _ReviewsSkeleton(),
-            LoadStatus.failure => ErrorView(
-              onRetry: () => context.read<ProductReviewsController>().load(productId),
+        builder: (BuildContext context, ProductReviewsState state) =>
+            FadeSwitcher(
+              child: switch (state.status) {
+                LoadStatus.loading => const _ReviewsSkeleton(),
+                LoadStatus.failure => ErrorView(
+                  onRetry: () =>
+                      context.read<ProductReviewsController>().load(productId),
+                ),
+                LoadStatus.success => _ReviewsList(state: state),
+              },
             ),
-            LoadStatus.success => _ReviewsList(state: state),
-          },
-        ),
       ),
     ),
   );
@@ -41,7 +44,8 @@ class _ReviewsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ProductReviewsController controller = context.read<ProductReviewsController>();
+    final ProductReviewsController controller = context
+        .read<ProductReviewsController>();
     final List<ReviewEntity> visible = state.visible;
 
     return NotificationListener<ScrollNotification>(
@@ -89,7 +93,10 @@ class _ReviewsList extends StatelessWidget {
             ),
           for (final (int i, ReviewEntity r) in visible.indexed) ...<Widget>[
             SdDividerV5(spacing: SdSpacingConstant.h32),
-            SdFadeInV5(index: i % 6, child: ReviewTile(review: r)),
+            SdFadeInV5(
+              index: i % 6,
+              child: ReviewTile(review: r),
+            ),
           ],
           if (state.loadingMore)
             Padding(

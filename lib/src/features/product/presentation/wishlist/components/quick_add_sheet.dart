@@ -69,7 +69,8 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
       closeTooltip: context.loc.action_close,
       footer: SdButtonV5(
         variant: SdButtonVariantV5.primary,
-        label: '${context.loc.detail_add_to_bag}  ·  ${Formatters.currency(p.price)}',
+        label:
+            '${context.loc.detail_add_to_bag}  ·  ${Formatters.currency(p.price)}',
         expand: true,
         busy: _busy,
         onPressed: _add,
@@ -100,7 +101,9 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
                     SizedBox(height: SdSpacingConstant.h6),
                     SdPriceV5(
                       price: Formatters.currency(p.price),
-                      compareAt: p.isOnSale ? Formatters.currency(p.compareAtPrice!) : null,
+                      compareAt: p.isOnSale
+                          ? Formatters.currency(p.compareAtPrice!)
+                          : null,
                     ),
                   ],
                 ),
@@ -108,7 +111,10 @@ class _QuickAddSheetState extends State<QuickAddSheet> {
             ],
           ),
           SizedBox(height: SdSpacingConstant.h20),
-          Text('${context.loc.detail_color}: ${color.name}', style: context.textTheme5.titleSmall),
+          Text(
+            '${context.loc.detail_color}: ${color.name}',
+            style: context.textTheme5.titleSmall,
+          ),
           SizedBox(height: SdSpacingConstant.h10),
           Wrap(
             spacing: SdSpacingConstant.w8,

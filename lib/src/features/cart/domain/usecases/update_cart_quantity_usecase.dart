@@ -6,7 +6,10 @@ import '../entities/cart_entity.dart';
 import '../repositories/cart_repository.dart';
 
 class UpdateCartQuantityParams extends Equatable {
-  const UpdateCartQuantityParams({required this.itemId, required this.quantity});
+  const UpdateCartQuantityParams({
+    required this.itemId,
+    required this.quantity,
+  });
 
   final String itemId;
   final int quantity;

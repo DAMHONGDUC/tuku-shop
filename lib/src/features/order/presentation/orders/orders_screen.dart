@@ -34,7 +34,8 @@ class OrdersScreen extends StatelessWidget {
                   context.loc.orders_filter_cancelled,
                 ],
                 selectedIndex: state.filter.index,
-                onSelected: (int i) => controller.setFilter(OrdersFilter.values[i]),
+                onSelected: (int i) =>
+                    controller.setFilter(OrdersFilter.values[i]),
               ),
               SizedBox(height: SdSpacingConstant.h12),
               Expanded(
@@ -64,16 +65,19 @@ class OrdersScreen extends StatelessWidget {
                         itemCount: visible.length,
                         separatorBuilder: (_, _) =>
                             SizedBox(height: SdContentPaddingV5.itemGap),
-                        itemBuilder: (BuildContext context, int i) => SdFadeInV5(
-                          index: i,
-                          child: OrderCard(
-                            order: visible[i],
-                            onTap: () async {
-                              await context.push(AppRoutes.orderPath(visible[i].id));
-                              await controller.load();
-                            },
-                          ),
-                        ),
+                        itemBuilder: (BuildContext context, int i) =>
+                            SdFadeInV5(
+                              index: i,
+                              child: OrderCard(
+                                order: visible[i],
+                                onTap: () async {
+                                  await context.push(
+                                    AppRoutes.orderPath(visible[i].id),
+                                  );
+                                  await controller.load();
+                                },
+                              ),
+                            ),
                       ),
                     ),
                   },

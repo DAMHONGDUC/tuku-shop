@@ -7,8 +7,10 @@ import 'package:tuku_shop/src/features/order/data/models/order_model.dart';
 import 'package:tuku_shop/src/features/order/domain/domain.dart';
 
 class OrderRepositoryImpl implements OrderRepository {
-  const OrderRepositoryImpl({required this.dataSource, DateTime Function()? clock})
-    : _clock = clock ?? DateTime.now;
+  const OrderRepositoryImpl({
+    required this.dataSource,
+    DateTime Function()? clock,
+  }) : _clock = clock ?? DateTime.now;
 
   final OrderRemoteDataSource dataSource;
   final DateTime Function() _clock;

@@ -20,7 +20,8 @@ class AddressFormScreen extends StatelessWidget {
     create: (BuildContext _) =>
         getIt<AddressFormController>()..load(args?.addressId),
     child: BlocConsumer<AddressFormController, AddressFormState>(
-      listenWhen: (AddressFormState a, AddressFormState b) => a.savedId != b.savedId,
+      listenWhen: (AddressFormState a, AddressFormState b) =>
+          a.savedId != b.savedId,
       listener: (BuildContext context, AddressFormState state) {
         SdSnackBarUtilsV5.success(context, context.loc.address_saved);
         context.pop(state.savedId);
@@ -50,11 +51,21 @@ class _AddressForm extends StatefulWidget {
 }
 
 class _AddressFormState extends State<_AddressForm> {
-  late final TextEditingController _name = TextEditingController(text: widget.existing?.fullName);
-  late final TextEditingController _phone = TextEditingController(text: widget.existing?.phone);
-  late final TextEditingController _street = TextEditingController(text: widget.existing?.street);
-  late final TextEditingController _city = TextEditingController(text: widget.existing?.city);
-  late final TextEditingController _postal = TextEditingController(text: widget.existing?.postalCode);
+  late final TextEditingController _name = TextEditingController(
+    text: widget.existing?.fullName,
+  );
+  late final TextEditingController _phone = TextEditingController(
+    text: widget.existing?.phone,
+  );
+  late final TextEditingController _street = TextEditingController(
+    text: widget.existing?.street,
+  );
+  late final TextEditingController _city = TextEditingController(
+    text: widget.existing?.city,
+  );
+  late final TextEditingController _postal = TextEditingController(
+    text: widget.existing?.postalCode,
+  );
   late final TextEditingController _country = TextEditingController(
     text: widget.existing?.country ?? 'United States',
   );
@@ -99,8 +110,9 @@ class _AddressFormState extends State<_AddressForm> {
   Widget build(BuildContext context) =>
       BlocBuilder<AddressFormController, AddressFormState>(
         builder: (BuildContext context, AddressFormState state) {
-          String? err(String key) =>
-              state.missing.contains(key) ? context.loc.validation_required : null;
+          String? err(String key) => state.missing.contains(key)
+              ? context.loc.validation_required
+              : null;
           final double gap = SdSpacingConstant.h16;
 
           return SdKeyboardDismissV5(
@@ -110,7 +122,10 @@ class _AddressFormState extends State<_AddressForm> {
                 bottom: SdContentPaddingV5.detailBottom(context),
               ),
               children: <Widget>[
-                Text(context.loc.address_label, style: context.textTheme5.labelLarge),
+                Text(
+                  context.loc.address_label,
+                  style: context.textTheme5.labelLarge,
+                ),
                 SizedBox(height: SdSpacingConstant.h8),
                 Row(
                   children: <Widget>[

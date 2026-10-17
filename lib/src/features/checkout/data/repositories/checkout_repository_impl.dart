@@ -64,9 +64,9 @@ class CheckoutRepositoryImpl implements CheckoutRepository {
     String id,
   ) => _guard(
     'Set default payment failed',
-    () async => (await dataSource.setDefaultPaymentMethod(id))
-        .map(PaymentMethodModelToPaymentMethodEntityMapper.toEntity)
-        .toList(),
+    () async => (await dataSource.setDefaultPaymentMethod(
+      id,
+    )).map(PaymentMethodModelToPaymentMethodEntityMapper.toEntity).toList(),
   );
 
   @override

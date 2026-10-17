@@ -31,7 +31,9 @@ class CheckoutStack {
       path: AppRoutes.addressForm.path,
       name: AppRoutes.addressForm.name,
       builder: (_, GoRouterState state) => AddressFormScreen(
-        args: state.extra is AddressFormArgs ? state.extra! as AddressFormArgs : null,
+        args: state.extra is AddressFormArgs
+            ? state.extra! as AddressFormArgs
+            : null,
       ),
     ),
     GoRoute(

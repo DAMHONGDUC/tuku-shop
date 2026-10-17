@@ -22,7 +22,10 @@ class OrderCard extends StatelessWidget {
         Row(
           children: <Widget>[
             Expanded(
-              child: Text(order.code, style: context.textTheme5.titleSmall!.tabular5),
+              child: Text(
+                order.code,
+                style: context.textTheme5.titleSmall!.tabular5,
+              ),
             ),
             SdBadgeV5(
               label: context.orderStatusLabel(order.status),
@@ -45,7 +48,10 @@ class OrderCard extends StatelessWidget {
                 child: SizedBox(
                   width: SdSpacingConstant.w56,
                   height: SdSpacingConstant.w56 / 0.8,
-                  child: AppImage(item.image, borderRadius: SdRadiusV5.thumbnailAll),
+                  child: AppImage(
+                    item.image,
+                    borderRadius: SdRadiusV5.thumbnailAll,
+                  ),
                 ),
               ),
             if (order.items.length > 3)
@@ -57,7 +63,10 @@ class OrderCard extends StatelessWidget {
                   color: context.sdTheme5.surfaceSunken,
                   borderRadius: SdRadiusV5.thumbnailAll,
                 ),
-                child: Text('+${order.items.length - 3}', style: context.textTheme5.labelLarge),
+                child: Text(
+                  '+${order.items.length - 3}',
+                  style: context.textTheme5.labelLarge,
+                ),
               ),
             const Spacer(),
             Column(

@@ -8,19 +8,33 @@ import 'presentation/orders/orders_controller.dart';
 
 class OrderDi {
   static void config() {
-    getIt.registerLazySingleton<OrderRemoteDataSource>(OrderRemoteDataSourceImpl.new);
+    getIt.registerLazySingleton<OrderRemoteDataSource>(
+      OrderRemoteDataSourceImpl.new,
+    );
     getIt.registerLazySingleton<OrderRepository>(
       () => OrderRepositoryImpl(dataSource: getIt()),
     );
 
-    getIt.registerLazySingleton<GetOrdersUsecase>(() => GetOrdersUsecase(getIt()));
-    getIt.registerLazySingleton<GetOrderDetailUsecase>(() => GetOrderDetailUsecase(getIt()));
-    getIt.registerLazySingleton<PlaceOrderUsecase>(() => PlaceOrderUsecase(getIt()));
-    getIt.registerLazySingleton<CancelOrderUsecase>(() => CancelOrderUsecase(getIt()));
+    getIt.registerLazySingleton<GetOrdersUsecase>(
+      () => GetOrdersUsecase(getIt()),
+    );
+    getIt.registerLazySingleton<GetOrderDetailUsecase>(
+      () => GetOrderDetailUsecase(getIt()),
+    );
+    getIt.registerLazySingleton<PlaceOrderUsecase>(
+      () => PlaceOrderUsecase(getIt()),
+    );
+    getIt.registerLazySingleton<CancelOrderUsecase>(
+      () => CancelOrderUsecase(getIt()),
+    );
 
     getIt.registerFactory<OrdersController>(() => OrdersController(getIt()));
     getIt.registerFactory<OrderDetailController>(
-      () => OrderDetailController(getOrder: getIt(), cancelOrder: getIt(), addToCart: getIt()),
+      () => OrderDetailController(
+        getOrder: getIt(),
+        cancelOrder: getIt(),
+        addToCart: getIt(),
+      ),
     );
   }
 }

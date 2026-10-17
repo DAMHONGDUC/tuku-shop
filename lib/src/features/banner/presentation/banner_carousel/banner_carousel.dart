@@ -20,12 +20,13 @@ class BannerCarousel extends StatelessWidget {
   Widget build(BuildContext context) => BlocProvider<BannerCarouselController>(
     create: (BuildContext _) => getIt<BannerCarouselController>()..load(),
     child: BlocBuilder<BannerCarouselController, BannerCarouselState>(
-      builder: (BuildContext context, BannerCarouselState state) => FadeSwitcher(
-        child: switch (state.status) {
-          LoadStatus.success => _Carousel(banners: state.banners),
-          _ => const _BannerSkeleton(),
-        },
-      ),
+      builder: (BuildContext context, BannerCarouselState state) =>
+          FadeSwitcher(
+            child: switch (state.status) {
+              LoadStatus.success => _Carousel(banners: state.banners),
+              _ => const _BannerSkeleton(),
+            },
+          ),
     ),
   );
 

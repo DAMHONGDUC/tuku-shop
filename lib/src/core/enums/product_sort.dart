@@ -1,1 +1,8 @@
-enum ProductSort { recommended, newest, priceLowHigh, priceHighLow, topRated, bestSelling }
+enum ProductSort {
+  recommended,
+  newest,
+  priceLowHigh,
+  priceHighLow,
+  topRated,
+  bestSelling,
+}

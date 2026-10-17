@@ -8,13 +8,10 @@ part 'login_state.dart';
 
 class LoginController extends Cubit<LoginState> {
   LoginController({
-    required LoginUsecase login,
-    required GetDemoAccountUsecase getDemoAccount,
-    required RequestPasswordResetUsecase requestPasswordReset,
-  }) : _login = login,
-       _getDemoAccount = getDemoAccount,
-       _requestPasswordReset = requestPasswordReset,
-       super(const LoginState());
+    required this._login,
+    required this._getDemoAccount,
+    required this._requestPasswordReset,
+  }) : super(const LoginState());
 
   final LoginUsecase _login;
   final GetDemoAccountUsecase _getDemoAccount;

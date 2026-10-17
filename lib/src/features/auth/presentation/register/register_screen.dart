@@ -70,7 +70,10 @@ class _RegisterViewState extends State<_RegisterView> {
             SdSnackBarUtilsV5.success(context, context.loc.register_welcome);
             context.go(AppRoutes.home.path);
           } else if (state.failure != null) {
-            SdSnackBarUtilsV5.error(context, context.failureMessage(state.failure!));
+            SdSnackBarUtilsV5.error(
+              context,
+              context.failureMessage(state.failure!),
+            );
           }
         },
         builder: (BuildContext context, RegisterState state) => SdScaffoldV5(

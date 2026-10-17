@@ -53,18 +53,18 @@ class ProductRepositoryImpl implements ProductRepository {
     List<String> ids,
   ) => _guard(
     'Load products by id failed',
-    () async => (await remote.getProductsByIds(ids))
-        .map(ProductModelToProductEntityMapper.toEntity)
-        .toList(),
+    () async => (await remote.getProductsByIds(
+      ids,
+    )).map(ProductModelToProductEntityMapper.toEntity).toList(),
   );
 
   @override
   Future<Either<Failure, List<ProductEntity>>> getRelatedProducts(String id) =>
       _guard(
         'Load related failed',
-        () async => (await remote.getRelatedProducts(id))
-            .map(ProductModelToProductEntityMapper.toEntity)
-            .toList(),
+        () async => (await remote.getRelatedProducts(
+          id,
+        )).map(ProductModelToProductEntityMapper.toEntity).toList(),
       );
 
   @override

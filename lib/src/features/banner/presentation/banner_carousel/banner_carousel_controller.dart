@@ -20,7 +20,8 @@ class BannerCarouselController extends Cubit<BannerCarouselState> {
     );
 
     result.fold(
-      (Failure _) => emit(const BannerCarouselState(status: LoadStatus.failure)),
+      (Failure _) =>
+          emit(const BannerCarouselState(status: LoadStatus.failure)),
       (List<BannerEntity> banners) => emit(
         BannerCarouselState(status: LoadStatus.success, banners: banners),
       ),

@@ -6,12 +6,8 @@ import 'package:tuku_shop/src/features/settings/domain/domain.dart';
 
 /// Theme, language and the onboarding flag. The whole app rebuilds from it.
 class SettingsController extends Cubit<AppSettings> {
-  SettingsController({
-    required GetSettingsUsecase getSettings,
-    required SaveSettingsUsecase saveSettings,
-  }) : _getSettings = getSettings,
-       _saveSettings = saveSettings,
-       super(const AppSettings());
+  SettingsController({required this._getSettings, required this._saveSettings})
+    : super(const AppSettings());
 
   final GetSettingsUsecase _getSettings;
   final SaveSettingsUsecase _saveSettings;

@@ -28,18 +28,24 @@ class CheckoutScreen extends StatelessWidget {
       listener: (BuildContext context, CheckoutState state) {
         if (state.placedOrderId != null) {
           HapticFeedback.heavyImpact();
-          context.pushReplacement(AppRoutes.orderSuccessPath(state.placedOrderId!));
+          context.pushReplacement(
+            AppRoutes.orderSuccessPath(state.placedOrderId!),
+          );
         } else if (state.failure != null) {
           SdSnackBarUtilsV5.error(context, context.loc.checkout_failed);
         }
       },
       builder: (BuildContext context, CheckoutState state) => SdScaffoldV5(
         appBar: SdAppBarV5(title: context.loc.checkout_title),
-        bottomBar: state.status == LoadStatus.success ? const _PlaceOrderBar() : null,
+        bottomBar: state.status == LoadStatus.success
+            ? const _PlaceOrderBar()
+            : null,
         body: FadeSwitcher(
           child: switch (state.status) {
             LoadStatus.loading => const Center(child: SdLoadingV5()),
-            LoadStatus.failure => ErrorView(onRetry: context.read<CheckoutController>().load),
+            LoadStatus.failure => ErrorView(
+              onRetry: context.read<CheckoutController>().load,
+            ),
             LoadStatus.success => _CheckoutBody(state: state),
           },
         ),
@@ -55,7 +61,9 @@ class _CheckoutBody extends StatelessWidget {
 
   Future<void> _addAddress(BuildContext context) async {
     final CheckoutController controller = context.read<CheckoutController>();
-    final Object? saved = await context.push<Object?>(AppRoutes.addressForm.path);
+    final Object? saved = await context.push<Object?>(
+      AppRoutes.addressForm.path,
+    );
 
     await controller.refreshAddresses(selectId: saved is String ? saved : null);
   }
@@ -97,7 +105,11 @@ class _CheckoutBody extends StatelessWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        SdIconV5(Symbols.location_on_rounded, color: context.sdTheme5.accent, fill: 1),
+                        SdIconV5(
+                          Symbols.location_on_rounded,
+                          color: context.sdTheme5.accent,
+                          fill: 1,
+                        ),
                         SizedBox(width: SdSpacingConstant.w12),
                         Expanded(
                           child: Column(
@@ -108,9 +120,19 @@ class _CheckoutBody extends StatelessWidget {
                                 style: context.textTheme5.titleSmall,
                               ),
                               SizedBox(height: SdSpacingConstant.h2),
-                              Text(address.phone, style: context.textTheme5.bodySmall!.muted5(context)),
+                              Text(
+                                address.phone,
+                                style: context.textTheme5.bodySmall!.muted5(
+                                  context,
+                                ),
+                              ),
                               SizedBox(height: SdSpacingConstant.h4),
-                              Text(address.oneLine, style: context.textTheme5.bodyMedium!.muted5(context)),
+                              Text(
+                                address.oneLine,
+                                style: context.textTheme5.bodyMedium!.muted5(
+                                  context,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -140,7 +162,11 @@ class _CheckoutBody extends StatelessWidget {
                       selected: d.id == state.deliveryId,
                       onSelected: () => controller.selectDelivery(d.id),
                       trailing: Text(
-                        d.feeFor(qualifiesForFree: cart.qualifiesForFreeShipping) == 0
+                        d.feeFor(
+                                  qualifiesForFree:
+                                      cart.qualifiesForFreeShipping,
+                                ) ==
+                                0
                             ? context.loc.summary_free
                             : Formatters.currency(d.fee),
                         style: context.textTheme5.labelLarge!.tabular5,
@@ -183,7 +209,8 @@ class _CheckoutBody extends StatelessWidget {
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: cart.items.length,
-                separatorBuilder: (_, _) => SizedBox(width: SdSpacingConstant.w8),
+                separatorBuilder: (_, _) =>
+                    SizedBox(width: SdSpacingConstant.w8),
                 itemBuilder: (BuildContext context, int i) {
                   final CartItemEntity item = cart.items[i];
 
@@ -193,13 +220,19 @@ class _CheckoutBody extends StatelessWidget {
                       SizedBox(
                         width: SdSpacingConstant.h96 * 0.8,
                         height: SdSpacingConstant.h96,
-                        child: AppImage(item.image, borderRadius: SdRadiusV5.thumbnailAll),
+                        child: AppImage(
+                          item.image,
+                          borderRadius: SdRadiusV5.thumbnailAll,
+                        ),
                       ),
                       if (item.quantity > 1)
                         Positioned(
                           top: SdSpacingConstant.h4,
                           right: SdSpacingConstant.w4,
-                          child: SdBadgeV5(label: '×${item.quantity}', tone: SdBadgeToneV5.inverse),
+                          child: SdBadgeV5(
+                            label: '×${item.quantity}',
+                            tone: SdBadgeToneV5.inverse,
+                          ),
                         ),
                     ],
                   );
@@ -222,7 +255,11 @@ class _CheckoutBody extends StatelessWidget {
         SizedBox(height: SdSpacingConstant.h16),
         Row(
           children: <Widget>[
-            SdIconV5(Symbols.lock_rounded, size: SdIconV5.smallSize, color: context.sdTheme5.textTertiary),
+            SdIconV5(
+              Symbols.lock_rounded,
+              size: SdIconV5.smallSize,
+              color: context.sdTheme5.textTertiary,
+            ),
             SizedBox(width: SdSpacingConstant.w6),
             Expanded(
               child: Text(
@@ -244,7 +281,8 @@ class _PlaceOrderBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final CheckoutController controller = context.watch<CheckoutController>();
     final CartEntity cart = context.watch<CartController>().state;
-    final double total = cart.subtotal - cart.discount + controller.shippingFor(cart);
+    final double total =
+        cart.subtotal - cart.discount + controller.shippingFor(cart);
 
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -260,7 +298,8 @@ class _PlaceOrderBar extends StatelessWidget {
       child: SdButtonV5(
         variant: SdButtonVariantV5.primary,
         size: SdButtonSizeV5.large,
-        label: '${context.loc.checkout_place_order}  ·  ${Formatters.currency(total)}',
+        label:
+            '${context.loc.checkout_place_order}  ·  ${Formatters.currency(total)}',
         icon: Symbols.lock_rounded,
         expand: true,
         busy: controller.state.placing,

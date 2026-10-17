@@ -8,13 +8,10 @@ part 'addresses_state.dart';
 
 class AddressesController extends Cubit<AddressesState> {
   AddressesController({
-    required GetAddressesUsecase getAddresses,
-    required SaveAddressUsecase saveAddress,
-    required DeleteAddressUsecase deleteAddress,
-  }) : _getAddresses = getAddresses,
-       _saveAddress = saveAddress,
-       _deleteAddress = deleteAddress,
-       super(const AddressesState());
+    required this._getAddresses,
+    required this._saveAddress,
+    required this._deleteAddress,
+  }) : super(const AddressesState());
 
   final GetAddressesUsecase _getAddresses;
   final SaveAddressUsecase _saveAddress;
@@ -40,7 +37,9 @@ class AddressesController extends Cubit<AddressesState> {
     emit(
       AddressesState(
         status: state.status,
-        addresses: state.addresses.where((AddressEntity a) => a.id != id).toList(),
+        addresses: state.addresses
+            .where((AddressEntity a) => a.id != id)
+            .toList(),
       ),
     );
     await _deleteAddress(id);

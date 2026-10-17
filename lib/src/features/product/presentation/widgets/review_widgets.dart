@@ -21,7 +21,9 @@ class RatingSummary extends StatelessWidget {
           ),
           SdRatingV5(
             rating: summary.average,
-            semanticLabel: context.loc.detail_rating(summary.average.toStringAsFixed(1)),
+            semanticLabel: context.loc.detail_rating(
+              summary.average.toStringAsFixed(1),
+            ),
           ),
           SizedBox(height: SdSpacingConstant.h4),
           Text(
@@ -41,7 +43,10 @@ class RatingSummary extends StatelessWidget {
                   children: <Widget>[
                     SizedBox(
                       width: SdSpacingConstant.w12,
-                      child: Text('$stars', style: context.textTheme5.labelMedium),
+                      child: Text(
+                        '$stars',
+                        style: context.textTheme5.labelMedium,
+                      ),
                     ),
                     SdIconV5(
                       Symbols.star_rounded,
@@ -52,7 +57,10 @@ class RatingSummary extends StatelessWidget {
                     SizedBox(width: SdSpacingConstant.w8),
                     Expanded(
                       child: TweenAnimationBuilder<double>(
-                        tween: Tween<double>(begin: 0, end: summary.share(stars)),
+                        tween: Tween<double>(
+                          begin: 0,
+                          end: summary.share(stars),
+                        ),
                         duration: SdMotionV5.of(context, SdMotionV5.page * 1.5),
                         curve: SdMotionV5.standard,
                         builder: (BuildContext context, double v, Widget? _) =>
@@ -133,7 +141,10 @@ class ReviewTile extends StatelessWidget {
       SizedBox(height: SdSpacingConstant.h10),
       Text(review.title, style: context.textTheme5.titleSmall),
       SizedBox(height: SdSpacingConstant.h4),
-      Text(review.comment, style: context.textTheme5.bodyMedium!.muted5(context)),
+      Text(
+        review.comment,
+        style: context.textTheme5.bodyMedium!.muted5(context),
+      ),
       if (review.photos.isNotEmpty) ...<Widget>[
         SizedBox(height: SdSpacingConstant.h10),
         SizedBox(

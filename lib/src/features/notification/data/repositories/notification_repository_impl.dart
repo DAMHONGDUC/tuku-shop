@@ -25,10 +25,10 @@ class NotificationRepositoryImpl implements NotificationRepository {
   @override
   Future<Either<Failure, List<NotificationEntity>>> getNotifications() async {
     try {
-      final List<NotificationEntity> items = (await dataSource
-              .getNotifications())
-          .map(NotificationModelToNotificationEntityMapper.toEntity)
-          .toList();
+      final List<NotificationEntity> items =
+          (await dataSource.getNotifications())
+              .map(NotificationModelToNotificationEntityMapper.toEntity)
+              .toList();
       return Right<Failure, List<NotificationEntity>>(items);
     } catch (e, stackTrace) {
       SdLogger.error(_tag, 'Load failed', error: e, stackTrace: stackTrace);
@@ -43,7 +43,12 @@ class NotificationRepositoryImpl implements NotificationRepository {
       _unread.add(dataSource.unreadCount);
       return const Right<Failure, Unit>(unit);
     } catch (e, stackTrace) {
-      SdLogger.error(_tag, 'Mark read failed', error: e, stackTrace: stackTrace);
+      SdLogger.error(
+        _tag,
+        'Mark read failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       return const Left<Failure, Unit>(ServerFailure());
     }
   }
@@ -55,7 +60,12 @@ class NotificationRepositoryImpl implements NotificationRepository {
       _unread.add(dataSource.unreadCount);
       return const Right<Failure, Unit>(unit);
     } catch (e, stackTrace) {
-      SdLogger.error(_tag, 'Mark all read failed', error: e, stackTrace: stackTrace);
+      SdLogger.error(
+        _tag,
+        'Mark all read failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       return const Left<Failure, Unit>(ServerFailure());
     }
   }

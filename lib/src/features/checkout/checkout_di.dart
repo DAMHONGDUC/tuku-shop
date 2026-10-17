@@ -18,9 +18,15 @@ class CheckoutDi {
       () => CheckoutRepositoryImpl(dataSource: getIt()),
     );
 
-    getIt.registerLazySingleton<GetAddressesUsecase>(() => GetAddressesUsecase(getIt()));
-    getIt.registerLazySingleton<SaveAddressUsecase>(() => SaveAddressUsecase(getIt()));
-    getIt.registerLazySingleton<DeleteAddressUsecase>(() => DeleteAddressUsecase(getIt()));
+    getIt.registerLazySingleton<GetAddressesUsecase>(
+      () => GetAddressesUsecase(getIt()),
+    );
+    getIt.registerLazySingleton<SaveAddressUsecase>(
+      () => SaveAddressUsecase(getIt()),
+    );
+    getIt.registerLazySingleton<DeleteAddressUsecase>(
+      () => DeleteAddressUsecase(getIt()),
+    );
     getIt.registerLazySingleton<GetPaymentMethodsUsecase>(
       () => GetPaymentMethodsUsecase(getIt()),
     );
@@ -40,7 +46,9 @@ class CheckoutDi {
         clearCart: getIt(),
       ),
     );
-    getIt.registerFactory<OrderSuccessController>(() => OrderSuccessController(getIt()));
+    getIt.registerFactory<OrderSuccessController>(
+      () => OrderSuccessController(getIt()),
+    );
     getIt.registerFactory<AddressesController>(
       () => AddressesController(
         getAddresses: getIt(),
@@ -52,7 +60,10 @@ class CheckoutDi {
       () => AddressFormController(getAddresses: getIt(), saveAddress: getIt()),
     );
     getIt.registerFactory<PaymentMethodsController>(
-      () => PaymentMethodsController(getPaymentMethods: getIt(), setDefault: getIt()),
+      () => PaymentMethodsController(
+        getPaymentMethods: getIt(),
+        setDefault: getIt(),
+      ),
     );
   }
 }

@@ -23,5 +23,12 @@ class BannerEntity extends Equatable {
   final ProductListArgs target;
 
   @override
-  List<Object> get props => <Object>[id, eyebrow, title, subtitle, image, target];
+  List<Object> get props => <Object>[
+    id,
+    eyebrow,
+    title,
+    subtitle,
+    image,
+    target,
+  ];
 }

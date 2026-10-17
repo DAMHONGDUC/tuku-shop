@@ -17,7 +17,8 @@ class OrdersController extends Cubit<OrdersState> {
     );
     result.fold(
       (Failure _) => emit(state.copyWith(status: LoadStatus.failure)),
-      (List<OrderEntity> o) => emit(state.copyWith(status: LoadStatus.success, orders: o)),
+      (List<OrderEntity> o) =>
+          emit(state.copyWith(status: LoadStatus.success, orders: o)),
     );
   }
 

@@ -31,8 +31,9 @@ class CheckoutState extends Equatable {
   PaymentMethodEntity? get payment =>
       payments.firstWhereOrNull((PaymentMethodEntity p) => p.id == paymentId);
 
-  DeliveryOptionEntity? get delivery =>
-      deliveryOptions.firstWhereOrNull((DeliveryOptionEntity d) => d.id == deliveryId);
+  DeliveryOptionEntity? get delivery => deliveryOptions.firstWhereOrNull(
+    (DeliveryOptionEntity d) => d.id == deliveryId,
+  );
 
   bool get canPlace => address != null && payment != null && delivery != null;
 

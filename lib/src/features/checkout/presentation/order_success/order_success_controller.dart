@@ -15,7 +15,8 @@ class OrderSuccessController extends Cubit<OrderSuccessState> {
     final Either<Failure, OrderEntity> result = await _getOrder(id);
     result.fold(
       (Failure _) => emit(const OrderSuccessState(status: LoadStatus.failure)),
-      (OrderEntity o) => emit(OrderSuccessState(status: LoadStatus.success, order: o)),
+      (OrderEntity o) =>
+          emit(OrderSuccessState(status: LoadStatus.success, order: o)),
     );
   }
 }

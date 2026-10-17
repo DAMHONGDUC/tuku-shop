@@ -71,13 +71,19 @@ class ProductCardSkeleton extends StatelessWidget {
   Widget build(BuildContext context) => Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      const AspectRatio(aspectRatio: ProductCard.imageAspect, child: SdSkeletonV5()),
+      const AspectRatio(
+        aspectRatio: ProductCard.imageAspect,
+        child: SdSkeletonV5(),
+      ),
       SizedBox(height: SdSpacingConstant.h12),
       SdSkeletonV5(width: SdSpacingConstant.w64, height: SdSpacingConstant.h10),
       SizedBox(height: SdSpacingConstant.h8),
       SdSkeletonV5(height: SdSpacingConstant.h14),
       SizedBox(height: SdSpacingConstant.h8),
-      SdSkeletonV5(width: SdSpacingConstant.w64 * 1.3, height: SdSpacingConstant.h14),
+      SdSkeletonV5(
+        width: SdSpacingConstant.w64 * 1.3,
+        height: SdSpacingConstant.h14,
+      ),
     ],
   );
 }

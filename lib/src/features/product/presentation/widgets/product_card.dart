@@ -65,9 +65,9 @@ class ProductCard extends StatelessWidget {
         Text(
           product.brand.toUpperCase(),
           maxLines: 1,
-          style: context.textTheme5.labelSmall!.faint5(context).copyWith(
-            letterSpacing: 0.8,
-          ),
+          style: context.textTheme5.labelSmall!
+              .faint5(context)
+              .copyWith(letterSpacing: 0.8),
         ),
         SizedBox(height: SdSpacingConstant.h2),
         Text(
@@ -122,7 +122,8 @@ class ProductBadges extends StatelessWidget {
           tone: SdBadgeToneV5.accent,
           solid: true,
         ),
-      if (product.isOnSale && product.isNew) SizedBox(height: SdSpacingConstant.h4),
+      if (product.isOnSale && product.isNew)
+        SizedBox(height: SdSpacingConstant.h4),
       if (product.isNew)
         SdBadgeV5(label: context.loc.badge_new, tone: SdBadgeToneV5.inverse),
     ],
@@ -146,7 +147,8 @@ class ProductLikeButton extends StatelessWidget {
       liked: liked,
       size: size,
       tooltip: liked ? context.loc.wishlist_remove : context.loc.wishlist_add,
-      onChanged: (bool _) => context.read<WishlistController>().toggle(productId),
+      onChanged: (bool _) =>
+          context.read<WishlistController>().toggle(productId),
     );
   }
 }

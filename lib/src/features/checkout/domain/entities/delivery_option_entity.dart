@@ -22,5 +22,11 @@ class DeliveryOptionEntity extends Equatable {
       freeOverThreshold && qualifiesForFree ? 0 : fee;
 
   @override
-  List<Object> get props => <Object>[id, minDays, maxDays, fee, freeOverThreshold];
+  List<Object> get props => <Object>[
+    id,
+    minDays,
+    maxDays,
+    fee,
+    freeOverThreshold,
+  ];
 }

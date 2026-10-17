@@ -34,11 +34,20 @@ class WishlistRepositoryImpl implements WishlistRepository {
       _ids = next;
       _changes.add(next);
       await local.write(next);
-      SdLogger.action('WishlistRepository', saved ? 'Saved' : 'Removed', productId);
+      SdLogger.action(
+        'WishlistRepository',
+        saved ? 'Saved' : 'Removed',
+        productId,
+      );
 
       return Right<Failure, bool>(saved);
     } catch (e, stackTrace) {
-      SdLogger.error('WishlistRepository', 'Toggle failed', error: e, stackTrace: stackTrace);
+      SdLogger.error(
+        'WishlistRepository',
+        'Toggle failed',
+        error: e,
+        stackTrace: stackTrace,
+      );
       return const Left<Failure, bool>(CacheFailure());
     }
   }

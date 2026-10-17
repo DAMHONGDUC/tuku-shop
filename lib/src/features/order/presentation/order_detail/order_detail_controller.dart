@@ -9,13 +9,10 @@ part 'order_detail_state.dart';
 
 class OrderDetailController extends Cubit<OrderDetailState> {
   OrderDetailController({
-    required GetOrderDetailUsecase getOrder,
-    required CancelOrderUsecase cancelOrder,
-    required AddToCartUsecase addToCart,
-  }) : _getOrder = getOrder,
-       _cancelOrder = cancelOrder,
-       _addToCart = addToCart,
-       super(const OrderDetailState());
+    required this._getOrder,
+    required this._cancelOrder,
+    required this._addToCart,
+  }) : super(const OrderDetailState());
 
   final GetOrderDetailUsecase _getOrder;
   final CancelOrderUsecase _cancelOrder;
@@ -25,7 +22,8 @@ class OrderDetailController extends Cubit<OrderDetailState> {
     final Either<Failure, OrderEntity> result = await _getOrder(id);
     result.fold(
       (Failure _) => emit(const OrderDetailState(status: LoadStatus.failure)),
-      (OrderEntity o) => emit(OrderDetailState(status: LoadStatus.success, order: o)),
+      (OrderEntity o) =>
+          emit(OrderDetailState(status: LoadStatus.success, order: o)),
     );
   }
 

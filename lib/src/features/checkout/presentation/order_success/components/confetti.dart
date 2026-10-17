@@ -12,7 +12,8 @@ class Confetti extends StatefulWidget {
   State<Confetti> createState() => _ConfettiState();
 }
 
-class _ConfettiState extends State<Confetti> with SingleTickerProviderStateMixin {
+class _ConfettiState extends State<Confetti>
+    with SingleTickerProviderStateMixin {
   late final AnimationController _controller = AnimationController(
     vsync: this,
     duration: const Duration(milliseconds: 2600),
@@ -35,7 +36,8 @@ class _ConfettiState extends State<Confetti> with SingleTickerProviderStateMixin
     ];
 
     for (int i = 0; i < 70; i++) {
-      final double angle = -math.pi / 2 + (random.nextDouble() - 0.5) * math.pi * 0.9;
+      final double angle =
+          -math.pi / 2 + (random.nextDouble() - 0.5) * math.pi * 0.9;
       final double speed = 0.5 + random.nextDouble() * 0.7;
       _pieces.add(
         _Piece(
@@ -109,7 +111,11 @@ class _ConfettiPainter extends CustomPainter {
         ..rotate(p.spin * t)
         ..drawRRect(
           RRect.fromRectAndRadius(
-            Rect.fromCenter(center: Offset.zero, width: p.size, height: p.size * 0.5),
+            Rect.fromCenter(
+              center: Offset.zero,
+              width: p.size,
+              height: p.size * 0.5,
+            ),
             const Radius.circular(1.5),
           ),
           paint,

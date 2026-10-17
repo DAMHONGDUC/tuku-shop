@@ -28,9 +28,14 @@ class OrderActions extends StatelessWidget {
           variant: SdButtonVariantV5.destructive,
           onPressed: () async {
             Navigator.of(context, rootNavigator: true).pop();
-            final bool ok = await context.read<OrderDetailController>().cancel();
+            final bool ok = await context
+                .read<OrderDetailController>()
+                .cancel();
             if (context.mounted && ok) {
-              SdSnackBarUtilsV5.success(context, context.loc.order_cancelled_toast);
+              SdSnackBarUtilsV5.success(
+                context,
+                context.loc.order_cancelled_toast,
+              );
             }
           },
         ),
@@ -77,7 +82,10 @@ class OrderActions extends StatelessWidget {
             label: context.loc.order_write_review,
             icon: Symbols.rate_review_rounded,
             expand: true,
-            onPressed: () => SdSnackBarUtilsV5.info(context, context.loc.order_review_thanks),
+            onPressed: () => SdSnackBarUtilsV5.info(
+              context,
+              context.loc.order_review_thanks,
+            ),
           ),
           SizedBox(height: SdSpacingConstant.h10),
         ],

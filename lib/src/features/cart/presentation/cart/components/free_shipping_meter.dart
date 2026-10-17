@@ -16,7 +16,9 @@ class FreeShippingMeter extends StatelessWidget {
     final double progress = unlocked
         ? 1
         : (cart.subtotal / AppConstants.freeShippingThreshold).clamp(0, 1);
-    final Color tint = unlocked ? context.sdTheme5.success : context.sdTheme5.textPrimary;
+    final Color tint = unlocked
+        ? context.sdTheme5.success
+        : context.sdTheme5.textPrimary;
 
     return SdCardV5(
       layer: SdCardLayerV5.sunken,
@@ -27,7 +29,9 @@ class FreeShippingMeter extends StatelessWidget {
           Row(
             children: <Widget>[
               SdIconV5(
-                unlocked ? Symbols.celebration_rounded : Symbols.local_shipping_rounded,
+                unlocked
+                    ? Symbols.celebration_rounded
+                    : Symbols.local_shipping_rounded,
                 size: SdIconV5.smallSize * 1.1,
                 color: tint,
               ),

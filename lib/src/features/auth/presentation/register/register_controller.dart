@@ -9,22 +9,19 @@ import '../login/login_controller.dart';
 part 'register_state.dart';
 
 class RegisterController extends Cubit<RegisterState> {
-  RegisterController({required RegisterUsecase register})
-    : _register = register,
-      super(const RegisterState());
+  RegisterController({required this._register}) : super(const RegisterState());
 
   final RegisterUsecase _register;
 
   static const int minPasswordLength = 8;
 
   /// 0–4: length, a digit, a capital, a symbol.
-  static int passwordStrength(String value) =>
-      <bool>[
-        value.length >= minPasswordLength,
-        value.contains(RegExp(r'\d')),
-        value.contains(RegExp(r'[A-Z]')),
-        value.contains(RegExp(r'[^A-Za-z0-9]')),
-      ].where((bool b) => b).length;
+  static int passwordStrength(String value) => <bool>[
+    value.length >= minPasswordLength,
+    value.contains(RegExp(r'\d')),
+    value.contains(RegExp(r'[A-Z]')),
+    value.contains(RegExp(r'[^A-Za-z0-9]')),
+  ].where((bool b) => b).length;
 
   void acceptTerms(bool value) => emit(state.copyWith(termsAccepted: value));
 
@@ -57,9 +54,12 @@ class RegisterController extends Cubit<RegisterState> {
       ),
     );
 
-    if (<Object?>[nameError, emailError, passwordError, confirmError].any(
-          (Object? e) => e != null,
-        ) ||
+    if (<Object?>[
+          nameError,
+          emailError,
+          passwordError,
+          confirmError,
+        ].any((Object? e) => e != null) ||
         !state.termsAccepted) {
       return;
     }

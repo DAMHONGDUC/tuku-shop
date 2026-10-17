@@ -23,7 +23,8 @@ class _AddToBagBarState extends State<AddToBagBar> {
   bool _justAdded = false;
 
   Future<void> _add() async {
-    final ProductDetailController controller = context.read<ProductDetailController>();
+    final ProductDetailController controller = context
+        .read<ProductDetailController>();
     final bool added = await controller.addToBag();
 
     if (!mounted) return;
@@ -44,51 +45,52 @@ class _AddToBagBarState extends State<AddToBagBar> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      BlocBuilder<ProductDetailController, ProductDetailState>(
-        builder: (BuildContext context, ProductDetailState state) => Container(
-          padding: EdgeInsets.fromLTRB(
-            SdContentPaddingV5.horizontal,
-            SdSpacingConstant.h12,
-            SdContentPaddingV5.horizontal,
-            SdContentPaddingV5.detailBottom(context),
+  Widget build(
+    BuildContext context,
+  ) => BlocBuilder<ProductDetailController, ProductDetailState>(
+    builder: (BuildContext context, ProductDetailState state) => Container(
+      padding: EdgeInsets.fromLTRB(
+        SdContentPaddingV5.horizontal,
+        SdSpacingConstant.h12,
+        SdContentPaddingV5.horizontal,
+        SdContentPaddingV5.detailBottom(context),
+      ),
+      decoration: BoxDecoration(
+        color: context.sdTheme5.surface,
+        border: Border(top: BorderSide(color: context.sdTheme5.divider)),
+      ),
+      child: Row(
+        children: <Widget>[
+          ProductLikeButton(
+            productId: state.product!.id,
+            size: SdSpacingConstant.r48,
           ),
-          decoration: BoxDecoration(
-            color: context.sdTheme5.surface,
-            border: Border(top: BorderSide(color: context.sdTheme5.divider)),
+          SizedBox(width: SdSpacingConstant.w12),
+          Expanded(
+            child: _justAdded
+                ? SdButtonV5(
+                    key: const ValueKey<String>('added'),
+                    variant: SdButtonVariantV5.secondary,
+                    size: SdButtonSizeV5.large,
+                    label: context.loc.detail_view_bag,
+                    icon: Symbols.check_circle_rounded,
+                    expand: true,
+                    onPressed: () => context.go(AppRoutes.cart.path),
+                  )
+                : SdButtonV5(
+                    key: const ValueKey<String>('add'),
+                    variant: SdButtonVariantV5.primary,
+                    size: SdButtonSizeV5.large,
+                    label:
+                        '${context.loc.detail_add_to_bag}  ·  ${Formatters.currency(state.product!.price * state.quantity)}',
+                    icon: Symbols.shopping_bag_rounded,
+                    expand: true,
+                    busy: state.adding,
+                    onPressed: _add,
+                  ),
           ),
-          child: Row(
-            children: <Widget>[
-              ProductLikeButton(
-                productId: state.product!.id,
-                size: SdSpacingConstant.r48,
-              ),
-              SizedBox(width: SdSpacingConstant.w12),
-              Expanded(
-                child: _justAdded
-                    ? SdButtonV5(
-                        key: const ValueKey<String>('added'),
-                        variant: SdButtonVariantV5.secondary,
-                        size: SdButtonSizeV5.large,
-                        label: context.loc.detail_view_bag,
-                        icon: Symbols.check_circle_rounded,
-                        expand: true,
-                        onPressed: () => context.go(AppRoutes.cart.path),
-                      )
-                    : SdButtonV5(
-                        key: const ValueKey<String>('add'),
-                        variant: SdButtonVariantV5.primary,
-                        size: SdButtonSizeV5.large,
-                        label:
-                            '${context.loc.detail_add_to_bag}  ·  ${Formatters.currency(state.product!.price * state.quantity)}',
-                        icon: Symbols.shopping_bag_rounded,
-                        expand: true,
-                        busy: state.adding,
-                        onPressed: _add,
-                      ),
-              ),
-            ],
-          ),
-        ),
-      );
+        ],
+      ),
+    ),
+  );
 }

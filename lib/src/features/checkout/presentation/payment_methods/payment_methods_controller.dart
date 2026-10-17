@@ -8,16 +8,15 @@ part 'payment_methods_state.dart';
 
 class PaymentMethodsController extends Cubit<PaymentMethodsState> {
   PaymentMethodsController({
-    required GetPaymentMethodsUsecase getPaymentMethods,
-    required SetDefaultPaymentMethodUsecase setDefault,
-  }) : _getPaymentMethods = getPaymentMethods,
-       _setDefault = setDefault,
-       super(const PaymentMethodsState());
+    required this._getPaymentMethods,
+    required this._setDefault,
+  }) : super(const PaymentMethodsState());
 
   final GetPaymentMethodsUsecase _getPaymentMethods;
   final SetDefaultPaymentMethodUsecase _setDefault;
 
-  Future<void> load() async => _emit(await _getPaymentMethods(const NoParams()));
+  Future<void> load() async =>
+      _emit(await _getPaymentMethods(const NoParams()));
 
   Future<void> makeDefault(String id) async => _emit(await _setDefault(id));
 

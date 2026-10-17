@@ -18,7 +18,8 @@ class AddressesScreen extends StatelessWidget {
     create: (BuildContext _) => getIt<AddressesController>()..load(),
     child: BlocBuilder<AddressesController, AddressesState>(
       builder: (BuildContext context, AddressesState state) {
-        final AddressesController controller = context.read<AddressesController>();
+        final AddressesController controller = context
+            .read<AddressesController>();
 
         Future<void> open([String? id]) async {
           await context.push<Object?>(
@@ -54,16 +55,21 @@ class AddressesScreen extends StatelessWidget {
                 title: context.loc.addresses_empty,
               ),
               LoadStatus.success => ListView.separated(
-                padding: SdContentPaddingV5.gutter.copyWith(top: SdSpacingConstant.h8),
+                padding: SdContentPaddingV5.gutter.copyWith(
+                  top: SdSpacingConstant.h8,
+                ),
                 itemCount: state.addresses.length,
-                separatorBuilder: (_, _) => SizedBox(height: SdContentPaddingV5.itemGap),
+                separatorBuilder: (_, _) =>
+                    SizedBox(height: SdContentPaddingV5.itemGap),
                 itemBuilder: (BuildContext context, int i) {
                   final AddressEntity a = state.addresses[i];
 
                   return SdFadeInV5(
                     index: i,
                     child: SdCardV5(
-                      borderColor: a.isDefault ? context.sdTheme5.textPrimary : null,
+                      borderColor: a.isDefault
+                          ? context.sdTheme5.textPrimary
+                          : null,
                       onTap: () => open(a.id),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -76,15 +82,31 @@ class AddressesScreen extends StatelessWidget {
                                     : Symbols.home_rounded,
                               ),
                               SizedBox(width: SdSpacingConstant.w8),
-                              Expanded(child: Text(a.label, style: context.textTheme5.titleSmall)),
+                              Expanded(
+                                child: Text(
+                                  a.label,
+                                  style: context.textTheme5.titleSmall,
+                                ),
+                              ),
                               if (a.isDefault)
-                                SdBadgeV5(label: context.loc.address_default, tone: SdBadgeToneV5.inverse),
+                                SdBadgeV5(
+                                  label: context.loc.address_default,
+                                  tone: SdBadgeToneV5.inverse,
+                                ),
                             ],
                           ),
                           SizedBox(height: SdSpacingConstant.h10),
-                          Text('${a.fullName}  ·  ${a.phone}', style: context.textTheme5.bodyMedium),
+                          Text(
+                            '${a.fullName}  ·  ${a.phone}',
+                            style: context.textTheme5.bodyMedium,
+                          ),
                           SizedBox(height: SdSpacingConstant.h2),
-                          Text(a.oneLine, style: context.textTheme5.bodySmall!.muted5(context)),
+                          Text(
+                            a.oneLine,
+                            style: context.textTheme5.bodySmall!.muted5(
+                              context,
+                            ),
+                          ),
                           SizedBox(height: SdSpacingConstant.h8),
                           Row(
                             children: <Widget>[
@@ -113,13 +135,19 @@ class AddressesScreen extends StatelessWidget {
                                         label: context.loc.action_remove,
                                         variant: SdButtonVariantV5.destructive,
                                         onPressed: () {
-                                          Navigator.of(context, rootNavigator: true).pop();
+                                          Navigator.of(
+                                            context,
+                                            rootNavigator: true,
+                                          ).pop();
                                           controller.delete(a.id);
                                         },
                                       ),
                                       SdDialogActionV5(
                                         label: context.loc.action_cancel,
-                                        onPressed: () => Navigator.of(context, rootNavigator: true).pop(),
+                                        onPressed: () => Navigator.of(
+                                          context,
+                                          rootNavigator: true,
+                                        ).pop(),
                                       ),
                                     ],
                                   ),

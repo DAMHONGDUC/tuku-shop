@@ -32,21 +32,28 @@ class ReviewPreviewSection extends StatelessWidget {
               SizedBox(height: SdSpacingConstant.h16),
               FadeSwitcher(
                 child: reviews == null
-                    ? SdShimmerV5(child: SdSkeletonV5(height: SdSpacingConstant.h108))
+                    ? SdShimmerV5(
+                        child: SdSkeletonV5(height: SdSpacingConstant.h108),
+                      )
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
                           RatingSummary(summary: reviews.summary),
-                          for (final ReviewEntity r in reviews.items.take(2)) ...<Widget>[
+                          for (final ReviewEntity r in reviews.items.take(
+                            2,
+                          )) ...<Widget>[
                             SdDividerV5(spacing: SdSpacingConstant.h32),
                             ReviewTile(review: r),
                           ],
                           SizedBox(height: SdSpacingConstant.h16),
                           SdButtonV5(
                             variant: SdButtonVariantV5.outlined,
-                            label: context.loc.detail_all_reviews(reviews.summary.total),
+                            label: context.loc.detail_all_reviews(
+                              reviews.summary.total,
+                            ),
                             expand: true,
-                            onPressed: () => context.push(AppRoutes.productReviewsPath(id)),
+                            onPressed: () =>
+                                context.push(AppRoutes.productReviewsPath(id)),
                           ),
                         ],
                       ),

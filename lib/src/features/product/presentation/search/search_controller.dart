@@ -10,15 +10,11 @@ part 'search_state.dart';
 /// on a `ProductBrowseController` beside it.
 class ProductSearchController extends Cubit<ProductSearchState> {
   ProductSearchController({
-    required GetRecentSearchesUsecase getRecent,
-    required SaveRecentSearchUsecase saveRecent,
-    required ClearRecentSearchesUsecase clearRecent,
-    required GetTrendingSearchesUsecase getTrending,
-  }) : _getRecent = getRecent,
-       _saveRecent = saveRecent,
-       _clearRecent = clearRecent,
-       _getTrending = getTrending,
-       super(const ProductSearchState());
+    required this._getRecent,
+    required this._saveRecent,
+    required this._clearRecent,
+    required this._getTrending,
+  }) : super(const ProductSearchState());
 
   final GetRecentSearchesUsecase _getRecent;
   final SaveRecentSearchUsecase _saveRecent;
@@ -26,8 +22,13 @@ class ProductSearchController extends Cubit<ProductSearchState> {
   final GetTrendingSearchesUsecase _getTrending;
 
   Future<void> load() async {
-    final (Either<Failure, List<String>> recent, Either<Failure, List<String>> trending) =
-        await (_getRecent(const NoParams()), _getTrending(const NoParams())).wait;
+    final (
+      Either<Failure, List<String>> recent,
+      Either<Failure, List<String>> trending,
+    ) = await (
+      _getRecent(const NoParams()),
+      _getTrending(const NoParams()),
+    ).wait;
 
     emit(
       ProductSearchState(
@@ -37,13 +38,17 @@ class ProductSearchController extends Cubit<ProductSearchState> {
     );
   }
 
-  void setKeyword(String keyword) => emit(state.copyWith(keyword: keyword.trim()));
+  void setKeyword(String keyword) =>
+      emit(state.copyWith(keyword: keyword.trim()));
 
   Future<void> remember(String keyword) async {
     if (keyword.trim().isEmpty) return;
 
     final Either<Failure, List<String>> result = await _saveRecent(keyword);
-    result.fold((Failure _) {}, (List<String> r) => emit(state.copyWith(recent: r)));
+    result.fold(
+      (Failure _) {},
+      (List<String> r) => emit(state.copyWith(recent: r)),
+    );
   }
 
   Future<void> clearRecent() async {

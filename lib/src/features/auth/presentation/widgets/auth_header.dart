@@ -32,7 +32,9 @@ class AuthHeader extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: SdContentPaddingV5.statusBarInset(context) + SdSpacingConstant.h12,
+          top:
+              SdContentPaddingV5.statusBarInset(context) +
+              SdSpacingConstant.h12,
           left: SdContentPaddingV5.horizontal,
           child: SdFadeInV5(
             child: Text(

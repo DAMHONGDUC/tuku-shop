@@ -9,11 +9,9 @@ part 'address_form_state.dart';
 
 class AddressFormController extends Cubit<AddressFormState> {
   AddressFormController({
-    required GetAddressesUsecase getAddresses,
-    required SaveAddressUsecase saveAddress,
-  }) : _getAddresses = getAddresses,
-       _saveAddress = saveAddress,
-       super(const AddressFormState());
+    required this._getAddresses,
+    required this._saveAddress,
+  }) : super(const AddressFormState());
 
   final GetAddressesUsecase _getAddresses;
   final SaveAddressUsecase _saveAddress;
@@ -57,7 +55,8 @@ class AddressFormController extends Cubit<AddressFormState> {
 
     result.fold(
       (Failure _) => emit(state.copyWith(saving: false)),
-      (AddressEntity saved) => emit(state.copyWith(saving: false, savedId: saved.id)),
+      (AddressEntity saved) =>
+          emit(state.copyWith(saving: false, savedId: saved.id)),
     );
   }
 }

@@ -31,9 +31,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   @override
   Future<void> markRead(String id) async {
     _items = _items
-        .map(
-          (NotificationModel n) => n.id == id ? n.copyWith(isRead: true) : n,
-        )
+        .map((NotificationModel n) => n.id == id ? n.copyWith(isRead: true) : n)
         .toList();
   }
 

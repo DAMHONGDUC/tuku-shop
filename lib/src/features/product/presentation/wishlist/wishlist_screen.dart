@@ -19,8 +19,9 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<WishlistScreenController>(
-    create: (BuildContext context) => getIt<WishlistScreenController>()
-      ..sync(context.read<WishlistController>().state),
+    create: (BuildContext context) =>
+        getIt<WishlistScreenController>()
+          ..sync(context.read<WishlistController>().state),
     child: BlocListener<WishlistController, List<String>>(
       listener: (BuildContext context, List<String> ids) =>
           context.read<WishlistScreenController>().sync(ids),
@@ -32,7 +33,8 @@ class WishlistScreen extends StatelessWidget {
                   SliverToBoxAdapter(
                     child: Padding(
                       padding: SdContentPaddingV5.gutter.copyWith(
-                        top: SdContentPaddingV5.statusBarInset(context) +
+                        top:
+                            SdContentPaddingV5.statusBarInset(context) +
                             SdSpacingConstant.h16,
                         bottom: SdSpacingConstant.h16,
                       ),
@@ -46,7 +48,9 @@ class WishlistScreen extends StatelessWidget {
                           SizedBox(height: SdSpacingConstant.h4),
                           Text(
                             context.loc.wishlist_count(state.products.length),
-                            style: context.textTheme5.bodyMedium!.muted5(context),
+                            style: context.textTheme5.bodyMedium!.muted5(
+                              context,
+                            ),
                           ),
                         ],
                       ),
@@ -57,9 +61,9 @@ class WishlistScreen extends StatelessWidget {
                     LoadStatus.failure => SliverFillRemaining(
                       hasScrollBody: false,
                       child: ErrorView(
-                        onRetry: () => context.read<WishlistScreenController>().sync(
-                          context.read<WishlistController>().state,
-                        ),
+                        onRetry: () => context
+                            .read<WishlistScreenController>()
+                            .sync(context.read<WishlistController>().state),
                       ),
                     ),
                     LoadStatus.success when state.products.isEmpty =>
@@ -84,7 +88,9 @@ class WishlistScreen extends StatelessWidget {
                     LoadStatus.success => _SavedGrid(products: state.products),
                   },
                   SliverToBoxAdapter(
-                    child: SizedBox(height: SdContentPaddingV5.aboveNavBar(context)),
+                    child: SizedBox(
+                      height: SdContentPaddingV5.aboveNavBar(context),
+                    ),
                   ),
                 ],
               ),
@@ -118,7 +124,10 @@ class _SavedGrid extends StatelessWidget {
           index: i,
           child: Column(
             children: <Widget>[
-              ProductCard(product: products[i], heroTag: 'saved-${products[i].id}'),
+              ProductCard(
+                product: products[i],
+                heroTag: 'saved-${products[i].id}',
+              ),
               SizedBox(height: SdSpacingConstant.h8),
               SdButtonV5(
                 variant: SdButtonVariantV5.secondary,

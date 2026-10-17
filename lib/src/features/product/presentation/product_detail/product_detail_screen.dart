@@ -25,7 +25,8 @@ class ProductDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => BlocProvider<ProductDetailController>(
-    create: (BuildContext _) => getIt<ProductDetailController>()..load(productId),
+    create: (BuildContext _) =>
+        getIt<ProductDetailController>()..load(productId),
     child: _DetailView(
       productId: productId,
       heroTag: args?.heroTag ?? 'detail-$productId',
@@ -121,7 +122,9 @@ class _Content extends StatelessWidget {
         ),
         SliverToBoxAdapter(
           child: Padding(
-            padding: SdContentPaddingV5.gutter.copyWith(top: SdSpacingConstant.h20),
+            padding: SdContentPaddingV5.gutter.copyWith(
+              top: SdSpacingConstant.h20,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -131,7 +134,10 @@ class _Content extends StatelessWidget {
                 SizedBox(height: gap * 0.8),
                 const SdFadeInV5(index: 2, child: PerksSection()),
                 SizedBox(height: gap),
-                SdFadeInV5(index: 3, child: DescriptionSection(product: product)),
+                SdFadeInV5(
+                  index: 3,
+                  child: DescriptionSection(product: product),
+                ),
                 SizedBox(height: gap),
                 const ReviewPreviewSection(),
               ],
@@ -139,7 +145,11 @@ class _Content extends StatelessWidget {
           ),
         ),
         SliverToBoxAdapter(child: SizedBox(height: gap)),
-        BlocSelector<ProductDetailController, ProductDetailState, List<ProductEntity>>(
+        BlocSelector<
+          ProductDetailController,
+          ProductDetailState,
+          List<ProductEntity>
+        >(
           selector: (ProductDetailState s) => s.related,
           builder: (BuildContext context, List<ProductEntity> related) =>
               SliverToBoxAdapter(
