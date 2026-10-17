@@ -57,6 +57,13 @@ ios/Runner/GoogleService-Info.plist
 
 # env
 env/*.json
+!env/*.example.json
+env_assets/
+ios/fastlane/.env
+functions/.env
+
+# script-tools release output
+Release/
 
 # Fastlane
 **/fastlane/report.xml
