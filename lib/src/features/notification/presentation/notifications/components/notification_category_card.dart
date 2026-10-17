@@ -1,8 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class NotificationCategoryCard extends StatelessWidget {
   final NotificationCategory category;
@@ -16,7 +15,7 @@ class NotificationCategoryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SdInkWell(
+    return SdInkWellV5(
       onTap: onTap,
       borderRadius: 0,
       containerBg: context.colorTheme.cardDefault,
@@ -26,21 +25,21 @@ class NotificationCategoryCard extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  padding: EdgeInsets.all(SdSpacing.s8),
+                  padding: EdgeInsets.all(SdSpacingV5.s8),
                   decoration: BoxDecoration(
                     border: Border.all(
                       width: 1,
                       color: context.colorTheme.borderDefault,
                     ),
-                    borderRadius: BorderRadius.circular(SdSpacing.s100),
+                    borderRadius: BorderRadius.circular(SdSpacingV5.s100),
                   ),
-                  child: SdIcon(
+                  child: SdIconV5(
                     iconData: category.icon,
                     color: category.type.iconColor,
-                    iconSize: SdSpacing.s28,
+                    iconSize: SdSpacingV5.s28,
                   ),
                 ),
-                SdHorizontalSpacing(),
+                SdHorizontalSpacingV5(),
                 Row(
                   children: [
                     _InfoSectio(
@@ -52,14 +51,17 @@ class NotificationCategoryCard extends StatelessWidget {
               ],
             ),
           ),
-          SdHorizontalSpacing(xRatio: 0.5),
+          SdHorizontalSpacingV5(xRatio: 0.5),
           Row(
             children: [
-              SdBadge(count: category.numOfNotifications, size: SdSpacing.s20),
-              SdHorizontalSpacing(),
-              SdIcon(
-                iconData: Ionicons.chevron_forward,
-                iconSize: SdSpacing.s20,
+              SdBadgeV5(
+                count: category.numOfNotifications,
+                size: SdSpacingV5.s20,
+              ),
+              SdHorizontalSpacingV5(),
+              SdIconV5(
+                iconData: Icons.chevron_right,
+                iconSize: SdSpacingV5.s20,
                 color: context.colorTheme.iconSecondary,
               ),
             ],
@@ -82,14 +84,14 @@ class _InfoSectio extends StatelessWidget {
       children: [
         Text(
           name,
-          style: SdTextStyle.heading14(),
+          style: SdTextStyleV5.heading14(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        SdVerticalSpacing(xRatio: 0.25),
+        SdVerticalSpacingV5(xRatio: 0.25),
         Text(
           description,
-          style: SdTextStyle.body12().wColor(context.colorTheme.textSubTitle),
+          style: SdTextStyleV5.body12().wColor(context.colorTheme.textSubTitle),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),

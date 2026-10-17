@@ -4,7 +4,7 @@ import 'package:tuku_shop/src/di/injector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sliver_tools/sliver_tools.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'color_selection_section/color_selection_controller.dart';
 import 'color_selection_section/color_selection_section.dart';
@@ -88,7 +88,7 @@ class _BodyState extends State<_Body> {
 
   @override
   Widget build(BuildContext context) {
-    return SdSafeAreaScaffold(
+    return SdSafeAreaScaffoldV5(
       backgroundColor: context.colorTheme.surfaceDefault,
       bottomNavigationBar: _BottomSection(),
       child: BlocListener<ProductDetailController, ProductDetailState>(
@@ -212,9 +212,9 @@ class _SeperateSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: SdVerticalSpacing(
+      child: SdVerticalSpacingV5(
         bgColor: context.colorTheme.pageDefault,
-        value: SdSpacing.s8,
+        value: SdSpacingV5.s8,
       ),
     );
   }

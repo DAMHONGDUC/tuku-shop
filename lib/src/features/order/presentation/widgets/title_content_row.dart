@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class TitleContentRow extends StatelessWidget {
   const TitleContentRow({
@@ -23,9 +23,9 @@ class TitleContentRow extends StatelessWidget {
           '$title: ',
           style:
               titleStyle ??
-              SdTextStyle.body12().wColor(context.colorTheme.textSubTitle),
+              SdTextStyleV5.body12().wColor(context.colorTheme.textSubTitle),
         ),
-        Text(content, style: contentStyle ?? SdTextStyle.body12()),
+        Text(content, style: contentStyle ?? SdTextStyleV5.body12()),
       ],
     );
   }

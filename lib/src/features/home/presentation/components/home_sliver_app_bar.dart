@@ -2,16 +2,15 @@ import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/home/presentation/config/home_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
-final _kAppBarPadding = SdSpacing.s12;
-final _kAppBarPaddingTop = SdSpacing.s4;
-final _kAppBarPaddingBottom = SdSpacing.s8;
-final _kSearchBarHeight = SdSpacing.s40;
+final _kAppBarPadding = SdSpacingV5.s12;
+final _kAppBarPaddingTop = SdSpacingV5.s4;
+final _kAppBarPaddingBottom = SdSpacingV5.s8;
+final _kSearchBarHeight = SdSpacingV5.s40;
 final _kAppBarHeight =
     _kSearchBarHeight + _kAppBarPaddingBottom + _kAppBarPaddingTop;
-final _kIconPadding = SdSpacing.s6;
+final _kIconPadding = SdSpacingV5.s6;
 
 class HomeSliverAppBar extends StatelessWidget implements PreferredSizeWidget {
   const HomeSliverAppBar({super.key});
@@ -23,11 +22,11 @@ class HomeSliverAppBar extends StatelessWidget implements PreferredSizeWidget {
       floating: true,
       snap: true,
       pinned: false,
-      elevation: SdSpacing.s2,
+      elevation: SdSpacingV5.s2,
       shadowColor: context.colorTheme.primaryShadowDefault,
       toolbarHeight: _kAppBarHeight,
       backgroundColor: context.colorTheme.surfaceDefault,
-      surfaceTintColor: SdColors.transparent,
+      surfaceTintColor: SdColorsV5.transparent,
       titleSpacing: 0,
       title: Padding(
         padding: EdgeInsets.only(
@@ -40,27 +39,27 @@ class HomeSliverAppBar extends StatelessWidget implements PreferredSizeWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(child: CustomSearchBar(height: _kSearchBarHeight)),
-            SdHorizontalSpacing(),
+            SdHorizontalSpacingV5(),
             Row(
               children: [
-                SdIconButton(
+                SdIconButtonV5(
                   padding: EdgeInsets.all(_kIconPadding),
                   onPressed: () {
                     GoRouter.of(context).push(HomeRoutes.search.fullPath);
                   },
-                  icon: SdIcon(
-                    iconData: Ionicons.cart,
+                  icon: SdIconV5(
+                    iconData: Icons.shopping_cart,
                     color: context.colorTheme.primary,
                   ),
                 ),
-                SdHorizontalSpacing(xRatio: 0.5),
-                SdIconButton(
+                SdHorizontalSpacingV5(xRatio: 0.5),
+                SdIconButtonV5(
                   padding: EdgeInsets.all(_kIconPadding),
                   onPressed: () {
                     GoRouter.of(context).push(HomeRoutes.search.fullPath);
                   },
-                  icon: SdIcon(
-                    iconData: Ionicons.chatbubble_ellipses_outline,
+                  icon: SdIconV5(
+                    iconData: Icons.chat_bubble_outline,
                     color: context.colorTheme.primary,
                   ),
                 ),

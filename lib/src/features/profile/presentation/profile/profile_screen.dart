@@ -3,7 +3,7 @@ import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/profile/presentation/profile/components/setting_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'components/profile_app_bar.dart';
 import 'components/profile_skeleton.dart';
@@ -32,7 +32,7 @@ class _ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SdSafeAreaScaffold(
+    return SdSafeAreaScaffoldV5(
       backgroundColor: context.colorTheme.pageDefault,
       contentBgColor: context.colorTheme.pageDefault,
       appBar: ProfileAppBar(),
@@ -53,11 +53,11 @@ class _ProfileView extends StatelessWidget {
           } else if (state is ProfileLoadedState) {
             return RefreshWrapper(
               onRefresh: () => _onRefresh(context),
-              child: SdListView(
-                padding: EdgeInsets.all(SdSpacing.s16),
+              child: SdListViewV5(
+                padding: EdgeInsets.all(SdSpacingV5.s16),
                 items: state.listSettingSection,
                 separatorBuilder: (context, index) {
-                  return SdVerticalSpacing();
+                  return SdVerticalSpacingV5();
                 },
                 itemBuilder: (_, index) {
                   return SettingSection(

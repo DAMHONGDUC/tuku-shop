@@ -4,7 +4,7 @@ import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:tuku_shop/src/features/notification/presentation/notifications/components/notification_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'components/notification_app_bar.dart';
 import 'components/notification_category_card.dart';
@@ -36,7 +36,7 @@ class _NotificationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SdSafeAreaScaffold(
+    return SdSafeAreaScaffoldV5(
       backgroundColor: context.colorTheme.pageDefault,
       contentBgColor: context.colorTheme.pageDefault,
       appBar: NotificationAppBar(),
@@ -81,14 +81,14 @@ class _Body extends StatelessWidget {
     final listNotiCategory = notificationData.listNotificationCategory;
 
     return ListView(
-      padding: EdgeInsets.symmetric(vertical: SdSpacing.s10),
+      padding: EdgeInsets.symmetric(vertical: SdSpacingV5.s10),
       children: [
-        SdListView(
+        SdListViewV5(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           items: listNotiCategory,
           separatorBuilder: (context, index) {
-            return SdDivider();
+            return SdDividerV5();
           },
           itemBuilder: (context, index) {
             return NotificationCategoryCard(
@@ -98,18 +98,18 @@ class _Body extends StatelessWidget {
           },
         ),
         Padding(
-          padding: const EdgeInsets.all(SdSpacing.s10),
+          padding: const EdgeInsets.all(SdSpacingV5.s10),
           child: SectionHeader(
             title: 'Order update information',
             hasBottomSpacing: false,
           ),
         ),
-        SdListView(
+        SdListViewV5(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           items: listNoti,
           separatorBuilder: (context, index) {
-            return SdDivider();
+            return SdDividerV5();
           },
           itemBuilder: (_, index) {
             return NotificationCard(

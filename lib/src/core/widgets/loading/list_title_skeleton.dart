@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class ListTitleSkeleton extends StatelessWidget {
   const ListTitleSkeleton({
@@ -17,37 +17,37 @@ class ListTitleSkeleton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: context.colorTheme.cardDefault,
-        borderRadius: BorderRadius.all(Radius.circular(SdSpacing.s12)),
+        borderRadius: BorderRadius.all(Radius.circular(SdSpacingV5.s12)),
       ),
-      padding: EdgeInsets.all(SdSpacing.s12),
+      padding: EdgeInsets.all(SdSpacingV5.s12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
               if (withAvatar) ...[
-                SdSkeleton(
-                  width: SdSpacing.s40,
-                  height: SdSpacing.s40,
-                  borderRadiusValue: SdSpacing.s100,
+                SdSkeletonV5(
+                  width: SdSpacingV5.s40,
+                  height: SdSpacingV5.s40,
+                  borderRadiusValue: SdSpacingV5.s100,
                 ),
-                SdHorizontalSpacing(),
+                SdHorizontalSpacingV5(),
               ],
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SdSkeleton(width: 100),
-                  SdVerticalSpacing(xRatio: 0.5),
-                  SdSkeleton(width: 150),
+                  SdSkeletonV5(width: 100),
+                  SdVerticalSpacingV5(xRatio: 0.5),
+                  SdSkeletonV5(width: 150),
                 ],
               ),
             ],
           ),
           if (withTrailing) ...[
-            SdSkeleton(
-              width: SdSpacing.s20,
-              height: SdSpacing.s20,
-              borderRadiusValue: SdSpacing.s100,
+            SdSkeletonV5(
+              width: SdSpacingV5.s20,
+              height: SdSpacingV5.s20,
+              borderRadiusValue: SdSpacingV5.s100,
             ),
           ],
         ],

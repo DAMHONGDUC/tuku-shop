@@ -4,7 +4,7 @@ import 'package:tuku_shop/src/features/product/data/models/description_model.dar
 import 'package:tuku_shop/src/features/product/data/models/product_color_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_size_model.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 final kMockProductPath = 'assets/images/product/';
 
@@ -46,9 +46,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p1_2.png'],
@@ -85,9 +85,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p2_3.png'],
@@ -109,9 +109,9 @@ class ProductMock {
       ],
       purchaserCount: 42,
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p3_1.png'],
@@ -153,9 +153,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p4_5.png'],
@@ -170,9 +170,9 @@ class ProductMock {
       imageUrl: '${kMockProductPath}p5_1.png',
       purchaserCount: 60,
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p5_1.png'],
@@ -206,9 +206,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p6_2.png'],
@@ -235,9 +235,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p2_3.png'],
@@ -264,9 +264,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p4_5.png'],
@@ -293,9 +293,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p1_1.png'],
@@ -322,9 +322,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p6_1.png'],
@@ -346,9 +346,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p3_1.png'],
@@ -370,9 +370,9 @@ class ProductMock {
         ),
       ],
       reviewComments: ReviewCommentMock.generateRandomReviews(
-        SdHelper.randomInt(min: 100, max: 500),
+        SdHelperV5.randomInt(min: 100, max: 500),
       ),
-      averageRating: SdHelper.randomDouble(min: 3, max: 5),
+      averageRating: SdHelperV5.randomDouble(min: 3, max: 5),
       description: DescriptionModel(
         content: ProductDescriptionMock.generateRandomDescription(),
         images: ['${kMockProductPath}p5_1.png'],

@@ -2,7 +2,7 @@ import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/notification/data/mock/notifications_mock.dart';
 import 'package:tuku_shop/src/features/notification/data/models/notification_category_model.dart';
 import 'package:tuku_shop/src/features/notification/data/models/notification_model.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 abstract class NotificationRemoteDataSource {
   Future<List<NotificationModel>> getNotifications();
@@ -15,7 +15,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   @override
   Future<List<NotificationModel>> getNotifications() async {
     try {
-      await SdHelper.delayLoading();
+      await SdHelperV5.delayLoading();
       return NotificationsMock.generateMockNotifications();
     } catch (e) {
       throw ServerException(e.toString());
@@ -25,7 +25,7 @@ class NotificationRemoteDataSourceImpl implements NotificationRemoteDataSource {
   @override
   Future<List<NotificationCategoryModel>> getNotificationCategories() async {
     try {
-      await SdHelper.delayLoading();
+      await SdHelperV5.delayLoading();
       return NotificationsMock.generateMockCategories();
     } catch (e) {
       throw ServerException(e.toString());

@@ -1,7 +1,7 @@
-import 'package:system_design_flutter/config/router/sd_router.dart';
+import 'package:system_design/index.dart';
 
 class TutorialRoutes {
-  static const SdRouter tutorial = SdRouter(
+  static const SdRouterV5 tutorial = SdRouterV5(
     name: 'tutorial',
     path: '/tutorial',
     fullPath: '/tutorial',

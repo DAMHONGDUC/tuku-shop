@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class BottomActionSection extends StatelessWidget {
   final double price;
@@ -11,12 +11,12 @@ class BottomActionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: SdHelper.getPageDefaultPadding().copyWith(bottom: 0),
+      padding: SdHelperV5.getPageDefaultPadding().copyWith(bottom: 0),
       decoration: BoxDecoration(
         color: context.colorTheme.surfaceDefault,
         borderRadius: const BorderRadius.only(
-          topLeft: Radius.circular(SdSpacing.s24),
-          topRight: Radius.circular(SdSpacing.s24),
+          topLeft: Radius.circular(SdSpacingV5.s24),
+          topRight: Radius.circular(SdSpacingV5.s24),
         ),
         boxShadow: [
           BoxShadow(
@@ -39,40 +39,40 @@ class BottomActionSection extends StatelessWidget {
               children: [
                 Text(
                   'Price',
-                  style: SdTextStyle.body14().wColor(
+                  style: SdTextStyleV5.body14().wColor(
                     context.colorTheme.textSubTitle,
                   ),
                 ),
                 Text(
-                  SdCurrencyFormatHelper.formatPrice(price),
-                  style: SdTextStyle.body24()
+                  SdCurrencyFormatHelperV5.formatPrice(price),
+                  style: SdTextStyleV5.body24()
                       .wColor(context.colorTheme.primary)
                       .wBold(),
                 ),
               ],
             ),
-            SdHorizontalSpacing(),
+            SdHorizontalSpacingV5(),
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: SdButton(
+                    child: SdButtonV5(
                       title: 'Add to cart',
-                      widthType: SdButtonWidth.full,
+                      widthType: SdButtonWidthV5.full,
                       onTap: () {},
-                      type: SdButtonType.secondary,
-                      colorConfig: SdButtonColorConfig.init().copyWith(
+                      type: SdButtonTypeV5.secondary,
+                      colorConfig: SdButtonColorConfigV5.init().copyWith(
                         secondaryBorderColor: context.colorTheme.primary,
                         secondaryTextColor: context.colorTheme.primary,
                       ),
                     ),
                   ),
-                  SdHorizontalSpacing(),
+                  SdHorizontalSpacingV5(),
                   Expanded(
-                    child: SdButton(
+                    child: SdButtonV5(
                       title: 'Buy now',
-                      widthType: SdButtonWidth.full,
-                      colorConfig: SdButtonColorConfig.init().copyWith(
+                      widthType: SdButtonWidthV5.full,
+                      colorConfig: SdButtonColorConfigV5.init().copyWith(
                         primaryBgColor: context.colorTheme.primary,
                       ),
                       onTap: () {},

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:system_design_flutter/widgets/route/sd_go_route.dart';
+import 'package:system_design/index.dart';
 
 import '../tutorial_screen.dart';
 import 'tutorial_routes.dart';
 
 class TutorialStack {
   static final routes = [
-    SdGoRoute(
+    SdGoRouteV5(
       path: TutorialRoutes.tutorial.path,
       name: TutorialRoutes.tutorial.name,
       builder: (BuildContext context, GoRouterState state) {

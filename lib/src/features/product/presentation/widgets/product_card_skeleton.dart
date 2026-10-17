@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'product_card.dart';
 
@@ -12,11 +12,11 @@ class ProductCardSkeleton extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: context.colorTheme.surfaceDefault,
-        borderRadius: BorderRadius.circular(SdSpacing.s12),
+        borderRadius: BorderRadius.circular(SdSpacingV5.s12),
         boxShadow: [
           BoxShadow(
-            color: SdColors.black12,
-            blurRadius: SdSpacing.s12,
+            color: SdColorsV5.black12,
+            blurRadius: SdSpacingV5.s12,
             offset: const Offset(0, 4),
           ),
         ],
@@ -25,30 +25,30 @@ class ProductCardSkeleton extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // image
-          SdSkeleton(
+          SdSkeletonV5(
             height: kImageSize,
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(SdSpacing.s8),
-              topRight: Radius.circular(SdSpacing.s8),
+              topLeft: Radius.circular(SdSpacingV5.s8),
+              topRight: Radius.circular(SdSpacingV5.s8),
             ),
           ),
-          SizedBox(height: SdSpacing.s10),
+          SizedBox(height: SdSpacingV5.s10),
 
           Container(
-            padding: EdgeInsets.all(SdSpacing.s8),
+            padding: EdgeInsets.all(SdSpacingV5.s8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // name
-                SdSkeleton(width: double.infinity),
-                SizedBox(height: SdSpacing.s4),
+                SdSkeletonV5(width: double.infinity),
+                SizedBox(height: SdSpacingV5.s4),
 
                 // band
-                SdSkeleton(width: 120),
-                SizedBox(height: SdSpacing.s8),
+                SdSkeletonV5(width: 120),
+                SizedBox(height: SdSpacingV5.s8),
 
                 // price
-                SdSkeleton(width: 80),
+                SdSkeletonV5(width: 80),
               ],
             ),
           ),

@@ -1,7 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart' hide SdContextV2X;
 
 const kImageSize = 150.0;
 
@@ -13,18 +13,18 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SdInkWell(
+    return SdInkWellV5(
       borderRadius: 0,
       contentPadding: EdgeInsets.zero,
       onTap: onPress,
       child: Container(
         decoration: BoxDecoration(
           color: context.colorTheme.surfaceDefault,
-          borderRadius: BorderRadius.circular(SdSpacing.s12),
+          borderRadius: BorderRadius.circular(SdSpacingV5.s12),
           boxShadow: [
             BoxShadow(
               color: context.colorTheme.boxShadowDefault,
-              blurRadius: SdSpacing.s6,
+              blurRadius: SdSpacingV5.s6,
               offset: Offset(0, 4),
             ),
           ],
@@ -39,13 +39,13 @@ class ProductCard extends StatelessWidget {
               child: _CardImageView(imageUrl: product.imageUrl),
             ),
             Container(
-              padding: EdgeInsets.all(SdSpacing.s8),
+              padding: EdgeInsets.all(SdSpacingV5.s8),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // name
                   Text(product.name, style: context.textTheme.body14),
-                  SizedBox(height: SdSpacing.s2),
+                  SizedBox(height: SdSpacingV5.s2),
 
                   // brand
                   Text(
@@ -54,11 +54,11 @@ class ProductCard extends StatelessWidget {
                       context.colorTheme.textSubTitle,
                     ),
                   ),
-                  SizedBox(height: SdSpacing.s8),
+                  SizedBox(height: SdSpacingV5.s8),
 
                   // price
                   Text(
-                    SdCurrencyFormatHelper.formatPrice(product.price),
+                    SdCurrencyFormatHelperV5.formatPrice(product.price),
                     style: context.textTheme.heading16.wBold(),
                   ),
                 ],
@@ -85,8 +85,8 @@ class _CardImageView extends StatelessWidget {
           height: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(SdSpacing.s8),
-              topRight: Radius.circular(SdSpacing.s8),
+              topLeft: Radius.circular(SdSpacingV5.s8),
+              topRight: Radius.circular(SdSpacingV5.s8),
             ),
             image: DecorationImage(
               image: AssetImage(imageUrl),
@@ -95,19 +95,19 @@ class _CardImageView extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: SdSpacing.s8,
-          right: SdSpacing.s8,
+          top: SdSpacingV5.s8,
+          right: SdSpacingV5.s8,
           child: Container(
             decoration: BoxDecoration(
-              color: SdColors.grey900,
-              borderRadius: BorderRadius.all(Radius.circular(SdSpacing.s100)),
+              color: SdColorsV5.grey900,
+              borderRadius: BorderRadius.all(Radius.circular(SdSpacingV5.s100)),
             ),
             child: Padding(
-              padding: EdgeInsets.all(SdSpacing.s6),
-              child: SdIcon(
+              padding: EdgeInsets.all(SdSpacingV5.s6),
+              child: SdIconV5(
                 iconData: Icons.favorite_border,
                 color: AppColors.white,
-                iconSize: SdSpacing.s16,
+                iconSize: SdSpacingV5.s16,
               ),
             ),
           ),

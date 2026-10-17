@@ -3,7 +3,7 @@ import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/order/presentation/my_order/components/my_order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'components/my_order_app_bar.dart';
 import 'components/my_order_skeleton.dart';
@@ -73,7 +73,7 @@ class __MyOrderViewState extends State<_MyOrderView>
 
   @override
   Widget build(BuildContext context) {
-    return SdSafeAreaScaffold(
+    return SdSafeAreaScaffoldV5(
       backgroundColor: context.colorTheme.pageDefault,
       contentBgColor: context.colorTheme.pageDefault,
       appBar: MyOrderAppBar(tabController: _tabController),
@@ -132,15 +132,15 @@ class __TabContentState extends State<_TabContent>
           } else if (state is MyOrderLoadedState) {
             return state.items.isEmpty
                 ? EmptyView()
-                : SdListViewLoadMore(
-                    padding: EdgeInsets.all(SdSpacing.s10),
+                : SdListViewLoadMoreV5(
+                    padding: EdgeInsets.all(SdSpacingV5.s10),
                     items: state.items,
                     canLoadMore: state.canLoadMore,
                     physics: const AlwaysScrollableScrollPhysics(),
                     onLoadMore: () =>
                         _onLoadMore(canLoadMore: state.canLoadMore),
                     separatorBuilder: (_, __) =>
-                        SdVerticalSpacing(value: SdSpacing.s10),
+                        SdVerticalSpacingV5(value: SdSpacingV5.s10),
                     itemBuilder: (_, index) {
                       return MyOrderCard(order: state.items[index]);
                     },

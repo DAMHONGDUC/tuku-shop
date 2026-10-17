@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart' hide SdContextV2X;
 
 import 'banner_carousel_controller.dart';
 
@@ -37,7 +37,7 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
             children: [
               CarouselSlider(
                 items: state.banners.map((banner) {
-                  final contentColor = SdColorHelper.getColorFromHex(
+                  final contentColor = SdColorHelperV5.getColorFromHex(
                     banner.contentColor,
                   );
 
@@ -55,21 +55,21 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
                         ),
                       ),
                       Positioned(
-                        left: SdSpacing.s16,
-                        top: SdSpacing.s16,
+                        left: SdSpacingV5.s16,
+                        top: SdSpacingV5.s16,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
                               padding: EdgeInsets.symmetric(
-                                horizontal: SdSpacing.s8,
-                                vertical: SdSpacing.s4,
+                                horizontal: SdSpacingV5.s8,
+                                vertical: SdSpacingV5.s4,
                               ),
                               width: UIConstants.bannerTagWidth,
                               decoration: BoxDecoration(
                                 color: banner.tagType.color,
                                 borderRadius: BorderRadius.circular(
-                                  SdSpacing.s12,
+                                  SdSpacingV5.s12,
                                 ),
                               ),
                               alignment: Alignment.center,
@@ -78,7 +78,7 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
                                 style: context.textTheme.heading14.whiteText(),
                               ),
                             ),
-                            SdVerticalSpacing(),
+                            SdVerticalSpacingV5(),
                             Text(
                               banner.title,
                               style: context.textTheme.heading14.wColor(
@@ -91,7 +91,7 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
                                 contentColor,
                               ),
                             ),
-                            SizedBox(height: SdSpacing.s8),
+                            SizedBox(height: SdSpacingV5.s8),
                             Text(
                               banner.price,
                               style: context.textTheme.heading16
@@ -117,7 +117,7 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
                   },
                 ),
               ),
-              SdVerticalSpacing(),
+              SdVerticalSpacingV5(),
               _BannerIndicator(
                 length: state.banners.length,
                 onTap: (index) => _controller.animateToPage(
@@ -154,9 +154,9 @@ class _BannerIndicator extends StatelessWidget {
         return GestureDetector(
           onTap: () => onTap?.call(index),
           child: Container(
-            width: SdSpacing.s6,
-            height: SdSpacing.s6,
-            margin: EdgeInsets.symmetric(horizontal: SdSpacing.s4),
+            width: SdSpacingV5.s6,
+            height: SdSpacingV5.s6,
+            margin: EdgeInsets.symmetric(horizontal: SdSpacingV5.s4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: colorBuilder?.call(index),
@@ -175,11 +175,11 @@ class _BannerSkeleton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SdSkeleton(
+        SdSkeletonV5(
           height: UIConstants.bannerHeight,
           borderRadiusValue: UIConstants.bannerBorderRadius,
         ),
-        SdVerticalSpacing(),
+        SdVerticalSpacingV5(),
         _BannerIndicator(
           length: 8,
           colorBuilder: (index) => context.colorTheme.indicatorBg,

@@ -4,8 +4,8 @@
 
 | Tool | Version |
 |---|---|
-| Flutter (via FVM, `.fvmrc`) | 3.38.8 |
-| Dart | 3.10.7 |
+| Flutter (via FVM, `.fvmrc`) | 3.44.5 |
+| Dart | 3.12.2 |
 | Android Studio | 2024.3 |
 | Java | 17.0.12 LTS |
 | Xcode | 26.4 |

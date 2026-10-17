@@ -1,13 +1,13 @@
-import 'package:system_design_flutter/config/router/sd_router.dart';
+import 'package:system_design/index.dart';
 
 class HomeRoutes {
-  static const SdRouter home = SdRouter(
+  static const SdRouterV5 home = SdRouterV5(
     name: 'home',
     path: '/home',
     fullPath: '/home',
   );
 
-  static final SdRouter search = SdRouter(
+  static final SdRouterV5 search = SdRouterV5(
     name: 'search',
     path: 'search',
     fullPath: '${home.fullPath}/search',

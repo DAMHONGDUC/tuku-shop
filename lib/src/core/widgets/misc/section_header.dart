@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart' hide SdContextV2X;
 
 class SectionHeader extends StatelessWidget {
   final String title;
@@ -33,7 +33,7 @@ class SectionHeader extends StatelessWidget {
             ),
           ],
         ),
-        if (hasBottomSpacing) SdVerticalSpacing(),
+        if (hasBottomSpacing) SdVerticalSpacingV5(),
       ],
     );
   }

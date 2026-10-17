@@ -5,7 +5,7 @@ import 'package:tuku_shop/src/features/order/presentation/widgets/title_content_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'my_order_detail_args.dart';
 import 'my_order_detail_controller.dart';
@@ -32,7 +32,7 @@ class _MyOrderDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SdSafeAreaScaffold(
+    return SdSafeAreaScaffoldV5(
       backgroundColor: context.colorTheme.pageDefault,
       contentBgColor: context.colorTheme.pageDefault,
       appBar: AppBar(
@@ -66,46 +66,46 @@ class _OrderDetailContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.all(SdSpacing.s16),
+      padding: EdgeInsets.all(SdSpacingV5.s16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              SdTag(
+              SdTagV5(
                 label: order.status.label,
                 color: order.status.color,
-                borderRadiusValue: SdSpacing.s8,
+                borderRadiusValue: SdSpacingV5.s8,
               ),
             ],
           ),
-          SdVerticalSpacing(),
+          SdVerticalSpacingV5(),
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SdImage(
-                borderRadiusValue: SdSpacing.s6,
+              SdImageV5(
+                borderRadiusValue: SdSpacingV5.s6,
                 imagePath: order.productThumbnailUrl,
                 width: _kImgThumbnailSize,
                 height: _kImgThumbnailSize,
               ),
-              SdHorizontalSpacing(),
+              SdHorizontalSpacingV5(),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(order.productName, style: SdTextStyle.heading14()),
-                    SdVerticalSpacing(xRatio: 0.5),
+                    Text(order.productName, style: SdTextStyleV5.heading14()),
+                    SdVerticalSpacingV5(xRatio: 0.5),
                     TitleContentRow(
                       title: 'Color',
                       content: order.productColor.colorName,
                     ),
-                    SdVerticalSpacing(xRatio: 0.25),
+                    SdVerticalSpacingV5(xRatio: 0.25),
                     TitleContentRow(
                       title: 'Size',
                       content: order.productSize.name,
                     ),
-                    SdVerticalSpacing(xRatio: 0.25),
+                    SdVerticalSpacingV5(xRatio: 0.25),
                     TitleContentRow(
                       title: 'Quantity',
                       content: order.quantity.toString(),
@@ -115,16 +115,16 @@ class _OrderDetailContent extends StatelessWidget {
               ),
             ],
           ),
-          SdVerticalSpacing(value: SdSpacing.s24),
+          SdVerticalSpacingV5(value: SdSpacingV5.s24),
           const Divider(),
-          SdVerticalSpacing(),
+          SdVerticalSpacingV5(),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Total', style: SdTextStyle.heading14()),
+              Text('Total', style: SdTextStyleV5.heading14()),
               Text(
-                SdCurrencyFormatHelper.formatPrice(order.totalPrice),
-                style: SdTextStyle.heading14().wBold(),
+                SdCurrencyFormatHelperV5.formatPrice(order.totalPrice),
+                style: SdTextStyleV5.heading14().wBold(),
               ),
             ],
           ),

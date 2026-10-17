@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import '../app_colors.dart';
 
@@ -44,18 +44,18 @@ class AppColorThemeExt extends ThemeExtension<AppColorThemeExt> {
       pageDefault: Color(0xFFf1f1f1),
       textDefault: AppColors.textDefaultLight,
       iconDefault: AppColors.iconDefaultLight,
-      iconSecondary: SdColors.grey.withValues(alpha: 0.9),
+      iconSecondary: SdColorsV5.grey.withValues(alpha: 0.9),
       textSubTitle: AppColors.textSubTitleLight,
       cardDefault: AppColors.cardDefaultLight,
-      boxShadowDefault: SdColors.black.withValues(alpha: 0.15),
+      boxShadowDefault: SdColorsV5.black.withValues(alpha: 0.15),
       borderDefault: Color(0xFFe6e7eb),
       indicatorActive: AppColors.primary,
-      indicatorBg: SdColors.grey.withValues(alpha: 0.3),
+      indicatorBg: SdColorsV5.grey.withValues(alpha: 0.3),
       primary: AppColors.primary,
       surfaceDefault: AppColors.white,
       primaryShadowDefault: AppColors.primary.withValues(alpha: 0.2),
       cardOnSurface: Color(0xFFf1f1f1),
-      boxShadowSecondary: SdColors.black.withValues(alpha: 0.1),
+      boxShadowSecondary: SdColorsV5.black.withValues(alpha: 0.1),
     );
   }
 

@@ -1,13 +1,13 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/order/data/models/order_model.dart';
 import 'package:tuku_shop/src/features/product/data/mock/product_mock.dart';
-import 'package:system_design_flutter/utils/utils.dart';
+import 'package:system_design/index.dart';
 import 'package:uuid/uuid.dart';
 
 class OrderMock {
   static OrderModel generateOrderMockItem() {
     final randomProduct = ProductMock.products.getRandomItem();
-    final randomQuantity = SdHelper.randomInt(min: 1, max: 10);
+    final randomQuantity = SdHelperV5.randomInt(min: 1, max: 10);
     final randomStatus = OrderStatusExt.tabs.getRandomItem();
 
     return OrderModel(

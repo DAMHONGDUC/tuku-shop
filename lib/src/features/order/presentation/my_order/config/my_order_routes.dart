@@ -1,13 +1,13 @@
-import 'package:system_design_flutter/config/router/sd_router.dart';
+import 'package:system_design/index.dart';
 
 class MyOrderRoutes {
-  static const SdRouter myOrder = SdRouter(
+  static const SdRouterV5 myOrder = SdRouterV5(
     name: 'my-order',
     path: '/my-order',
     fullPath: '/my-order',
   );
 
-  static final SdRouter myOrderDetail = SdRouter(
+  static final SdRouterV5 myOrderDetail = SdRouterV5(
     name: 'my-order-detail',
     path: 'my-order-detail',
     fullPath: '${myOrder.fullPath}/my-order-detail',

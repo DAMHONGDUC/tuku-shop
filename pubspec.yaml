@@ -5,7 +5,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.12.2
 
 dependencies:
   flutter:
@@ -14,8 +14,8 @@ dependencies:
     sdk: flutter
   intl: ^0.20.2
   dartz: ^0.10.1
-  system_design_flutter:
-    path: packages/system_design_flutter
+  system_design:
+    path: packages/flutter-system-design-kit
   cupertino_icons: ^1.0.8
   go_router: ^15.1.2
   flutter_bloc: ^9.1.1
@@ -24,7 +24,6 @@ dependencies:
   equatable: ^2.0.7
   google_fonts: ^6.2.1
   adaptive_theme: ^3.7.0
-  ionicons: ^0.2.2
   carousel_slider: ^5.1.1
   collection: ^1.19.1
   sliver_tools: ^0.2.12

@@ -3,7 +3,7 @@ import 'package:tuku_shop/src/features/product/presentation/product_detail/color
 import 'package:flutter/material.dart';
 import 'package:tuku_shop/src/features/product/domain/entities/product_color.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 const _kColorOptionSize = 45.0;
 
@@ -15,13 +15,13 @@ class ColorSelectionSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: SdHelper.getPageDefaultPadding(),
+      padding: SdHelperV5.getPageDefaultPadding(),
       color: context.colorTheme.surfaceDefault,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Color', style: SdTextStyle.heading18()),
-          SdVerticalSpacing(),
+          Text('Color', style: SdTextStyleV5.heading18()),
+          SdVerticalSpacingV5(),
           BlocBuilder<ColorSelectionController, ColorSelectionState>(
             buildWhen: (previous, current) {
               return current is ColorSelectionChangedColorState;
@@ -35,7 +35,7 @@ class ColorSelectionSection extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: productColors.length,
                     separatorBuilder: (context, index) =>
-                        SizedBox(width: SdSpacing.s12),
+                        SizedBox(width: SdSpacingV5.s12),
                     itemBuilder: (context, index) {
                       final productColor = productColors[index];
 
@@ -76,7 +76,7 @@ class _ColorOption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final color = SdColorHelper.getColorFromHex(productColor.colorCode);
+    final color = SdColorHelperV5.getColorFromHex(productColor.colorCode);
 
     return Container(
       width: _kColorOptionSize,
@@ -86,21 +86,21 @@ class _ColorOption extends StatelessWidget {
         color: color,
         border: Border.all(
           color: isSelected ? Colors.black87 : Colors.transparent,
-          width: SdSpacing.s2,
+          width: SdSpacingV5.s2,
         ),
         boxShadow: [
           BoxShadow(
             color: context.colorTheme.boxShadowDefault,
-            spreadRadius: SdSpacing.s1,
-            blurRadius: SdSpacing.s4,
-            offset: const Offset(0, SdSpacing.s2),
+            spreadRadius: SdSpacingV5.s1,
+            blurRadius: SdSpacingV5.s4,
+            offset: const Offset(0, SdSpacingV5.s2),
           ),
         ],
       ),
       child: isSelected
-          ? SdIcon(
+          ? SdIconV5(
               iconData: Icons.check,
-              color: SdColorHelper.getContrastColor(color),
+              color: SdColorHelperV5.getContrastColor(color),
             )
           : null,
     );

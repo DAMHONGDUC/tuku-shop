@@ -1,7 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/presentation/widgets/product_grid_skeleton.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class ProductInfoSkeleton extends StatelessWidget {
   const ProductInfoSkeleton({super.key, required this.imgHeight});
@@ -13,33 +13,33 @@ class ProductInfoSkeleton extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SdSkeleton(height: imgHeight, borderRadius: BorderRadius.zero),
+          SdSkeletonV5(height: imgHeight, borderRadius: BorderRadius.zero),
           Container(
             color: context.colorTheme.surfaceDefault,
-            padding: EdgeInsets.all(SdSpacing.s16),
+            padding: EdgeInsets.all(SdSpacingV5.s16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 // skeleton 1
-                SdVerticalSpacing(),
-                SdSkeleton(width: 300),
-                SdVerticalSpacing(),
-                SdSkeleton(width: 100),
+                SdVerticalSpacingV5(),
+                SdSkeletonV5(width: 300),
+                SdVerticalSpacingV5(),
+                SdSkeletonV5(width: 100),
 
                 // skeleton 2
-                SdVerticalSpacing(xRatio: 2),
-                SdSkeleton(height: 80),
+                SdVerticalSpacingV5(xRatio: 2),
+                SdSkeletonV5(height: 80),
 
                 // skeleton 3
-                SdVerticalSpacing(xRatio: 2),
-                SdSkeleton(),
-                SdVerticalSpacing(),
-                SdSkeleton(),
-                SdVerticalSpacing(),
-                SdSkeleton(),
+                SdVerticalSpacingV5(xRatio: 2),
+                SdSkeletonV5(),
+                SdVerticalSpacingV5(),
+                SdSkeletonV5(),
+                SdVerticalSpacingV5(),
+                SdSkeletonV5(),
 
                 // skeleton 5
-                SdVerticalSpacing(xRatio: 2),
+                SdVerticalSpacingV5(xRatio: 2),
                 ProductGridSkeleton(),
               ],
             ),

@@ -1,8 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class NotificationCard extends StatelessWidget {
   final NotificationEntity notification;
@@ -18,7 +17,7 @@ class NotificationCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isUnread = !notification.isRead;
 
-    return SdInkWell(
+    return SdInkWellV5(
       onTap: onTap,
       borderRadius: 0,
       containerBg: isUnread
@@ -29,12 +28,12 @@ class NotificationCard extends StatelessWidget {
           Expanded(
             child: Row(
               children: [
-                SdIcon(
+                SdIconV5(
                   iconData: notification.type.iconData,
-                  iconSize: SdSpacing.s28,
+                  iconSize: SdSpacingV5.s28,
                   color: context.colorTheme.iconDefault,
                 ),
-                SdHorizontalSpacing(),
+                SdHorizontalSpacingV5(),
                 Expanded(
                   child: _InfoSectio(
                     name: notification.title,
@@ -45,10 +44,10 @@ class NotificationCard extends StatelessWidget {
               ],
             ),
           ),
-          SdHorizontalSpacing(xRatio: 0.5),
-          SdIcon(
-            iconData: Ionicons.chevron_forward,
-            iconSize: SdSpacing.s20,
+          SdHorizontalSpacingV5(xRatio: 0.5),
+          SdIconV5(
+            iconData: Icons.chevron_right,
+            iconSize: SdSpacingV5.s20,
             color: context.colorTheme.iconSecondary,
           ),
         ],
@@ -74,21 +73,21 @@ class _InfoSectio extends StatelessWidget {
       children: [
         Text(
           name,
-          style: SdTextStyle.heading14(),
+          style: SdTextStyleV5.heading14(),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        SdVerticalSpacing(xRatio: 0.25),
+        SdVerticalSpacingV5(xRatio: 0.25),
         Text(
           description,
-          style: SdTextStyle.body12().wColor(context.colorTheme.textSubTitle),
+          style: SdTextStyleV5.body12().wColor(context.colorTheme.textSubTitle),
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        SdVerticalSpacing(xRatio: 0.25),
+        SdVerticalSpacingV5(xRatio: 0.25),
         Text(
-          SdDateTimeHelper.dateTimeToHHMMDDMMYY(createdAt),
-          style: SdTextStyle.body12().copyWith(
+          SdDateTimeHelperV5.dateTimeToHHMMDDMMYY(createdAt),
+          style: SdTextStyleV5.body12().copyWith(
             color: context.colorTheme.textSubTitle,
           ),
         ),

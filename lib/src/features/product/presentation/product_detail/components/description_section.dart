@@ -1,7 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class DescriptionSection extends StatefulWidget {
   final Description description;
@@ -22,12 +22,12 @@ class _DescriptionSectionState extends State<DescriptionSection> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: SdHelper.getPageDefaultPadding(),
+      padding: SdHelperV5.getPageDefaultPadding(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Description', style: SdTextStyle.heading18()),
-          SdVerticalSpacing(),
+          Text('Description', style: SdTextStyleV5.heading18()),
+          SdVerticalSpacingV5(),
           AnimatedCrossFade(
             firstChild: _CollapsedDescription(
               onClickReadMore: () {
@@ -72,21 +72,24 @@ class _ExpandedDescription extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(description.content, style: SdTextStyle.body14()),
-        SdVerticalSpacing(),
+        Text(description.content, style: SdTextStyleV5.body14()),
+        SdVerticalSpacingV5(),
         ...description.images
             .take(2)
             .map(
-              (e) => SdImage(imagePath: e, width: imgHeight, height: imgHeight),
+              (e) =>
+                  SdImageV5(imagePath: e, width: imgHeight, height: imgHeight),
             ),
-        SdVerticalSpacing(),
+        SdVerticalSpacingV5(),
         Align(
           alignment: Alignment.topLeft,
           child: GestureDetector(
             onTap: onClickReadLess,
             child: Text(
               'Read Less',
-              style: SdTextStyle.heading12().wColor(context.colorTheme.primary),
+              style: SdTextStyleV5.heading12().wColor(
+                context.colorTheme.primary,
+              ),
             ),
           ),
         ),
@@ -112,14 +115,14 @@ class _CollapsedDescription extends StatelessWidget {
           description,
           maxLines: 3,
           overflow: TextOverflow.ellipsis,
-          style: SdTextStyle.body14(),
+          style: SdTextStyleV5.body14(),
         ),
-        SdVerticalSpacing(),
+        SdVerticalSpacingV5(),
         GestureDetector(
           onTap: onClickReadMore,
           child: Text(
             'Read More',
-            style: SdTextStyle.heading12().wColor(AppColors.primary),
+            style: SdTextStyleV5.heading12().wColor(AppColors.primary),
           ),
         ),
       ],

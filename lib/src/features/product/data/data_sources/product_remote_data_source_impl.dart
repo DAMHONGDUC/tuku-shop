@@ -5,7 +5,7 @@ import 'package:tuku_shop/src/features/product/data/models/product_model.dart';
 import 'package:tuku_shop/src/features/product/data/mock/product_mock.dart';
 import 'package:tuku_shop/src/features/product/data/models/recommend_products_data_model.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'product_remote_data_source.dart';
 
@@ -17,7 +17,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     required GetRecommendProjectFilterParams params,
   }) async {
     try {
-      await SdHelper.delayLoading();
+      await SdHelperV5.delayLoading();
 
       final allProducts = ProductMock.products;
 
@@ -53,7 +53,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     required SearchProductsFilterParams params,
   }) async {
     try {
-      await SdHelper.delayLoading();
+      await SdHelperV5.delayLoading();
 
       final keyword = params.keyword.trim().toLowerCase();
       final matched = keyword.isEmpty
@@ -85,7 +85,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   @override
   Future<ProductModel> getProductDetail({required String productId}) async {
     try {
-      await SdHelper.delayLoading();
+      await SdHelperV5.delayLoading();
 
       final product = ProductMock.products.firstWhereOrNull(
         (e) => e.id == productId,
@@ -106,7 +106,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     int? limit,
   }) async {
     try {
-      await SdHelper.delayLoading();
+      await SdHelperV5.delayLoading();
 
       final related = ProductMock.products
           .where((e) => e.id != productId)

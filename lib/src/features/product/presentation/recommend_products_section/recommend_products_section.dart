@@ -6,7 +6,7 @@ import 'package:tuku_shop/src/features/product/presentation/widgets/product_grid
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'recommend_products_controller.dart';
 
@@ -31,11 +31,11 @@ class RecommendProductsSection extends StatelessWidget {
 
           return Column(
             children: [
-              SdGridView(
+              SdGridViewV5(
                 items: products,
                 gridCrossAxisCount: 2,
-                gridMainAxisSpacing: SdSpacing.s16,
-                gridCrossAxisSpacing: SdSpacing.s16,
+                gridMainAxisSpacing: SdSpacingV5.s16,
+                gridCrossAxisSpacing: SdSpacingV5.s16,
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -53,11 +53,11 @@ class RecommendProductsSection extends StatelessWidget {
                 },
               ),
               if (isLoadingMore) ...[
-                SdVerticalSpacing(),
+                SdVerticalSpacingV5(),
                 const Center(
                   child: SizedBox(
-                    width: SdSpacing.s28,
-                    height: SdSpacing.s28,
+                    width: SdSpacingV5.s28,
+                    height: SdSpacingV5.s28,
                     child: CircularProgressIndicator(strokeWidth: 3),
                   ),
                 ),

@@ -1,8 +1,3 @@
-[submodule "packages/system_design_flutter"]
-	path = packages/system_design_flutter
-	url = https://github.com/DAMHONGDUC/system_design_flutter
-	ignore = dirty
-	branch = main
 [submodule "packages/flutter-system-design-kit"]
 	path = packages/flutter-system-design-kit
 	url = https://github.com/DAMHONGDUC/flutter-system-design-kit

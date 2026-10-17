@@ -6,7 +6,7 @@ import 'package:tuku_shop/src/features/splash/splash_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart' hide SdContextV2X;
 
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
@@ -33,7 +33,7 @@ class _SplashView extends StatelessWidget {
           GoRouter.of(context).go(LoginRoutes.login.fullPath);
         }
       },
-      child: SdAdaptiveStatusBar(
+      child: SdAdaptiveStatusBarV5(
         backgroundColor: context.colorTheme.primary,
         child: Scaffold(
           backgroundColor: context.colorTheme.primary,
@@ -45,7 +45,7 @@ class _SplashView extends StatelessWidget {
                   context.loc.app_name,
                   style: context.textTheme.heading40.whiteText(),
                 ),
-                SdVerticalSpacing(xRatio: 0.5),
+                SdVerticalSpacingV5(xRatio: 0.5),
                 Text(
                   context.loc.splash_description,
                   style: context.textTheme.body16.whiteText(),

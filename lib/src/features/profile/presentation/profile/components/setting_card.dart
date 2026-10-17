@@ -1,8 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/profile/domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class SettingCard extends StatelessWidget {
   const SettingCard({super.key, required this.setting});
@@ -11,29 +10,29 @@ class SettingCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SdInkWell(
+    return SdInkWellV5(
       onTap: () {},
       containerBg: context.colorTheme.cardDefault,
-      borderRadius: SdSpacing.s12,
-      contentPadding: EdgeInsets.all(SdSpacing.s12),
+      borderRadius: SdSpacingV5.s12,
+      contentPadding: EdgeInsets.all(SdSpacingV5.s12),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
             children: [
-              SdIcon(iconData: setting.iconData, color: setting.iconColor),
-              SdHorizontalSpacing(),
+              SdIconV5(iconData: setting.iconData, color: setting.iconColor),
+              SdHorizontalSpacingV5(),
               Text(
                 setting.name,
-                style: SdTextStyle.body14().wSemiBold().copyWith(
+                style: SdTextStyleV5.body14().wSemiBold().copyWith(
                   color: setting.nameColor,
                 ),
               ),
             ],
           ),
-          SdIcon(
-            iconData: Ionicons.chevron_forward,
-            iconSize: SdSpacing.s20,
+          SdIconV5(
+            iconData: Icons.chevron_right,
+            iconSize: SdSpacingV5.s20,
             color: context.colorTheme.iconSecondary,
           ),
         ],

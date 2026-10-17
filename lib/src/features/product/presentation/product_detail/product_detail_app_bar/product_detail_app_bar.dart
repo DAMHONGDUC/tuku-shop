@@ -3,8 +3,7 @@ import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/color_selection_section/color_selection_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'product_detail_app_bar_controller.dart';
 
@@ -26,7 +25,7 @@ class ProductDetailAppBar extends StatelessWidget {
       floating: false,
       backgroundColor: context.colorTheme.surfaceDefault,
       surfaceTintColor: Colors.transparent,
-      elevation: SdSpacing.s2,
+      elevation: SdSpacingV5.s2,
       shadowColor: context.colorTheme.primaryShadowDefault,
       automaticallyImplyLeading: false,
       titleSpacing: 0,
@@ -50,8 +49,8 @@ class _TitleSection extends StatelessWidget {
       builder: (context, state) {
         return Row(
           children: [
-            SdFadingIcon(
-              iconData: SdHelper.getAppBarBackIcon(),
+            SdFadingIconV5(
+              iconData: SdHelperV5.getAppBarBackIcon(),
               iconColor: state.calculateIconColor(
                 context: context,
                 imgHeight: imgHeight,
@@ -60,19 +59,19 @@ class _TitleSection extends StatelessWidget {
                 context: context,
                 imgHeight: imgHeight,
               ),
-              iconSize: SdSpacing.s24,
+              iconSize: SdSpacingV5.s24,
               onTap: () {
                 Navigator.of(context).pop();
               },
             ),
-            SdHorizontalSpacing(),
+            SdHorizontalSpacingV5(),
             Expanded(
-              child: SdFadeWrapper(
+              child: SdFadeWrapperV5(
                 progress: state.calculateProgress(imgHeight: imgHeight),
                 child: CustomSearchBar(
                   bgColor: context.colorTheme.cardOnSurface,
                   hasBorder: false,
-                  searchIconSize: SdSpacing.s20,
+                  searchIconSize: SdSpacingV5.s20,
                 ),
               ),
             ),
@@ -105,25 +104,25 @@ class _ActionSection extends StatelessWidget {
 
         return Row(
           children: [
-            SdFadingIcon(
+            SdFadingIconV5(
               iconData: Icons.share,
               iconColor: iconColor,
               bgColor: iconBgColor,
-              iconSize: SdSpacing.s22,
+              iconSize: SdSpacingV5.s22,
               onTap: () {},
             ),
-            SdFadingIcon(
-              iconData: Ionicons.cart,
+            SdFadingIconV5(
+              iconData: Icons.shopping_cart,
               iconColor: iconColor,
               bgColor: iconBgColor,
-              iconSize: SdSpacing.s22,
+              iconSize: SdSpacingV5.s22,
               onTap: () {},
             ),
-            SdFadingIcon(
+            SdFadingIconV5(
               iconData: Icons.more_vert,
               iconColor: iconColor,
               bgColor: iconBgColor,
-              iconSize: SdSpacing.s22,
+              iconSize: SdSpacingV5.s22,
               onTap: () {},
             ),
           ],
@@ -150,7 +149,7 @@ class _ImageSection extends StatelessWidget {
           imagePath = state.productColor.imageUrl;
         }
 
-        return FlexibleSpaceBar(background: SdImage(imagePath: imagePath));
+        return FlexibleSpaceBar(background: SdImageV5(imagePath: imagePath));
       },
     );
   }

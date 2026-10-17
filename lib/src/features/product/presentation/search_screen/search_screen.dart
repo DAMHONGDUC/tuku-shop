@@ -5,7 +5,7 @@ import 'package:tuku_shop/src/features/product/presentation/product_detail/produ
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'search_controller.dart';
 
@@ -46,7 +46,7 @@ class _SearchViewState extends State<_SearchView> {
     return Scaffold(
       appBar: AppBar(title: const Text('Search Products')),
       body: Padding(
-        padding: EdgeInsets.all(SdSpacing.s16),
+        padding: EdgeInsets.all(SdSpacingV5.s16),
         child: Column(
           children: [
             TextField(
@@ -70,7 +70,7 @@ class _SearchViewState extends State<_SearchView> {
               onChanged: _onQueryChanged,
               onSubmitted: _onQueryChanged,
             ),
-            SdVerticalSpacing(),
+            SdVerticalSpacingV5(),
             Expanded(
               child: BlocBuilder<SearchProductsController, SearchProductsState>(
                 builder: (context, state) {
@@ -89,7 +89,7 @@ class _SearchViewState extends State<_SearchView> {
                     return ListView.separated(
                       itemCount: state.products.length,
                       separatorBuilder: (_, __) =>
-                          SdVerticalSpacing(value: SdSpacing.s8),
+                          SdVerticalSpacingV5(value: SdSpacingV5.s8),
                       itemBuilder: (context, index) {
                         final product = state.products[index];
                         return Card(
@@ -97,7 +97,9 @@ class _SearchViewState extends State<_SearchView> {
                           child: ListTile(
                             title: Text(product.name),
                             subtitle: Text(
-                              SdCurrencyFormatHelper.formatPrice(product.price),
+                              SdCurrencyFormatHelperV5.formatPrice(
+                                product.price,
+                              ),
                             ),
                             trailing: const Icon(Icons.arrow_forward_ios),
                             onTap: () {

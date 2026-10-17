@@ -4,7 +4,7 @@ import 'package:tuku_shop/src/features/order/data/mock/order_mock.dart';
 import 'package:tuku_shop/src/features/order/data/models/order_model.dart';
 import 'package:tuku_shop/src/features/order/data/models/orders_data_model.dart';
 import 'package:tuku_shop/src/features/order/domain/entities/get_my_order_filter_params.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 abstract class OrderRemoteDataSource {
   Future<OrdersDataModel> getMyOrder({required GetMyOrderFilterParams params});
@@ -33,7 +33,7 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
     required GetMyOrderFilterParams params,
   }) async {
     try {
-      await SdHelper.delayLoading();
+      await SdHelperV5.delayLoading();
 
       _initializeMockDataIfNeeded();
 
@@ -62,7 +62,7 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
   @override
   Future<OrderModel?> getOrderDetail({required String orderId}) async {
     try {
-      await SdHelper.delayLoading();
+      await SdHelperV5.delayLoading();
 
       _initializeMockDataIfNeeded();
 

@@ -1,7 +1,7 @@
-import 'package:system_design_flutter/config/router/sd_router.dart';
+import 'package:system_design/index.dart';
 
 class NotificationsRoutes {
-  static const SdRouter notifications = SdRouter(
+  static const SdRouterV5 notifications = SdRouterV5(
     name: 'notifications',
     path: '/notifications',
     fullPath: '/notifications',

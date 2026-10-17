@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class SectionContainer extends StatelessWidget {
   const SectionContainer({
@@ -19,14 +19,14 @@ class SectionContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(SdSpacing.s12),
+      padding: EdgeInsets.all(SdSpacingV5.s12),
       margin: EdgeInsets.only(
-        top: topMargin ? SdSpacing.s8 : 0,
-        bottom: bottomMargin ? SdSpacing.s8 : 0,
+        top: topMargin ? SdSpacingV5.s8 : 0,
+        bottom: bottomMargin ? SdSpacingV5.s8 : 0,
       ),
       decoration: BoxDecoration(
         color: context.colorTheme.surfaceDefault,
-        borderRadius: BorderRadius.all(Radius.circular(SdSpacing.s8)),
+        borderRadius: BorderRadius.all(Radius.circular(SdSpacingV5.s8)),
       ),
       child: Column(
         children: [

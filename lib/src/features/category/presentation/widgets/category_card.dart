@@ -1,7 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/category/domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart' hide SdContextV2X;
 
 class CategoryCard extends StatelessWidget {
   final CategoryEntity category;
@@ -16,13 +16,13 @@ class CategoryCard extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SdImage(
+          SdImageV5(
             imagePath: category.imageUrl,
             width: UIConstants.categoriesImageWidth,
             height: UIConstants.categoriesImageHeight,
-            borderRadiusValue: SdSpacing.s100,
+            borderRadiusValue: SdSpacingV5.s100,
           ),
-          SdVerticalSpacing(xRatio: 0.5),
+          SdVerticalSpacingV5(xRatio: 0.5),
           Text(
             category.name,
             style: context.textTheme.heading14,

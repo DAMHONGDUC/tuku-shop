@@ -8,7 +8,7 @@ import 'package:tuku_shop/src/features/product/presentation/recommend_products_s
 import 'package:tuku_shop/src/features/product/presentation/recommend_products_section/recommend_products_section.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'components/home_sliver_app_bar.dart';
 
@@ -71,7 +71,7 @@ class _HomeViewState extends State<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return SdSafeAreaScaffold(
+    return SdSafeAreaScaffoldV5(
       backgroundColor: context.colorTheme.surfaceDefault,
       contentBgColor: context.colorTheme.pageDefault,
       child: RefreshWrapper(

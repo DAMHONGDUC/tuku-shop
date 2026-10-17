@@ -6,7 +6,7 @@ import 'package:tuku_shop/src/features/product/presentation/widgets/product_grid
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'related_products_controller.dart';
 
@@ -17,8 +17,8 @@ class RelatedProductsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: SdSpacing.s16,
-        vertical: SdSpacing.s12,
+        horizontal: SdSpacingV5.s16,
+        vertical: SdSpacingV5.s12,
       ),
       color: context.colorTheme.surfaceDefault,
       child: BlocConsumer<RelatedProductsController, RelatedProductsState>(
@@ -36,13 +36,13 @@ class RelatedProductsSection extends StatelessWidget {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('Related products', style: SdTextStyle.heading18()),
-                SdVerticalSpacing(),
-                SdGridView(
+                Text('Related products', style: SdTextStyleV5.heading18()),
+                SdVerticalSpacingV5(),
+                SdGridViewV5(
                   items: state.products,
                   gridCrossAxisCount: 2,
-                  gridMainAxisSpacing: SdSpacing.s16,
-                  gridCrossAxisSpacing: SdSpacing.s16,
+                  gridMainAxisSpacing: SdSpacingV5.s16,
+                  gridCrossAxisSpacing: SdSpacingV5.s16,
                   padding: EdgeInsets.zero,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),

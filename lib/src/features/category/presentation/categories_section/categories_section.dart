@@ -3,7 +3,7 @@ import 'package:tuku_shop/src/features/category/presentation/widgets/category_ca
 import 'package:tuku_shop/src/features/category/presentation/widgets/category_card_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import 'categories_section_controller.dart';
 
@@ -67,7 +67,7 @@ class _CategoriesSectionState extends State<CategoriesSection> {
                 height: UIConstants.categoriesListHeight,
                 child: ListView.separated(
                   separatorBuilder: (context, index) {
-                    return SdHorizontalSpacing(xRatio: 2);
+                    return SdHorizontalSpacingV5(xRatio: 2);
                   },
                   shrinkWrap: true,
                   physics: const ClampingScrollPhysics(),
@@ -80,7 +80,7 @@ class _CategoriesSectionState extends State<CategoriesSection> {
                   },
                 ),
               ),
-              SdVerticalSpacing(value: SdSpacing.s8),
+              SdVerticalSpacingV5(value: SdSpacingV5.s8),
               _ScrollIndicator(scrollProgress: _scrollProgress),
             ],
           );
@@ -103,7 +103,7 @@ class _ScrollIndicator extends StatelessWidget {
 
     return Container(
       width: indicatorWidth,
-      height: SdSpacing.s4,
+      height: SdSpacingV5.s4,
       decoration: BoxDecoration(
         color: context.colorTheme.indicatorBg,
         borderRadius: BorderRadius.circular(2),
@@ -115,10 +115,10 @@ class _ScrollIndicator extends StatelessWidget {
             left: scrollProgress * (indicatorWidth - thumbWidth),
             child: Container(
               width: thumbWidth,
-              height: SdSpacing.s4,
+              height: SdSpacingV5.s4,
               decoration: BoxDecoration(
                 color: context.colorTheme.indicatorActive,
-                borderRadius: BorderRadius.circular(SdSpacing.s2),
+                borderRadius: BorderRadius.circular(SdSpacingV5.s2),
               ),
             ),
           ),
@@ -140,7 +140,7 @@ class _ListCategorySkeleton extends StatelessWidget {
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             separatorBuilder: (context, index) {
-              return SdHorizontalSpacing(xRatio: 2);
+              return SdHorizontalSpacingV5(xRatio: 2);
             },
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
@@ -150,12 +150,12 @@ class _ListCategorySkeleton extends StatelessWidget {
             },
           ),
         ),
-        SdVerticalSpacing(value: SdSpacing.s8),
+        SdVerticalSpacingV5(value: SdSpacingV5.s8),
         Container(
           width: 60,
           height: 4,
           decoration: BoxDecoration(
-            color: SdColors.grey.withValues(alpha: 0.3),
+            color: SdColorsV5.grey.withValues(alpha: 0.3),
             borderRadius: BorderRadius.circular(2),
           ),
         ),

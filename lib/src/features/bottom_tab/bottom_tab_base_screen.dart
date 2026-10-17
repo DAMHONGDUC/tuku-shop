@@ -1,8 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart' hide SdContextV2X;
 
 class BottomTabBaseScreen extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -21,11 +20,11 @@ class BottomTabBaseScreen extends StatelessWidget {
         (imgPath != null && imgPathSelected != null);
 
     if (isValid) {
-      return SdIcon(
+      return SdIconV5(
         iconData: isSelected ? iconSelected : icon,
         iconPath: isSelected ? imgPathSelected : imgPath,
         color: isSelected ? AppColors.primary : AppColors.grey,
-        iconSize: SdSpacing.s20,
+        iconSize: SdSpacingV5.s20,
       );
     }
 
@@ -35,8 +34,8 @@ class BottomTabBaseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final iconPadding = EdgeInsets.only(
-      top: SdSpacing.s4,
-      bottom: SdSpacing.s4,
+      top: SdSpacingV5.s4,
+      bottom: SdSpacingV5.s4,
     );
 
     return Scaffold(
@@ -53,7 +52,7 @@ class BottomTabBaseScreen extends StatelessWidget {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.grey,
         type: BottomNavigationBarType.fixed,
-        iconSize: SdSpacing.s18,
+        iconSize: SdSpacingV5.s18,
         items: [
           BottomNavigationBarItem(
             icon: Padding(
@@ -82,8 +81,8 @@ class BottomTabBaseScreen extends StatelessWidget {
               padding: iconPadding,
               child: _buildIcon(
                 isSelected: navigationShell.currentIndex == 2,
-                icon: Ionicons.notifications_outline,
-                iconSelected: Ionicons.notifications,
+                icon: Icons.notifications_outlined,
+                iconSelected: Icons.notifications,
               ),
             ),
             label: 'Notification',
@@ -93,8 +92,8 @@ class BottomTabBaseScreen extends StatelessWidget {
               padding: iconPadding,
               child: _buildIcon(
                 isSelected: navigationShell.currentIndex == 3,
-                icon: Ionicons.person_outline,
-                iconSelected: Ionicons.person,
+                icon: Icons.person_outline,
+                iconSelected: Icons.person,
               ),
             ),
             label: 'Profile',
