@@ -373,6 +373,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'An account with this email already exists.'**
   String get auth_error_email_taken;
+
+  /// No description provided for @register_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get register_title;
+
+  /// No description provided for @register_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Join Tuku for members-only prices, faster checkout and order tracking.'**
+  String get register_subtitle;
+
+  /// No description provided for @field_full_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get field_full_name;
+
+  /// No description provided for @field_full_name_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Alex Morgan'**
+  String get field_full_name_hint;
+
+  /// No description provided for @field_confirm_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
+  String get field_confirm_password;
+
+  /// No description provided for @register_terms.
+  ///
+  /// In en, this message translates to:
+  /// **'I agree to the Terms of Service and Privacy Policy'**
+  String get register_terms;
+
+  /// No description provided for @register_accept_terms.
+  ///
+  /// In en, this message translates to:
+  /// **'Please accept the terms to continue'**
+  String get register_accept_terms;
+
+  /// No description provided for @register_submit.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get register_submit;
+
+  /// No description provided for @register_have_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Already a member?'**
+  String get register_have_account;
+
+  /// No description provided for @register_welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Tuku! 200 points added to your account.'**
+  String get register_welcome;
+
+  /// No description provided for @password_weak.
+  ///
+  /// In en, this message translates to:
+  /// **'Weak'**
+  String get password_weak;
+
+  /// No description provided for @password_fair.
+  ///
+  /// In en, this message translates to:
+  /// **'Fair'**
+  String get password_fair;
+
+  /// No description provided for @password_good.
+  ///
+  /// In en, this message translates to:
+  /// **'Good'**
+  String get password_good;
+
+  /// No description provided for @password_strong.
+  ///
+  /// In en, this message translates to:
+  /// **'Strong'**
+  String get password_strong;
 }
 
 class _AppLocalizationsDelegate

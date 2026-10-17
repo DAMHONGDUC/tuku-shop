@@ -1,15 +1,11 @@
 part of 'splash_controller.dart';
 
-@immutable
-sealed class SplashState extends Equatable {
-  const SplashState();
+class SplashState extends Equatable {
+  const SplashState({this.destination});
+
+  /// Null while the logo is still playing.
+  final AppRoute? destination;
 
   @override
-  List<Object?> get props => const [];
+  List<Object?> get props => <Object?>[destination?.path];
 }
-
-final class SplashInitialState extends SplashState {}
-
-final class LoggedInLState extends SplashState {}
-
-final class NotLogInLState extends SplashState {}

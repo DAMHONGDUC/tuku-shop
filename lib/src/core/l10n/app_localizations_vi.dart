@@ -154,4 +154,49 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get auth_error_email_taken => 'Email này đã được đăng ký.';
+
+  @override
+  String get register_title => 'Tạo tài khoản';
+
+  @override
+  String get register_subtitle =>
+      'Tham gia Tuku để nhận giá thành viên, thanh toán nhanh và theo dõi đơn hàng.';
+
+  @override
+  String get field_full_name => 'Họ và tên';
+
+  @override
+  String get field_full_name_hint => 'Nguyễn Văn A';
+
+  @override
+  String get field_confirm_password => 'Xác nhận mật khẩu';
+
+  @override
+  String get register_terms =>
+      'Tôi đồng ý với Điều khoản dịch vụ và Chính sách bảo mật';
+
+  @override
+  String get register_accept_terms => 'Vui lòng đồng ý điều khoản để tiếp tục';
+
+  @override
+  String get register_submit => 'Tạo tài khoản';
+
+  @override
+  String get register_have_account => 'Đã có tài khoản?';
+
+  @override
+  String get register_welcome =>
+      'Chào mừng đến với Tuku! Bạn được tặng 200 điểm.';
+
+  @override
+  String get password_weak => 'Yếu';
+
+  @override
+  String get password_fair => 'Trung bình';
+
+  @override
+  String get password_good => 'Khá';
+
+  @override
+  String get password_strong => 'Mạnh';
 }

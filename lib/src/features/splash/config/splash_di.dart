@@ -1,8 +1,11 @@
 import 'package:tuku_shop/src/di/injector.dart';
-import 'package:tuku_shop/src/features/splash/splash_controller.dart';
+
+import '../splash_controller.dart';
 
 class SplashDi {
-  static config() {
-    getIt.registerFactory<SplashController>(() => SplashController());
+  static void config() {
+    getIt.registerFactory<SplashController>(
+      () => SplashController(restoreSession: getIt(), getSettings: getIt()),
+    );
   }
 }

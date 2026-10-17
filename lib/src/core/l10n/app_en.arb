@@ -52,5 +52,19 @@
   "validation_password_short": "Use at least 8 characters",
   "validation_password_mismatch": "Passwords don't match",
   "auth_error_credentials": "That email and password don't match. Try the demo account.",
-  "auth_error_email_taken": "An account with this email already exists."
+  "auth_error_email_taken": "An account with this email already exists.",
+  "register_title": "Create account",
+  "register_subtitle": "Join Tuku for members-only prices, faster checkout and order tracking.",
+  "field_full_name": "Full name",
+  "field_full_name_hint": "Alex Morgan",
+  "field_confirm_password": "Confirm password",
+  "register_terms": "I agree to the Terms of Service and Privacy Policy",
+  "register_accept_terms": "Please accept the terms to continue",
+  "register_submit": "Create account",
+  "register_have_account": "Already a member?",
+  "register_welcome": "Welcome to Tuku! 200 points added to your account.",
+  "password_weak": "Weak",
+  "password_fair": "Fair",
+  "password_good": "Good",
+  "password_strong": "Strong"
 }

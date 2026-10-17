@@ -155,4 +155,49 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get auth_error_email_taken =>
       'An account with this email already exists.';
+
+  @override
+  String get register_title => 'Create account';
+
+  @override
+  String get register_subtitle =>
+      'Join Tuku for members-only prices, faster checkout and order tracking.';
+
+  @override
+  String get field_full_name => 'Full name';
+
+  @override
+  String get field_full_name_hint => 'Alex Morgan';
+
+  @override
+  String get field_confirm_password => 'Confirm password';
+
+  @override
+  String get register_terms =>
+      'I agree to the Terms of Service and Privacy Policy';
+
+  @override
+  String get register_accept_terms => 'Please accept the terms to continue';
+
+  @override
+  String get register_submit => 'Create account';
+
+  @override
+  String get register_have_account => 'Already a member?';
+
+  @override
+  String get register_welcome =>
+      'Welcome to Tuku! 200 points added to your account.';
+
+  @override
+  String get password_weak => 'Weak';
+
+  @override
+  String get password_fair => 'Fair';
+
+  @override
+  String get password_good => 'Good';
+
+  @override
+  String get password_strong => 'Strong';
 }
