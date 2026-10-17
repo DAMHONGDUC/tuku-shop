@@ -4,7 +4,7 @@
 
 | Workflow | Trigger | Steps |
 |---|---|---|
-| [ci.yml](../.github/workflows/ci.yml) | Push / PR to `main` | `melos bootstrap` → `melos run analyze` → `melos run test` (no secrets) |
+| [ci.yml](../.github/workflows/ci.yml) | Push / PR to `main` | Flutter 3.47.2 → `pub get` → script-tools `generate_code.sh` → `analyze_code.sh` → `run_tests.sh` → kit `flutter test` (no secrets) |
 | [deploy.yml](../.github/workflows/deploy.yml) | Manual (`workflow_dispatch`) | Restore signing/config files from secrets → Fastlane → Firebase App Distribution |
 
 | Job | Status |

@@ -1,14 +1,16 @@
 # Testing
 
-Tests mirror [lib/src/features/](../lib/src/features/) under [test/features/](../test/features/).
+Tests mirror [lib/src/](../lib/src/) under [test/](../test/): `test/features/` and `test/app/`.
 
 | Target | Tooling |
 |---|---|
-| Usecases | `flutter_test` + `mocktail` |
-| Repository impls | `flutter_test` + `mocktail` |
+| Repository impls and mock data sources | `flutter_test`, real in-memory data with `MockLatency.enabled = false` |
+| Domain entities (cart totals) | `flutter_test` |
 | Cubits (loading / loaded / error sequences) | `bloc_test` |
-| Shared fakes | [test/helpers/](../test/helpers/) |
+| Shared mocks and fixtures | [test/helpers/](../test/helpers/) |
+| App smoke test | [test/widget_test.dart](../test/widget_test.dart) |
 
 ```bash
-fvm dart run melos run test
+make test
+make test TEST=test/features/cart
 ```

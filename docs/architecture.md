@@ -6,12 +6,12 @@ Feature-based Clean Architecture: each feature owns its `domain` / `data` / `pre
 
 | Path | Contents |
 |---|---|
-| `lib/src/features/product/` | Product detail, search, recommended products |
-| `lib/src/features/order/` | My orders + order detail |
-| `lib/src/features/banner/`, `category/`, `notification/`, `profile/` | Feature slices |
+| `lib/src/app/` | `tuku_app.dart`, `app_router.dart`, `shell/` (tab bar), `state/` (app-wide singleton Cubits) |
+| `lib/src/features/auth/`, `product/`, `cart/`, `checkout/`, `order/`, `wishlist/`, `notification/`, `banner/`, `category/`, `settings/` | Feature slices |
+| `lib/src/features/profile/` | Presentation only: Profile tab, edit profile, settings, help center |
 | `lib/src/features/home/` | Presentation only: composes banner / category / product sections |
-| `lib/src/features/splash/`, `tutorial/`, `login/`, `register/`, `bottom_tab/`, `preview_media/` | Screen flows |
-| `lib/src/core/` | Constants, enums, env, exceptions, failures, l10n, navigation, resources, usecase base, utils, shared widgets |
+| `lib/src/features/splash/`, `onboarding/` | Screen flows |
+| `lib/src/core/` | Constants, enums, exceptions, failures, l10n, navigation (`AppRoutes`, route args), resources, usecase base, utils, shared widgets |
 | `lib/src/di/injector.dart` | Calls each feature's `<Feature>Di.config()` |
 
 ## Feature layers
@@ -31,7 +31,7 @@ flowchart LR
   featureA[featureA.domain] -->|shared concepts only| featureB[featureB.domain]
 ```
 
-A feature exposes only its `domain/domain.dart` barrel, except to the presentation-only `home/` and `bottom_tab/`, which compose other features' sections.
+A feature exposes only its `domain/domain.dart` barrel, except to the presentation-only `home/`, which composes other features' sections. Navigation goes through `AppRoutes` in `core/navigation/`.
 
 ## Data flow
 

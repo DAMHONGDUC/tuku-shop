@@ -2,7 +2,7 @@
 
 | | |
 |---|---|
-| Project | Tuku Shop: Flutter e-commerce app, Cubit + Clean Architecture, Melos workspace |
+| Project | Tuku Shop: Flutter e-commerce app, Cubit + Clean Architecture, design system and scripts as submodules |
 | Entry point | `lib/main.dart` |
 | Package | `tuku_shop` (imports: `package:tuku_shop/...`) |
 
@@ -10,13 +10,14 @@
 
 | Task | Command |
 |---|---|
-| Setup (after clone / pull) | `fvm dart run melos run setup` |
-| Run | `fvm flutter run` |
-| Test single file | `fvm flutter test test/features/<feature>/<path>_test.dart` |
-| Test all packages | `fvm dart run melos run test` |
-| Analyze | `fvm dart run melos run analyze` |
-| Format | `fvm dart run melos run format` |
-| Codegen (l10n + build_runner) | `fvm dart run melos run gen:all` |
+| List every command | `make` |
+| Setup (after clone / pull) | `make set-up` |
+| Run | `make run` |
+| Test single file | `make test TEST=test/features/<feature>/<path>_test.dart` |
+| Test the app | `make test` |
+| Analyze (CI gate, infos fail too) | `make analyze` |
+| Format | `make format` |
+| Codegen (l10n) | `make gen` |
 
 ## Rules
 
