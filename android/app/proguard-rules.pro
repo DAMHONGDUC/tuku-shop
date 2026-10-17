@@ -6,12 +6,6 @@
 -keep class io.flutter.** { *; }
 -keep class io.flutter.plugins.** { *; }
 
-# Firebase rules (if using Firebase)
--keep class com.google.firebase.** { *; }
--keep class com.google.android.gms.** { *; }
--dontwarn com.google.firebase.**
--dontwarn com.google.android.gms.**
-
 # Gson rules (if using Gson for JSON parsing)
 -keepattributes Signature
 -keepattributes *Annotation*

@@ -5,7 +5,6 @@ import 'package:tuku_shop/src/di/injector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:system_design/index.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,9 +32,6 @@ class TukuShopApp extends StatelessWidget {
 
 Future<void> initialisation() async {
   try {
-    // firebase
-    await Firebase.initializeApp();
-
     // di
     Injector.config();
 

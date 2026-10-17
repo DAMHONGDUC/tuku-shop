@@ -34,12 +34,3 @@ Rerun step 3 after every `git pull`.
 | `make test [TEST=<path>]` | `flutter test`, one file or folder with `TEST` |
 | `make env-<flavor>` | `env_assets/` → `env/`, `ios/`, `android/` (flavors: `dev`, `prod`) |
 | `make build-ipa-<flavor>` / `release-<flavor>` / `upload-ipa-<flavor>` | iOS release; needs `ios/fastlane/Fastfile` (TODO: confirm, not set up yet) |
-
-## Firebase config files
-
-| File | Platform | Registered app ID |
-|---|---|---|
-| `android/app/google-services.json` | Android | `com.dd.tuku.shop` |
-| `ios/Runner/GoogleService-Info.plist` | iOS | `app.dd.tuku.shop` |
-
-Both files are gitignored; download them from the Firebase console (project `dutuku-e-commerce`).
