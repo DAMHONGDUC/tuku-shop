@@ -276,4 +276,77 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notifications_title => 'Notifications';
+
+  @override
+  String get common_undo => 'Undo';
+
+  @override
+  String cart_title_count(int count) {
+    return 'Cart ($count)';
+  }
+
+  @override
+  String get cart_update_failed => 'Couldn\'t update your cart. Try again.';
+
+  @override
+  String get cart_free_shipping_unlocked =>
+      'You\'ve unlocked free standard shipping 🎉';
+
+  @override
+  String cart_free_shipping_nudge(String amount) {
+    return 'Add $amount more for free shipping';
+  }
+
+  @override
+  String get cart_subtotal => 'Subtotal';
+
+  @override
+  String get cart_savings => 'You save';
+
+  @override
+  String get cart_shipping => 'Shipping';
+
+  @override
+  String get cart_shipping_at_checkout => 'At checkout';
+
+  @override
+  String cart_removed(String name) {
+    return 'Removed $name';
+  }
+
+  @override
+  String get cart_remove => 'Remove';
+
+  @override
+  String get cart_total => 'Total';
+
+  @override
+  String get cart_checkout => 'Checkout';
+
+  @override
+  String get pdp_added_to_cart => 'Added to cart';
+
+  @override
+  String get pdp_view_cart => 'View cart';
+
+  @override
+  String get pdp_add_failed => 'Couldn\'t add to cart. Try again.';
+
+  @override
+  String sheet_in_stock(int count) {
+    return '$count in stock';
+  }
+
+  @override
+  String get sheet_quantity => 'Quantity';
+
+  @override
+  String sheet_add_to_cart(String total) {
+    return 'Add to cart · $total';
+  }
+
+  @override
+  String sheet_buy_now(String total) {
+    return 'Buy now · $total';
+  }
 }

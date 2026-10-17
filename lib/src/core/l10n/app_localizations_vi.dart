@@ -277,4 +277,77 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get notifications_title => 'Thông báo';
+
+  @override
+  String get common_undo => 'Hoàn tác';
+
+  @override
+  String cart_title_count(int count) {
+    return 'Giỏ hàng ($count)';
+  }
+
+  @override
+  String get cart_update_failed => 'Không cập nhật được giỏ hàng. Thử lại.';
+
+  @override
+  String get cart_free_shipping_unlocked =>
+      'Bạn được miễn phí giao hàng tiêu chuẩn 🎉';
+
+  @override
+  String cart_free_shipping_nudge(String amount) {
+    return 'Mua thêm $amount để được miễn phí ship';
+  }
+
+  @override
+  String get cart_subtotal => 'Tạm tính';
+
+  @override
+  String get cart_savings => 'Tiết kiệm';
+
+  @override
+  String get cart_shipping => 'Phí giao hàng';
+
+  @override
+  String get cart_shipping_at_checkout => 'Tính khi thanh toán';
+
+  @override
+  String cart_removed(String name) {
+    return 'Đã xoá $name';
+  }
+
+  @override
+  String get cart_remove => 'Xoá';
+
+  @override
+  String get cart_total => 'Tổng cộng';
+
+  @override
+  String get cart_checkout => 'Thanh toán';
+
+  @override
+  String get pdp_added_to_cart => 'Đã thêm vào giỏ';
+
+  @override
+  String get pdp_view_cart => 'Xem giỏ';
+
+  @override
+  String get pdp_add_failed => 'Không thêm được vào giỏ. Thử lại.';
+
+  @override
+  String sheet_in_stock(int count) {
+    return 'Còn $count sản phẩm';
+  }
+
+  @override
+  String get sheet_quantity => 'Số lượng';
+
+  @override
+  String sheet_add_to_cart(String total) {
+    return 'Thêm vào giỏ · $total';
+  }
+
+  @override
+  String sheet_buy_now(String total) {
+    return 'Mua ngay · $total';
+  }
 }

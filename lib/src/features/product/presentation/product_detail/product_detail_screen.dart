@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/presentation/favorites/favorites_controller.dart';
 
+import 'add_to_cart/add_to_cart_controller.dart';
+import 'add_to_cart/add_to_cart_sheet.dart';
 import 'components/product_gallery.dart';
 import 'components/product_info_section.dart';
 import 'product_detail_args.dart';
@@ -34,6 +37,7 @@ class ProductDetailScreen extends StatelessWidget {
                 ..getProductDetail(productId: args.productId),
         ),
         BlocProvider(create: (_) => getIt<VariantSelectionController>()),
+        BlocProvider(create: (_) => getIt<AddToCartController>()),
         BlocProvider(
           create: (_) =>
               getIt<ProductReviewsController>()..load(args.productId),
@@ -87,72 +91,104 @@ class _ViewState extends State<_View> {
     final colors = context.colorTheme;
     final productId = widget.productId;
 
-    return BlocConsumer<ProductDetailController, ProductDetailState>(
-      listener: (context, state) {
-        if (state is ProductDetailLoadedState) {
-          context.read<VariantSelectionController>().init(state.product);
-        }
-      },
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: colors.pageDefault,
-          extendBodyBehindAppBar: true,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(kToolbarHeight),
-            child: ValueListenableBuilder<bool>(
-              valueListenable: _collapsed,
-              builder: (context, collapsed, _) => AppBar(
-                backgroundColor: collapsed
-                    ? colors.cardDefault
-                    : SdColorsV5.transparent,
-                surfaceTintColor: SdColorsV5.transparent,
-                elevation: 0,
-                scrolledUnderElevation: 0,
-                centerTitle: true,
-                title: collapsed && state is ProductDetailLoadedState
-                    ? Text(
-                        state.product.name,
-                        style: SdTextStyleV5.heading16().wColor(
-                          colors.textDefault,
-                        ),
-                      )
-                    : null,
-                leading: Padding(
-                  padding: EdgeInsets.all(SdSpacingV5.s4),
-                  child: _RoundIconButton(
-                    icon: Icons.arrow_back_ios_new_rounded,
-                    label: MaterialLocalizations.of(context).backButtonTooltip,
-                    onTap: () => Navigator.of(context).maybePop(),
+    return BlocListener<AddToCartController, AddToCartState>(
+      listenWhen: (a, b) => a.status != b.status,
+      listener: _onAddToCart,
+      child: BlocConsumer<ProductDetailController, ProductDetailState>(
+        listener: (context, state) {
+          if (state is ProductDetailLoadedState) {
+            context.read<VariantSelectionController>().init(state.product);
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: colors.pageDefault,
+            extendBodyBehindAppBar: true,
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(kToolbarHeight),
+              child: ValueListenableBuilder<bool>(
+                valueListenable: _collapsed,
+                builder: (context, collapsed, _) => AppBar(
+                  backgroundColor: collapsed
+                      ? colors.cardDefault
+                      : SdColorsV5.transparent,
+                  surfaceTintColor: SdColorsV5.transparent,
+                  elevation: 0,
+                  scrolledUnderElevation: 0,
+                  centerTitle: true,
+                  title: collapsed && state is ProductDetailLoadedState
+                      ? Text(
+                          state.product.name,
+                          style: SdTextStyleV5.heading16().wColor(
+                            colors.textDefault,
+                          ),
+                        )
+                      : null,
+                  leading: Padding(
+                    padding: EdgeInsets.all(SdSpacingV5.s4),
+                    child: _RoundIconButton(
+                      icon: Icons.arrow_back_ios_new_rounded,
+                      label: MaterialLocalizations.of(
+                        context,
+                      ).backButtonTooltip,
+                      onTap: () => Navigator.of(context).maybePop(),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-          bottomNavigationBar: state is ProductDetailLoadedState
-              ? _Dock(product: state.product)
-              : null,
-          body: switch (state) {
-            ProductDetailLoadedState(:final product) => _Content(
-              product: product,
-              controller: _scrollController,
-            ),
-            ProductDetailErrorState() => SafeArea(
-              child: Padding(
-                padding: EdgeInsets.all(SdSpacingV5.s16),
-                child: Center(
-                  child: SectionError(
-                    onRetry: () => context
-                        .read<ProductDetailController>()
-                        .getProductDetail(productId: productId),
+            bottomNavigationBar: state is ProductDetailLoadedState
+                ? _Dock(product: state.product)
+                : null,
+            body: switch (state) {
+              ProductDetailLoadedState(:final product) => _Content(
+                product: product,
+                controller: _scrollController,
+              ),
+              ProductDetailErrorState() => SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.all(SdSpacingV5.s16),
+                  child: Center(
+                    child: SectionError(
+                      onRetry: () => context
+                          .read<ProductDetailController>()
+                          .getProductDetail(productId: productId),
+                    ),
                   ),
                 ),
               ),
-            ),
-            _ => const _Skeleton(),
-          },
-        );
-      },
+              _ => const _Skeleton(),
+            },
+          );
+        },
+      ),
     );
+  }
+
+  void _onAddToCart(BuildContext context, AddToCartState state) {
+    final messenger = ScaffoldMessenger.of(context);
+    switch (state.status) {
+      case AddToCartStatus.added when state.buyNow:
+        context.push(CheckoutRoutes.checkoutLocation(lineIds: [state.lineId!]));
+      case AddToCartStatus.added:
+        messenger
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(context.loc.pdp_added_to_cart),
+              action: SnackBarAction(
+                label: context.loc.pdp_view_cart,
+                onPressed: () => context.go(CartRoutes.cart.fullPath),
+              ),
+            ),
+          );
+      case AddToCartStatus.failed:
+        messenger.showSnackBar(
+          SnackBar(content: Text(context.loc.pdp_add_failed)),
+        );
+      default:
+        break;
+    }
   }
 }
 
@@ -242,13 +278,7 @@ class _Dock extends StatelessWidget {
   final ProductEntity product;
 
   void _addToCart(BuildContext context, {required bool buyNow}) {
-    final selection = context.read<VariantSelectionController>().state;
-    if (selection.size == null) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text(context.loc.pdp_select_size)));
-      return;
-    }
+    AddToCartSheet.show(context, product: product, buyNow: buyNow);
   }
 
   @override

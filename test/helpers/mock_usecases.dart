@@ -1,5 +1,6 @@
 import 'package:tuku_shop/src/features/auth/domain/domain.dart';
 import 'package:tuku_shop/src/features/banner/domain/domain.dart';
+import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 import 'package:tuku_shop/src/features/category/domain/domain.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:tuku_shop/src/features/order/domain/domain.dart';
@@ -48,3 +49,14 @@ class MockWatchWishlistIdsUsecase extends Mock
     implements WatchWishlistIdsUsecase {}
 
 class MockToggleWishlistUsecase extends Mock implements ToggleWishlistUsecase {}
+
+class MockGetCartUsecase extends Mock implements GetCartUsecase {}
+
+class MockWatchCartUsecase extends Mock implements WatchCartUsecase {}
+
+class MockUpdateCartQuantityUsecase extends Mock
+    implements UpdateCartQuantityUsecase {}
+
+class MockRemoveCartLineUsecase extends Mock implements RemoveCartLineUsecase {}
+
+class MockAddToCartUsecase extends Mock implements AddToCartUsecase {}

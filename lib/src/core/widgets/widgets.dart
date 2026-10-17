@@ -6,6 +6,7 @@ export 'misc/app_button.dart';
 export 'misc/price_text.dart';
 export 'misc/app_chip.dart';
 export 'misc/load_more_scroll.dart';
+export 'misc/quantity_stepper.dart';
 
 // container
 export './container/section_container.dart';

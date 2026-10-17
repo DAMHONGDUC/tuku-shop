@@ -601,6 +601,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Notifications'**
   String get notifications_title;
+
+  /// No description provided for @common_undo.
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get common_undo;
+
+  /// No description provided for @cart_title_count.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart ({count})'**
+  String cart_title_count(int count);
+
+  /// No description provided for @cart_update_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t update your cart. Try again.'**
+  String get cart_update_failed;
+
+  /// No description provided for @cart_free_shipping_unlocked.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve unlocked free standard shipping 🎉'**
+  String get cart_free_shipping_unlocked;
+
+  /// No description provided for @cart_free_shipping_nudge.
+  ///
+  /// In en, this message translates to:
+  /// **'Add {amount} more for free shipping'**
+  String cart_free_shipping_nudge(String amount);
+
+  /// No description provided for @cart_subtotal.
+  ///
+  /// In en, this message translates to:
+  /// **'Subtotal'**
+  String get cart_subtotal;
+
+  /// No description provided for @cart_savings.
+  ///
+  /// In en, this message translates to:
+  /// **'You save'**
+  String get cart_savings;
+
+  /// No description provided for @cart_shipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping'**
+  String get cart_shipping;
+
+  /// No description provided for @cart_shipping_at_checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'At checkout'**
+  String get cart_shipping_at_checkout;
+
+  /// No description provided for @cart_removed.
+  ///
+  /// In en, this message translates to:
+  /// **'Removed {name}'**
+  String cart_removed(String name);
+
+  /// No description provided for @cart_remove.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove'**
+  String get cart_remove;
+
+  /// No description provided for @cart_total.
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
+  String get cart_total;
+
+  /// No description provided for @cart_checkout.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get cart_checkout;
+
+  /// No description provided for @pdp_added_to_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Added to cart'**
+  String get pdp_added_to_cart;
+
+  /// No description provided for @pdp_view_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'View cart'**
+  String get pdp_view_cart;
+
+  /// No description provided for @pdp_add_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t add to cart. Try again.'**
+  String get pdp_add_failed;
+
+  /// No description provided for @sheet_in_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} in stock'**
+  String sheet_in_stock(int count);
+
+  /// No description provided for @sheet_quantity.
+  ///
+  /// In en, this message translates to:
+  /// **'Quantity'**
+  String get sheet_quantity;
+
+  /// No description provided for @sheet_add_to_cart.
+  ///
+  /// In en, this message translates to:
+  /// **'Add to cart · {total}'**
+  String sheet_add_to_cart(String total);
+
+  /// No description provided for @sheet_buy_now.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy now · {total}'**
+  String sheet_buy_now(String total);
 }
 
 class _AppLocalizationsDelegate

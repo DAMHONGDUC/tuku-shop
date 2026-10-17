@@ -1,5 +1,6 @@
 import 'package:tuku_shop/src/features/auth/auth_di.dart';
 import 'package:tuku_shop/src/features/banner/banner_di.dart';
+import 'package:tuku_shop/src/features/cart/cart_di.dart';
 import 'package:tuku_shop/src/features/category/category_di.dart';
 import 'package:tuku_shop/src/features/notification/notification_di.dart';
 import 'package:tuku_shop/src/features/order/order_di.dart';
@@ -20,6 +21,7 @@ class Injector {
     // widgets, they don't own any DI of their own.
     AuthDi.config();
     BannerDi.config();
+    CartDi.config();
     CategoryDi.config();
     ProductDi.config();
     OrderDi.config();

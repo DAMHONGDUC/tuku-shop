@@ -1,5 +1,6 @@
 export 'cart_routes.dart';
 export 'categories_routes.dart';
+export 'checkout_routes.dart';
 export 'home_routes.dart';
 export 'login_routes.dart';
 export 'my_order_routes.dart';

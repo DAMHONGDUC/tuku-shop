@@ -4,7 +4,9 @@ import 'package:tuku_shop/src/features/product/data/data_sources/product_remote_
 import 'package:tuku_shop/src/features/product/data/data_sources/search_history_local_data_source.dart';
 import 'package:tuku_shop/src/features/product/data/repositories/product_repository_impl.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
+import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/presentation/favorites/favorites_controller.dart';
+import 'package:tuku_shop/src/features/product/presentation/product_detail/add_to_cart/add_to_cart_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/related_product_section/related_products_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/reviews_section/product_reviews_controller.dart';
@@ -62,6 +64,9 @@ class ProductDi {
     );
     getIt.registerFactory<VariantSelectionController>(
       () => VariantSelectionController(),
+    );
+    getIt.registerFactory<AddToCartController>(
+      () => AddToCartController(getIt<AddToCartUsecase>()),
     );
     getIt.registerFactory<ProductReviewsController>(
       () => ProductReviewsController(getIt<GetProductReviewsUsecase>()),

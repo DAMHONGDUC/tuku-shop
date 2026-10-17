@@ -132,5 +132,67 @@
     "cart_title": "Cart",
     "cart_empty_title": "Your cart is empty",
     "cart_empty_message": "Find something you like and add it here.",
-    "notifications_title": "Notifications"
+    "notifications_title": "Notifications",
+    "common_undo": "Undo",
+    "cart_title_count": "Cart ({count})",
+    "@cart_title_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "cart_update_failed": "Couldn't update your cart. Try again.",
+    "cart_free_shipping_unlocked": "You've unlocked free standard shipping 🎉",
+    "cart_free_shipping_nudge": "Add {amount} more for free shipping",
+    "@cart_free_shipping_nudge": {
+        "placeholders": {
+            "amount": {
+                "type": "String"
+            }
+        }
+    },
+    "cart_subtotal": "Subtotal",
+    "cart_savings": "You save",
+    "cart_shipping": "Shipping",
+    "cart_shipping_at_checkout": "At checkout",
+    "cart_removed": "Removed {name}",
+    "@cart_removed": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "cart_remove": "Remove",
+    "cart_total": "Total",
+    "cart_checkout": "Checkout",
+    "pdp_added_to_cart": "Added to cart",
+    "pdp_view_cart": "View cart",
+    "pdp_add_failed": "Couldn't add to cart. Try again.",
+    "sheet_in_stock": "{count} in stock",
+    "@sheet_in_stock": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sheet_quantity": "Quantity",
+    "sheet_add_to_cart": "Add to cart · {total}",
+    "@sheet_add_to_cart": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "sheet_buy_now": "Buy now · {total}",
+    "@sheet_buy_now": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    }
 }
