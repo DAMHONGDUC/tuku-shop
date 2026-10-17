@@ -42,20 +42,6 @@ class CartController extends Cubit<CartEntity> {
 
   Future<void> remove(String itemId) => _removeItem(itemId);
 
-  /// Restores a line removed by mistake — the bag's undo.
-  Future<void> restore(CartItemEntity item) => _addToCart(
-    AddToCartParams(
-      productId: item.productId,
-      name: item.name,
-      brand: item.brand,
-      image: item.image,
-      color: item.color,
-      size: item.size,
-      unitPrice: item.unitPrice,
-      compareAtPrice: item.compareAtPrice,
-      quantity: item.quantity,
-    ),
-  );
 
   /// Null on success, the failure otherwise.
   Future<Failure?> applyPromo(String code) async {
