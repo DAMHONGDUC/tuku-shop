@@ -349,4 +349,236 @@ class AppLocalizationsEn extends AppLocalizations {
   String sheet_buy_now(String total) {
     return 'Buy now · $total';
   }
+
+  @override
+  String get checkout_title => 'Checkout';
+
+  @override
+  String get checkout_items_title => 'Items';
+
+  @override
+  String checkout_items(int count) {
+    return 'Items ($count)';
+  }
+
+  @override
+  String get checkout_ship_to => 'Ship to';
+
+  @override
+  String get checkout_change => 'Change';
+
+  @override
+  String get checkout_no_address => 'Add an address to continue';
+
+  @override
+  String get checkout_shipping => 'Shipping';
+
+  @override
+  String checkout_shipping_days(int min, int max) {
+    return '$min–$max days';
+  }
+
+  @override
+  String get checkout_free => 'Free';
+
+  @override
+  String get checkout_payment => 'Payment';
+
+  @override
+  String get checkout_voucher => 'Voucher';
+
+  @override
+  String get checkout_voucher_hint => 'Enter a code';
+
+  @override
+  String get checkout_voucher_invalid => 'This code isn\'t valid';
+
+  @override
+  String get checkout_voucher_try => 'Try TUKU10 for 10% off or FREESHIP';
+
+  @override
+  String checkout_voucher_percent(String code, int percent) {
+    return '$code · $percent% off';
+  }
+
+  @override
+  String checkout_voucher_free_shipping(String code) {
+    return '$code · free standard shipping';
+  }
+
+  @override
+  String get checkout_apply => 'Apply';
+
+  @override
+  String get checkout_summary => 'Summary';
+
+  @override
+  String get checkout_discount => 'Discount';
+
+  @override
+  String checkout_place_order(String total) {
+    return 'Place order · $total';
+  }
+
+  @override
+  String get checkout_place_failed => 'Couldn\'t place the order. Try again.';
+
+  @override
+  String get success_title => 'Order placed!';
+
+  @override
+  String get success_message =>
+      'Thanks for shopping with us. We\'ll let you know when it ships.';
+
+  @override
+  String get success_order => 'Order';
+
+  @override
+  String get success_arrives => 'Arrives by';
+
+  @override
+  String get success_track => 'Track order';
+
+  @override
+  String get success_continue => 'Continue shopping';
+
+  @override
+  String get address_book_title => 'Addresses';
+
+  @override
+  String get address_pick_title => 'Choose an address';
+
+  @override
+  String get address_add => 'Add address';
+
+  @override
+  String get address_edit => 'Edit address';
+
+  @override
+  String get address_default => 'Default';
+
+  @override
+  String get address_set_default => 'Set as default';
+
+  @override
+  String get address_delete => 'Delete';
+
+  @override
+  String get address_empty_title => 'No addresses yet';
+
+  @override
+  String get address_empty_message =>
+      'Add where you\'d like your orders delivered.';
+
+  @override
+  String get address_full_name => 'Full name';
+
+  @override
+  String get address_phone => 'Phone';
+
+  @override
+  String get address_street => 'Street and number';
+
+  @override
+  String get address_city => 'City';
+
+  @override
+  String get address_state => 'State';
+
+  @override
+  String get address_postal_code => 'Postal code';
+
+  @override
+  String get address_make_default => 'Use as my default address';
+
+  @override
+  String get address_save => 'Save address';
+
+  @override
+  String get address_save_failed => 'Couldn\'t save the address. Try again.';
+
+  @override
+  String get address_field_invalid => 'Check this field';
+
+  @override
+  String get orders_title => 'My orders';
+
+  @override
+  String get orders_empty_title => 'No orders here';
+
+  @override
+  String get orders_empty_message => 'Orders in this status will show up here.';
+
+  @override
+  String get order_status_to_confirm => 'To confirm';
+
+  @override
+  String get order_status_to_ship => 'To ship';
+
+  @override
+  String get order_status_on_the_way => 'On the way';
+
+  @override
+  String get order_status_delivered => 'Delivered';
+
+  @override
+  String get order_status_cancelled => 'Cancelled';
+
+  @override
+  String get order_status_returned => 'Returned';
+
+  @override
+  String get order_headline_to_confirm => 'We\'ve received your order';
+
+  @override
+  String get order_headline_to_ship => 'Your order is being packed';
+
+  @override
+  String get order_headline_on_the_way => 'Your order is on the way';
+
+  @override
+  String get order_headline_delivered => 'Delivered. Enjoy!';
+
+  @override
+  String get order_headline_cancelled => 'This order was cancelled';
+
+  @override
+  String get order_headline_returned => 'This order was returned';
+
+  @override
+  String order_eta(String date) {
+    return 'Estimated delivery $date';
+  }
+
+  @override
+  String order_more_items(int count) {
+    return '+$count more items';
+  }
+
+  @override
+  String order_items_total(int count) {
+    return '$count items · total';
+  }
+
+  @override
+  String get order_cancel => 'Cancel order';
+
+  @override
+  String get order_cancel_title => 'Cancel this order?';
+
+  @override
+  String get order_cancel_message =>
+      'We haven\'t confirmed it yet, so nothing will be charged.';
+
+  @override
+  String get order_cancel_keep => 'Keep order';
+
+  @override
+  String get order_cancel_confirm => 'Cancel order';
+
+  @override
+  String get order_cancelled_toast => 'Order cancelled';
+
+  @override
+  String get order_buy_again => 'Buy again';
 }

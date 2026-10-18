@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tuku_shop/src/features/banner/data/mock/banner_mock.dart';
+import 'package:tuku_shop/src/features/cart/data/mock/cart_mock.dart';
 import 'package:tuku_shop/src/features/category/data/mock/category_mock.dart';
 import 'package:tuku_shop/src/features/order/data/mock/order_mock.dart';
 import 'package:tuku_shop/src/features/product/data/mock/product_mock.dart';
@@ -31,9 +32,10 @@ void main() {
   test('category, banner and order images exist', () {
     CategoryMock.categories.map((e) => e.imageUrl!).forEach(expectAsset);
     BannerMock.banners.map((e) => e.imageUrl!).forEach(expectAsset);
-    OrderMock.generateOrders(
-      count: 20,
-    ).map((e) => e.productThumbnailUrl!).forEach(expectAsset);
+    for (final order in OrderMock.seed()) {
+      order.items!.map((e) => e.imageUrl!).forEach(expectAsset);
+    }
+    CartMock.seedLines.map((e) => e.imageUrl!).forEach(expectAsset);
   });
 
   test('category product counts match the catalog', () {
@@ -48,8 +50,10 @@ void main() {
   test('product ids are unique and order snapshots point at real products', () {
     final ids = ProductMock.products.map((e) => e.id).toSet();
     expect(ids.length, ProductMock.products.length);
-    for (final order in OrderMock.generateOrders(count: 20)) {
-      expect(ids, contains(order.productId));
+    for (final order in OrderMock.seed()) {
+      for (final item in order.items!) {
+        expect(ids, contains(item.productId));
+      }
     }
   });
 

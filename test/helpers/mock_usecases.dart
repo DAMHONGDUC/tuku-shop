@@ -3,7 +3,6 @@ import 'package:tuku_shop/src/features/banner/domain/domain.dart';
 import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 import 'package:tuku_shop/src/features/category/domain/domain.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
-import 'package:tuku_shop/src/features/order/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/profile/domain/domain.dart';
 import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
@@ -18,10 +17,6 @@ class MockGetNotificationsUsecase extends Mock
 
 class MockGetProfileSettingsUsecase extends Mock
     implements GetProfileSettingsUsecase {}
-
-class MockGetMyOrderUsecase extends Mock implements GetMyOrderUsecase {}
-
-class MockGetOrderDetailUsecase extends Mock implements GetOrderDetailUsecase {}
 
 class MockGetProductDetailUsecase extends Mock
     implements GetProductDetailUsecase {}
@@ -60,3 +55,6 @@ class MockUpdateCartQuantityUsecase extends Mock
 class MockRemoveCartLineUsecase extends Mock implements RemoveCartLineUsecase {}
 
 class MockAddToCartUsecase extends Mock implements AddToCartUsecase {}
+
+class MockMarkAllNotificationsReadUsecase extends Mock
+    implements MarkAllNotificationsReadUsecase {}

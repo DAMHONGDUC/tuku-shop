@@ -11,6 +11,7 @@ import '../../../../helpers/mock_usecases.dart';
 void main() {
   late MockGetNotificationsUsecase usecase;
   late NotificationsController controller;
+  late MockMarkAllNotificationsReadUsecase markRead;
 
   final tNotificationData = NotificationData(
     listNotification: const [],
@@ -19,7 +20,11 @@ void main() {
 
   setUp(() {
     usecase = MockGetNotificationsUsecase();
-    controller = NotificationsController(usecase);
+    markRead = MockMarkAllNotificationsReadUsecase();
+    when(
+      () => markRead.call(NoParams()),
+    ).thenAnswer((_) async => const Right(unit));
+    controller = NotificationsController(usecase, markRead);
   });
 
   tearDown(() => controller.close());

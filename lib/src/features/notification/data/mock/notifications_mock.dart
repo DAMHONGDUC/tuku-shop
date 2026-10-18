@@ -132,12 +132,13 @@ class NotificationsMock {
 
     final types = NotificationType.values;
 
+    var minutesAgo = 0;
     return List.generate(count, (index) {
       final type = types[random.nextInt(types.length)];
-      final isRead = index == 0 ? true : random.nextBool();
-      final timestamp = DateTime.now().subtract(
-        Duration(minutes: random.nextInt(60 * 24 * 30)), // up to 30 days old
-      );
+      // Newest first; the three newest are unread.
+      final isRead = index >= 3;
+      minutesAgo += 90 + random.nextInt(60 * 30);
+      final timestamp = DateTime.now().subtract(Duration(minutes: minutesAgo));
       final relatedId = 'TK${100001 + index}';
       final id = 'N${index + 1}';
 
@@ -148,7 +149,7 @@ class NotificationsMock {
         case NotificationType.orderUpdate:
           final i = random.nextInt(orderTitles.length);
           title = orderTitles[i];
-          body = orderBodies[i].replaceAll('{id}', relatedId.substring(0, 6));
+          body = orderBodies[i].replaceAll('{id}', relatedId);
           break;
         case NotificationType.promotion:
           final i = random.nextInt(promoTitles.length);

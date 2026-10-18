@@ -194,5 +194,138 @@
                 "type": "String"
             }
         }
-    }
+    },
+    "checkout_title": "Checkout",
+    "checkout_items_title": "Items",
+    "checkout_items": "Items ({count})",
+    "@checkout_items": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "checkout_ship_to": "Ship to",
+    "checkout_change": "Change",
+    "checkout_no_address": "Add an address to continue",
+    "checkout_shipping": "Shipping",
+    "checkout_shipping_days": "{min}–{max} days",
+    "@checkout_shipping_days": {
+        "placeholders": {
+            "min": {
+                "type": "int"
+            },
+            "max": {
+                "type": "int"
+            }
+        }
+    },
+    "checkout_free": "Free",
+    "checkout_payment": "Payment",
+    "checkout_voucher": "Voucher",
+    "checkout_voucher_hint": "Enter a code",
+    "checkout_voucher_invalid": "This code isn't valid",
+    "checkout_voucher_try": "Try TUKU10 for 10% off or FREESHIP",
+    "checkout_voucher_percent": "{code} · {percent}% off",
+    "@checkout_voucher_percent": {
+        "placeholders": {
+            "code": {
+                "type": "String"
+            },
+            "percent": {
+                "type": "int"
+            }
+        }
+    },
+    "checkout_voucher_free_shipping": "{code} · free standard shipping",
+    "@checkout_voucher_free_shipping": {
+        "placeholders": {
+            "code": {
+                "type": "String"
+            }
+        }
+    },
+    "checkout_apply": "Apply",
+    "checkout_summary": "Summary",
+    "checkout_discount": "Discount",
+    "checkout_place_order": "Place order · {total}",
+    "@checkout_place_order": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "checkout_place_failed": "Couldn't place the order. Try again.",
+    "success_title": "Order placed!",
+    "success_message": "Thanks for shopping with us. We'll let you know when it ships.",
+    "success_order": "Order",
+    "success_arrives": "Arrives by",
+    "success_track": "Track order",
+    "success_continue": "Continue shopping",
+    "address_book_title": "Addresses",
+    "address_pick_title": "Choose an address",
+    "address_add": "Add address",
+    "address_edit": "Edit address",
+    "address_default": "Default",
+    "address_set_default": "Set as default",
+    "address_delete": "Delete",
+    "address_empty_title": "No addresses yet",
+    "address_empty_message": "Add where you'd like your orders delivered.",
+    "address_full_name": "Full name",
+    "address_phone": "Phone",
+    "address_street": "Street and number",
+    "address_city": "City",
+    "address_state": "State",
+    "address_postal_code": "Postal code",
+    "address_make_default": "Use as my default address",
+    "address_save": "Save address",
+    "address_save_failed": "Couldn't save the address. Try again.",
+    "address_field_invalid": "Check this field",
+    "orders_title": "My orders",
+    "orders_empty_title": "No orders here",
+    "orders_empty_message": "Orders in this status will show up here.",
+    "order_status_to_confirm": "To confirm",
+    "order_status_to_ship": "To ship",
+    "order_status_on_the_way": "On the way",
+    "order_status_delivered": "Delivered",
+    "order_status_cancelled": "Cancelled",
+    "order_status_returned": "Returned",
+    "order_headline_to_confirm": "We've received your order",
+    "order_headline_to_ship": "Your order is being packed",
+    "order_headline_on_the_way": "Your order is on the way",
+    "order_headline_delivered": "Delivered. Enjoy!",
+    "order_headline_cancelled": "This order was cancelled",
+    "order_headline_returned": "This order was returned",
+    "order_eta": "Estimated delivery {date}",
+    "@order_eta": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "order_more_items": "+{count} more items",
+    "@order_more_items": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "order_items_total": "{count} items · total",
+    "@order_items_total": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "order_cancel": "Cancel order",
+    "order_cancel_title": "Cancel this order?",
+    "order_cancel_message": "We haven't confirmed it yet, so nothing will be charged.",
+    "order_cancel_keep": "Keep order",
+    "order_cancel_confirm": "Cancel order",
+    "order_cancelled_toast": "Order cancelled",
+    "order_buy_again": "Buy again"
 }

@@ -721,6 +721,432 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Buy now · {total}'**
   String sheet_buy_now(String total);
+
+  /// No description provided for @checkout_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Checkout'**
+  String get checkout_title;
+
+  /// No description provided for @checkout_items_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Items'**
+  String get checkout_items_title;
+
+  /// No description provided for @checkout_items.
+  ///
+  /// In en, this message translates to:
+  /// **'Items ({count})'**
+  String checkout_items(int count);
+
+  /// No description provided for @checkout_ship_to.
+  ///
+  /// In en, this message translates to:
+  /// **'Ship to'**
+  String get checkout_ship_to;
+
+  /// No description provided for @checkout_change.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get checkout_change;
+
+  /// No description provided for @checkout_no_address.
+  ///
+  /// In en, this message translates to:
+  /// **'Add an address to continue'**
+  String get checkout_no_address;
+
+  /// No description provided for @checkout_shipping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shipping'**
+  String get checkout_shipping;
+
+  /// No description provided for @checkout_shipping_days.
+  ///
+  /// In en, this message translates to:
+  /// **'{min}–{max} days'**
+  String checkout_shipping_days(int min, int max);
+
+  /// No description provided for @checkout_free.
+  ///
+  /// In en, this message translates to:
+  /// **'Free'**
+  String get checkout_free;
+
+  /// No description provided for @checkout_payment.
+  ///
+  /// In en, this message translates to:
+  /// **'Payment'**
+  String get checkout_payment;
+
+  /// No description provided for @checkout_voucher.
+  ///
+  /// In en, this message translates to:
+  /// **'Voucher'**
+  String get checkout_voucher;
+
+  /// No description provided for @checkout_voucher_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a code'**
+  String get checkout_voucher_hint;
+
+  /// No description provided for @checkout_voucher_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'This code isn\'t valid'**
+  String get checkout_voucher_invalid;
+
+  /// No description provided for @checkout_voucher_try.
+  ///
+  /// In en, this message translates to:
+  /// **'Try TUKU10 for 10% off or FREESHIP'**
+  String get checkout_voucher_try;
+
+  /// No description provided for @checkout_voucher_percent.
+  ///
+  /// In en, this message translates to:
+  /// **'{code} · {percent}% off'**
+  String checkout_voucher_percent(String code, int percent);
+
+  /// No description provided for @checkout_voucher_free_shipping.
+  ///
+  /// In en, this message translates to:
+  /// **'{code} · free standard shipping'**
+  String checkout_voucher_free_shipping(String code);
+
+  /// No description provided for @checkout_apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
+  String get checkout_apply;
+
+  /// No description provided for @checkout_summary.
+  ///
+  /// In en, this message translates to:
+  /// **'Summary'**
+  String get checkout_summary;
+
+  /// No description provided for @checkout_discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Discount'**
+  String get checkout_discount;
+
+  /// No description provided for @checkout_place_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Place order · {total}'**
+  String checkout_place_order(String total);
+
+  /// No description provided for @checkout_place_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t place the order. Try again.'**
+  String get checkout_place_failed;
+
+  /// No description provided for @success_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Order placed!'**
+  String get success_title;
+
+  /// No description provided for @success_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Thanks for shopping with us. We\'ll let you know when it ships.'**
+  String get success_message;
+
+  /// No description provided for @success_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Order'**
+  String get success_order;
+
+  /// No description provided for @success_arrives.
+  ///
+  /// In en, this message translates to:
+  /// **'Arrives by'**
+  String get success_arrives;
+
+  /// No description provided for @success_track.
+  ///
+  /// In en, this message translates to:
+  /// **'Track order'**
+  String get success_track;
+
+  /// No description provided for @success_continue.
+  ///
+  /// In en, this message translates to:
+  /// **'Continue shopping'**
+  String get success_continue;
+
+  /// No description provided for @address_book_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Addresses'**
+  String get address_book_title;
+
+  /// No description provided for @address_pick_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose an address'**
+  String get address_pick_title;
+
+  /// No description provided for @address_add.
+  ///
+  /// In en, this message translates to:
+  /// **'Add address'**
+  String get address_add;
+
+  /// No description provided for @address_edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit address'**
+  String get address_edit;
+
+  /// No description provided for @address_default.
+  ///
+  /// In en, this message translates to:
+  /// **'Default'**
+  String get address_default;
+
+  /// No description provided for @address_set_default.
+  ///
+  /// In en, this message translates to:
+  /// **'Set as default'**
+  String get address_set_default;
+
+  /// No description provided for @address_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get address_delete;
+
+  /// No description provided for @address_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No addresses yet'**
+  String get address_empty_title;
+
+  /// No description provided for @address_empty_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Add where you\'d like your orders delivered.'**
+  String get address_empty_message;
+
+  /// No description provided for @address_full_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Full name'**
+  String get address_full_name;
+
+  /// No description provided for @address_phone.
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get address_phone;
+
+  /// No description provided for @address_street.
+  ///
+  /// In en, this message translates to:
+  /// **'Street and number'**
+  String get address_street;
+
+  /// No description provided for @address_city.
+  ///
+  /// In en, this message translates to:
+  /// **'City'**
+  String get address_city;
+
+  /// No description provided for @address_state.
+  ///
+  /// In en, this message translates to:
+  /// **'State'**
+  String get address_state;
+
+  /// No description provided for @address_postal_code.
+  ///
+  /// In en, this message translates to:
+  /// **'Postal code'**
+  String get address_postal_code;
+
+  /// No description provided for @address_make_default.
+  ///
+  /// In en, this message translates to:
+  /// **'Use as my default address'**
+  String get address_make_default;
+
+  /// No description provided for @address_save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save address'**
+  String get address_save;
+
+  /// No description provided for @address_save_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Couldn\'t save the address. Try again.'**
+  String get address_save_failed;
+
+  /// No description provided for @address_field_invalid.
+  ///
+  /// In en, this message translates to:
+  /// **'Check this field'**
+  String get address_field_invalid;
+
+  /// No description provided for @orders_title.
+  ///
+  /// In en, this message translates to:
+  /// **'My orders'**
+  String get orders_title;
+
+  /// No description provided for @orders_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No orders here'**
+  String get orders_empty_title;
+
+  /// No description provided for @orders_empty_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders in this status will show up here.'**
+  String get orders_empty_message;
+
+  /// No description provided for @order_status_to_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'To confirm'**
+  String get order_status_to_confirm;
+
+  /// No description provided for @order_status_to_ship.
+  ///
+  /// In en, this message translates to:
+  /// **'To ship'**
+  String get order_status_to_ship;
+
+  /// No description provided for @order_status_on_the_way.
+  ///
+  /// In en, this message translates to:
+  /// **'On the way'**
+  String get order_status_on_the_way;
+
+  /// No description provided for @order_status_delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered'**
+  String get order_status_delivered;
+
+  /// No description provided for @order_status_cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancelled'**
+  String get order_status_cancelled;
+
+  /// No description provided for @order_status_returned.
+  ///
+  /// In en, this message translates to:
+  /// **'Returned'**
+  String get order_status_returned;
+
+  /// No description provided for @order_headline_to_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'We\'ve received your order'**
+  String get order_headline_to_confirm;
+
+  /// No description provided for @order_headline_to_ship.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order is being packed'**
+  String get order_headline_to_ship;
+
+  /// No description provided for @order_headline_on_the_way.
+  ///
+  /// In en, this message translates to:
+  /// **'Your order is on the way'**
+  String get order_headline_on_the_way;
+
+  /// No description provided for @order_headline_delivered.
+  ///
+  /// In en, this message translates to:
+  /// **'Delivered. Enjoy!'**
+  String get order_headline_delivered;
+
+  /// No description provided for @order_headline_cancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'This order was cancelled'**
+  String get order_headline_cancelled;
+
+  /// No description provided for @order_headline_returned.
+  ///
+  /// In en, this message translates to:
+  /// **'This order was returned'**
+  String get order_headline_returned;
+
+  /// No description provided for @order_eta.
+  ///
+  /// In en, this message translates to:
+  /// **'Estimated delivery {date}'**
+  String order_eta(String date);
+
+  /// No description provided for @order_more_items.
+  ///
+  /// In en, this message translates to:
+  /// **'+{count} more items'**
+  String order_more_items(int count);
+
+  /// No description provided for @order_items_total.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} items · total'**
+  String order_items_total(int count);
+
+  /// No description provided for @order_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel order'**
+  String get order_cancel;
+
+  /// No description provided for @order_cancel_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel this order?'**
+  String get order_cancel_title;
+
+  /// No description provided for @order_cancel_message.
+  ///
+  /// In en, this message translates to:
+  /// **'We haven\'t confirmed it yet, so nothing will be charged.'**
+  String get order_cancel_message;
+
+  /// No description provided for @order_cancel_keep.
+  ///
+  /// In en, this message translates to:
+  /// **'Keep order'**
+  String get order_cancel_keep;
+
+  /// No description provided for @order_cancel_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel order'**
+  String get order_cancel_confirm;
+
+  /// No description provided for @order_cancelled_toast.
+  ///
+  /// In en, this message translates to:
+  /// **'Order cancelled'**
+  String get order_cancelled_toast;
+
+  /// No description provided for @order_buy_again.
+  ///
+  /// In en, this message translates to:
+  /// **'Buy again'**
+  String get order_buy_again;
 }
 
 class _AppLocalizationsDelegate

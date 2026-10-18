@@ -88,8 +88,8 @@ class ProductRepositoryImpl implements ProductRepository {
   Future<Either<Failure, SearchSuggestions>> getSearchSuggestions() =>
       _guard(() async {
         final results = await Future.wait([
-          searchHistory.getRecent(),
-          dataSource.getTrendingSearches(),
+          Future.sync(searchHistory.getRecent),
+          Future.sync(dataSource.getTrendingSearches),
         ]);
         return SearchSuggestions(recent: results[0], trending: results[1]);
       });

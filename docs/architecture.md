@@ -7,10 +7,12 @@ Feature-based Clean Architecture: each feature owns its `domain` / `data` / `pre
 | Path | Contents |
 |---|---|
 | `lib/src/features/product/` | Catalog queries (category, tag, sale, keyword, sort, paging), product detail, reviews, search, app-wide favorites state |
-| `lib/src/features/order/` | My orders + order detail |
+| `lib/src/features/order/` | Orders (seeded history, place, cancel), My orders by status, order detail with timeline |
 | `lib/src/features/banner/`, `category/`, `notification/`, `profile/` | Feature slices; `category/` also owns the Categories tab |
 | `lib/src/features/wishlist/` | Saved product ids (seeded on first launch) and the Wishlist tab |
-| `lib/src/features/cart/` | Cart tab |
+| `lib/src/features/cart/` | Cart lines (seeded), app-wide cart state, Cart tab |
+| `lib/src/features/checkout/` | Shipping, payment, vouchers, totals math, checkout and order-success screens |
+| `lib/src/features/address/` | Address book (seeded) with pick mode for checkout |
 | `lib/src/features/auth/` | Login screen + session; first launch saves the demo user, so the app opens signed in |
 | `lib/src/features/home/` | Presentation only: composes banner, category and product-strip sections, each loading on its own |
 | `lib/src/features/splash/`, `tutorial/`, `register/`, `bottom_tab/`, `preview_media/` | Screen flows |

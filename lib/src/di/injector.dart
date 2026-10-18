@@ -1,7 +1,9 @@
+import 'package:tuku_shop/src/features/address/address_di.dart';
 import 'package:tuku_shop/src/features/auth/auth_di.dart';
 import 'package:tuku_shop/src/features/banner/banner_di.dart';
 import 'package:tuku_shop/src/features/cart/cart_di.dart';
 import 'package:tuku_shop/src/features/category/category_di.dart';
+import 'package:tuku_shop/src/features/checkout/checkout_di.dart';
 import 'package:tuku_shop/src/features/notification/notification_di.dart';
 import 'package:tuku_shop/src/features/order/order_di.dart';
 import 'package:tuku_shop/src/features/product/product_di.dart';
@@ -19,10 +21,12 @@ class Injector {
     // controller chain. There's no cross-feature ordering dependency here:
     // "home" and "bottom_tab" only compose other features' presentation
     // widgets, they don't own any DI of their own.
+    AddressDi.config();
     AuthDi.config();
     BannerDi.config();
     CartDi.config();
     CategoryDi.config();
+    CheckoutDi.config();
     ProductDi.config();
     OrderDi.config();
     NotificationDi.config();

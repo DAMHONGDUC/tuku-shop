@@ -5,6 +5,7 @@ import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/core/l10n/app_localizations.dart';
 import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/cart/presentation/cart/cart_controller.dart';
+import 'package:tuku_shop/src/features/notification/presentation/notification_badge/notification_badge_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/favorites/favorites_controller.dart';
 
 class MainMaterialApp extends StatelessWidget {
@@ -24,6 +25,7 @@ class MainMaterialApp extends StatelessWidget {
       providers: [
         BlocProvider.value(value: getIt<FavoritesController>()..load()),
         BlocProvider.value(value: getIt<CartController>()..load()),
+        BlocProvider.value(value: getIt<NotificationBadgeController>()..load()),
       ],
       child: MaterialApp.router(
         theme: theme,

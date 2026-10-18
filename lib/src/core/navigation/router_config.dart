@@ -1,6 +1,8 @@
 import 'package:tuku_shop/src/core/navigation/extra_codec_config.dart';
 import 'package:tuku_shop/src/features/bottom_tab/bottom_tab_stack.dart';
+import 'package:tuku_shop/src/features/address/presentation/address_book/config/address_stack.dart';
 import 'package:tuku_shop/src/features/auth/presentation/login/config/login_stack.dart';
+import 'package:tuku_shop/src/features/checkout/presentation/checkout/config/checkout_stack.dart';
 import 'package:tuku_shop/src/features/notification/presentation/notifications/config/notifications_stack.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/config/product_stack.dart';
 import 'package:tuku_shop/src/features/register/config/register_stack.dart';
@@ -38,6 +40,8 @@ final GoRouter kAppRouter = GoRouter(
     ...RegisterStack.routes,
     ...ProductStack.routes,
     ...NotificationsStack.routes,
+    ...CheckoutStack.routes,
+    ...AddressStack.routes,
     BottomTabStack.statefulShellRoute,
   ],
 );

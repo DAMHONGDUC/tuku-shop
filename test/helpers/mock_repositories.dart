@@ -6,9 +6,9 @@ import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 import 'package:tuku_shop/src/features/banner/domain/domain.dart';
 import 'package:tuku_shop/src/features/category/data/data_sources/category_remote_data_source.dart';
 import 'package:tuku_shop/src/features/category/domain/domain.dart';
+import 'package:tuku_shop/src/features/notification/data/data_sources/notification_local_data_source.dart';
 import 'package:tuku_shop/src/features/notification/data/data_sources/notification_remote_data_source.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
-import 'package:tuku_shop/src/features/order/data/data_sources/order_remote_data_source.dart';
 import 'package:tuku_shop/src/features/order/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/data/data_sources/product_remote_data_source.dart';
 import 'package:tuku_shop/src/features/product/data/data_sources/search_history_local_data_source.dart';
@@ -42,8 +42,6 @@ class MockBannerRemoteDataSource extends Mock
 class MockNotificationRemoteDataSource extends Mock
     implements NotificationRemoteDataSource {}
 
-class MockOrderRemoteDataSource extends Mock implements OrderRemoteDataSource {}
-
 class MockProfileRemoteDataSource extends Mock
     implements ProfileRemoteDataSource {}
 
@@ -57,3 +55,6 @@ class MockSearchHistoryLocalDataSource extends Mock
     implements SearchHistoryLocalDataSource {}
 
 class MockCartRepository extends Mock implements CartRepository {}
+
+class MockNotificationLocalDataSource extends Mock
+    implements NotificationLocalDataSource {}

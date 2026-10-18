@@ -1,64 +1,120 @@
 import 'package:equatable/equatable.dart';
 import 'package:tuku_shop/src/core/core.dart';
-import 'package:tuku_shop/src/features/product/domain/domain.dart';
+
+class OrderItem extends Equatable {
+  final String productId;
+  final String name;
+  final String imageUrl;
+  final String colorName;
+  final String size;
+  final double unitPrice;
+  final int quantity;
+
+  const OrderItem({
+    required this.productId,
+    required this.name,
+    required this.imageUrl,
+    required this.colorName,
+    required this.size,
+    required this.unitPrice,
+    required this.quantity,
+  });
+
+  double get total => unitPrice * quantity;
+
+  @override
+  List<Object?> get props => [
+    productId,
+    name,
+    imageUrl,
+    colorName,
+    size,
+    unitPrice,
+    quantity,
+  ];
+}
+
+/// Where the order goes, copied from the address book when it was placed.
+class ShipTo extends Equatable {
+  final String fullName;
+  final String phone;
+  final String address;
+
+  const ShipTo({
+    required this.fullName,
+    required this.phone,
+    required this.address,
+  });
+
+  @override
+  List<Object?> get props => [fullName, phone, address];
+}
+
+class OrderEvent extends Equatable {
+  final OrderStatus status;
+  final DateTime at;
+
+  const OrderEvent({required this.status, required this.at});
+
+  @override
+  List<Object?> get props => [status, at];
+}
 
 class OrderEntity extends Equatable {
   final String id;
-  final String productName;
-  final String productId;
-  final int quantity;
+  final DateTime createdAt;
   final OrderStatus status;
-  final double totalPrice;
-  final String productThumbnailUrl;
-  final ProductColor productColor;
-  final ProductSize productSize;
+  final List<OrderItem> items;
+  final ShipTo shipTo;
+  final String shippingMethod;
+  final double shippingFee;
+  final String paymentMethod;
+  final double subtotal;
+  final double discount;
+  final double total;
+  final String? voucherCode;
+  final DateTime estimatedDelivery;
+
+  /// Status changes so far, oldest first.
+  final List<OrderEvent> events;
 
   const OrderEntity({
     required this.id,
-    required this.productName,
-    required this.productId,
-    required this.quantity,
+    required this.createdAt,
     required this.status,
-    required this.totalPrice,
-    required this.productThumbnailUrl,
-    required this.productColor,
-    required this.productSize,
+    required this.items,
+    required this.shipTo,
+    required this.shippingMethod,
+    required this.shippingFee,
+    required this.paymentMethod,
+    required this.subtotal,
+    required this.discount,
+    required this.total,
+    required this.estimatedDelivery,
+    required this.events,
+    this.voucherCode,
   });
 
-  OrderEntity copyWith({
-    String? id,
-    String? productName,
-    String? productId,
-    int? quantity,
-    OrderStatus? status,
-    double? totalPrice,
-    String? productThumbnailUrl,
-    ProductColor? productColor,
-    ProductSize? productSize,
-  }) {
-    return OrderEntity(
-      id: id ?? this.id,
-      productName: productName ?? this.productName,
-      productId: productId ?? this.productId,
-      quantity: quantity ?? this.quantity,
-      status: status ?? this.status,
-      totalPrice: totalPrice ?? this.totalPrice,
-      productThumbnailUrl: productThumbnailUrl ?? this.productThumbnailUrl,
-      productColor: productColor ?? this.productColor,
-      productSize: productSize ?? this.productSize,
-    );
-  }
+  int get itemCount => items.fold(0, (sum, i) => sum + i.quantity);
+
+  /// Only an order nobody has confirmed yet can be cancelled.
+  bool get canCancel => status == OrderStatus.waitingForConfirmation;
 
   @override
   List<Object?> get props => [
     id,
-    productName,
-    productId,
-    quantity,
+    createdAt,
     status,
-    totalPrice,
-    productThumbnailUrl,
-    productColor,
-    productSize,
+    items,
+    shipTo,
+    shippingMethod,
+    shippingFee,
+    paymentMethod,
+    subtotal,
+    discount,
+    total,
+    voucherCode,
+    estimatedDelivery,
+    events,
   ];
 }

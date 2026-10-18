@@ -20,7 +20,9 @@ class WishlistRepositoryImpl implements WishlistRepository {
   @override
   Future<Either<Failure, List<String>>> getIds() async {
     try {
-      return Right(List.unmodifiable(await _ids()));
+      // Always a fresh read, so pull-to-refresh behaves like the network.
+      _cache = await dataSource.getIds();
+      return Right(List.unmodifiable(_cache!));
     } catch (e) {
       return Left(CacheFailure());
     }

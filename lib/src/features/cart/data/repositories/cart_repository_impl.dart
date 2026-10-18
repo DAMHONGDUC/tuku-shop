@@ -62,7 +62,9 @@ class CartRepositoryImpl implements CartRepository {
   @override
   Future<Either<Failure, List<CartLine>>> getLines() async {
     try {
-      return Right(List.unmodifiable(await _lines()));
+      // Always a fresh read, so pull-to-refresh behaves like the network.
+      _cache = (await dataSource.getLines()).map(_toEntity).toList();
+      return Right(List.unmodifiable(_cache!));
     } catch (e) {
       return Left(CacheFailure());
     }
