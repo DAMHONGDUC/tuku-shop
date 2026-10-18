@@ -33,4 +33,17 @@ Rerun step 3 after every `git pull`.
 | `make analyze` | `flutter analyze --fatal-infos` |
 | `make test [TEST=<path>]` | `flutter test`, one file or folder with `TEST` |
 | `make env-<flavor>` | `env_assets/` → `env/`, `ios/`, `android/` (flavors: `dev`, `prod`) |
-| `make build-ios-<flavor>` / `release-ios-<flavor>` / `upload-ios-<flavor>` | iOS release; needs `ios/fastlane/Fastfile` (TODO: confirm, not set up yet) |
+| `make build-ios-<flavor>` | Release IPA into `build/ios/ipa` |
+| `make release-ios-<flavor> [NOTE="..."]` | Build, bump the build number, upload to TestFlight (fastlane `beta`) |
+| `make upload-ios-<flavor>` | Upload the IPA already built (fastlane `upload`) |
+
+## iOS release
+
+Lanes come from `packages/script-tools/flutter/fastlane/Fastfile`; `ios/fastlane/Fastfile` only declares team `WNG5UWNJ6H` and bundle id `app.dd.tuku.shop`.
+
+| Step | Command |
+|---|---|
+| Credentials (once per machine) | `cp ios/fastlane/.env.example ios/fastlane/.env`, then fill the six keys |
+| Distribution certificate (once per team) | `cd ios && bundle exec fastlane certificates` |
+| Check without building | `cd ios && bundle exec fastlane preflight flavor:dev` |
+| Release | `make release-ios-dev NOTE="..."`, then commit the bumped `pubspec.yaml` |

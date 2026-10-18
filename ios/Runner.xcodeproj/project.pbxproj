@@ -486,6 +486,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				DEVELOPMENT_TEAM = WNG5UWNJ6H;
 				PRODUCT_BUNDLE_IDENTIFIER = app.dd.tuku.shop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -668,6 +669,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				DEVELOPMENT_TEAM = WNG5UWNJ6H;
 				PRODUCT_BUNDLE_IDENTIFIER = app.dd.tuku.shop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -690,6 +692,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				DEVELOPMENT_TEAM = WNG5UWNJ6H;
 				PRODUCT_BUNDLE_IDENTIFIER = app.dd.tuku.shop;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";

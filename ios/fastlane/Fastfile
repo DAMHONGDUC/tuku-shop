@@ -1,45 +1,19 @@
-default_platform(:ios)
+# What this app is, and nothing else. The lanes live in script-tools:
+#
+#   bundle exec fastlane certificates          # local only, once
+#   bundle exec fastlane preflight             # checks, no build
+#   bundle exec fastlane beta flavor:dev bump:true notes:"..."
+#   bundle exec fastlane upload flavor:dev     # a built IPA that failed to upload
+#
+# From the project root these are `make release-ios-<flavor>` and friends.
+# Nothing here archives: `packages/script-tools/flutter/build_ipa.sh` does.
+import "../../packages/script-tools/flutter/fastlane/Fastfile"
 
-# Path to the Flutter project root (this Fastfile lives in ios/fastlane).
-FLUTTER_ROOT = File.expand_path("../..", __dir__)
-IPA_OUTPUT_DIR = File.join(FLUTTER_ROOT, "build/ios/ipa")
-
-platform :ios do
-  desc "Build a release IPA with Flutter and distribute it via Firebase App Distribution"
-  desc ""
-  desc "Requires manual code signing to be configured via secrets — see docs/ci-cd.md"
-  desc "(APPLE_TEAM_ID, APPLE_PROVISIONING_PROFILE_NAME, plus the"
-  desc "certificate/profile imported into the CI keychain before this lane runs)."
-  lane :firebase_distribute do
-    export_options = {
-      method: "ad-hoc",
-      teamID: ENV["APPLE_TEAM_ID"],
-      signingStyle: "manual",
-      provisioningProfiles: {
-        "app.dd.tuku.shop" => ENV["APPLE_PROVISIONING_PROFILE_NAME"],
-      },
-    }
-    export_options_path = File.join(FLUTTER_ROOT, "ios/ExportOptions.plist")
-    File.write(export_options_path, export_options.to_plist)
-
-    dart_defines = ENV["DART_DEFINE_FILE"]
-    dart_define_arg = dart_defines ? "--dart-define-from-file=#{dart_defines}" : ""
-
-    sh(
-      "cd #{FLUTTER_ROOT} && flutter build ipa --release " \
-      "--export-options-plist=ios/ExportOptions.plist #{dart_define_arg}".strip
-    )
-
-    ipa_path = Dir[File.join(IPA_OUTPUT_DIR, "*.ipa")].first
-    UI.user_error!("No .ipa file found in #{IPA_OUTPUT_DIR}") unless ipa_path
-
-    firebase_app_distribution(
-      app: ENV["FIREBASE_IOS_APP_ID"] || "1:374119896673:ios:ace4479e3100e8ca407c20",
-      groups: ENV["FIREBASE_DISTRIBUTION_GROUPS"] || "testers",
-      release_notes: ENV["RELEASE_NOTES"] || "Automated build from CI",
-      ipa_path: ipa_path,
-      # Auth is picked up automatically from either the FIREBASE_TOKEN or
-      # GOOGLE_APPLICATION_CREDENTIALS environment variable — see docs/ci-cd.md.
-    )
-  end
-end
+# `targets` is ordered; the first is the app and the bundle id every upload
+# uses. An extension added later goes here AND in the Matchfile.
+sd_ios_app(
+  team_id: "WNG5UWNJ6H",
+  targets: [
+    { name: "Runner", bundle_id: "app.dd.tuku.shop" },
+  ],
+)
