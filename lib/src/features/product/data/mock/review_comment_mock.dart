@@ -1,24 +1,22 @@
 import 'dart:math';
+
 import 'package:tuku_shop/src/features/product/data/models/review_comment_model.dart';
 
-const kImgReviewPath = 'assets/images/review_comment/';
-const kVidReviewPath = 'assets/videos/review_comment/';
-
 class ReviewCommentMock {
-  static final _random = Random();
+  // Fixed seed: the same reviews on every launch.
+  static final _random = Random(7);
 
-  static final _names = [
+  static const _names = [
     'Alice',
-    'Bob',
+    'Bao',
     'Clara',
     'David',
     'Ethan',
     'Fiona',
-    'George',
     'Hana',
     'Ivy',
     'Jack',
-    'Liam',
+    'Linh',
     'Mia',
     'Noah',
     'Olivia',
@@ -30,95 +28,60 @@ class ReviewCommentMock {
     'Uma',
     'Victor',
     'Wendy',
-    'Xander',
     'Yara',
     'Zoe',
+    'Minh',
   ];
 
-  static final _comments = [
-    'Great quality, worth the price!',
-    'Really stylish and durable.',
-    'Perfect size for my needs.',
-    'Looks good but could be stronger.',
-    'Comfortable and lightweight.',
-    'Material feels premium.',
-    'Nice design but a bit pricey.',
-    'Color is vibrant and beautiful.',
-    'Exactly as described, love it!',
-    'Could be improved with more pockets.',
-    'Fast shipping, very satisfied!',
-    'Exceeded my expectations.',
-    'Good value for money.',
-    'Not as described, a bit disappointed.',
-    'Packaging was excellent.',
-    'Would definitely buy again.',
-    'Customer service was helpful.',
-    'Feels cheap, expected better.',
-    'Love the texture and finish.',
-    'Perfect gift for a friend.',
+  static const _comments = [
+    'Fits true to size and the fabric feels great.',
+    'Even nicer in person. Already wore it twice this week.',
+    'Color is exactly like the photos.',
+    'Runs a little small, I would size up.',
+    'Soft, comfortable and washes well.',
+    'Great quality for the price.',
+    'Perfect for the office and the weekend.',
+    'Fast delivery and lovely packaging.',
+    'The cut is really flattering.',
+    'Good basic, bought it in a second color.',
+    'A bit thinner than expected but still nice.',
+    'Got so many compliments on this!',
+    'Stitching and details feel premium.',
+    'Comfortable all day, no complaints.',
   ];
 
-  // Assets
-  static final _imageAssets = [
-    '${kImgReviewPath}img_review_1.jpg',
-    '${kImgReviewPath}img_review_2.jpg',
-    '${kImgReviewPath}img_review_3.jpg',
-    '${kImgReviewPath}img_review_4.jpg',
-    '${kImgReviewPath}img_review_5.jpg',
-    '${kImgReviewPath}img_review_6.jpg',
-    '${kImgReviewPath}img_review_7.jpg',
-    '${kImgReviewPath}img_review_8.jpg',
-  ];
-
-  static final _videoAssets = [
-    '${kVidReviewPath}vid_review_1.mp4',
-    '${kVidReviewPath}vid_review_2.mp4',
-    '${kVidReviewPath}vid_review_3.mp4',
-    '${kVidReviewPath}vid_review_4.mp4',
-    '${kVidReviewPath}vid_review_5.mp4',
-    '${kVidReviewPath}vid_review_6.mp4',
-    '${kVidReviewPath}vid_review_7.mp4',
-    '${kVidReviewPath}vid_review_8.mp4',
-  ];
-
-  /// Random assets (max 9, image or video)
-  static List<ReviewAssetModel> _generateRandomAssets({int max = 5}) {
-    final assetCount = _random.nextInt(max + 1);
-    final assets = <ReviewAssetModel>[];
-
-    for (int i = 0; i < assetCount; i++) {
-      final isImage = _random.nextBool();
-      if (isImage) {
-        final url = _imageAssets[_random.nextInt(_imageAssets.length)];
-        assets.add(ReviewAssetModel(url: url, type: 'image'));
-      } else {
-        final url = _videoAssets[_random.nextInt(_videoAssets.length)];
-        assets.add(ReviewAssetModel(url: url, type: 'video'));
-      }
-    }
-    return assets;
-  }
-
-  /// Generate a list of random review comments
-  static List<ReviewCommentModel> generateRandomReviews(int count) {
+  /// [count] reviews, newest first. About one in three carries one or two
+  /// customer photos drawn from [photos] (the product's own pictures).
+  static List<ReviewCommentModel> generateRandomReviews(
+    int count, {
+    List<String> photos = const [],
+  }) {
+    var daysAgo = 0;
     return List.generate(count, (index) {
-      final name = _names[_random.nextInt(_names.length)];
-      final comment = _comments[_random.nextInt(_comments.length)];
-      final rating = (_random.nextDouble() * 2) + 3; // rating từ 3.0 -> 5.0
-      final daysAgo = _random.nextInt(365);
-      final date = DateTime.now()
-          .subtract(Duration(days: daysAgo))
-          .toUtc()
-          .toString();
-      final assets = _generateRandomAssets();
+      daysAgo += 1 + _random.nextInt(12);
+      // Mostly 4–5 stars, the occasional 3.
+      final rating = 3 + _random.nextDouble() * 2;
+      final withPhotos = photos.isNotEmpty && _random.nextInt(3) == 0;
 
       return ReviewCommentModel(
         id: (index + 1).toString(),
-        userName: name,
-        comment: comment,
+        userName: _names[_random.nextInt(_names.length)],
+        comment: _comments[_random.nextInt(_comments.length)],
         rating: double.parse(rating.toStringAsFixed(1)),
-        createdAt: date,
-        assets: assets,
+        createdAt: DateTime.utc(
+          2026,
+          10,
+          1,
+        ).subtract(Duration(days: daysAgo)).toString(),
+        assets: withPhotos
+            ? [
+                for (var i = 0; i <= _random.nextInt(2); i++)
+                  ReviewAssetModel(
+                    url: photos[_random.nextInt(photos.length)],
+                    type: 'image',
+                  ),
+              ]
+            : const [],
       );
     });
   }

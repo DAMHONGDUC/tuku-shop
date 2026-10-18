@@ -20,8 +20,6 @@
 | `ANDROID_KEYSTORE_PASSWORD` | Android | `storePassword` from `android/key.properties` |
 | `ANDROID_KEY_PASSWORD` | Android | `keyPassword` from `android/key.properties` |
 | `ANDROID_KEY_ALIAS` | Android | `keyAlias` from `android/key.properties` |
-| `ANDROID_GOOGLE_SERVICES_JSON_BASE64` | Android | `base64 android/app/google-services.json` |
-| `IOS_GOOGLE_SERVICE_INFO_PLIST_BASE64` | iOS | `base64 ios/Runner/GoogleService-Info.plist` |
 | `FIREBASE_SERVICE_ACCOUNT_JSON_BASE64` | Both | base64 of a service account JSON with "Firebase App Distribution Admin" role |
 | `ENV_DART_DEFINE_JSON_BASE64` | Both, optional | `base64 env/dev.json`, passed as `--dart-define-from-file` |
 | `APPLE_TEAM_ID` | iOS | Apple Developer Team ID |

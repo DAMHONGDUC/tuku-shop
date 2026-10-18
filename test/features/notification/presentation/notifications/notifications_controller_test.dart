@@ -11,6 +11,7 @@ import '../../../../helpers/mock_usecases.dart';
 void main() {
   late MockGetNotificationsUsecase usecase;
   late NotificationsController controller;
+  late MockMarkAllNotificationsReadUsecase markRead;
 
   final tNotificationData = NotificationData(
     listNotification: const [],
@@ -19,7 +20,11 @@ void main() {
 
   setUp(() {
     usecase = MockGetNotificationsUsecase();
-    controller = NotificationsController(usecase);
+    markRead = MockMarkAllNotificationsReadUsecase();
+    when(
+      () => markRead.call(NoParams()),
+    ).thenAnswer((_) async => const Right(unit));
+    controller = NotificationsController(usecase, markRead);
   });
 
   tearDown(() => controller.close());
@@ -53,4 +58,33 @@ void main() {
       NotificationsErrorState(errorMsg: 'something wrong'),
     ],
   );
+
+  test('selectFilter narrows the visible list', () async {
+    final data = NotificationData(
+      listNotification: [
+        NotificationEntity(
+          id: '1',
+          title: 'Shipped',
+          body: '',
+          timestamp: DateTime(2026),
+          type: NotificationType.orderUpdate,
+        ),
+        NotificationEntity(
+          id: '2',
+          title: 'Sale',
+          body: '',
+          timestamp: DateTime(2026),
+          type: NotificationType.promotion,
+        ),
+      ],
+      listNotificationCategory: const [],
+    );
+    when(() => usecase.call(NoParams())).thenAnswer((_) async => Right(data));
+
+    await controller.getData();
+    controller.selectFilter(NotificationFilter.offers);
+
+    final state = controller.state as NotificationsLoadedState;
+    expect(state.visible.map((e) => e.id), ['2']);
+  });
 }

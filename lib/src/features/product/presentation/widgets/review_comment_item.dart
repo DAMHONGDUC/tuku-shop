@@ -1,7 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 const _kAssetsReviewSize = 100.0;
 
@@ -23,8 +23,13 @@ class ReviewCommentItem extends StatelessWidget {
         Row(
           children: [
             // User
-            Text(review.userName, style: SdTextStyle.body14().wSemiBold()),
-            const SdHorizontalSpacing(xRatio: 0.5),
+            Text(
+              review.userName,
+              style: SdTextStyleV5.body14().wSemiBold().wColor(
+                context.colorTheme.textDefault,
+              ),
+            ),
+            const SdHorizontalSpacingV5(xRatio: 0.5),
             // Rating
             Row(
               children: List.generate(
@@ -33,51 +38,54 @@ class ReviewCommentItem extends StatelessWidget {
                   index < review.rating.round()
                       ? Icons.star
                       : Icons.star_border,
-                  color: Colors.amber,
-                  size: 16,
+                  color: context.colorTheme.warning,
+                  size: 14,
                 ),
               ),
             ),
             Spacer(),
             // Date
             Text(
-              SdDateTimeHelper.dateTimeToDDMMYY(review.createdAt),
-              style: SdTextStyle.heading12().copyWith(
+              SdDateTimeHelperV5.dateTimeToDDMMYY(review.createdAt),
+              style: SdTextStyleV5.body12().copyWith(
                 color: context.colorTheme.textSubTitle,
               ),
             ),
           ],
         ),
-        const SdVerticalSpacing(xRatio: 0.25),
+        const SdVerticalSpacingV5(xRatio: 0.25),
 
         // Comment
-        Text(review.comment, style: SdTextStyle.body14()),
+        Text(
+          review.comment,
+          style: SdTextStyleV5.body14().wColor(context.colorTheme.textDefault),
+        ),
 
-        const SdVerticalSpacing(xRatio: 0.25),
+        const SdVerticalSpacingV5(xRatio: 0.25),
 
         // Assets (max 2)
         if (review.assets.isNotEmpty) ...[
-          const SizedBox(height: SdSpacing.s4),
+          const SizedBox(height: SdSpacingV5.s4),
           SizedBox(
             height: _kAssetsReviewSize,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: review.assets.length,
-              separatorBuilder: (_, __) => SdHorizontalSpacing(),
+              separatorBuilder: (_, __) => SdHorizontalSpacingV5(),
               itemBuilder: (context, index) {
                 final asset = review.assets[index];
                 return GestureDetector(
                   onTap: () {
                     final items = review.assets
                         .map(
-                          (e) => SdPreviewMediaConfig(
+                          (e) => SdPreviewMediaConfigV5(
                             filePath: e.url,
                             isVideo: e.type == AssetType.video,
                             isAsset: e.url.contains('asset'),
                           ),
                         )
                         .toList();
-                    SdPreviewMediaView.show(
+                    SdPreviewMediaViewV5.show(
                       context: context,
                       items: items,
                       initialIndex: index,
@@ -85,14 +93,14 @@ class ReviewCommentItem extends StatelessWidget {
                   },
                   child: asset.type == AssetType.image
                       ? ClipRRect(
-                          borderRadius: BorderRadius.circular(SdSpacing.s8),
-                          child: SdImage(
+                          borderRadius: BorderRadius.circular(SdSpacingV5.s8),
+                          child: SdImageV5(
                             imagePath: asset.url,
                             width: _kAssetsReviewSize,
                             height: _kAssetsReviewSize,
                           ),
                         )
-                      : SdVideoPlaceHolder(
+                      : SdVideoPlaceHolderV5(
                           videoPath: asset.url,
                           width: _kAssetsReviewSize,
                           height: _kAssetsReviewSize,
@@ -103,7 +111,7 @@ class ReviewCommentItem extends StatelessWidget {
           ),
         ],
 
-        if (!isLast) SdVerticalSpacing(),
+        if (!isLast) SdVerticalSpacingV5(),
       ],
     );
   }

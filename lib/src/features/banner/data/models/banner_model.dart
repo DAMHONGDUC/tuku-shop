@@ -9,6 +9,7 @@ class BannerModel {
   final String? subtitle;
   final String? price;
   final String? contentColor;
+  final String? categoryId;
 
   const BannerModel({
     this.id,
@@ -19,5 +20,6 @@ class BannerModel {
     this.subtitle,
     this.price,
     this.contentColor,
+    this.categoryId,
   });
 }

@@ -1,5 +1,387 @@
 {
     "@@locale": "en",
     "app_name": "Tuku Shop",
-    "splash_description": "Any shopping just from home"
+    "splash_description": "Any shopping just from home",
+    "login_title": "Welcome back",
+    "login_subtitle": "Sign in to continue shopping",
+    "login_email_label": "Email",
+    "login_email_hint": "you@example.com",
+    "login_password_label": "Password",
+    "login_password_hint": "Enter your password",
+    "login_button": "Sign in",
+    "login_signing_in": "Signing in...",
+    "login_no_account": "Don't have an account?",
+    "login_register": "Register",
+    "login_demo_title": "Demo account",
+    "login_demo_fill": "Use demo account",
+    "login_error_email_empty": "Please enter your email",
+    "login_error_email_invalid": "Please enter a valid email",
+    "login_error_password_empty": "Please enter your password",
+    "login_error_invalid_credentials": "Incorrect email or password",
+    "login_error_unknown": "Something went wrong. Please try again",
+    "logout_failed": "Could not log out. Please try again",
+    "common_retry": "Retry",
+    "common_load_failed": "Couldn't load this. Check your connection and try again.",
+    "common_see_all": "See all",
+    "common_items_count": "{count} items",
+    "@common_items_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "common_start_shopping": "Start shopping",
+    "nav_home": "Home",
+    "nav_categories": "Categories",
+    "nav_wishlist": "Wishlist",
+    "nav_cart": "Cart",
+    "nav_profile": "Profile",
+    "home_search_hint": "Search dresses, jeans…",
+    "home_categories": "Categories",
+    "home_flash_sale": "Flash sale",
+    "home_new_arrivals": "New arrivals",
+    "home_best_sellers": "Best sellers",
+    "home_just_for_you": "Just for you",
+    "categories_title": "Categories",
+    "products_count": "{count} products",
+    "@products_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sort_recommended": "Recommended",
+    "sort_newest": "Newest",
+    "sort_price_low": "Price: low to high",
+    "sort_price_high": "Price: high to low",
+    "sort_rating": "Top rated",
+    "filter_on_sale": "On sale",
+    "products_empty_title": "Nothing here yet",
+    "products_empty_message": "Try another filter or category.",
+    "search_hint": "Search products",
+    "search_recent": "Recent",
+    "search_clear": "Clear",
+    "search_trending": "Trending",
+    "search_recommended": "Recommended for you",
+    "search_no_results_title": "No matches",
+    "search_no_results_message": "Check the spelling or try a broader word, like \"dress\" or \"jeans\".",
+    "badge_new": "New",
+    "badge_discount": "-{percent}%",
+    "@badge_discount": {
+        "placeholders": {
+            "percent": {
+                "type": "int"
+            }
+        }
+    },
+    "pdp_color": "Color",
+    "pdp_size": "Size",
+    "pdp_only_left": "Only {count} left",
+    "@pdp_only_left": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pdp_sold_out": "Sold out",
+    "pdp_select_size": "Pick a size first",
+    "pdp_free_shipping": "Free shipping",
+    "pdp_free_shipping_sub": "over $100",
+    "pdp_delivery": "2–4 days",
+    "pdp_delivery_sub": "delivery",
+    "pdp_returns": "30 days",
+    "pdp_returns_sub": "free returns",
+    "pdp_details": "Details",
+    "pdp_material": "Material",
+    "pdp_fit": "Fit",
+    "pdp_reviews": "Reviews",
+    "pdp_reviews_count": "{count} reviews",
+    "@pdp_reviews_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pdp_show_more_reviews": "Show more reviews",
+    "pdp_related": "You may also like",
+    "pdp_add_to_cart": "Add to cart",
+    "pdp_buy_now": "Buy now",
+    "pdp_sold": "{count} sold",
+    "@pdp_sold": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "wishlist_title": "Wishlist",
+    "wishlist_title_count": "Wishlist ({count})",
+    "@wishlist_title_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "wishlist_empty_title": "Save what you love",
+    "wishlist_empty_message": "Tap the heart on any item to keep it here for later.",
+    "cart_title": "Cart",
+    "cart_empty_title": "Your cart is empty",
+    "cart_empty_message": "Find something you like and add it here.",
+    "notifications_title": "Notifications",
+    "common_undo": "Undo",
+    "cart_title_count": "Cart ({count})",
+    "@cart_title_count": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "cart_update_failed": "Couldn't update your cart. Try again.",
+    "cart_free_shipping_unlocked": "You've unlocked free standard shipping 🎉",
+    "cart_free_shipping_nudge": "Add {amount} more for free shipping",
+    "@cart_free_shipping_nudge": {
+        "placeholders": {
+            "amount": {
+                "type": "String"
+            }
+        }
+    },
+    "cart_subtotal": "Subtotal",
+    "cart_savings": "You save",
+    "cart_shipping": "Shipping",
+    "cart_shipping_at_checkout": "At checkout",
+    "cart_removed": "Removed {name}",
+    "@cart_removed": {
+        "placeholders": {
+            "name": {
+                "type": "String"
+            }
+        }
+    },
+    "cart_remove": "Remove",
+    "cart_total": "Total",
+    "cart_checkout": "Checkout",
+    "pdp_added_to_cart": "Added to cart",
+    "pdp_view_cart": "View cart",
+    "pdp_add_failed": "Couldn't add to cart. Try again.",
+    "sheet_in_stock": "{count} in stock",
+    "@sheet_in_stock": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "sheet_quantity": "Quantity",
+    "sheet_add_to_cart": "Add to cart · {total}",
+    "@sheet_add_to_cart": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "sheet_buy_now": "Buy now · {total}",
+    "@sheet_buy_now": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "checkout_title": "Checkout",
+    "checkout_items_title": "Items",
+    "checkout_items": "Items ({count})",
+    "@checkout_items": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "checkout_ship_to": "Ship to",
+    "checkout_change": "Change",
+    "checkout_no_address": "Add an address to continue",
+    "checkout_shipping": "Shipping",
+    "checkout_shipping_days": "{min}–{max} days",
+    "@checkout_shipping_days": {
+        "placeholders": {
+            "min": {
+                "type": "int"
+            },
+            "max": {
+                "type": "int"
+            }
+        }
+    },
+    "checkout_free": "Free",
+    "checkout_payment": "Payment",
+    "checkout_voucher": "Voucher",
+    "checkout_voucher_hint": "Enter a code",
+    "checkout_voucher_invalid": "This code isn't valid",
+    "checkout_voucher_try": "Try TUKU10 for 10% off or FREESHIP",
+    "checkout_voucher_percent": "{code} · {percent}% off",
+    "@checkout_voucher_percent": {
+        "placeholders": {
+            "code": {
+                "type": "String"
+            },
+            "percent": {
+                "type": "int"
+            }
+        }
+    },
+    "checkout_voucher_free_shipping": "{code} · free standard shipping",
+    "@checkout_voucher_free_shipping": {
+        "placeholders": {
+            "code": {
+                "type": "String"
+            }
+        }
+    },
+    "checkout_apply": "Apply",
+    "checkout_summary": "Summary",
+    "checkout_discount": "Discount",
+    "checkout_place_order": "Place order · {total}",
+    "@checkout_place_order": {
+        "placeholders": {
+            "total": {
+                "type": "String"
+            }
+        }
+    },
+    "checkout_place_failed": "Couldn't place the order. Try again.",
+    "success_title": "Order placed!",
+    "success_message": "Thanks for shopping with us. We'll let you know when it ships.",
+    "success_order": "Order",
+    "success_arrives": "Arrives by",
+    "success_track": "Track order",
+    "success_continue": "Continue shopping",
+    "address_book_title": "Addresses",
+    "address_pick_title": "Choose an address",
+    "address_add": "Add address",
+    "address_edit": "Edit address",
+    "address_default": "Default",
+    "address_set_default": "Set as default",
+    "address_delete": "Delete",
+    "address_empty_title": "No addresses yet",
+    "address_empty_message": "Add where you'd like your orders delivered.",
+    "address_full_name": "Full name",
+    "address_phone": "Phone",
+    "address_street": "Street and number",
+    "address_city": "City",
+    "address_state": "State",
+    "address_postal_code": "Postal code",
+    "address_make_default": "Use as my default address",
+    "address_save": "Save address",
+    "address_save_failed": "Couldn't save the address. Try again.",
+    "address_field_invalid": "Check this field",
+    "orders_title": "My orders",
+    "orders_empty_title": "No orders here",
+    "orders_empty_message": "Orders in this status will show up here.",
+    "order_status_to_confirm": "To confirm",
+    "order_status_to_ship": "To ship",
+    "order_status_on_the_way": "On the way",
+    "order_status_delivered": "Delivered",
+    "order_status_cancelled": "Cancelled",
+    "order_status_returned": "Returned",
+    "order_headline_to_confirm": "We've received your order",
+    "order_headline_to_ship": "Your order is being packed",
+    "order_headline_on_the_way": "Your order is on the way",
+    "order_headline_delivered": "Delivered. Enjoy!",
+    "order_headline_cancelled": "This order was cancelled",
+    "order_headline_returned": "This order was returned",
+    "order_eta": "Estimated delivery {date}",
+    "@order_eta": {
+        "placeholders": {
+            "date": {
+                "type": "String"
+            }
+        }
+    },
+    "order_more_items": "+{count} more items",
+    "@order_more_items": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "order_items_total": "{count} items · total",
+    "@order_items_total": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "order_cancel": "Cancel order",
+    "order_cancel_title": "Cancel this order?",
+    "order_cancel_message": "We haven't confirmed it yet, so nothing will be charged.",
+    "order_cancel_keep": "Keep order",
+    "order_cancel_confirm": "Cancel order",
+    "order_cancelled_toast": "Order cancelled",
+    "order_buy_again": "Buy again",
+    "common_cancel": "Cancel",
+    "profile_edit": "Edit profile",
+    "profile_save": "Save changes",
+    "profile_theme": "Appearance",
+    "profile_theme_system": "System",
+    "profile_theme_light": "Light",
+    "profile_theme_dark": "Dark",
+    "profile_language": "Language",
+    "profile_reset": "Reset demo data",
+    "profile_reset_title": "Reset demo data?",
+    "profile_reset_message": "Cart, wishlist, orders, addresses and notifications go back to how they were on first launch. You stay signed in.",
+    "profile_reset_confirm": "Reset",
+    "profile_reset_done": "Demo data restored",
+    "profile_logout": "Log out",
+    "profile_demo_note": "Demo build with sample data",
+    "register_title": "Create your account",
+    "register_subtitle": "Save your wishlist, track orders and check out faster.",
+    "register_password_hint": "At least 6 characters",
+    "register_password_short": "Use at least 6 characters",
+    "register_button": "Create account",
+    "register_have_account": "Already have an account?",
+    "register_email_taken": "That email already has an account. Sign in instead.",
+    "notifications_filter_all": "All",
+    "notifications_filter_orders": "Orders",
+    "notifications_filter_offers": "Offers",
+    "notifications_filter_updates": "Updates",
+    "notifications_new": "New",
+    "notifications_earlier": "Earlier",
+    "notifications_empty_title": "You're all caught up",
+    "notifications_empty_message": "Order updates and offers will show up here.",
+    "notifications_minutes_ago": "{count}m ago",
+    "@notifications_minutes_ago": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notifications_hours_ago": "{count}h ago",
+    "@notifications_hours_ago": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notifications_days_ago": "{count}d ago",
+    "@notifications_days_ago": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "profile_logout_title": "Log out?",
+    "profile_logout_message": "Your cart, wishlist and orders stay saved on this device."
 }

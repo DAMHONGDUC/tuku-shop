@@ -51,12 +51,15 @@ app.*.map.json
 # release keystore
 /android/app/*.jks
 
-# Firebase/Google Services Configuration Files
-android/app/google-services.json
-ios/Runner/GoogleService-Info.plist
-
 # env
 env/*.json
+!env/*.example.json
+env_assets/
+ios/fastlane/.env
+functions/.env
+
+# script-tools release output
+Release/
 
 # Fastlane
 **/fastlane/report.xml

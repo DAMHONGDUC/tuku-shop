@@ -1,98 +1,120 @@
+import 'package:flutter/material.dart';
+import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
-import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
 
+/// One notification: a tinted type icon, the message, its age and an unread
+/// dot.
 class NotificationCard extends StatelessWidget {
   final NotificationEntity notification;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
-  const NotificationCard({
-    super.key,
-    required this.notification,
-    required this.onTap,
-  });
+  const NotificationCard({super.key, required this.notification, this.onTap});
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colorTheme;
     final isUnread = !notification.isRead;
+    final tint = _tint(context, notification.type);
 
-    return SdInkWell(
-      onTap: onTap,
-      borderRadius: 0,
-      containerBg: isUnread
-          ? context.colorTheme.primary.withValues(alpha: 0.05)
-          : context.colorTheme.cardDefault,
-      child: Row(
-        children: [
-          Expanded(
-            child: Row(
-              children: [
-                SdIcon(
-                  iconData: notification.type.iconData,
-                  iconSize: SdSpacing.s28,
-                  color: context.colorTheme.iconDefault,
+    return Material(
+      color: isUnread ? colors.primarySoft : colors.cardDefault,
+      borderRadius: BorderRadius.circular(UIConstants.cardRadius),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(UIConstants.cardRadius),
+        child: Padding(
+          padding: EdgeInsets.all(SdSpacingV5.s16),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: SdSpacingV5.s44,
+                height: SdSpacingV5.s44,
+                decoration: BoxDecoration(
+                  color: tint.withValues(alpha: 0.12),
+                  shape: BoxShape.circle,
                 ),
-                SdHorizontalSpacing(),
-                Expanded(
-                  child: _InfoSectio(
-                    name: notification.title,
-                    description: notification.body,
-                    createdAt: notification.timestamp,
+                child: Center(
+                  child: SdIconV5(
+                    iconData: notification.type.iconData,
+                    iconSize: SdSpacingV5.s20,
+                    color: tint,
+                  ),
+                ),
+              ),
+              SdHorizontalSpacingV5(value: SdSpacingV5.s12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            notification.title,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: SdTextStyleV5.body14().wSemiBold().wColor(
+                              colors.textDefault,
+                            ),
+                          ),
+                        ),
+                        SdHorizontalSpacingV5(value: SdSpacingV5.s8),
+                        Text(
+                          _age(context, notification.timestamp),
+                          style: SdTextStyleV5.body12().wColor(
+                            colors.textSubTitle,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SdVerticalSpacingV5(value: SdSpacingV5.s4),
+                    Text(
+                      notification.body,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: SdTextStyleV5.body12().wColor(colors.textSubTitle),
+                    ),
+                  ],
+                ),
+              ),
+              if (isUnread) ...[
+                SdHorizontalSpacingV5(value: SdSpacingV5.s8),
+                Padding(
+                  padding: EdgeInsets.only(top: SdSpacingV5.s4),
+                  child: Container(
+                    width: SdSpacingV5.s8,
+                    height: SdSpacingV5.s8,
+                    decoration: BoxDecoration(
+                      color: colors.primary,
+                      shape: BoxShape.circle,
+                    ),
                   ),
                 ),
               ],
-            ),
+            ],
           ),
-          SdHorizontalSpacing(xRatio: 0.5),
-          SdIcon(
-            iconData: Ionicons.chevron_forward,
-            iconSize: SdSpacing.s20,
-            color: context.colorTheme.iconSecondary,
-          ),
-        ],
+        ),
       ),
     );
   }
-}
 
-class _InfoSectio extends StatelessWidget {
-  const _InfoSectio({
-    required this.name,
-    required this.description,
-    required this.createdAt,
-  });
-  final String name;
-  final String description;
-  final DateTime createdAt;
+  static Color _tint(BuildContext context, NotificationType type) {
+    final colors = context.colorTheme;
+    return switch (type) {
+      NotificationType.orderUpdate => colors.primary,
+      NotificationType.promotion => colors.sale,
+      NotificationType.newProduct => colors.warning,
+      NotificationType.account || NotificationType.general => colors.success,
+    };
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          name,
-          style: SdTextStyle.heading14(),
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        SdVerticalSpacing(xRatio: 0.25),
-        Text(
-          description,
-          style: SdTextStyle.body12().wColor(context.colorTheme.textSubTitle),
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        SdVerticalSpacing(xRatio: 0.25),
-        Text(
-          SdDateTimeHelper.dateTimeToHHMMDDMMYY(createdAt),
-          style: SdTextStyle.body12().copyWith(
-            color: context.colorTheme.textSubTitle,
-          ),
-        ),
-      ],
-    );
+  static String _age(BuildContext context, DateTime time) {
+    final diff = DateTime.now().difference(time);
+    final loc = context.loc;
+    if (diff.inHours < 1) return loc.notifications_minutes_ago(diff.inMinutes);
+    if (diff.inDays < 1) return loc.notifications_hours_ago(diff.inHours);
+    return loc.notifications_days_ago(diff.inDays);
   }
 }

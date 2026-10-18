@@ -1,7 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart' hide SdContextV2X;
 
 class CustomSearchBar extends StatelessWidget {
   const CustomSearchBar({
@@ -9,7 +8,7 @@ class CustomSearchBar extends StatelessWidget {
     this.height = 40.0,
     this.bgColor,
     this.hasBorder = true,
-    this.searchIconSize = SdSpacing.s24,
+    this.searchIconSize = SdSpacingV5.s24,
   });
   final double height;
   final Color? bgColor;
@@ -25,27 +24,27 @@ class CustomSearchBar extends StatelessWidget {
       child: Container(
         height: height,
         padding: EdgeInsets.symmetric(
-          horizontal: SdSpacing.s8,
-          vertical: SdSpacing.s6,
+          horizontal: SdSpacingV5.s8,
+          vertical: SdSpacingV5.s6,
         ),
         decoration: BoxDecoration(
           color: bgColor ?? context.colorTheme.cardDefault,
-          borderRadius: BorderRadius.circular(SdSpacing.s8),
+          borderRadius: BorderRadius.circular(SdSpacingV5.s8),
           border: hasBorder
               ? Border.all(
                   color: context.colorTheme.borderDefault,
-                  width: SdSpacing.s1,
+                  width: SdSpacingV5.s1,
                 )
               : null,
         ),
         child: Row(
           children: [
-            SdIcon(
-              iconData: Ionicons.search,
+            SdIconV5(
+              iconData: Icons.search,
               color: context.colorTheme.iconDefault,
               iconSize: searchIconSize,
             ),
-            SdHorizontalSpacing(),
+            SdHorizontalSpacingV5(),
             Text(
               'Search products...',
               style: context.textTheme.body14.wColor(

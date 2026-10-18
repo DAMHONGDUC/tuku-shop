@@ -1,113 +1,66 @@
-import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:tuku_shop/src/core/core.dart';
+import 'package:tuku_shop/src/features/cart/presentation/cart/cart_controller.dart';
+import 'package:tuku_shop/src/features/product/presentation/favorites/favorites_controller.dart';
 
+/// The five tabs under the floating V5 bar.
 class BottomTabBaseScreen extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
   const BottomTabBaseScreen({super.key, required this.navigationShell});
 
-  Widget _buildIcon({
-    required bool isSelected,
-    IconData? iconSelected,
-    IconData? icon,
-    String? imgPath,
-    String? imgPathSelected,
-  }) {
-    final isValid =
-        (icon != null && iconSelected != null) ||
-        (imgPath != null && imgPathSelected != null);
-
-    if (isValid) {
-      return SdIcon(
-        iconData: isSelected ? iconSelected : icon,
-        iconPath: isSelected ? imgPathSelected : imgPath,
-        color: isSelected ? AppColors.primary : AppColors.grey,
-        iconSize: SdSpacing.s20,
-      );
-    }
-
-    return SizedBox.shrink();
+  void _onSelected(int index) {
+    navigationShell.goBranch(
+      index,
+      initialLocation: index == navigationShell.currentIndex,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    final iconPadding = EdgeInsets.only(
-      top: SdSpacing.s4,
-      bottom: SdSpacing.s4,
+    final loc = context.loc;
+    final wishlistCount = context.select<FavoritesController, int>(
+      (c) => c.state.ids.length,
+    );
+    final cartCount = context.select<CartController, int>(
+      (c) => c.state.itemCount,
     );
 
-    return Scaffold(
+    return FloatingBottomNav(
       body: navigationShell,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: navigationShell.currentIndex,
-        onTap: (int index) => _onItemTapped(context, index),
-        selectedLabelStyle: context.textTheme.heading12,
-        unselectedLabelStyle: context.textTheme.body12.copyWith(
-          color: AppColors.grey,
+      selectedIndex: navigationShell.currentIndex,
+      onSelected: _onSelected,
+      destinations: [
+        FloatingNavDestination(
+          icon: Icons.home_outlined,
+          selectedIcon: Icons.home_rounded,
+          label: loc.nav_home,
         ),
-        backgroundColor: context.colorTheme.surfaceDefault,
-        elevation: 0.5,
-        selectedItemColor: AppColors.primary,
-        unselectedItemColor: AppColors.grey,
-        type: BottomNavigationBarType.fixed,
-        iconSize: SdSpacing.s18,
-        items: [
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: iconPadding,
-              child: _buildIcon(
-                isSelected: navigationShell.currentIndex == 0,
-                imgPath: '${kAssetsIconPath}ic_home.svg',
-                imgPathSelected: '${kAssetsIconPath}ic_home_selected.svg',
-              ),
-            ),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: iconPadding,
-              child: _buildIcon(
-                isSelected: navigationShell.currentIndex == 1,
-                icon: Icons.local_shipping_outlined,
-                iconSelected: Icons.local_shipping,
-              ),
-            ),
-            label: 'My Order',
-          ),
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: iconPadding,
-              child: _buildIcon(
-                isSelected: navigationShell.currentIndex == 2,
-                icon: Ionicons.notifications_outline,
-                iconSelected: Ionicons.notifications,
-              ),
-            ),
-            label: 'Notification',
-          ),
-          BottomNavigationBarItem(
-            icon: Padding(
-              padding: iconPadding,
-              child: _buildIcon(
-                isSelected: navigationShell.currentIndex == 3,
-                icon: Ionicons.person_outline,
-                iconSelected: Ionicons.person,
-              ),
-            ),
-            label: 'Profile',
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _onItemTapped(BuildContext context, int index) {
-    navigationShell.goBranch(
-      index,
-      initialLocation: index == navigationShell.currentIndex,
+        FloatingNavDestination(
+          icon: Icons.grid_view_outlined,
+          selectedIcon: Icons.grid_view_rounded,
+          label: loc.nav_categories,
+        ),
+        FloatingNavDestination(
+          icon: Icons.favorite_border_rounded,
+          selectedIcon: Icons.favorite_rounded,
+          label: loc.nav_wishlist,
+          badgeCount: wishlistCount,
+        ),
+        FloatingNavDestination(
+          icon: Icons.shopping_bag_outlined,
+          selectedIcon: Icons.shopping_bag_rounded,
+          label: loc.nav_cart,
+          badgeCount: cartCount,
+        ),
+        FloatingNavDestination(
+          icon: Icons.person_outline_rounded,
+          selectedIcon: Icons.person_rounded,
+          label: loc.nav_profile,
+        ),
+      ],
     );
   }
 }

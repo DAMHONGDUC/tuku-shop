@@ -1,34 +1,31 @@
 import 'dart:math';
 
 class ProductDescriptionMock {
-  static final _random = Random();
+  // Fixed seed: the same text on every launch.
+  static final _random = Random(11);
 
-  static final _sentences = [
-    'This product is made from high-quality materials, ensuring durability and longevity.',
-    'Designed with user comfort in mind, it offers an excellent experience for daily use.',
-    'Its sleek and modern design makes it suitable for any style or occasion.',
-    'The product is lightweight and portable, easy to carry wherever you go.',
-    'Eco-friendly manufacturing processes were used, making it safe for the environment.',
-    'Attention to detail is evident in every part of this product.',
-    'Multiple color options allow you to choose the one that fits your taste.',
-    'Perfect as a gift, it will delight anyone who receives it.',
-    'Maintenance is simple, ensuring the product stays in top condition.',
-    'Innovative design features set this product apart from others.',
-    'Its versatility allows it to be used in various situations effectively.',
-    'The texture feels premium and comfortable to touch.',
-    'Reliable performance guarantees customer satisfaction over time.',
-    'It offers great value for its price, combining quality and affordability.',
-    'Limited edition design adds exclusivity and uniqueness.',
+  static const _openers = [
+    'A wardrobe staple you will reach for again and again.',
+    'Designed for everyday wear and made to last.',
+    'Clean lines and an easy shape that works with everything.',
+    'An update on a classic, cut for comfort.',
   ];
 
-  static String generateRandomDescription() {
-    final lines = <String>[];
-    final sentenceCount = 10 + _random.nextInt(5);
+  static const _closers = [
+    'Machine wash cold, hang to dry.',
+    'Pair it with denim for the weekend or tailoring for the office.',
+    'Our model is 178 cm and wears a size M.',
+    'Responsibly made in partner factories we audit every year.',
+  ];
 
-    for (var i = 0; i < sentenceCount; i++) {
-      lines.add(_sentences[_random.nextInt(_sentences.length)]);
-    }
-
-    return lines.join(' ');
+  static String generate({
+    required String name,
+    required String material,
+    required String fit,
+  }) {
+    final opener = _openers[_random.nextInt(_openers.length)];
+    final closer = _closers[_random.nextInt(_closers.length)];
+    return '$opener The $name is made from ${material.toLowerCase()} '
+        'with a ${fit.toLowerCase()} fit. $closer';
   }
 }

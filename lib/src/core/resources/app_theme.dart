@@ -5,20 +5,30 @@ import 'custom_theme_ext/app_text_theme_ext.dart';
 
 class AppTheme {
   static ThemeData buildLightTheme() {
-    final baseTheme = ThemeData(brightness: Brightness.light);
+    final colors = AppColorThemeExt.light();
+    final baseTheme = ThemeData(
+      brightness: Brightness.light,
+      colorSchemeSeed: colors.primary,
+      scaffoldBackgroundColor: colors.pageDefault,
+    );
 
     return baseTheme.copyWith(
       textTheme: GoogleFonts.latoTextTheme(baseTheme.textTheme),
-      extensions: [AppColorThemeExt.light(), AppTextThemeExt.light()],
+      extensions: [colors, AppTextThemeExt.light()],
     );
   }
 
   static ThemeData buildDarkTheme() {
-    final baseTheme = ThemeData(brightness: Brightness.dark);
+    final colors = AppColorThemeExt.dark();
+    final baseTheme = ThemeData(
+      brightness: Brightness.dark,
+      colorSchemeSeed: colors.primary,
+      scaffoldBackgroundColor: colors.pageDefault,
+    );
 
     return baseTheme.copyWith(
       textTheme: GoogleFonts.latoTextTheme(baseTheme.textTheme),
-      extensions: [AppColorThemeExt.dark(), AppTextThemeExt.dark()],
+      extensions: [colors, AppTextThemeExt.dark()],
     );
   }
 }

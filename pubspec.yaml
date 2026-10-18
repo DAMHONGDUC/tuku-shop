@@ -5,7 +5,7 @@ publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.12.2
 
 dependencies:
   flutter:
@@ -14,8 +14,8 @@ dependencies:
     sdk: flutter
   intl: ^0.20.2
   dartz: ^0.10.1
-  system_design_flutter:
-    path: packages/system_design_flutter
+  system_design:
+    path: packages/flutter-system-design-kit
   cupertino_icons: ^1.0.8
   go_router: ^15.1.2
   flutter_bloc: ^9.1.1
@@ -24,13 +24,11 @@ dependencies:
   equatable: ^2.0.7
   google_fonts: ^6.2.1
   adaptive_theme: ^3.7.0
-  ionicons: ^0.2.2
   carousel_slider: ^5.1.1
   collection: ^1.19.1
   sliver_tools: ^0.2.12
   uuid: ^4.5.2
-  firebase_core: ^4.2.1
-
+  shared_preferences: ^2.5.6
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -40,6 +38,8 @@ dev_dependencies:
   melos: ^6.3.2
   mocktail: ^1.0.4
   bloc_test: ^10.0.0
+  shared_preferences_platform_interface: ^2.4.2
+  fake_async: ^1.3.3
 
 flutter:
   uses-material-design: true
@@ -48,8 +48,18 @@ flutter:
     - assets/google_fonts/
     - assets/icons/
     - assets/images/banner/
-    - assets/images/product/
-    - assets/images/category/
-    - assets/images/review_comment/
+    - assets/images/catalog/accessories/
+    - assets/images/catalog/activewear/
+    - assets/images/catalog/bags/
+    - assets/images/catalog/hoodies/
+    - assets/images/catalog/jackets/
+    - assets/images/catalog/jeans/
+    - assets/images/catalog/kids/
+    - assets/images/catalog/men-shirts/
+    - assets/images/catalog/men-tshirts/
+    - assets/images/catalog/shoes/
+    - assets/images/catalog/trousers/
+    - assets/images/catalog/women-dresses/
+    - assets/images/catalog/women-skirts/
+    - assets/images/catalog/women-tops/
     - assets/images/common/
-    - assets/videos/review_comment/

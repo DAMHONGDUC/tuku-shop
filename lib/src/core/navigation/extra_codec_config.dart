@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:tuku_shop/src/features/order/presentation/my_order/my_order_detail/my_order_detail_args.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_args.dart';
 
 class ExtraCodecConfig extends Codec<Object?, Object?> {
@@ -23,10 +22,6 @@ class _ExtraEncoder extends Converter<Object?, Object?> {
     return switch (input) {
       ProductDetailArgs args => {
         'type': 'ProductDetailArgs',
-        'data': args.toJson(),
-      },
-      MyOrderDetailArgs args => {
-        'type': 'MyOrderDetailArgs',
         'data': args.toJson(),
       },
       List list => {
@@ -62,8 +57,6 @@ class _ExtraDecoder extends Converter<Object?, Object?> {
       switch (type) {
         case 'ProductDetailArgs':
           return ProductDetailArgs.fromJson(data as Map<String, dynamic>);
-        case 'MyOrderDetailArgs':
-          return MyOrderDetailArgs.fromJson(data as Map<String, dynamic>);
         case 'List':
           return (data as List).map((e) => convert(e)).toList();
         case 'Map':

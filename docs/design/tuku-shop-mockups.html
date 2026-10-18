@@ -1,0 +1,311 @@
+<title>Tuku Shop Mockups</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap">
+<style>
+/* Layout: a design-language strip, then a wrapping wall of 360-pt phone frames, one per screen, in purchase-flow order. */
+:root {
+  --page: #F4F4F7; --card: #FFFFFF; --ink: #15151A; --ink-2: #4A4A55; --ink-3: #6B6B78;
+  --line: #E6E6EE; --brand: #504EB7; --brand-5: rgba(80,78,183,.06); --brand-12: rgba(80,78,183,.12);
+  --sale: #E5484D; --ok: #2E9E6B; --shadow: 0 8px 24px rgba(40,38,90,.08);
+  --sheet-bg: #E9E9F0; --font: "Lato", "Helvetica Neue", Arial, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --page: #0F0F14; --card: #1A1A22; --ink: #F2F2F7; --ink-2: #C9C9D4; --ink-3: #9A9AAA;
+  --line: #2A2A35; --brand: #8B89F0; --brand-5: rgba(139,137,240,.08); --brand-12: rgba(139,137,240,.16);
+  --sale: #FF6B6F; --ok: #4CC38A; --shadow: 0 8px 24px rgba(0,0,0,.4); --sheet-bg: #07070A; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --page: #0F0F14; --card: #1A1A22; --ink: #F2F2F7; --ink-2: #C9C9D4; --ink-3: #9A9AAA;
+  --line: #2A2A35; --brand: #8B89F0; --brand-5: rgba(139,137,240,.08); --brand-12: rgba(139,137,240,.16);
+  --sale: #FF6B6F; --ok: #4CC38A; --shadow: 0 8px 24px rgba(0,0,0,.4); --sheet-bg: #07070A; color-scheme: dark }
+* { box-sizing: border-box }
+body { background: var(--sheet-bg); color: var(--ink); font-family: var(--font); margin: 0;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 64px }
+.wrap { max-width: 1240px; margin: 0 auto; display: grid; gap: 32px }
+header h1 { font-size: 32px; margin: 0 0 8px; text-wrap: balance }
+header p { margin: 0; color: var(--ink-3); max-width: 62ch; line-height: 1.5 }
+.lang { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px }
+.lang > div { background: var(--card); border-radius: 16px; padding: 16px; display: grid; gap: 8px; min-width: 0 }
+.lang h2 { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-3); margin: 0 }
+.sw { display: flex; gap: 8px; flex-wrap: wrap }
+.sw span { width: 36px; height: 36px; border-radius: 8px; border: 1px solid var(--line) }
+.lang small { color: var(--ink-3); line-height: 1.5 }
+.wall { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px 24px }
+figure { margin: 0; display: grid; gap: 12px; justify-items: center }
+figcaption { font-size: 14px; color: var(--ink-2); text-align: center; max-width: 320px; line-height: 1.45 }
+figcaption b { color: var(--ink); display: block; font-size: 16px; margin-bottom: 2px }
+
+/* Phone */
+.ph { width: 320px; max-width: 100%; height: 660px; background: var(--page); border-radius: 36px; overflow: hidden; position: relative;
+  border: 8px solid #101014; box-shadow: var(--shadow); display: flex; flex-direction: column; font-size: 12px }
+.sb { height: 28px; flex: none; display: flex; justify-content: space-between; align-items: center; padding: 0 20px; font-size: 11px; font-weight: 700 }
+.scroll { flex: 1; overflow: hidden; display: flex; flex-direction: column; gap: 16px; padding: 0 16px 96px }
+.row { display: flex; align-items: center; gap: 8px }
+.between { justify-content: space-between }
+.h16 { font-size: 16px; font-weight: 700 } .h24 { font-size: 22px; font-weight: 700; line-height: 1.2 } .b14 { font-size: 14px } .b12 { font-size: 12px; color: var(--ink-3) }
+.price { font-variant-numeric: tabular-nums; font-weight: 700 } .was { color: var(--ink-3); text-decoration: line-through; font-weight: 400; margin-left: 4px; font-size: 11px }
+.link { color: var(--brand); font-weight: 700 }
+.search { background: var(--card); border-radius: 12px; padding: 10px 12px; color: var(--ink-3); flex: 1; border: 1px solid var(--line) }
+.ib { width: 36px; height: 36px; border-radius: 12px; background: var(--card); display: grid; place-items: center; position: relative; border: 1px solid var(--line); flex: none }
+.ib svg { width: 18px; height: 18px; stroke: var(--ink); fill: none; stroke-width: 1.8 }
+.dot { position: absolute; top: -4px; right: -4px; background: var(--sale); color: #fff; font-size: 9px; font-weight: 700; border-radius: 99px; min-width: 16px; height: 16px; display: grid; place-items: center; padding: 0 4px }
+.banner { height: 136px; border-radius: 16px; background: center/cover; position: relative; overflow: hidden; color: #fff; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; gap: 2px }
+.banner::before { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,.55), rgba(0,0,0,0) 70%) }
+.banner > * { position: relative }
+.tag { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 99px; background: var(--sale); color: #fff; width: fit-content }
+.cats { display: flex; gap: 12px }
+.cat { display: grid; gap: 6px; justify-items: center; font-size: 11px; color: var(--ink-2) }
+.cat i { width: 56px; height: 56px; border-radius: 16px; background: center/cover; display: block }
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
+.pc { background: var(--card); border-radius: 16px; overflow: hidden; box-shadow: 0 4px 16px rgba(40,38,90,.06); display: grid }
+.pc .im { aspect-ratio: 4/5; background: center/cover; position: relative }
+.pc .im .heart { position: absolute; top: 8px; right: 8px; width: 28px; height: 28px; border-radius: 99px; background: rgba(255,255,255,.9); display: grid; place-items: center }
+.pc .im .heart svg { width: 14px; height: 14px; stroke: #15151A; fill: none; stroke-width: 2 }
+.pc .im .heart.on svg { fill: var(--sale); stroke: var(--sale) }
+.pc .im .tag { position: absolute; left: 8px; top: 8px }
+.pc .tx { padding: 8px 10px 10px; display: grid; gap: 2px }
+.chips { display: flex; gap: 8px; flex-wrap: nowrap; overflow: hidden }
+.chip { padding: 7px 12px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); white-space: nowrap; font-size: 12px }
+.chip.on { background: var(--brand); border-color: var(--brand); color: #fff; font-weight: 700 }
+.chip.off { color: var(--ink-3); text-decoration: line-through; opacity: .6 }
+.card { background: var(--card); border-radius: 16px; padding: 16px; display: grid; gap: 12px }
+.btn { background: var(--brand); color: #fff; border-radius: 14px; padding: 13px; text-align: center; font-weight: 700; font-size: 14px }
+.btn.ghost { background: var(--brand-5); color: var(--brand); border: 1px solid var(--brand-12) }
+.dock { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px 16px 20px; background: var(--card); border-top: 1px solid var(--line); display: flex; gap: 10px; align-items: center }
+.dock .btn { flex: 1 }
+/* Floating nav: V5 clone of the V3 glass bar */
+.nav { position: absolute; left: 12px; right: 12px; bottom: 14px; height: 52px; border-radius: 26px; background: color-mix(in srgb, var(--card) 82%, transparent);
+  backdrop-filter: blur(14px); border: 1px solid var(--line); display: grid; grid-template-columns: repeat(5, 1fr); box-shadow: 0 10px 30px rgba(40,38,90,.14) }
+.nav span { display: grid; place-items: center; position: relative }
+.nav span.on::before { content: ""; position: absolute; inset: 4px; border-radius: 22px; background: var(--brand-12) }
+.nav svg { width: 20px; height: 20px; stroke: var(--ink-3); fill: none; stroke-width: 1.8; position: relative }
+.nav .on svg { stroke: var(--brand); fill: var(--brand-12) }
+.nav .dot { top: 6px; right: 14px }
+.catcard { border-radius: 16px; padding: 12px; height: 104px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between }
+.catcard b { font-size: 13px; color: #15151A; position: relative; z-index: 1 } .catcard small { color: #4A4A55; position: relative; z-index: 1 }
+.catcard i { position: absolute; right: -6px; bottom: -6px; width: 72px; height: 88px; border-radius: 12px; background: center/cover; box-shadow: 0 6px 14px rgba(0,0,0,.12) }
+.hero { height: 300px; background: center/cover; margin: 0 -16px; position: relative }
+.pager { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; gap: 4px }
+.pager i { width: 6px; height: 6px; border-radius: 9px; background: rgba(255,255,255,.6) } .pager i.on { width: 18px; background: #fff }
+.stars { color: #F2B01E; letter-spacing: 1px }
+.trust { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px }
+.trust div { background: var(--brand-5); border-radius: 12px; padding: 8px; display: grid; gap: 2px; text-align: center }
+.sw2 { display: flex; gap: 10px } .sw2 i { width: 28px; height: 28px; border-radius: 99px; border: 2px solid var(--card); box-shadow: 0 0 0 1px var(--line) } .sw2 i.on { box-shadow: 0 0 0 2px var(--brand) }
+.line { display: grid; grid-template-columns: 64px 1fr; gap: 12px; align-items: center }
+.line i { width: 64px; height: 80px; border-radius: 12px; background: center/cover }
+.qty { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden } .qty span { padding: 4px 10px }
+.sum { display: grid; gap: 6px } .sum div { display: flex; justify-content: space-between; font-variant-numeric: tabular-nums }
+.hr { height: 1px; background: var(--line) }
+.radio { width: 16px; height: 16px; border-radius: 99px; border: 2px solid var(--line); flex: none } .radio.on { border: 5px solid var(--brand) }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--card); border-radius: 24px 24px 0 0; padding: 12px 16px 20px; display: grid; gap: 14px; box-shadow: 0 -12px 30px rgba(0,0,0,.15) }
+.scrim { position: absolute; inset: 0; background: rgba(10,10,20,.45) }
+.grab { width: 40px; height: 4px; border-radius: 9px; background: var(--line); justify-self: center }
+.tl { display: grid; gap: 0 } .tl div { display: grid; grid-template-columns: 20px 1fr; gap: 10px; padding-bottom: 14px; position: relative }
+.tl div::before { content: ""; position: absolute; left: 6px; top: 14px; bottom: 0; width: 2px; background: var(--line) } .tl div:last-child::before { display: none }
+.tl div i { width: 14px; height: 14px; border-radius: 99px; background: var(--line); margin-top: 2px } .tl div.done i { background: var(--ok) } .tl div.now i { background: var(--brand); box-shadow: 0 0 0 4px var(--brand-12) }
+.okring { width: 88px; height: 88px; border-radius: 99px; background: rgba(46,158,107,.12); display: grid; place-items: center; justify-self: center; box-shadow: 0 0 0 12px rgba(46,158,107,.06) }
+.okring svg { width: 44px; height: 44px; stroke: var(--ok); fill: none; stroke-width: 3 }
+.counters { display: grid; grid-template-columns: repeat(4, 1fr); text-align: center; gap: 4px }
+.counters div { display: grid; gap: 4px; justify-items: center; font-size: 10px; color: var(--ink-2) } .counters b { font-size: 16px; color: var(--ink) }
+.set div { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line) } .set div:last-child { border: 0 }
+.avatar { width: 56px; height: 56px; border-radius: 99px; background: var(--brand); color: #fff; display: grid; place-items: center; font-weight: 700; font-size: 18px }
+.input { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 12px; color: var(--ink) }
+.empty { display: grid; gap: 12px; justify-items: center; text-align: center; padding: 48px 8px }
+.empty .ill { width: 96px; height: 96px; border-radius: 32px; background: var(--brand-5); display: grid; place-items: center }
+.empty .ill svg { width: 44px; height: 44px; stroke: var(--brand); fill: none; stroke-width: 1.6 }
+.skel { background: linear-gradient(90deg, var(--line), color-mix(in srgb, var(--line) 50%, var(--card)), var(--line)); border-radius: 12px }
+@media (prefers-reduced-motion: no-preference) { .skel { background-size: 200% 100%; animation: sh 1.4s infinite linear } @keyframes sh { to { background-position: -200% 0 } } }
+</style>
+
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9-9a5 5 0 0 1 9-3 5 5 0 0 1 9 3c-2 4.6-9 9-9 9z"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 0 1 6 0"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 6h16M7 12h10M10 18h4"/></symbol>
+</svg>
+
+<div class="wrap">
+  <header>
+    <h1>Tuku Shop mockups</h1>
+    <p>Phase 2 design pass for the clothing-store demo. Every screen uses the V5 tokens below and real catalog photos. The Flutter build in phases 3–9 follows these frames.</p>
+  </header>
+
+  <section class="lang" aria-label="Design language">
+    <div><h2>Color 60 / 30 / 10</h2><div class="sw"><span style="background:#F4F4F7"></span><span style="background:#FFFFFF"></span><span style="background:#15151A"></span><span style="background:#6B6B78"></span><span style="background:#504EB7"></span><span style="background:#E5484D"></span><span style="background:#2E9E6B"></span></div><small>Neutral page and cards, ink text, brand indigo only on CTAs, active states and badges. Red is kept for sale and errors.</small></div>
+    <div><h2>Type</h2><div style="display:grid;gap:4px"><span class="h24">Heading 24</span><span class="h16">Heading 16</span><span class="b14">Body 14</span><span class="b12">Body 12 · secondary</span></div><small>Lato, two weights. Prices use tabular figures and are larger than their labels.</small></div>
+    <div><h2>Spacing & shape</h2><small>8-pt grid: 4 · 8 · 12 · 16 · 24 · 32 · 48. Cards radius 16, images 12, sheets 24. Soft indigo-tinted shadows. Tap targets at least 44 pt.</small></div>
+    <div><h2>States</h2><div class="skel" style="height:40px"></div><small>Every section has a skeleton, an empty state with a CTA, and an error with Retry. Sections load on their own after 1 s.</small></div>
+  </section>
+
+  <section class="wall" aria-label="Screens">
+
+    <!-- Home -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll">
+        <div class="row"><div class="search">Search dresses, jeans…</div><div class="ib"><svg><use href="#i-bell"/></svg><b class="dot">3</b></div></div>
+        <div class="banner" style="background-image:url(img/b_3.jpg)"><span class="tag">Hot</span><span class="h16">Summer Dresses</span><span style="opacity:.9">Light, floral, easy · From $64</span></div>
+        <div class="row between"><span class="h16">Categories</span><span class="link">See all</span></div>
+        <div class="cats"><div class="cat"><i style="background-image:url(img/wt3_1.jpg)"></i>Tops</div><div class="cat"><i style="background-image:url(img/wd1_1.jpg)"></i>Dresses</div><div class="cat"><i style="background-image:url(img/jn3_1.jpg)"></i>Jeans</div><div class="cat"><i style="background-image:url(img/sh4_1.jpg)"></i>Shoes</div></div>
+        <div class="row between"><span class="h16">Flash sale <span style="color:var(--sale)">02:14:36</span></span><span class="link">See all</span></div>
+        <div class="grid2">
+          <div class="pc"><div class="im" style="background-image:url(img/hd3_1.jpg)"><span class="tag">-15%</span><span class="heart"><svg><use href="#i-heart"/></svg></span></div><div class="tx"><span>Crewneck Sweatshirt</span><span class="price">$44.00<span class="was">$52.00</span></span></div></div>
+          <div class="pc"><div class="im" style="background-image:url(img/bg2_1.jpg)"><span class="tag">-17%</span><span class="heart on"><svg><use href="#i-heart"/></svg></span></div><div class="tx"><span>Crossbody Bag</span><span class="price">$79.00<span class="was">$95.00</span></span></div></div>
+        </div>
+      </div>
+      <div class="nav"><span class="on"><svg><use href="#i-home"/></svg></span><span><svg><use href="#i-grid"/></svg></span><span><svg><use href="#i-heart"/></svg><b class="dot">4</b></span><span><svg><use href="#i-bag"/></svg><b class="dot">2</b></span><span><svg><use href="#i-user"/></svg></span></div>
+    </div><figcaption><b>Home</b>Search, banner, categories, flash sale, new arrivals, best sellers. Each section loads on its own. The floating nav hides when you scroll down.</figcaption></figure>
+
+    <!-- Categories -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll">
+        <span class="h24">Categories</span>
+        <div class="grid2">
+          <div class="catcard" style="background:#F6E7E1"><b>Tops & Blouses</b><small>5 items</small><i style="background-image:url(img/wt3_1.jpg)"></i></div>
+          <div class="catcard" style="background:#F3E6EE"><b>Dresses</b><small>5 items</small><i style="background-image:url(img/wd1_1.jpg)"></i></div>
+          <div class="catcard" style="background:#EFE9F6"><b>Skirts</b><small>4 items</small><i style="background-image:url(img/ws1_2.jpg)"></i></div>
+          <div class="catcard" style="background:#E6EEF6"><b>T-shirts</b><small>5 items</small><i style="background-image:url(img/mt1_2.jpg)"></i></div>
+          <div class="catcard" style="background:#E3F0F2"><b>Shirts</b><small>5 items</small><i style="background-image:url(img/ms1_2.jpg)"></i></div>
+          <div class="catcard" style="background:#E1E8F3"><b>Jeans</b><small>5 items</small><i style="background-image:url(img/jn3_1.jpg)"></i></div>
+          <div class="catcard" style="background:#EEF0E2"><b>Trousers & Shorts</b><small>5 items</small><i style="background-image:url(img/tr1_1.jpg)"></i></div>
+          <div class="catcard" style="background:#F2ECE3"><b>Jackets & Coats</b><small>5 items</small><i style="background-image:url(img/jk5_1.jpg)"></i></div>
+        </div>
+      </div>
+      <div class="nav"><span><svg><use href="#i-home"/></svg></span><span class="on"><svg><use href="#i-grid"/></svg></span><span><svg><use href="#i-heart"/></svg><b class="dot">4</b></span><span><svg><use href="#i-bag"/></svg><b class="dot">2</b></span><span><svg><use href="#i-user"/></svg></span></div>
+    </div><figcaption><b>Categories</b>Color-coded cards with one product photo each, in a steady two-column rhythm.</figcaption></figure>
+
+    <!-- Category products -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll">
+        <div class="row"><div class="ib"><svg><use href="#i-back"/></svg></div><span class="h16" style="flex:1">Dresses</span><div class="ib"><svg><use href="#i-filter"/></svg></div></div>
+        <div class="chips"><span class="chip on">Recommended</span><span class="chip">Price ↑</span><span class="chip">Price ↓</span><span class="chip">On sale</span></div>
+        <span class="b12">5 products</span>
+        <div class="grid2">
+          <div class="pc"><div class="im" style="background-image:url(img/wd1_1.jpg)"><span class="heart"><svg><use href="#i-heart"/></svg></span></div><div class="tx"><span>Floral Midi Dress</span><span class="b12">Aurora · ★ 4.6</span><span class="price">$69.00</span></div></div>
+          <div class="pc"><div class="im" style="background-image:url(img/wd5_2.jpg)"><span class="tag" style="background:var(--brand)">New</span><span class="heart"><svg><use href="#i-heart"/></svg></span></div><div class="tx"><span>Satin Slip Dress</span><span class="b12">Aurora · ★ 4.4</span><span class="price">$64.00</span></div></div>
+          <div class="pc"><div class="im skel"></div><div class="tx"><div class="skel" style="height:10px"></div><div class="skel" style="height:10px;width:60%"></div></div></div>
+          <div class="pc"><div class="im skel"></div><div class="tx"><div class="skel" style="height:10px"></div><div class="skel" style="height:10px;width:60%"></div></div></div>
+        </div>
+      </div>
+    </div><figcaption><b>Category products</b>Sort chips instead of a modal. Page 1 shows after 1 s; the next page appends with skeleton cards while you scroll.</figcaption></figure>
+
+    <!-- Search -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll">
+        <div class="row"><div class="ib"><svg><use href="#i-back"/></svg></div><div class="search" style="color:var(--ink)">|</div></div>
+        <div class="row between"><span class="h16">Recent</span><span class="b12">Clear</span></div>
+        <div class="chips" style="flex-wrap:wrap"><span class="chip">linen shirt</span><span class="chip">black jeans</span><span class="chip">sneakers</span></div>
+        <span class="h16">Trending</span>
+        <div class="chips" style="flex-wrap:wrap"><span class="chip">🔥 slip dress</span><span class="chip">🔥 trench coat</span><span class="chip">cargo pants</span><span class="chip">hoodie</span></div>
+        <span class="h16">Recommended for you</span>
+        <div class="line"><i style="background-image:url(img/jk3_1.jpg)"></i><div><div>Wool Overcoat</div><div class="b12">Tuku Studio</div><div class="price">$159.00</div></div></div>
+        <div class="line"><i style="background-image:url(img/ac2_2.jpg)"></i><div><div>High-Rise Leggings</div><div class="b12">Stride</div><div class="price">$44.00</div></div></div>
+      </div>
+    </div><figcaption><b>Search</b>Never blank: recent searches, trending terms and recommendations before you type.</figcaption></figure>
+
+    <!-- PDP -->
+    <figure><div class="ph"><div class="sb" style="position:absolute;inset:0 0 auto;z-index:2;color:#fff"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll" style="padding-top:0">
+        <div class="hero" style="background-image:url(img/wd1_1.jpg)"><div class="pager"><i class="on"></i><i></i></div></div>
+        <div class="row between"><span class="b12">Aurora</span><span class="b12"><span class="stars">★★★★★</span> 4.6 (212)</span></div>
+        <div class="h24" style="margin-top:-8px">Floral Midi Dress</div>
+        <div class="row" style="margin-top:-8px"><span class="price h16">$69.00</span></div>
+        <div class="row between"><span class="b14">Color · <b>Black Floral</b></span></div>
+        <div class="sw2"><i class="on" style="background:#2B2B2B"></i><i style="background:#F3E9DC"></i></div>
+        <div class="row between"><span class="b14">Size</span><span class="link">Size guide</span></div>
+        <div class="chips"><span class="chip">XS</span><span class="chip on">S</span><span class="chip">M</span><span class="chip off">L</span><span class="chip">XL</span></div>
+        <div class="trust"><div><b>Free</b><span class="b12">over $100</span></div><div><b>2–4 days</b><span class="b12">delivery</span></div><div><b>30 days</b><span class="b12">returns</span></div></div>
+      </div>
+      <div class="dock"><div class="ib" style="width:48px;height:48px"><svg><use href="#i-heart"/></svg></div><div class="btn ghost">Buy now</div><div class="btn">Add to cart</div></div>
+    </div><figcaption><b>Product detail</b>Large photos, rating and delivery as trust signals, tappable size chips (sold-out ones struck through). Add to cart sits in the thumb zone.</figcaption></figure>
+
+    <!-- Add to cart sheet -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll"><div class="hero" style="background-image:url(img/wd1_1.jpg)"></div></div>
+      <div class="scrim"></div>
+      <div class="sheet"><div class="grab"></div>
+        <div class="line"><i style="background-image:url(img/wd1_1.jpg)"></i><div><div class="h16">Floral Midi Dress</div><div class="price">$69.00</div><div class="b12">Black Floral · S · 6 left</div></div></div>
+        <div class="b14">Color</div><div class="sw2"><i class="on" style="background:#2B2B2B"></i><i style="background:#F3E9DC"></i></div>
+        <div class="b14">Size</div><div class="chips"><span class="chip">XS</span><span class="chip on">S</span><span class="chip">M</span><span class="chip off">L</span><span class="chip">XL</span></div>
+        <div class="row between"><span class="b14">Quantity</span><span class="qty"><span>−</span><span>1</span><span>+</span></span></div>
+        <div class="btn">Add to cart · $69.00</div>
+      </div>
+    </div><figcaption><b>Add-to-cart sheet</b>Selection over typing. The button carries the live total; a toast confirms and the cart badge ticks up.</figcaption></figure>
+
+    <!-- Wishlist empty -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll"><span class="h24">Wishlist</span>
+        <div class="empty"><div class="ill"><svg><use href="#i-heart"/></svg></div><span class="h16">Save what you love</span><span class="b12">Tap the heart on any item to keep it here for later.</span><div class="btn" style="width:200px">Start shopping</div></div>
+      </div>
+      <div class="nav"><span><svg><use href="#i-home"/></svg></span><span><svg><use href="#i-grid"/></svg></span><span class="on"><svg><use href="#i-heart"/></svg></span><span><svg><use href="#i-bag"/></svg><b class="dot">2</b></span><span><svg><use href="#i-user"/></svg></span></div>
+    </div><figcaption><b>Wishlist (empty state)</b>Guidance and one CTA instead of a blank list. Filled state reuses the product grid.</figcaption></figure>
+
+    <!-- Cart -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll"><span class="h24">Cart (2)</span>
+        <div class="card"><div class="line"><i style="background-image:url(img/wd1_1.jpg)"></i><div style="display:grid;gap:4px"><div>Floral Midi Dress</div><div class="b12">Black Floral · S</div><div class="row between"><span class="price">$69.00</span><span class="qty"><span>−</span><span>1</span><span>+</span></span></div></div></div>
+          <div class="hr"></div>
+          <div class="line"><i style="background-image:url(img/sh4_1.jpg)"></i><div style="display:grid;gap:4px"><div>Canvas High-Tops</div><div class="b12">Black · 41</div><div class="row between"><span class="price">$59.00</span><span class="qty"><span>−</span><span>1</span><span>+</span></span></div></div></div></div>
+        <div class="card" style="background:var(--brand-5)"><span class="b12">Add $0.00 more for free shipping — you have it! 🎉</span></div>
+        <div class="card sum"><div><span>Subtotal</span><span>$128.00</span></div><div><span>Shipping</span><span style="color:var(--ok)">Free</span></div></div>
+      </div>
+      <div class="dock"><div style="display:grid"><span class="b12">Total</span><span class="price h16">$128.00</span></div><div class="btn">Checkout</div></div>
+    </div><figcaption><b>Cart</b>Inline quantity steppers, a free-shipping nudge, total and Checkout pinned at the bottom.</figcaption></figure>
+
+    <!-- Checkout -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll">
+        <div class="row"><div class="ib"><svg><use href="#i-back"/></svg></div><span class="h16">Checkout</span></div>
+        <div class="card"><div class="row between"><b>Ship to</b><span class="link">Change</span></div><span>Tuku Demo · +1 202 555 0147<br><span class="b12">1600 Market St, Apt 12, San Francisco, CA</span></span></div>
+        <div class="card"><b>Shipping</b><div class="row"><span class="radio on"></span><span style="flex:1">Standard · 3–5 days</span><span class="price">Free</span></div><div class="row"><span class="radio"></span><span style="flex:1">Express · 1–2 days</span><span class="price">$12.99</span></div></div>
+        <div class="card"><b>Payment</b><div class="row"><span class="radio on"></span><span>Cash on delivery</span></div><div class="row"><span class="radio"></span><span>Card (demo)</span></div></div>
+        <div class="row"><div class="input" style="flex:1">TUKU10</div><div class="btn ghost" style="padding:12px 16px">Apply</div></div>
+        <div class="card sum"><div><span>Subtotal</span><span>$128.00</span></div><div><span>Discount (TUKU10)</span><span style="color:var(--ok)">−$12.80</span></div><div><span>Shipping</span><span>Free</span></div><div class="hr"></div><div class="h16"><span>Total</span><span>$115.20</span></div></div>
+      </div>
+      <div class="dock"><div class="btn">Place order · $115.20</div></div>
+    </div><figcaption><b>Checkout</b>One scroll in decision order: address, shipping, payment, voucher, summary. Each block loads separately.</figcaption></figure>
+
+    <!-- Success -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll" style="justify-content:center;gap:20px;text-align:center">
+        <div class="okring"><svg><use href="#i-check"/></svg></div>
+        <div class="h24">Order placed!</div>
+        <span class="b12" style="margin-top:-12px">Thanks, Tuku. We’ll let you know when it ships.</span>
+        <div class="card" style="text-align:left"><div class="row between"><span class="b12">Order</span><b>#TK100013</b></div><div class="row between"><span class="b12">Arrives</span><b>Thu, Oct 22</b></div><div class="row between"><span class="b12">Total</span><b class="price">$115.20</b></div></div>
+        <div class="btn">Track order</div><div class="btn ghost">Continue shopping</div>
+      </div>
+    </div><figcaption><b>Order success: the peak moment</b>Check mark animates in with a soft pulse, then a summary card and two clear next steps.</figcaption></figure>
+
+    <!-- Order detail -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll">
+        <div class="row"><div class="ib"><svg><use href="#i-back"/></svg></div><span class="h16">Order #TK100013</span></div>
+        <div class="card" style="background:var(--brand-5)"><span class="h16">Your order is being packed</span><span class="b12">Estimated delivery Thu, Oct 22</span></div>
+        <div class="card"><div class="tl">
+          <div class="done"><i></i><span><b>Order placed</b><br><span class="b12">Oct 18, 10:24</span></span></div>
+          <div class="now"><i></i><span><b>Confirmed & packing</b><br><span class="b12">Oct 18, 14:02</span></span></div>
+          <div><i></i><span class="b12">Shipped</span></div>
+          <div><i></i><span class="b12">Delivered</span></div></div></div>
+        <div class="card"><div class="line"><i style="background-image:url(img/wd1_1.jpg)"></i><div><div>Floral Midi Dress</div><div class="b12">Black Floral · S · ×1</div><div class="price">$69.00</div></div></div></div>
+      </div>
+      <div class="dock"><div class="btn ghost">Cancel order</div><div class="btn">Buy again</div></div>
+    </div><figcaption><b>Order detail</b>A confident status headline and a visual timeline instead of a list of dates.</figcaption></figure>
+
+    <!-- Profile -->
+    <figure><div class="ph"><div class="sb"><span>9:41</span><span>●●● ▮</span></div>
+      <div class="scroll">
+        <div class="row" style="gap:12px"><div class="avatar">TD</div><div><div class="h16">Tuku Demo</div><div class="b12">demo@tukushop.com</div></div></div>
+        <div class="card"><div class="row between"><b>My orders</b><span class="link">See all</span></div>
+          <div class="counters"><div><b>1</b>To confirm</div><div><b>0</b>To ship</div><div><b>2</b>On the way</div><div><b>9</b>Delivered</div></div></div>
+        <div class="card set"><div><span>Addresses</span><span class="b12">2 ›</span></div><div><span>Wishlist</span><span class="b12">4 ›</span></div><div><span>Notifications</span><span class="b12">3 new ›</span></div></div>
+        <div class="card set"><div><span>Dark mode</span><span class="b12">System ›</span></div><div><span>Language</span><span class="b12">English ›</span></div><div><span>Reset demo data</span><span class="b12">›</span></div><div><span style="color:var(--sale)">Log out</span><span></span></div></div>
+      </div>
+      <div class="nav"><span><svg><use href="#i-home"/></svg></span><span><svg><use href="#i-grid"/></svg></span><span><svg><use href="#i-heart"/></svg><b class="dot">4</b></span><span><svg><use href="#i-bag"/></svg><b class="dot">2</b></span><span class="on"><svg><use href="#i-user"/></svg></span></div>
+    </div><figcaption><b>Profile</b>Avatar header, order-status shortcuts with counts, grouped settings. Log out is the only red item.</figcaption></figure>
+
+  </section>
+</div>

@@ -1,16 +1,10 @@
 import 'package:tuku_shop/src/features/product/data/models/product_data_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_model.dart';
-import 'package:tuku_shop/src/features/product/data/models/recommend_products_data_model.dart';
+import 'package:tuku_shop/src/features/product/data/models/reviews_page_model.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 
 abstract class ProductRemoteDataSource {
-  Future<RecommendProductsDataModel> getRecommendProducts({
-    required GetRecommendProjectFilterParams params,
-  });
-
-  Future<ProductsDataModel> searchProducts({
-    required SearchProductsFilterParams params,
-  });
+  Future<ProductsDataModel> getProducts(ProductQuery query);
 
   Future<ProductModel> getProductDetail({required String productId});
 
@@ -18,4 +12,14 @@ abstract class ProductRemoteDataSource {
     required String productId,
     int? limit,
   });
+
+  Future<List<ProductModel>> getProductsByIds(List<String> ids);
+
+  Future<ReviewsPageModel> getProductReviews({
+    required String productId,
+    required int page,
+    required int pageSize,
+  });
+
+  Future<List<String>> getTrendingSearches();
 }

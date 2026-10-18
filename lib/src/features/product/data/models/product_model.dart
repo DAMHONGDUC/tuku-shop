@@ -1,6 +1,7 @@
 import 'package:tuku_shop/src/features/product/data/models/description_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_color_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_size_model.dart';
+import 'package:tuku_shop/src/features/product/data/models/product_variant_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/review_comment_model.dart';
 
 class ProductModel {
@@ -15,6 +16,14 @@ class ProductModel {
   final List<ProductSizeModel>? productSizes;
   final DescriptionModel? description;
   final List<ReviewCommentModel>? reviewComments;
+  final String? categoryId;
+  final List<String>? images;
+  final double? originalPrice;
+  final List<String>? tags;
+  final List<ProductVariantModel>? variants;
+  final String? material;
+  final String? fit;
+  final int? ratingCount;
 
   const ProductModel({
     this.id,
@@ -28,5 +37,13 @@ class ProductModel {
     this.productSizes,
     this.description,
     this.reviewComments,
+    this.categoryId,
+    this.images,
+    this.originalPrice,
+    this.tags,
+    this.variants,
+    this.material,
+    this.fit,
+    this.ratingCount,
   });
 }

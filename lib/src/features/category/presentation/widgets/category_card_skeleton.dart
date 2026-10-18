@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class CategoryCardSkeleton extends StatelessWidget {
   const CategoryCardSkeleton({super.key});
@@ -12,13 +12,13 @@ class CategoryCardSkeleton extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SdSkeleton(
+          SdSkeletonV5(
             height: UIConstants.categoriesImageHeight,
             width: UIConstants.categoriesImageWidth,
-            borderRadiusValue: SdSpacing.s100,
+            borderRadiusValue: SdSpacingV5.s100,
           ),
-          SdVerticalSpacing(),
-          SdSkeleton(width: double.infinity),
+          SdVerticalSpacingV5(),
+          SdSkeletonV5(width: double.infinity),
         ],
       ),
     );

@@ -1,10 +1,11 @@
-import 'package:tuku_shop/src/core/navigation/router_config.dart';
-import 'package:tuku_shop/src/features/home/presentation/config/home_stack.dart';
-import 'package:tuku_shop/src/features/order/presentation/my_order/config/my_order_stack.dart';
-import 'package:tuku_shop/src/features/notification/presentation/notifications/config/notifications_stack.dart';
-import 'package:tuku_shop/src/features/profile/presentation/profile/config/profile_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tuku_shop/src/core/navigation/router_config.dart';
+import 'package:tuku_shop/src/features/cart/presentation/cart/config/cart_stack.dart';
+import 'package:tuku_shop/src/features/category/presentation/categories/config/categories_stack.dart';
+import 'package:tuku_shop/src/features/home/presentation/config/home_stack.dart';
+import 'package:tuku_shop/src/features/profile/presentation/profile/config/profile_stack.dart';
+import 'package:tuku_shop/src/features/wishlist/presentation/wishlist/config/wishlist_stack.dart';
 
 import 'bottom_tab_base_screen.dart';
 
@@ -19,22 +20,22 @@ class BottomTabStack {
           return BottomTabBaseScreen(navigationShell: navigationShell);
         },
     branches: [
-      // Home Tab Branch
       StatefulShellBranch(
         navigatorKey: kHomeTabNavigatorKey,
         routes: <RouteBase>[...HomeStack.routes],
       ),
-      // My Order Tab Branch
       StatefulShellBranch(
-        navigatorKey: kMyOrderTabNavigatorKey,
-        routes: <RouteBase>[...MyOrderStack.routes],
+        navigatorKey: kCategoriesTabNavigatorKey,
+        routes: <RouteBase>[...CategoriesStack.routes],
       ),
-      // Favorite Tab Branch
       StatefulShellBranch(
-        navigatorKey: kFavoriteTabNavigatorKey,
-        routes: <RouteBase>[...NotificationsStack.routes],
+        navigatorKey: kWishlistTabNavigatorKey,
+        routes: <RouteBase>[...WishlistStack.routes],
       ),
-      // Profile Tab Branch
+      StatefulShellBranch(
+        navigatorKey: kCartTabNavigatorKey,
+        routes: <RouteBase>[...CartStack.routes],
+      ),
       StatefulShellBranch(
         navigatorKey: kProfileTabNavigatorKey,
         routes: <RouteBase>[...ProfileStack.routes],

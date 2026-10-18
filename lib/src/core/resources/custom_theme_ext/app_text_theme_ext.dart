@@ -1,7 +1,7 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
   // Body styles
@@ -86,52 +86,47 @@ class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
   }
 
   // Light theme
-  static AppTextThemeExt light() {
-    final lightTextColor = AppColors.textDefaultLight;
+  static AppTextThemeExt light() => _build(AppColors.textDefaultLight);
 
+  static AppTextThemeExt dark() => _build(AppColors.textDefaultDark);
+
+  static AppTextThemeExt _build(Color lightTextColor) {
     return AppTextThemeExt(
       // Body styles
-      body6: _applyFont(SdTextStyle.body6().wColor(lightTextColor)),
-      body8: _applyFont(SdTextStyle.body8().wColor(lightTextColor)),
-      body10: _applyFont(SdTextStyle.body10().wColor(lightTextColor)),
-      body12: _applyFont(SdTextStyle.body12().wColor(lightTextColor)),
-      body14: _applyFont(SdTextStyle.body14().wColor(lightTextColor)),
-      body16: _applyFont(SdTextStyle.body16().wColor(lightTextColor)),
-      body18: _applyFont(SdTextStyle.body18().wColor(lightTextColor)),
-      body20: _applyFont(SdTextStyle.body20().wColor(lightTextColor)),
-      body24: _applyFont(SdTextStyle.body24().wColor(lightTextColor)),
-      body32: _applyFont(SdTextStyle.body32().wColor(lightTextColor)),
-      body40: _applyFont(SdTextStyle.body40().wColor(lightTextColor)),
-      body48: _applyFont(SdTextStyle.body48().wColor(lightTextColor)),
-      body56: _applyFont(SdTextStyle.body56().wColor(lightTextColor)),
-      body64: _applyFont(SdTextStyle.body64().wColor(lightTextColor)),
-      body72: _applyFont(SdTextStyle.body72().wColor(lightTextColor)),
+      body6: _applyFont(SdTextStyleV5.body6().wColor(lightTextColor)),
+      body8: _applyFont(SdTextStyleV5.body8().wColor(lightTextColor)),
+      body10: _applyFont(SdTextStyleV5.body10().wColor(lightTextColor)),
+      body12: _applyFont(SdTextStyleV5.body12().wColor(lightTextColor)),
+      body14: _applyFont(SdTextStyleV5.body14().wColor(lightTextColor)),
+      body16: _applyFont(SdTextStyleV5.body16().wColor(lightTextColor)),
+      body18: _applyFont(SdTextStyleV5.body18().wColor(lightTextColor)),
+      body20: _applyFont(SdTextStyleV5.body20().wColor(lightTextColor)),
+      body24: _applyFont(SdTextStyleV5.body24().wColor(lightTextColor)),
+      body32: _applyFont(SdTextStyleV5.body32().wColor(lightTextColor)),
+      body40: _applyFont(SdTextStyleV5.body40().wColor(lightTextColor)),
+      body48: _applyFont(SdTextStyleV5.body48().wColor(lightTextColor)),
+      body56: _applyFont(SdTextStyleV5.body56().wColor(lightTextColor)),
+      body64: _applyFont(SdTextStyleV5.body64().wColor(lightTextColor)),
+      body72: _applyFont(SdTextStyleV5.body72().wColor(lightTextColor)),
       // Heading styles
-      heading6: _applyFont(SdTextStyle.heading6().wColor(lightTextColor)),
-      heading8: _applyFont(SdTextStyle.heading8().wColor(lightTextColor)),
-      heading10: _applyFont(SdTextStyle.heading10().wColor(lightTextColor)),
-      heading12: _applyFont(SdTextStyle.heading12().wColor(lightTextColor)),
-      heading13: _applyFont(SdTextStyle.heading13().wColor(lightTextColor)),
-      heading14: _applyFont(SdTextStyle.heading14().wColor(lightTextColor)),
-      heading16: _applyFont(SdTextStyle.heading16().wColor(lightTextColor)),
-      heading18: _applyFont(SdTextStyle.heading18().wColor(lightTextColor)),
-      heading20: _applyFont(SdTextStyle.heading20().wColor(lightTextColor)),
-      heading24: _applyFont(SdTextStyle.heading24().wColor(lightTextColor)),
-      heading28: _applyFont(SdTextStyle.heading28().wColor(lightTextColor)),
-      heading32: _applyFont(SdTextStyle.heading32().wColor(lightTextColor)),
-      heading40: _applyFont(SdTextStyle.heading40().wColor(lightTextColor)),
-      heading48: _applyFont(SdTextStyle.heading48().wColor(lightTextColor)),
-      heading56: _applyFont(SdTextStyle.heading56().wColor(lightTextColor)),
-      heading64: _applyFont(SdTextStyle.heading64().wColor(lightTextColor)),
-      heading72: _applyFont(SdTextStyle.heading72().wColor(lightTextColor)),
+      heading6: _applyFont(SdTextStyleV5.heading6().wColor(lightTextColor)),
+      heading8: _applyFont(SdTextStyleV5.heading8().wColor(lightTextColor)),
+      heading10: _applyFont(SdTextStyleV5.heading10().wColor(lightTextColor)),
+      heading12: _applyFont(SdTextStyleV5.heading12().wColor(lightTextColor)),
+      heading13: _applyFont(SdTextStyleV5.heading13().wColor(lightTextColor)),
+      heading14: _applyFont(SdTextStyleV5.heading14().wColor(lightTextColor)),
+      heading16: _applyFont(SdTextStyleV5.heading16().wColor(lightTextColor)),
+      heading18: _applyFont(SdTextStyleV5.heading18().wColor(lightTextColor)),
+      heading20: _applyFont(SdTextStyleV5.heading20().wColor(lightTextColor)),
+      heading24: _applyFont(SdTextStyleV5.heading24().wColor(lightTextColor)),
+      heading28: _applyFont(SdTextStyleV5.heading28().wColor(lightTextColor)),
+      heading32: _applyFont(SdTextStyleV5.heading32().wColor(lightTextColor)),
+      heading40: _applyFont(SdTextStyleV5.heading40().wColor(lightTextColor)),
+      heading48: _applyFont(SdTextStyleV5.heading48().wColor(lightTextColor)),
+      heading56: _applyFont(SdTextStyleV5.heading56().wColor(lightTextColor)),
+      heading64: _applyFont(SdTextStyleV5.heading64().wColor(lightTextColor)),
+      heading72: _applyFont(SdTextStyleV5.heading72().wColor(lightTextColor)),
     );
-  }
-
-  // Dark theme
-  // TODO: create text theme for dark theme
-  // for now it's have same value with light
-  static AppTextThemeExt dark() {
-    return AppTextThemeExt.light();
   }
 
   @override

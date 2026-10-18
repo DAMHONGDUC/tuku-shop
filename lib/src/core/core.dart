@@ -1,5 +1,6 @@
 // Config
 export 'navigation/router_config.dart';
+export 'navigation/routes/routes.dart';
 
 // Constants
 export './constants/constants.dart';
@@ -29,6 +30,7 @@ export './env/app_env.dart';
 export './exceptions/cache_exception.dart';
 export './exceptions/network_exception.dart';
 export './exceptions/server_exception.dart';
+export './exceptions/validation_exception.dart';
 
 // utils
 export './utils/utils.dart';

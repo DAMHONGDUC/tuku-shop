@@ -1,72 +1,67 @@
-import 'package:tuku_shop/src/core/core.dart';
-import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_args.dart';
-import 'package:tuku_shop/src/features/product/presentation/product_detail/config/product_routes.dart';
-import 'package:tuku_shop/src/features/product/presentation/widgets/product_card.dart';
-import 'package:tuku_shop/src/features/product/presentation/widgets/product_grid_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
+import 'package:tuku_shop/src/core/core.dart';
+import 'package:tuku_shop/src/features/product/presentation/favorites/favorite_product_tile.dart';
 
 import 'related_products_controller.dart';
 
 class RelatedProductsSection extends StatelessWidget {
-  const RelatedProductsSection({super.key});
+  const RelatedProductsSection({super.key, required this.productId});
+
+  final String productId;
+
+  static const double _width = UIConstants.productStripCardWidth;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(
-        horizontal: SdSpacing.s16,
-        vertical: SdSpacing.s12,
-      ),
-      color: context.colorTheme.surfaceDefault,
-      child: BlocConsumer<RelatedProductsController, RelatedProductsState>(
-        listener: (context, state) {
-          // TODO: implement listener if need
-        },
-        buildWhen: (previous, current) {
-          return current is RelatedProductsLoadingState ||
-              current is RelatedProductsLoadedState;
-        },
-        builder: (context, state) {
-          if (state is RelatedProductsLoadingState) {
-            return ProductGridSkeleton();
-          } else if (state is RelatedProductsLoadedState) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('Related products', style: SdTextStyle.heading18()),
-                SdVerticalSpacing(),
-                SdGridView(
-                  items: state.products,
-                  gridCrossAxisCount: 2,
-                  gridMainAxisSpacing: SdSpacing.s16,
-                  gridCrossAxisSpacing: SdSpacing.s16,
-                  padding: EdgeInsets.zero,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-
-                  itemBuilder: (context, index) {
-                    final product = state.products[index];
-                    return ProductCard(
-                      product: product,
-                      onPress: () {
-                        GoRouter.of(context).push(
-                          ProductRoutes.productDetail.fullPath,
-                          extra: ProductDetailArgs(productId: product.id),
-                        );
-                      },
-                    );
-                  },
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: SdSpacingV5.s16),
+          child: Text(
+            context.loc.pdp_related,
+            style: SdTextStyleV5.heading16().wColor(
+              context.colorTheme.textDefault,
+            ),
+          ),
+        ),
+        SdVerticalSpacingV5(value: SdSpacingV5.s12),
+        BlocBuilder<RelatedProductsController, RelatedProductsState>(
+          builder: (context, state) {
+            if (state is RelatedProductsErrorState) {
+              return Padding(
+                padding: EdgeInsets.symmetric(horizontal: SdSpacingV5.s16),
+                child: SectionError(
+                  onRetry: () => context
+                      .read<RelatedProductsController>()
+                      .getData(productId: productId),
                 ),
-              ],
+              );
+            }
+            final products = state is RelatedProductsLoadedState
+                ? state.products
+                : null;
+            return SizedBox(
+              height: productTileExtent(_width),
+              child: ListView.separated(
+                padding: EdgeInsets.symmetric(horizontal: SdSpacingV5.s16),
+                scrollDirection: Axis.horizontal,
+                itemCount: products?.length ?? 3,
+                separatorBuilder: (_, _) =>
+                    SdHorizontalSpacingV5(value: SdSpacingV5.s12),
+                itemBuilder: (context, index) => SizedBox(
+                  width: _width,
+                  child: products == null
+                      ? const ProductTileSkeleton()
+                      : FavoriteProductTile(product: products[index]),
+                ),
+              ),
             );
-          }
-
-          return const SizedBox.shrink();
-        },
-      ),
+          },
+        ),
+      ],
     );
   }
 }

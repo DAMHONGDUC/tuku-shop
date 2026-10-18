@@ -1,6 +1,6 @@
 import 'package:tuku_shop/src/core/resources/resources.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class EmptyView extends StatelessWidget {
   final String message;
@@ -11,7 +11,7 @@ class EmptyView extends StatelessWidget {
     super.key,
     this.message = 'No data available',
     this.iconPath = 'assets/icons/ic_empty_box.png',
-    this.iconSize = SdSpacing.s100,
+    this.iconSize = SdSpacingV5.s100,
   });
 
   @override
@@ -20,11 +20,13 @@ class EmptyView extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SdIcon(iconPath: iconPath!, iconSize: iconSize),
-          SdVerticalSpacing(),
+          SdIconV5(iconPath: iconPath!, iconSize: iconSize),
+          SdVerticalSpacingV5(),
           Text(
             message,
-            style: SdTextStyle.body14().wColor(context.colorTheme.textSubTitle),
+            style: SdTextStyleV5.body14().wColor(
+              context.colorTheme.textSubTitle,
+            ),
             textAlign: TextAlign.center,
           ),
         ],

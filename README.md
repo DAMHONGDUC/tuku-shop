@@ -25,12 +25,12 @@
 
 | Category | Technology | Version |
 |---|---|---|
-| Framework | Flutter | 3.38.8 |
-| Language | Dart | 3.10.7 |
+| Framework | Flutter | 3.44.5 |
+| Language | Dart | 3.12.2 |
 | State management | flutter_bloc (Cubit) | 9.1.1 |
-| Backend | Firebase (`firebase_core` only); feature data comes from `data/mock/` | 4.11.0 |
+| Backend | None; feature data comes from `data/mock/` | - |
 | Local DB | None | - |
-| Special libraries | `system_design_flutter` (in-house design system, git submodule) | pinned by commit |
+| Special libraries | `system_design` v5 (in-house design system, `flutter-system-design-kit` git submodule) | pinned by commit |
 
 ## Project architecture
 
