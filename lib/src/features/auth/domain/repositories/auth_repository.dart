@@ -12,4 +12,9 @@ abstract class AuthRepository {
   });
 
   Future<Either<Failure, Unit>> logout();
+
+  Future<Either<Failure, UserEntity>> updateProfile({
+    required String fullName,
+    required String phone,
+  });
 }

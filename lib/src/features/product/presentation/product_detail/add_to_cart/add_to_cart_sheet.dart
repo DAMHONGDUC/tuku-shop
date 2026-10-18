@@ -27,6 +27,7 @@ class AddToCartSheet extends StatelessWidget {
   }) {
     return showModalBottomSheet<void>(
       context: context,
+      useRootNavigator: true,
       isScrollControlled: true,
       backgroundColor: context.colorTheme.cardDefault,
       shape: const RoundedRectangleBorder(

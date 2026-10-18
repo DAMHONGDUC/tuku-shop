@@ -1,29 +1,36 @@
 import 'package:tuku_shop/src/di/injector.dart';
+import 'package:tuku_shop/src/features/address/domain/domain.dart';
 import 'package:tuku_shop/src/features/auth/domain/domain.dart';
-import 'package:tuku_shop/src/features/profile/data/data_sources/profile_remote_data_source.dart';
-import 'package:tuku_shop/src/features/profile/data/repositories/profile_repository_impl.dart';
-import 'package:tuku_shop/src/features/profile/domain/domain.dart';
+import 'package:tuku_shop/src/features/cart/domain/domain.dart';
+import 'package:tuku_shop/src/features/notification/domain/domain.dart';
+import 'package:tuku_shop/src/features/order/domain/domain.dart';
+import 'package:tuku_shop/src/features/product/domain/domain.dart';
+import 'package:tuku_shop/src/features/profile/presentation/edit_profile/edit_profile_controller.dart';
 import 'package:tuku_shop/src/features/profile/presentation/profile/profile_controller.dart';
+import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
 
+/// Profile has no data of its own: it composes auth, orders and the
+/// reset steps of every feature.
 class ProfileDi {
   static config() {
-    getIt.registerLazySingleton<ProfileRemoteDataSource>(
-      () => ProfileRemoteDataSourceImpl(),
-    );
-
-    getIt.registerLazySingleton<ProfileRepository>(
-      () => ProfileRepositoryImpl(dataSource: getIt<ProfileRemoteDataSource>()),
-    );
-
-    getIt.registerLazySingleton<GetProfileSettingsUsecase>(
-      () => GetProfileSettingsUsecase(getIt<ProfileRepository>()),
-    );
-
     getIt.registerFactory<ProfileController>(
       () => ProfileController(
-        getIt<GetProfileSettingsUsecase>(),
-        getIt<LogoutUsecase>(),
+        getCurrentUser: getIt<GetCurrentUserUsecase>(),
+        getOrderCounts: getIt<GetOrderCountsUsecase>(),
+        watchOrderChanges: getIt<WatchOrderChangesUsecase>(),
+        logout: getIt<LogoutUsecase>(),
+        resetSteps: demoResetSteps(
+          cart: getIt<ResetCartUsecase>(),
+          wishlist: getIt<ResetWishlistUsecase>(),
+          orders: getIt<ResetOrdersUsecase>(),
+          addresses: getIt<ResetAddressesUsecase>(),
+          notifications: getIt<ResetNotificationsUsecase>(),
+          searches: getIt<ClearRecentSearchesUsecase>(),
+        ),
       ),
+    );
+    getIt.registerFactory<EditProfileController>(
+      () => EditProfileController(getIt<UpdateProfileUsecase>()),
     );
   }
 }

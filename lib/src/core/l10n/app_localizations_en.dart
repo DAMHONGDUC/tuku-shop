@@ -581,4 +581,50 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get order_buy_again => 'Buy again';
+
+  @override
+  String get common_cancel => 'Cancel';
+
+  @override
+  String get profile_edit => 'Edit profile';
+
+  @override
+  String get profile_save => 'Save changes';
+
+  @override
+  String get profile_theme => 'Appearance';
+
+  @override
+  String get profile_theme_system => 'System';
+
+  @override
+  String get profile_theme_light => 'Light';
+
+  @override
+  String get profile_theme_dark => 'Dark';
+
+  @override
+  String get profile_language => 'Language';
+
+  @override
+  String get profile_reset => 'Reset demo data';
+
+  @override
+  String get profile_reset_title => 'Reset demo data?';
+
+  @override
+  String get profile_reset_message =>
+      'Cart, wishlist, orders, addresses and notifications go back to how they were on first launch. You stay signed in.';
+
+  @override
+  String get profile_reset_confirm => 'Reset';
+
+  @override
+  String get profile_reset_done => 'Demo data restored';
+
+  @override
+  String get profile_logout => 'Log out';
+
+  @override
+  String get profile_demo_note => 'Demo build with sample data';
 }

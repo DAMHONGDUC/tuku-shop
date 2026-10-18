@@ -1147,6 +1147,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Buy again'**
   String get order_buy_again;
+
+  /// No description provided for @common_cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get common_cancel;
+
+  /// No description provided for @profile_edit.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit profile'**
+  String get profile_edit;
+
+  /// No description provided for @profile_save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get profile_save;
+
+  /// No description provided for @profile_theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get profile_theme;
+
+  /// No description provided for @profile_theme_system.
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get profile_theme_system;
+
+  /// No description provided for @profile_theme_light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get profile_theme_light;
+
+  /// No description provided for @profile_theme_dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get profile_theme_dark;
+
+  /// No description provided for @profile_language.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get profile_language;
+
+  /// No description provided for @profile_reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset demo data'**
+  String get profile_reset;
+
+  /// No description provided for @profile_reset_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset demo data?'**
+  String get profile_reset_title;
+
+  /// No description provided for @profile_reset_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Cart, wishlist, orders, addresses and notifications go back to how they were on first launch. You stay signed in.'**
+  String get profile_reset_message;
+
+  /// No description provided for @profile_reset_confirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get profile_reset_confirm;
+
+  /// No description provided for @profile_reset_done.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo data restored'**
+  String get profile_reset_done;
+
+  /// No description provided for @profile_logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out'**
+  String get profile_logout;
+
+  /// No description provided for @profile_demo_note.
+  ///
+  /// In en, this message translates to:
+  /// **'Demo build with sample data'**
+  String get profile_demo_note;
 }
 
 class _AppLocalizationsDelegate

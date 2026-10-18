@@ -581,4 +581,50 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get order_buy_again => 'Mua lại';
+
+  @override
+  String get common_cancel => 'Huỷ';
+
+  @override
+  String get profile_edit => 'Sửa thông tin';
+
+  @override
+  String get profile_save => 'Lưu thay đổi';
+
+  @override
+  String get profile_theme => 'Giao diện';
+
+  @override
+  String get profile_theme_system => 'Theo hệ thống';
+
+  @override
+  String get profile_theme_light => 'Sáng';
+
+  @override
+  String get profile_theme_dark => 'Tối';
+
+  @override
+  String get profile_language => 'Ngôn ngữ';
+
+  @override
+  String get profile_reset => 'Đặt lại dữ liệu demo';
+
+  @override
+  String get profile_reset_title => 'Đặt lại dữ liệu demo?';
+
+  @override
+  String get profile_reset_message =>
+      'Giỏ hàng, yêu thích, đơn hàng, địa chỉ và thông báo trở về như lần mở đầu tiên. Bạn vẫn đăng nhập.';
+
+  @override
+  String get profile_reset_confirm => 'Đặt lại';
+
+  @override
+  String get profile_reset_done => 'Đã khôi phục dữ liệu demo';
+
+  @override
+  String get profile_logout => 'Đăng xuất';
+
+  @override
+  String get profile_demo_note => 'Bản demo với dữ liệu mẫu';
 }

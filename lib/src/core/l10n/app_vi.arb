@@ -174,5 +174,20 @@
     "order_cancel_keep": "Giữ đơn",
     "order_cancel_confirm": "Huỷ đơn",
     "order_cancelled_toast": "Đã huỷ đơn",
-    "order_buy_again": "Mua lại"
+    "order_buy_again": "Mua lại",
+    "common_cancel": "Huỷ",
+    "profile_edit": "Sửa thông tin",
+    "profile_save": "Lưu thay đổi",
+    "profile_theme": "Giao diện",
+    "profile_theme_system": "Theo hệ thống",
+    "profile_theme_light": "Sáng",
+    "profile_theme_dark": "Tối",
+    "profile_language": "Ngôn ngữ",
+    "profile_reset": "Đặt lại dữ liệu demo",
+    "profile_reset_title": "Đặt lại dữ liệu demo?",
+    "profile_reset_message": "Giỏ hàng, yêu thích, đơn hàng, địa chỉ và thông báo trở về như lần mở đầu tiên. Bạn vẫn đăng nhập.",
+    "profile_reset_confirm": "Đặt lại",
+    "profile_reset_done": "Đã khôi phục dữ liệu demo",
+    "profile_logout": "Đăng xuất",
+    "profile_demo_note": "Bản demo với dữ liệu mẫu"
 }

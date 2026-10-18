@@ -15,6 +15,12 @@ abstract class AuthLocalDataSource {
   Future<void> saveSessionUser(UserModel user);
 
   Future<void> clearSession();
+
+  /// Changes name and phone of the signed-in user; one request.
+  Future<UserModel> updateSessionUser({
+    required String fullName,
+    required String phone,
+  });
 }
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
@@ -60,5 +66,24 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     } catch (e) {
       throw CacheException(e.toString());
     }
+  }
+
+  @override
+  Future<UserModel> updateSessionUser({
+    required String fullName,
+    required String phone,
+  }) async {
+    await MockLatency.wait();
+    final current = await getSessionUser();
+    if (current == null) throw const CacheException('signed out');
+    final updated = UserModel(
+      id: current.id,
+      fullName: fullName,
+      email: current.email,
+      phone: phone,
+      avatarUrl: current.avatarUrl,
+    );
+    await saveSessionUser(updated);
+    return updated;
   }
 }

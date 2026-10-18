@@ -6,4 +6,10 @@ class ProfileRoutes {
     path: '/profile',
     fullPath: '/profile',
   );
+
+  static const SdRouterV5 editProfile = SdRouterV5(
+    name: 'edit-profile',
+    path: 'edit',
+    fullPath: '/profile/edit',
+  );
 }

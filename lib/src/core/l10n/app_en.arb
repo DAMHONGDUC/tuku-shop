@@ -327,5 +327,20 @@
     "order_cancel_keep": "Keep order",
     "order_cancel_confirm": "Cancel order",
     "order_cancelled_toast": "Order cancelled",
-    "order_buy_again": "Buy again"
+    "order_buy_again": "Buy again",
+    "common_cancel": "Cancel",
+    "profile_edit": "Edit profile",
+    "profile_save": "Save changes",
+    "profile_theme": "Appearance",
+    "profile_theme_system": "System",
+    "profile_theme_light": "Light",
+    "profile_theme_dark": "Dark",
+    "profile_language": "Language",
+    "profile_reset": "Reset demo data",
+    "profile_reset_title": "Reset demo data?",
+    "profile_reset_message": "Cart, wishlist, orders, addresses and notifications go back to how they were on first launch. You stay signed in.",
+    "profile_reset_confirm": "Reset",
+    "profile_reset_done": "Demo data restored",
+    "profile_logout": "Log out",
+    "profile_demo_note": "Demo build with sample data"
 }

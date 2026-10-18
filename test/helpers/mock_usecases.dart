@@ -4,7 +4,6 @@ import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 import 'package:tuku_shop/src/features/category/domain/domain.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
-import 'package:tuku_shop/src/features/profile/domain/domain.dart';
 import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -14,9 +13,6 @@ class MockGetCategoriesUsecase extends Mock implements GetCategoriesUsecase {}
 
 class MockGetNotificationsUsecase extends Mock
     implements GetNotificationsUsecase {}
-
-class MockGetProfileSettingsUsecase extends Mock
-    implements GetProfileSettingsUsecase {}
 
 class MockGetProductDetailUsecase extends Mock
     implements GetProductDetailUsecase {}

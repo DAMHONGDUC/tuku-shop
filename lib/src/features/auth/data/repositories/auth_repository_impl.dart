@@ -59,4 +59,20 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> updateProfile({
+    required String fullName,
+    required String phone,
+  }) async {
+    try {
+      final user = await localDataSource.updateSessionUser(
+        fullName: fullName,
+        phone: phone,
+      );
+      return Right(UserModelToUserEntityMapper.toEntity(user));
+    } catch (e) {
+      return Left(CacheFailure());
+    }
+  }
 }

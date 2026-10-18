@@ -8,7 +8,9 @@ Feature-based Clean Architecture: each feature owns its `domain` / `data` / `pre
 |---|---|
 | `lib/src/features/product/` | Catalog queries (category, tag, sale, keyword, sort, paging), product detail, reviews, search, app-wide favorites state |
 | `lib/src/features/order/` | Orders (seeded history, place, cancel), My orders by status, order detail with timeline |
-| `lib/src/features/banner/`, `category/`, `notification/`, `profile/` | Feature slices; `category/` also owns the Categories tab |
+| `lib/src/features/banner/`, `category/`, `notification/` | Feature slices; `category/` also owns the Categories tab |
+| `lib/src/features/profile/` | Presentation only: Profile tab (user, order counters, settings, reset demo data) and edit profile |
+| `lib/src/features/settings/` | Device preferences (app language) |
 | `lib/src/features/wishlist/` | Saved product ids (seeded on first launch) and the Wishlist tab |
 | `lib/src/features/cart/` | Cart lines (seeded), app-wide cart state, Cart tab |
 | `lib/src/features/checkout/` | Shipping, payment, vouchers, totals math, checkout and order-success screens |
@@ -17,7 +19,7 @@ Feature-based Clean Architecture: each feature owns its `domain` / `data` / `pre
 | `lib/src/features/home/` | Presentation only: composes banner, category and product-strip sections, each loading on its own |
 | `lib/src/features/splash/`, `tutorial/`, `register/`, `bottom_tab/`, `preview_media/` | Screen flows |
 | `lib/src/core/` | Constants (incl. `MockLatency`), enums, env, exceptions, failures, l10n, navigation (route constants in `routes/`), resources, usecase base, utils, shared widgets (`FloatingBottomNav`, `ProductTile`, states) |
-| `lib/main_material_app.dart` | Provides app-wide Cubits (favorites, cart) above the router |
+| `lib/main_material_app.dart` | Provides app-wide Cubits (favorites, cart, notification badge, locale) above the router |
 | `lib/src/di/injector.dart` | Calls each feature's `<Feature>Di.config()` |
 
 ## Feature layers

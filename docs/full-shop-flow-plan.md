@@ -19,7 +19,7 @@ Turn Tuku Shop into a working clothing-store demo for client review: browse → 
 |---|---|---|
 | Mock data and mock state live only in `data/mock/` and the data source that reads it | Same seam a real API will replace | `data/data_sources/*_data_source.dart` |
 | Every data source method starts with `await MockLatency.wait()` (1 s) | One latency knob, no random 1–3 s waits | `lib/src/core/constants/mock_latency.dart` |
-| Controllers, usecases and repositories never delay (exception: splash stays up ≥ 1 s) | Latency belongs to the "network" only | Remove `SdHelperV5.delayLoading()` from `profile_controller.dart` |
+| Controllers, usecases and repositories never delay (exceptions: splash stays up ≥ 1 s; device settings such as language load instantly so the first frame is already in the right language) | Latency belongs to the "network" only | Remove `SdHelperV5.delayLoading()` from `profile_controller.dart` |
 | One Cubit + one request per screen section | A slow or failed section never blocks the others | See [Progressive loading](#progressive-loading) |
 | Every section has its own skeleton, empty state and error + Retry | Partial failure stays visible and recoverable | `presentation/<screen>/<section>/` |
 | Lists page 10 items and load more on scroll | First rows show after 1 s, not after the whole list | `SdListViewLoadMoreV5` / grid equivalent |
@@ -274,6 +274,7 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) | 2026-10-18 |
 | Bottom nav widget | App-side V5 clone of the V3 floating bar; no V3 imports | 2026-10-18 |
 | Mockups approved | Owner asked to run phases 1–9 without review stops; mockups v1 taken as approved | 2026-10-18 |
+| One action, one request | A user action (place order, save address, cancel) is a single 1 s data source call, not several in a row | 2026-10-18 |
 | UI redesign | New phase 2: `mobile-app-ui-design` skill mockups gate all screen work; later phases renumbered 3–9 | 2026-10-18 |
 
 ## Open decisions

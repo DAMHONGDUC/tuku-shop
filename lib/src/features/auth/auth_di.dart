@@ -30,6 +30,10 @@ class AuthDi {
       () => LoginUsecase(getIt<AuthRepository>()),
     );
 
+    getIt.registerLazySingleton<UpdateProfileUsecase>(
+      () => UpdateProfileUsecase(getIt<AuthRepository>()),
+    );
+
     getIt.registerLazySingleton<LogoutUsecase>(
       () => LogoutUsecase(getIt<AuthRepository>()),
     );
