@@ -40,6 +40,8 @@ dev_dependencies:
   bloc_test: ^10.0.0
   shared_preferences_platform_interface: ^2.4.2
   fake_async: ^1.3.3
+  # Config is the `flutter_launcher_icons:` block below; run with `make app-icon`.
+  flutter_launcher_icons: ^0.14.4
 
 flutter:
   uses-material-design: true
@@ -63,3 +65,14 @@ flutter:
     - assets/images/catalog/women-skirts/
     - assets/images/catalog/women-tops/
     - assets/images/common/
+    - assets/images/app_icon.png
+
+# Source of every launcher icon and launch screen image; regenerate with `make app-icon`.
+flutter_launcher_icons:
+  image_path: "assets/images/app_icon.png"
+  ios: true
+  # App Store Connect rejects a 1024 icon with an alpha channel (ITMS-90717).
+  remove_alpha_ios: true
+  # AppColors.primary, the same colour as the launch screen.
+  background_color_ios: "#504EB7"
+  android: "ic_launcher"
