@@ -4,6 +4,7 @@ import 'package:tuku_shop/src/features/auth/data/data_sources/auth_remote_data_s
 import 'package:tuku_shop/src/features/auth/data/repositories/auth_repository_impl.dart';
 import 'package:tuku_shop/src/features/auth/domain/domain.dart';
 import 'package:tuku_shop/src/features/auth/presentation/login/login_controller.dart';
+import 'package:tuku_shop/src/features/auth/presentation/register/register_controller.dart';
 
 class AuthDi {
   static config() {
@@ -38,6 +39,12 @@ class AuthDi {
       () => LogoutUsecase(getIt<AuthRepository>()),
     );
 
+    getIt.registerLazySingleton<RegisterUsecase>(
+      () => RegisterUsecase(getIt<AuthRepository>()),
+    );
+    getIt.registerFactory<RegisterController>(
+      () => RegisterController(getIt<RegisterUsecase>()),
+    );
     getIt.registerFactory<LoginController>(
       () => LoginController(getIt<LoginUsecase>()),
     );

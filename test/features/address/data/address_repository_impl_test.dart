@@ -21,7 +21,7 @@ void main() {
     return result;
   }
 
-  final repo = () =>
+  AddressRepositoryImpl repo() =>
       AddressRepositoryImpl(dataSource: AddressLocalDataSourceImpl());
 
   test('the seeded default comes first', () {

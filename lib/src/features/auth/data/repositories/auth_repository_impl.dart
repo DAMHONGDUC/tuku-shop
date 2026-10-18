@@ -75,4 +75,25 @@ class AuthRepositoryImpl implements AuthRepository {
       return Left(CacheFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, UserEntity>> register({
+    required String fullName,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final user = await remoteDataSource.register(
+        fullName: fullName,
+        email: email,
+        password: password,
+      );
+      await localDataSource.saveSessionUser(user);
+      return Right(UserModelToUserEntityMapper.toEntity(user));
+    } on EmailTakenException {
+      return const Left(ValidationFailure('email_taken'));
+    } catch (e) {
+      return Left(ServerFailure());
+    }
+  }
 }

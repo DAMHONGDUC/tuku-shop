@@ -145,6 +145,9 @@ void main() {
     await controller.applyVoucher('NOPE');
     expect(controller.state.voucherStatus, VoucherStatus.invalid);
     expect(controller.state.totals.discount, 0);
+
+    controller.clearVoucherError();
+    expect(controller.state.voucherStatus, VoucherStatus.idle);
   });
 
   test('placing removes the ordered lines and raises a notification', () async {

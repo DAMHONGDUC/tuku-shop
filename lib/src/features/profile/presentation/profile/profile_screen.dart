@@ -48,6 +48,28 @@ class _View extends StatelessWidget {
     if (ok == true) controller.resetDemoData();
   }
 
+  Future<void> _confirmLogout(BuildContext context) async {
+    final controller = context.read<ProfileController>();
+    final ok = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(context.loc.profile_logout_title),
+        content: Text(context.loc.profile_logout_message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(context.loc.common_cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(context.loc.profile_logout),
+          ),
+        ],
+      ),
+    );
+    if (ok == true) controller.logout();
+  }
+
   Future<void> _pickTheme(BuildContext context) async {
     final theme = AdaptiveTheme.of(context);
     final mode = await _pick<AdaptiveThemeMode>(
@@ -251,7 +273,7 @@ class _View extends StatelessWidget {
                         icon: Icons.logout_rounded,
                         label: loc.profile_logout,
                         danger: true,
-                        onTap: controller.logout,
+                        onTap: () => _confirmLogout(context),
                       ),
                     ],
                   ),

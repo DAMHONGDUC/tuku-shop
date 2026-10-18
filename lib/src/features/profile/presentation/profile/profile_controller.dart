@@ -17,16 +17,12 @@ part 'profile_state.dart';
 /// The Profile tab: the user and the order counters load separately.
 class ProfileController extends Cubit<ProfileState> {
   ProfileController({
-    required GetCurrentUserUsecase getCurrentUser,
-    required GetOrderCountsUsecase getOrderCounts,
+    required this._getCurrentUser,
+    required this._getOrderCounts,
     required WatchOrderChangesUsecase watchOrderChanges,
-    required LogoutUsecase logout,
-    required List<UseCase<Unit, NoParams>> resetSteps,
-  }) : _getCurrentUser = getCurrentUser,
-       _getOrderCounts = getOrderCounts,
-       _logout = logout,
-       _resetSteps = resetSteps,
-       super(const ProfileState()) {
+    required this._logout,
+    required this._resetSteps,
+  }) : super(const ProfileState()) {
     _subscription = watchOrderChanges().listen((_) => loadCounts());
   }
 

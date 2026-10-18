@@ -627,4 +627,74 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_demo_note => 'Demo build with sample data';
+
+  @override
+  String get register_title => 'Create your account';
+
+  @override
+  String get register_subtitle =>
+      'Save your wishlist, track orders and check out faster.';
+
+  @override
+  String get register_password_hint => 'At least 6 characters';
+
+  @override
+  String get register_password_short => 'Use at least 6 characters';
+
+  @override
+  String get register_button => 'Create account';
+
+  @override
+  String get register_have_account => 'Already have an account?';
+
+  @override
+  String get register_email_taken =>
+      'That email already has an account. Sign in instead.';
+
+  @override
+  String get notifications_filter_all => 'All';
+
+  @override
+  String get notifications_filter_orders => 'Orders';
+
+  @override
+  String get notifications_filter_offers => 'Offers';
+
+  @override
+  String get notifications_filter_updates => 'Updates';
+
+  @override
+  String get notifications_new => 'New';
+
+  @override
+  String get notifications_earlier => 'Earlier';
+
+  @override
+  String get notifications_empty_title => 'You\'re all caught up';
+
+  @override
+  String get notifications_empty_message =>
+      'Order updates and offers will show up here.';
+
+  @override
+  String notifications_minutes_ago(int count) {
+    return '${count}m ago';
+  }
+
+  @override
+  String notifications_hours_ago(int count) {
+    return '${count}h ago';
+  }
+
+  @override
+  String notifications_days_ago(int count) {
+    return '${count}d ago';
+  }
+
+  @override
+  String get profile_logout_title => 'Log out?';
+
+  @override
+  String get profile_logout_message =>
+      'Your cart, wishlist and orders stay saved on this device.';
 }

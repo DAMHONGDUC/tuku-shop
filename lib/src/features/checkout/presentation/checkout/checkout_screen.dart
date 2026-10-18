@@ -501,6 +501,7 @@ class _VoucherSectionState extends State<_VoucherSection> {
                             ),
                           ),
                         ),
+                        onChanged: (_) => controller.clearVoucherError(),
                         onSubmitted: controller.applyVoucher,
                       ),
                     ),

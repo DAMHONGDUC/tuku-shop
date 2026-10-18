@@ -627,4 +627,74 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get profile_demo_note => 'Bản demo với dữ liệu mẫu';
+
+  @override
+  String get register_title => 'Tạo tài khoản';
+
+  @override
+  String get register_subtitle =>
+      'Lưu món yêu thích, theo dõi đơn và thanh toán nhanh hơn.';
+
+  @override
+  String get register_password_hint => 'Tối thiểu 6 ký tự';
+
+  @override
+  String get register_password_short => 'Dùng ít nhất 6 ký tự';
+
+  @override
+  String get register_button => 'Tạo tài khoản';
+
+  @override
+  String get register_have_account => 'Đã có tài khoản?';
+
+  @override
+  String get register_email_taken =>
+      'Email này đã có tài khoản. Hãy đăng nhập.';
+
+  @override
+  String get notifications_filter_all => 'Tất cả';
+
+  @override
+  String get notifications_filter_orders => 'Đơn hàng';
+
+  @override
+  String get notifications_filter_offers => 'Ưu đãi';
+
+  @override
+  String get notifications_filter_updates => 'Cập nhật';
+
+  @override
+  String get notifications_new => 'Mới';
+
+  @override
+  String get notifications_earlier => 'Trước đó';
+
+  @override
+  String get notifications_empty_title => 'Bạn đã xem hết';
+
+  @override
+  String get notifications_empty_message =>
+      'Cập nhật đơn hàng và ưu đãi sẽ hiện ở đây.';
+
+  @override
+  String notifications_minutes_ago(int count) {
+    return '$count phút trước';
+  }
+
+  @override
+  String notifications_hours_ago(int count) {
+    return '$count giờ trước';
+  }
+
+  @override
+  String notifications_days_ago(int count) {
+    return '$count ngày trước';
+  }
+
+  @override
+  String get profile_logout_title => 'Đăng xuất?';
+
+  @override
+  String get profile_logout_message =>
+      'Giỏ hàng, yêu thích và đơn hàng vẫn được lưu trên máy này.';
 }

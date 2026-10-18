@@ -1237,6 +1237,126 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Demo build with sample data'**
   String get profile_demo_note;
+
+  /// No description provided for @register_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Create your account'**
+  String get register_title;
+
+  /// No description provided for @register_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Save your wishlist, track orders and check out faster.'**
+  String get register_subtitle;
+
+  /// No description provided for @register_password_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'At least 6 characters'**
+  String get register_password_hint;
+
+  /// No description provided for @register_password_short.
+  ///
+  /// In en, this message translates to:
+  /// **'Use at least 6 characters'**
+  String get register_password_short;
+
+  /// No description provided for @register_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Create account'**
+  String get register_button;
+
+  /// No description provided for @register_have_account.
+  ///
+  /// In en, this message translates to:
+  /// **'Already have an account?'**
+  String get register_have_account;
+
+  /// No description provided for @register_email_taken.
+  ///
+  /// In en, this message translates to:
+  /// **'That email already has an account. Sign in instead.'**
+  String get register_email_taken;
+
+  /// No description provided for @notifications_filter_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get notifications_filter_all;
+
+  /// No description provided for @notifications_filter_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get notifications_filter_orders;
+
+  /// No description provided for @notifications_filter_offers.
+  ///
+  /// In en, this message translates to:
+  /// **'Offers'**
+  String get notifications_filter_offers;
+
+  /// No description provided for @notifications_filter_updates.
+  ///
+  /// In en, this message translates to:
+  /// **'Updates'**
+  String get notifications_filter_updates;
+
+  /// No description provided for @notifications_new.
+  ///
+  /// In en, this message translates to:
+  /// **'New'**
+  String get notifications_new;
+
+  /// No description provided for @notifications_earlier.
+  ///
+  /// In en, this message translates to:
+  /// **'Earlier'**
+  String get notifications_earlier;
+
+  /// No description provided for @notifications_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'re all caught up'**
+  String get notifications_empty_title;
+
+  /// No description provided for @notifications_empty_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Order updates and offers will show up here.'**
+  String get notifications_empty_message;
+
+  /// No description provided for @notifications_minutes_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}m ago'**
+  String notifications_minutes_ago(int count);
+
+  /// No description provided for @notifications_hours_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}h ago'**
+  String notifications_hours_ago(int count);
+
+  /// No description provided for @notifications_days_ago.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}d ago'**
+  String notifications_days_ago(int count);
+
+  /// No description provided for @profile_logout_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Log out?'**
+  String get profile_logout_title;
+
+  /// No description provided for @profile_logout_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart, wishlist and orders stay saved on this device.'**
+  String get profile_logout_message;
 }
 
 class _AppLocalizationsDelegate

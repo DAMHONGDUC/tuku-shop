@@ -342,5 +342,46 @@
     "profile_reset_confirm": "Reset",
     "profile_reset_done": "Demo data restored",
     "profile_logout": "Log out",
-    "profile_demo_note": "Demo build with sample data"
+    "profile_demo_note": "Demo build with sample data",
+    "register_title": "Create your account",
+    "register_subtitle": "Save your wishlist, track orders and check out faster.",
+    "register_password_hint": "At least 6 characters",
+    "register_password_short": "Use at least 6 characters",
+    "register_button": "Create account",
+    "register_have_account": "Already have an account?",
+    "register_email_taken": "That email already has an account. Sign in instead.",
+    "notifications_filter_all": "All",
+    "notifications_filter_orders": "Orders",
+    "notifications_filter_offers": "Offers",
+    "notifications_filter_updates": "Updates",
+    "notifications_new": "New",
+    "notifications_earlier": "Earlier",
+    "notifications_empty_title": "You're all caught up",
+    "notifications_empty_message": "Order updates and offers will show up here.",
+    "notifications_minutes_ago": "{count}m ago",
+    "@notifications_minutes_ago": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notifications_hours_ago": "{count}h ago",
+    "@notifications_hours_ago": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "notifications_days_ago": "{count}d ago",
+    "@notifications_days_ago": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "profile_logout_title": "Log out?",
+    "profile_logout_message": "Your cart, wishlist and orders stay saved on this device."
 }

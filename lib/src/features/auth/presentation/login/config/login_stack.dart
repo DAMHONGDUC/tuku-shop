@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
+import 'package:tuku_shop/src/core/core.dart';
+import 'package:tuku_shop/src/features/auth/presentation/register/register_screen.dart';
 
 import '../login_screen.dart';
-import '../otp/login_otp_screen.dart';
-import 'package:tuku_shop/src/core/navigation/routes/login_routes.dart';
 
 class LoginStack {
   static final List<GoRoute> routes = [
@@ -14,15 +14,13 @@ class LoginStack {
       builder: (BuildContext context, GoRouterState state) {
         return const LoginScreen();
       },
-      routes: [
-        SdGoRouteV5(
-          path: LoginRoutes.loginOtp.path,
-          name: LoginRoutes.loginOtp.name,
-          builder: (BuildContext context, GoRouterState state) {
-            return const LoginOTPScreen();
-          },
-        ),
-      ],
+    ),
+    SdGoRouteV5(
+      path: RegisterRoutes.register.path,
+      name: RegisterRoutes.register.name,
+      builder: (BuildContext context, GoRouterState state) {
+        return const RegisterScreen();
+      },
     ),
   ];
 }

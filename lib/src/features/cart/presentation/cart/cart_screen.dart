@@ -166,15 +166,17 @@ class _CartLineTile extends StatelessWidget {
   Future<void> _remove(BuildContext context) async {
     final controller = context.read<CartController>();
     final messenger = ScaffoldMessenger.of(context);
+    final message = context.loc.cart_removed(line.name);
+    final undo = context.loc.common_undo;
     final removed = await controller.remove(line.id);
     if (removed == null) return;
     messenger
       ..hideCurrentSnackBar()
       ..showSnackBar(
         SnackBar(
-          content: Text(context.loc.cart_removed(line.name)),
+          content: Text(message),
           action: SnackBarAction(
-            label: context.loc.common_undo,
+            label: undo,
             onPressed: () => controller.undoRemove(removed),
           ),
         ),

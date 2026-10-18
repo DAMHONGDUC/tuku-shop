@@ -31,4 +31,18 @@ class MyOrderStack {
       ],
     ),
   ];
+
+  /// Routes above the tabs.
+  static final List<GoRoute> rootRoutes = [
+    SdGoRouteV5(
+      path: MyOrderRoutes.orderDetail.path,
+      name: MyOrderRoutes.orderDetail.name,
+      parentNavigatorKey: kRootNavigatorKey,
+      builder: (BuildContext context, GoRouterState state) {
+        return OrderDetailScreen(
+          orderId: state.uri.queryParameters['id'] ?? '',
+        );
+      },
+    ),
+  ];
 }

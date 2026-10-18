@@ -30,4 +30,11 @@ class NotificationsController extends Cubit<NotificationsState> {
       },
     );
   }
+
+  void selectFilter(NotificationFilter filter) {
+    final current = state;
+    if (current is NotificationsLoadedState) {
+      emit(current.copyWith(filter: filter));
+    }
+  }
 }

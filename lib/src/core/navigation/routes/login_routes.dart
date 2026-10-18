@@ -6,9 +6,4 @@ class LoginRoutes {
     path: '/login',
     fullPath: '/login',
   );
-  static final SdRouterV5 loginOtp = SdRouterV5(
-    name: 'login-otp',
-    path: 'login-otp',
-    fullPath: '${login.fullPath}/login-otp',
-  );
 }

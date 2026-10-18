@@ -6,10 +6,4 @@ class RegisterRoutes {
     path: '/register',
     fullPath: '/register',
   );
-
-  static final SdRouterV5 registerOtp = SdRouterV5(
-    name: 'register-otp',
-    path: 'register-otp',
-    fullPath: '${register.fullPath}/register-otp',
-  );
 }

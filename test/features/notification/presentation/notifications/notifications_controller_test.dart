@@ -58,4 +58,33 @@ void main() {
       NotificationsErrorState(errorMsg: 'something wrong'),
     ],
   );
+
+  test('selectFilter narrows the visible list', () async {
+    final data = NotificationData(
+      listNotification: [
+        NotificationEntity(
+          id: '1',
+          title: 'Shipped',
+          body: '',
+          timestamp: DateTime(2026),
+          type: NotificationType.orderUpdate,
+        ),
+        NotificationEntity(
+          id: '2',
+          title: 'Sale',
+          body: '',
+          timestamp: DateTime(2026),
+          type: NotificationType.promotion,
+        ),
+      ],
+      listNotificationCategory: const [],
+    );
+    when(() => usecase.call(NoParams())).thenAnswer((_) async => Right(data));
+
+    await controller.getData();
+    controller.selectFilter(NotificationFilter.offers);
+
+    final state = controller.state as NotificationsLoadedState;
+    expect(state.visible.map((e) => e.id), ['2']);
+  });
 }

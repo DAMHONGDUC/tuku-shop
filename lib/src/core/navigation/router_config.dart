@@ -3,9 +3,9 @@ import 'package:tuku_shop/src/features/bottom_tab/bottom_tab_stack.dart';
 import 'package:tuku_shop/src/features/address/presentation/address_book/config/address_stack.dart';
 import 'package:tuku_shop/src/features/auth/presentation/login/config/login_stack.dart';
 import 'package:tuku_shop/src/features/checkout/presentation/checkout/config/checkout_stack.dart';
+import 'package:tuku_shop/src/features/order/presentation/my_orders/config/my_order_stack.dart';
 import 'package:tuku_shop/src/features/notification/presentation/notifications/config/notifications_stack.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/config/product_stack.dart';
-import 'package:tuku_shop/src/features/register/config/register_stack.dart';
 import 'package:tuku_shop/src/core/navigation/routes/splash_routes.dart';
 import 'package:tuku_shop/src/features/splash/config/splash_stack.dart';
 import 'package:tuku_shop/src/features/tutorial/config/tutorial_stack.dart';
@@ -37,11 +37,11 @@ final GoRouter kAppRouter = GoRouter(
     ...SplashStack.routes,
     ...TutorialStack.routes,
     ...LoginStack.routes,
-    ...RegisterStack.routes,
     ...ProductStack.routes,
     ...NotificationsStack.routes,
     ...CheckoutStack.routes,
     ...AddressStack.routes,
+    ...MyOrderStack.rootRoutes,
     BottomTabStack.statefulShellRoute,
   ],
 );

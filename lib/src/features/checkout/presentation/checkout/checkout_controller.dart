@@ -14,23 +14,15 @@ part 'checkout_state.dart';
 /// placing the order.
 class CheckoutController extends Cubit<CheckoutState> {
   CheckoutController({
-    required GetCartUsecase getCart,
-    required GetAddressesUsecase getAddresses,
-    required GetShippingMethodsUsecase getShippingMethods,
-    required GetPaymentMethodsUsecase getPaymentMethods,
-    required ApplyVoucherUsecase applyVoucher,
-    required PlaceOrderUsecase placeOrder,
-    required RemoveCartLinesUsecase removeCartLines,
-    required AddNotificationUsecase addNotification,
-  }) : _getCart = getCart,
-       _getAddresses = getAddresses,
-       _getShippingMethods = getShippingMethods,
-       _getPaymentMethods = getPaymentMethods,
-       _applyVoucher = applyVoucher,
-       _placeOrder = placeOrder,
-       _removeCartLines = removeCartLines,
-       _addNotification = addNotification,
-       super(const CheckoutState());
+    required this._getCart,
+    required this._getAddresses,
+    required this._getShippingMethods,
+    required this._getPaymentMethods,
+    required this._applyVoucher,
+    required this._placeOrder,
+    required this._removeCartLines,
+    required this._addNotification,
+  }) : super(const CheckoutState());
 
   final GetCartUsecase _getCart;
   final GetAddressesUsecase _getAddresses;
@@ -149,6 +141,13 @@ class CheckoutController extends Cubit<CheckoutState> {
         state.copyWith(voucher: voucher, voucherStatus: VoucherStatus.idle),
       ),
     );
+  }
+
+  /// Typing a new code hides the previous "invalid" message.
+  void clearVoucherError() {
+    if (state.voucherStatus == VoucherStatus.invalid) {
+      emit(state.copyWith(voucherStatus: VoucherStatus.idle));
+    }
   }
 
   void removeVoucher() => emit(
