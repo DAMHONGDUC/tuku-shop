@@ -9,7 +9,7 @@ Turn Tuku Shop into a working clothing-store demo for client review: browse → 
 | G1 | Real-looking fashion catalog | 14 clothing categories, ~70 products, bundled images from free-license photo sites |
 | G2 | Full purchase flow | A reviewer can add to cart, check out, and see the new order in My Orders |
 | G3 | Mock data only in data sources | No mock values in domain, presentation or core; swapping in an API touches only `data/` |
-| G4 | Fixed 1 s latency | Every data source call waits exactly 1 s; no other artificial delay anywhere |
+| G4 | Short mock latency | Every data source call waits 300–700 ms (seeded, same sequence every launch); no other artificial delay anywhere |
 | G5 | Progressive loading | Every section loads and renders on its own; nothing waits for the whole screen |
 | G6 | Repeatable demo | Same data on every launch; one tap resets the demo state |
 
@@ -18,11 +18,11 @@ Turn Tuku Shop into a working clothing-store demo for client review: browse → 
 | Rule | Reason | Where |
 |---|---|---|
 | Mock data and mock state live only in `data/mock/` and the data source that reads it | Same seam a real API will replace | `data/data_sources/*_data_source.dart` |
-| Every data source method starts with `await MockLatency.wait()` (1 s) | One latency knob, no random 1–3 s waits | `lib/src/core/constants/mock_latency.dart` |
+| Every data source method starts with `await MockLatency.wait()` (300–700 ms) | One latency knob (`MockLatency.min` / `max`) | `lib/src/core/constants/mock_latency.dart` |
 | Controllers, usecases and repositories never delay (exceptions: splash stays up ≥ 1 s; device settings such as language load instantly so the first frame is already in the right language) | Latency belongs to the "network" only | Remove `SdHelperV5.delayLoading()` from `profile_controller.dart` |
 | One Cubit + one request per screen section | A slow or failed section never blocks the others | See [Progressive loading](#progressive-loading) |
 | Every section has its own skeleton, empty state and error + Retry | Partial failure stays visible and recoverable | `presentation/<screen>/<section>/` |
-| Lists page 10 items and load more on scroll | First rows show after 1 s, not after the whole list | `SdListViewLoadMoreV5` / grid equivalent |
+| Lists page 10 items and load more on scroll | First rows show after one short wait, not after the whole list | `SdListViewLoadMoreV5` / grid equivalent |
 | Mock catalog is deterministic (fixed ids, a seeded `Random` per mock file) | The client sees the same app on every launch | `product/data/mock/` |
 | No feature imports another feature's `data/` | Architecture rule; fixes current `order_mock.dart` → `product_mock.dart` import | `docs/claude/architecture.md` |
 | Screens follow the approved mockups from phase 2 (`mobile-app-ui-design` skill) | Polished, consistent demo for the client | `docs/design/` |
@@ -45,12 +45,12 @@ sequenceDiagram
     UI->>F: getData()
     UI->>N: getPage(1)
     Note over UI: shell + skeletons visible at t=0
-    B-->>UI: banners (t≈1s) → render
-    C-->>UI: categories (t≈1s) → render
-    F-->>UI: error (t≈1s) → section shows Retry, others unaffected
-    N-->>UI: page 1 (t≈1s) → render 10 cards
+    B-->>UI: banners (t≈0.3–0.7s) → render
+    C-->>UI: categories (t≈0.3–0.7s) → render
+    F-->>UI: error (t≈0.3–0.7s) → section shows Retry, others unaffected
+    N-->>UI: page 1 (t≈0.3–0.7s) → render 10 cards
     UI->>N: scroll near end → getPage(2)
-    N-->>UI: page 2 (t≈2s) → append
+    N-->>UI: page 2 (one more wait) → append
 ```
 
 | Screen | Independent sections (one request each) |
@@ -181,15 +181,16 @@ An app-side clone of the V3 bar's look and behavior, built only from V5 tokens; 
 
 | Item | Choice |
 |---|---|
-| Widget | `FloatingBottomNav` (shell: hide on scroll + tab swipe) and `FloatingBottomNavBar` (the bar) in `lib/src/core/widgets/navigation/` |
+| Widget | `FloatingBottomNav` (shell: fixed bar + tab swipe) and `FloatingBottomNavBar` (the bar) in `lib/src/core/widgets/navigation/` |
 | Bar shape | Floating stadium: height `SdSpacingV5.s56`, radius `s28`, side margin `s16`, bottom offset = safe-area bottom clamped to `s16`–`s20` |
 | Surface | `BackdropFilter` blur over `colorTheme.surfaceDefault` at 80 % + `borderDefault` hairline + `boxShadowDefault` (stands in for V3 liquid glass; no new package) |
 | Selected tab | Tinted capsule one segment wide, inset `s4`, `colorTheme.primary` at 22 %, slides with `AnimatedAlign` 250 ms `easeInOutCubic` |
 | Items | Outline icon → filled icon when selected, `SdIconV5` size `s22`, with the ARB label under it (`body10`); `primary` vs `iconSecondary`; bar height `s64` |
 | Badge | `SdBadgeV5` on the Notifications glyph (unread count); the cart badge lives on `CartActionButton`, fed by `CartCountScope` at the app root |
-| Hide on scroll | Bar follows the tab's main vertical list, settles shown/hidden on scroll end (250 ms `easeOutCubic`), always reappears on tab change, at list top, or when the list cannot scroll |
+| Fixed | The bar stays in place while the tab scrolls (hide-on-scroll removed 2026-10-27) |
+| Detail screens | Every non-tab screen (product, cart, favorites, checkout, my orders, order detail, edit profile, addresses, search) uses `parentNavigatorKey: kRootNavigatorKey`, so it covers the bar |
 | Swipe | Horizontal drag ≥ `s48` switches to the adjacent tab |
-| Content inset | `FloatingBottomNav.contentInset(context)` (offset + bar height) pads the bottom of every tab screen so the last row clears the bar |
+| Content inset | `FloatingBottomNav.contentInset(context)` (offset + bar height) pads the bottom of the four tab roots so the last row clears the bar; detail screens pad by the safe area only |
 | Motion constants | `UIConstants.navFast` 150 ms, `navNormal` 250 ms, in `lib/src/core/constants/ui_constants.dart` |
 | Route constants | `lib/src/core/navigation/routes/`, so any feature navigates without importing another feature's `presentation/` |
 
@@ -243,21 +244,23 @@ Every screen is redesigned with the `mobile-app-ui-design` skill before it is co
 
 ### Premium refresh
 
-Clean boutique look (white page, ink, champagne) on a Shopee-style structure; tokens live in `app_color_theme_ext.dart`.
+Clean look in the app icon's purple (white page, ink text, brand purple) on a Shopee-style structure; tokens live in `app_color_theme_ext.dart`.
 
 | Role | Light | Dark |
 |---|---|---|
-| `pageDefault` | `#FFFFFF` white | `#0F0E0D` |
-| `cardDefault` (cards, search pill) | `#F6F6F8` mist | `#1A1917` |
-| `surfaceDefault` (sheets, dialogs, docks, nav bar, outline buttons) | `#FFFFFF` | `#1A1917` |
-| `cardOnSurface` (photo backdrop) | `#EFEFF2` cloud | `#23211F` |
-| `textDefault` | `#141414` ink | `#F4F0E8` |
-| `textSubTitle` / `iconSecondary` | `#6E6E73` | `#A39C92` |
-| `borderDefault` | `#E6E6EA` | `#2C2A27` |
-| `primary` (CTAs, selection) / `onPrimary` | `#141414` / white | `#D9BF8C` / `#141414` |
-| `accent` (ratings, member ring, free-shipping bar) | `#A8834A` champagne | `#D9BF8C` |
-| `sale` | `#B3261E` | `#E5626B` |
-| `success` | `#2F7A57` | `#5CC291` |
+| `pageDefault` | `#FFFFFF` white | `#0F0F14` |
+| `cardDefault` (cards, search pill) | `#F6F6F8` mist | `#1A1A22` |
+| `surfaceDefault` (sheets, dialogs, docks, nav bar, outline buttons) | `#FFFFFF` | `#1A1A22` |
+| `cardOnSurface` (photo backdrop) | `#EFEFF2` cloud | `#22222C` |
+| `textDefault` | `#141414` ink | `#F2F2F7` |
+| `textSubTitle` / `iconSecondary` | `#6E6E73` | `#9A9AAA` |
+| `borderDefault` | `#E6E6EA` | `#2A2A35` |
+| `primary` (CTAs, selection) / `onPrimary` | `#504EB7` brand purple (app icon) / white | `#8583EE` / white |
+| `accent` (trust icons, free-shipping bar) | same as `primary` | same as `primary` |
+| Member card, splash | `#6466D4` → `#3F3C9E` gradient / `#504EB7` (both themes, as the icon and native launch screen) | same |
+| `warning` (rating stars) | `#F2B01E` amber | `#F5C451` |
+| `sale` | `#E5484D` | `#FF6B6F` |
+| `success` | `#2E9E6B` | `#4CC38A` |
 
 | Pattern | Applied as |
 |---|---|
@@ -304,12 +307,14 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 |---|---|---|
 | Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) — superseded 2026-10-26 | 2026-10-18 |
 | Bottom tabs v2 | Home · Categories · Notifications · Profile; Cart is a pushed screen behind the app-bar bag icon, Favorites an option in Profile | 2026-10-26 |
-| Premium refresh | Ivory / ink / champagne palette, Shopee-style structure | 2026-10-26 |
+| Premium refresh | Shopee-style structure; palette first ivory / ink / champagne, then brand purple (below) | 2026-10-26 |
+| Brand color | The app icon's purple `#504EB7` is `primary` again (CTAs, selection, splash, member card); champagne removed | 2026-10-27 |
 | Light background | White page with soft grey cards; sheets, docks and the nav bar stay white | 2026-10-26 |
 | Font | Platform UI font like Shopee (replaces Lato and the Playfair Display trial); no wordmark on the Home app bar, search and cart share one row | 2026-10-26 |
 | Bottom nav widget | App-side V5 clone of the V3 floating bar; no V3 imports | 2026-10-18 |
 | Mockups approved | Owner asked to run phases 1–9 without review stops; mockups v1 taken as approved | 2026-10-18 |
-| One action, one request | A user action (place order, save address, cancel) is a single 1 s data source call, not several in a row | 2026-10-18 |
+| One action, one request | A user action (place order, save address, cancel) is a single data source call, not several in a row | 2026-10-18 |
+| Mock latency | 300–700 ms per call from a seeded random (was a fixed 1 s) | 2026-10-27 |
 | UI redesign | New phase 2: `mobile-app-ui-design` skill mockups gate all screen work; later phases renumbered 3–9 | 2026-10-18 |
 
 ## Open decisions

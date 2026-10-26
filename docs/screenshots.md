@@ -35,7 +35,7 @@ About 5 minutes. Start from **Profile → Reset demo data** so every run shows t
 
 | # | Do | Point out |
 |---|---|---|
-| 1 | Launch the app | Already signed in as the demo user; home sections appear one by one (1 s mock latency each) |
+| 1 | Launch the app | Already signed in as the demo user; home sections appear one by one (300–700 ms mock latency each) |
 | 2 | Swipe the banner, tap a category chip | Banners link to categories; list has sort and paging |
 | 3 | Open a product | Gallery, color and size picker, sold-out sizes struck through, reviews, related items |
 | 4 | Tap the heart, then **Add to cart** | Wishlist and cart badges update at once (optimistic, rolled back on failure) |
