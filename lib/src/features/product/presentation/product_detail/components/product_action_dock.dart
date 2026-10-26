@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
@@ -27,6 +28,16 @@ class ProductActionDock extends StatelessWidget {
     return BottomActionBar(
       child: Row(
         children: [
+          if (product.sellerId.isNotEmpty) ...[
+            AppIconButton(
+              icon: Icons.chat_bubble_outline_rounded,
+              label: context.loc.pdp_chat,
+              style: AppIconButtonStyle.outlined,
+              onTap: () =>
+                  context.push(ChatRoutes.threadLocation(product.sellerId)),
+            ),
+            SdHorizontalSpacingV5(value: SdSpacingV5.s8),
+          ],
           BlocSelector<FavoritesController, FavoritesState, bool>(
             selector: (state) => state.contains(product.id),
             builder: (context, isFavorite) => AppIconButton(

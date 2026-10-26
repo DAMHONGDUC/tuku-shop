@@ -439,5 +439,36 @@
     "support_quick_return": "Return or exchange",
     "support_quick_size": "Help with sizing",
     "support_quick_voucher": "Any vouchers?",
-    "support_entry": "Chat with us"
+    "support_entry": "Chat with us",
+    "nav_chat": "Chat",
+    "chat_title": "Chat",
+    "chat_support_name": "Tuku Care",
+    "chat_support_tag": "Support",
+    "chat_official": "Official",
+    "chat_seller_stats": "★ {rating} · {rate}% response · {followers} followers",
+    "@chat_seller_stats": {
+        "placeholders": {
+            "rating": {
+                "type": "String"
+            },
+            "rate": {
+                "type": "int"
+            },
+            "followers": {
+                "type": "String"
+            }
+        }
+    },
+    "chat_quick_stock": "Is this in stock?",
+    "chat_quick_size": "Which size should I get?",
+    "chat_quick_ship": "When will it ship?",
+    "chat_quick_discount": "Any discount?",
+    "chat_empty_title": "No chats yet",
+    "chat_empty_message": "Message a shop from any product page, or ask Tuku Care for help.",
+    "chat_yesterday": "Yesterday",
+    "pdp_chat": "Chat",
+    "pdp_view_shop": "View shop",
+    "pdp_sold_by": "Sold by",
+    "pdp_response_rate": "Response",
+    "pdp_followers": "Followers"
 }

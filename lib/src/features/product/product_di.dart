@@ -11,10 +11,12 @@ import 'package:tuku_shop/src/features/product/presentation/product_detail/add_t
 import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/related_product_section/related_products_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/reviews_section/product_reviews_controller.dart';
+import 'package:tuku_shop/src/features/product/presentation/product_detail/shop_section/product_seller_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/variant_section/variant_selection_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_list/product_list_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/search_screen/filters/search_filters_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/search_screen/search_suggestions_controller.dart';
+import 'package:tuku_shop/src/features/seller/domain/domain.dart';
 import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
 
 class ProductDi {
@@ -75,6 +77,9 @@ class ProductDi {
     );
     getIt.registerFactory<ProductReviewsController>(
       () => ProductReviewsController(getIt<GetProductReviewsUsecase>()),
+    );
+    getIt.registerFactory<ProductSellerController>(
+      () => ProductSellerController(getIt<GetSellerUsecase>()),
     );
     getIt.registerFactory<RelatedProductsController>(
       () => RelatedProductsController(getIt<GetRelatedProductUsecase>()),

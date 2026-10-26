@@ -8,7 +8,7 @@ import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/profile/presentation/edit_profile/edit_profile_controller.dart';
 import 'package:tuku_shop/src/features/profile/presentation/profile/favorites_preview/favorites_preview_controller.dart';
 import 'package:tuku_shop/src/features/profile/presentation/profile/profile_controller.dart';
-import 'package:tuku_shop/src/features/support_chat/domain/domain.dart';
+import 'package:tuku_shop/src/features/chat/domain/domain.dart';
 import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
 
 /// Profile has no data of its own: it composes auth, orders, favorites and
@@ -28,7 +28,7 @@ class ProfileDi {
           addresses: getIt<ResetAddressesUsecase>(),
           notifications: getIt<ResetNotificationsUsecase>(),
           searches: getIt<ClearRecentSearchesUsecase>(),
-          supportChat: getIt<ResetSupportChatUsecase>(),
+          chat: getIt<ResetChatUsecase>(),
         ),
       ),
     );

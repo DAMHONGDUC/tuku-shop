@@ -8,7 +8,7 @@ import 'package:tuku_shop/src/features/order/presentation/my_orders/config/my_or
 import 'package:tuku_shop/src/features/product/presentation/product_detail/config/product_stack.dart';
 import 'package:tuku_shop/src/core/navigation/routes/splash_routes.dart';
 import 'package:tuku_shop/src/features/splash/config/splash_stack.dart';
-import 'package:tuku_shop/src/features/support_chat/presentation/support_chat/config/support_chat_stack.dart';
+import 'package:tuku_shop/src/features/chat/presentation/chat_thread/config/chat_thread_stack.dart';
 import 'package:tuku_shop/src/features/tutorial/config/tutorial_stack.dart';
 import 'package:tuku_shop/src/features/wishlist/presentation/wishlist/config/wishlist_stack.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +22,8 @@ final GlobalKey<NavigatorState> kHomeTabNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'homeTabNav');
 final GlobalKey<NavigatorState> kCategoriesTabNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'categoriesTabNav');
+final GlobalKey<NavigatorState> kChatTabNavigatorKey =
+    GlobalKey<NavigatorState>(debugLabel: 'chatTabNav');
 final GlobalKey<NavigatorState> kNotificationsTabNavigatorKey =
     GlobalKey<NavigatorState>(debugLabel: 'notificationsTabNav');
 final GlobalKey<NavigatorState> kProfileTabNavigatorKey =
@@ -40,7 +42,7 @@ final GoRouter kAppRouter = GoRouter(
     ...ProductStack.routes,
     ...CartStack.routes,
     ...WishlistStack.routes,
-    ...SupportChatStack.routes,
+    ...ChatThreadStack.routes,
     ...CheckoutStack.routes,
     ...AddressStack.routes,
     ...MyOrderStack.rootRoutes,

@@ -810,4 +810,61 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get support_entry => 'Chat with us';
+
+  @override
+  String get nav_chat => 'Chat';
+
+  @override
+  String get chat_title => 'Chat';
+
+  @override
+  String get chat_support_name => 'Tuku Care';
+
+  @override
+  String get chat_support_tag => 'Support';
+
+  @override
+  String get chat_official => 'Official';
+
+  @override
+  String chat_seller_stats(String rating, int rate, String followers) {
+    return '★ $rating · $rate% response · $followers followers';
+  }
+
+  @override
+  String get chat_quick_stock => 'Is this in stock?';
+
+  @override
+  String get chat_quick_size => 'Which size should I get?';
+
+  @override
+  String get chat_quick_ship => 'When will it ship?';
+
+  @override
+  String get chat_quick_discount => 'Any discount?';
+
+  @override
+  String get chat_empty_title => 'No chats yet';
+
+  @override
+  String get chat_empty_message =>
+      'Message a shop from any product page, or ask Tuku Care for help.';
+
+  @override
+  String get chat_yesterday => 'Yesterday';
+
+  @override
+  String get pdp_chat => 'Chat';
+
+  @override
+  String get pdp_view_shop => 'View shop';
+
+  @override
+  String get pdp_sold_by => 'Sold by';
+
+  @override
+  String get pdp_response_rate => 'Response';
+
+  @override
+  String get pdp_followers => 'Followers';
 }

@@ -10,7 +10,7 @@ import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:tuku_shop/src/features/order/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
-import 'package:tuku_shop/src/features/support_chat/domain/domain.dart';
+import 'package:tuku_shop/src/features/chat/domain/domain.dart';
 import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
 
 part 'profile_state.dart';
@@ -32,7 +32,7 @@ class ProfileController extends Cubit<ProfileState> {
   final LogoutUsecase _logout;
 
   /// Each feature's own reset: cart, wishlist, orders, addresses,
-  /// notifications, search history, support chat.
+  /// notifications, search history, chat.
   final List<UseCase<Unit, NoParams>> _resetSteps;
   late final StreamSubscription<void> _subscription;
 
@@ -97,5 +97,5 @@ List<UseCase<Unit, NoParams>> demoResetSteps({
   required ResetAddressesUsecase addresses,
   required ResetNotificationsUsecase notifications,
   required ClearRecentSearchesUsecase searches,
-  required ResetSupportChatUsecase supportChat,
-}) => [cart, wishlist, orders, addresses, notifications, searches, supportChat];
+  required ResetChatUsecase chat,
+}) => [cart, wishlist, orders, addresses, notifications, searches, chat];

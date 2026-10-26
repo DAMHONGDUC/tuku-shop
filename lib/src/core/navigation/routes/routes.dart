@@ -1,6 +1,7 @@
 export 'address_routes.dart';
 export 'cart_routes.dart';
 export 'categories_routes.dart';
+export 'chat_routes.dart';
 export 'checkout_routes.dart';
 export 'home_routes.dart';
 export 'login_routes.dart';
@@ -10,6 +11,5 @@ export 'product_routes.dart';
 export 'profile_routes.dart';
 export 'register_routes.dart';
 export 'splash_routes.dart';
-export 'support_chat_routes.dart';
 export 'tutorial_routes.dart';
 export 'wishlist_routes.dart';

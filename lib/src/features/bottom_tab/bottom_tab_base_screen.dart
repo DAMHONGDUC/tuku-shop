@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tuku_shop/src/core/core.dart';
+import 'package:tuku_shop/src/features/chat/presentation/chat_badge/chat_unread_controller.dart';
 import 'package:tuku_shop/src/features/notification/presentation/notification_badge/notification_badge_controller.dart';
 
-/// The four tabs under the floating V5 bar. Cart and Favorites are full
+/// The five tabs under the floating V5 bar (Shopee order: shop, browse,
+/// chat, alerts, me). Cart and Favorites are full
 /// screens: the cart opens from every app bar, Favorites from Profile.
 class BottomTabBaseScreen extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
@@ -22,6 +24,7 @@ class BottomTabBaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final loc = context.loc;
     final unread = context.watch<NotificationBadgeController>().state;
+    final unreadChats = context.watch<ChatUnreadController>().state;
 
     return FloatingBottomNav(
       body: navigationShell,
@@ -37,6 +40,12 @@ class BottomTabBaseScreen extends StatelessWidget {
           icon: Icons.grid_view_outlined,
           selectedIcon: Icons.grid_view_rounded,
           label: loc.nav_categories,
+        ),
+        FloatingNavDestination(
+          icon: Icons.chat_bubble_outline_rounded,
+          selectedIcon: Icons.chat_bubble_rounded,
+          label: loc.nav_chat,
+          badgeCount: unreadChats,
         ),
         FloatingNavDestination(
           icon: Icons.notifications_none_rounded,

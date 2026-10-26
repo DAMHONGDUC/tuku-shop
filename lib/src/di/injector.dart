@@ -3,6 +3,7 @@ import 'package:tuku_shop/src/features/auth/auth_di.dart';
 import 'package:tuku_shop/src/features/banner/banner_di.dart';
 import 'package:tuku_shop/src/features/cart/cart_di.dart';
 import 'package:tuku_shop/src/features/category/category_di.dart';
+import 'package:tuku_shop/src/features/chat/chat_di.dart';
 import 'package:tuku_shop/src/features/checkout/checkout_di.dart';
 import 'package:tuku_shop/src/features/notification/notification_di.dart';
 import 'package:tuku_shop/src/features/order/order_di.dart';
@@ -11,7 +12,6 @@ import 'package:tuku_shop/src/features/profile/profile_di.dart';
 import 'package:tuku_shop/src/features/seller/seller_di.dart';
 import 'package:tuku_shop/src/features/settings/settings_di.dart';
 import 'package:tuku_shop/src/features/splash/config/splash_di.dart';
-import 'package:tuku_shop/src/features/support_chat/support_chat_di.dart';
 import 'package:tuku_shop/src/features/tutorial/config/tutorial_di.dart';
 import 'package:tuku_shop/src/features/wishlist/wishlist_di.dart';
 import 'package:get_it/get_it.dart';
@@ -29,6 +29,7 @@ class Injector {
     BannerDi.config();
     CartDi.config();
     CategoryDi.config();
+    ChatDi.config();
     CheckoutDi.config();
     ProductDi.config();
     OrderDi.config();
@@ -37,7 +38,6 @@ class Injector {
     SellerDi.config();
     SettingsDi.config();
     SplashDi.config();
-    SupportChatDi.config();
     TutorialDi.config();
     WishlistDi.config();
   }

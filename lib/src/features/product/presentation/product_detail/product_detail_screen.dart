@@ -16,6 +16,7 @@ import 'related_product_section/related_products_controller.dart';
 import 'related_product_section/related_products_section.dart';
 import 'reviews_section/product_reviews_controller.dart';
 import 'reviews_section/reviews_section.dart';
+import 'shop_section/shop_section.dart';
 import 'variant_section/variant_section.dart';
 import 'variant_section/variant_selection_controller.dart';
 
@@ -235,6 +236,14 @@ class _Content extends StatelessWidget {
                   SdVerticalSpacingV5(value: SdSpacingV5.s16),
                   const TrustRow(),
                   SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                  if (product.sellerId.isNotEmpty) ...[
+                    Container(
+                      decoration: card,
+                      padding: pad,
+                      child: ShopSection(sellerId: product.sellerId),
+                    ),
+                    SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                  ],
                   Container(
                     decoration: card,
                     padding: pad,

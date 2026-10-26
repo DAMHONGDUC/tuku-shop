@@ -1567,6 +1567,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Chat with us'**
   String get support_entry;
+
+  /// No description provided for @nav_chat.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get nav_chat;
+
+  /// No description provided for @chat_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get chat_title;
+
+  /// No description provided for @chat_support_name.
+  ///
+  /// In en, this message translates to:
+  /// **'Tuku Care'**
+  String get chat_support_name;
+
+  /// No description provided for @chat_support_tag.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get chat_support_tag;
+
+  /// No description provided for @chat_official.
+  ///
+  /// In en, this message translates to:
+  /// **'Official'**
+  String get chat_official;
+
+  /// No description provided for @chat_seller_stats.
+  ///
+  /// In en, this message translates to:
+  /// **'★ {rating} · {rate}% response · {followers} followers'**
+  String chat_seller_stats(String rating, int rate, String followers);
+
+  /// No description provided for @chat_quick_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'Is this in stock?'**
+  String get chat_quick_stock;
+
+  /// No description provided for @chat_quick_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Which size should I get?'**
+  String get chat_quick_size;
+
+  /// No description provided for @chat_quick_ship.
+  ///
+  /// In en, this message translates to:
+  /// **'When will it ship?'**
+  String get chat_quick_ship;
+
+  /// No description provided for @chat_quick_discount.
+  ///
+  /// In en, this message translates to:
+  /// **'Any discount?'**
+  String get chat_quick_discount;
+
+  /// No description provided for @chat_empty_title.
+  ///
+  /// In en, this message translates to:
+  /// **'No chats yet'**
+  String get chat_empty_title;
+
+  /// No description provided for @chat_empty_message.
+  ///
+  /// In en, this message translates to:
+  /// **'Message a shop from any product page, or ask Tuku Care for help.'**
+  String get chat_empty_message;
+
+  /// No description provided for @chat_yesterday.
+  ///
+  /// In en, this message translates to:
+  /// **'Yesterday'**
+  String get chat_yesterday;
+
+  /// No description provided for @pdp_chat.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat'**
+  String get pdp_chat;
+
+  /// No description provided for @pdp_view_shop.
+  ///
+  /// In en, this message translates to:
+  /// **'View shop'**
+  String get pdp_view_shop;
+
+  /// No description provided for @pdp_sold_by.
+  ///
+  /// In en, this message translates to:
+  /// **'Sold by'**
+  String get pdp_sold_by;
+
+  /// No description provided for @pdp_response_rate.
+  ///
+  /// In en, this message translates to:
+  /// **'Response'**
+  String get pdp_response_rate;
+
+  /// No description provided for @pdp_followers.
+  ///
+  /// In en, this message translates to:
+  /// **'Followers'**
+  String get pdp_followers;
 }
 
 class _AppLocalizationsDelegate

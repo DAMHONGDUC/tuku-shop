@@ -90,7 +90,7 @@ class _View extends StatelessWidget {
               AppIconButton(
                 icon: Icons.support_agent_rounded,
                 label: context.loc.support_title,
-                onTap: () => context.push(SupportChatRoutes.chat.fullPath),
+                onTap: () => context.push(ChatRoutes.supportLocation()),
               ),
             ],
           ),

@@ -810,4 +810,61 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get support_entry => 'Chat với chúng tôi';
+
+  @override
+  String get nav_chat => 'Chat';
+
+  @override
+  String get chat_title => 'Chat';
+
+  @override
+  String get chat_support_name => 'Tuku Care';
+
+  @override
+  String get chat_support_tag => 'Hỗ trợ';
+
+  @override
+  String get chat_official => 'Chính hãng';
+
+  @override
+  String chat_seller_stats(String rating, int rate, String followers) {
+    return '★ $rating · Phản hồi $rate% · $followers người theo dõi';
+  }
+
+  @override
+  String get chat_quick_stock => 'Sản phẩm này còn hàng không?';
+
+  @override
+  String get chat_quick_size => 'Tôi nên chọn size nào?';
+
+  @override
+  String get chat_quick_ship => 'Khi nào giao hàng?';
+
+  @override
+  String get chat_quick_discount => 'Có giảm giá không?';
+
+  @override
+  String get chat_empty_title => 'Chưa có cuộc trò chuyện';
+
+  @override
+  String get chat_empty_message =>
+      'Nhắn tin cho shop từ trang sản phẩm, hoặc hỏi Tuku Care để được hỗ trợ.';
+
+  @override
+  String get chat_yesterday => 'Hôm qua';
+
+  @override
+  String get pdp_chat => 'Chat';
+
+  @override
+  String get pdp_view_shop => 'Xem shop';
+
+  @override
+  String get pdp_sold_by => 'Bán bởi';
+
+  @override
+  String get pdp_response_rate => 'Phản hồi';
+
+  @override
+  String get pdp_followers => 'Người theo dõi';
 }

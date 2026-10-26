@@ -241,8 +241,7 @@ class _View extends StatelessWidget {
                       icon: Icons.support_agent_rounded,
                       label: loc.support_title,
                       value: loc.support_entry,
-                      onTap: () =>
-                          context.push(SupportChatRoutes.chat.fullPath),
+                      onTap: () => context.push(ChatRoutes.supportLocation()),
                     ),
                   ],
                 ),

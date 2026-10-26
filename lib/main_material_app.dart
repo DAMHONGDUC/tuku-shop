@@ -5,6 +5,7 @@ import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/core/l10n/app_localizations.dart';
 import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/cart/presentation/cart/cart_controller.dart';
+import 'package:tuku_shop/src/features/chat/presentation/chat_badge/chat_unread_controller.dart';
 import 'package:tuku_shop/src/features/notification/presentation/notification_badge/notification_badge_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/favorites/favorites_controller.dart';
 import 'package:tuku_shop/src/features/settings/presentation/locale_controller.dart';
@@ -27,6 +28,7 @@ class MainMaterialApp extends StatelessWidget {
         BlocProvider.value(value: getIt<FavoritesController>()..load()),
         BlocProvider.value(value: getIt<CartController>()..load()),
         BlocProvider.value(value: getIt<NotificationBadgeController>()..load()),
+        BlocProvider.value(value: getIt<ChatUnreadController>()..load()),
         BlocProvider.value(value: getIt<LocaleController>()..load()),
       ],
       child: BlocBuilder<LocaleController, Locale?>(
