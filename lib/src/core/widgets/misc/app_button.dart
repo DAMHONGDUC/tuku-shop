@@ -4,8 +4,8 @@ import 'package:tuku_shop/src/core/core.dart';
 
 enum AppButtonStyle { primary, soft }
 
-/// The app's one button shape: 48 pt tall, radius 14, brand fill or a 6 %
-/// brand tint for the secondary action.
+/// The app's one button shape: 48 pt tall, radius 12, an ink fill for the
+/// main action or an ink hairline outline for the secondary one.
 class AppButton extends StatelessWidget {
   const AppButton({
     super.key,
@@ -24,13 +24,15 @@ class AppButton extends StatelessWidget {
   final bool isLoading;
   final IconData? leadingIcon;
 
+  static const double _radius = SdSpacingV5.s12;
+
   @override
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
     final enabled = onTap != null && !isLoading;
     final isPrimary = style == AppButtonStyle.primary;
-    final fg = isPrimary ? SdColorsV5.white : colors.primary;
-    final bg = isPrimary ? colors.primary : colors.primarySoft;
+    final fg = isPrimary ? colors.onPrimary : colors.textDefault;
+    final bg = isPrimary ? colors.primary : colors.cardDefault;
 
     final content = isLoading
         ? SizedBox(
@@ -54,7 +56,10 @@ class AppButton extends StatelessWidget {
                   label,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: SdTextStyleV5.body14().wSemiBold().wColor(fg),
+                  style: SdTextStyleV5.body14()
+                      .wSemiBold()
+                      .wColor(fg)
+                      .copyWith(letterSpacing: 0.4),
                 ),
               ),
             ],
@@ -64,10 +69,10 @@ class AppButton extends StatelessWidget {
       opacity: enabled || isLoading ? 1 : 0.5,
       child: Material(
         color: bg,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(_radius),
         child: InkWell(
           onTap: enabled ? onTap : null,
-          borderRadius: BorderRadius.circular(14),
+          borderRadius: BorderRadius.circular(_radius),
           child: Container(
             height: SdSpacingV5.s48,
             width: expand ? double.infinity : null,
@@ -75,9 +80,9 @@ class AppButton extends StatelessWidget {
             decoration: isPrimary
                 ? null
                 : BoxDecoration(
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(_radius),
                     border: Border.all(
-                      color: colors.primary.withValues(alpha: 0.12),
+                      color: colors.textDefault.withValues(alpha: 0.24),
                     ),
                   ),
             alignment: Alignment.center,

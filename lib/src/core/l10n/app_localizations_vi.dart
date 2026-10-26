@@ -697,4 +697,28 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get profile_logout_message =>
       'Giỏ hàng, yêu thích và đơn hàng vẫn được lưu trên máy này.';
+
+  @override
+  String get nav_notifications => 'Thông báo';
+
+  @override
+  String product_sold_count(String count) {
+    return 'Đã bán $count';
+  }
+
+  @override
+  String get profile_stat_orders => 'Đơn hàng';
+
+  @override
+  String get profile_favorites_empty =>
+      'Chạm vào trái tim trên sản phẩm để lưu lại tại đây.';
+
+  @override
+  String get profile_bag_empty => 'Giỏ hàng đang trống';
+
+  @override
+  String get profile_shopping => 'Mua sắm';
+
+  @override
+  String get profile_settings => 'Cài đặt';
 }

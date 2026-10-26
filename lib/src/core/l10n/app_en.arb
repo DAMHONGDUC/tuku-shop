@@ -34,7 +34,7 @@
     "common_start_shopping": "Start shopping",
     "nav_home": "Home",
     "nav_categories": "Categories",
-    "nav_wishlist": "Wishlist",
+    "nav_wishlist": "Favorites",
     "nav_cart": "Cart",
     "nav_profile": "Profile",
     "home_search_hint": "Search dresses, jeans…",
@@ -118,8 +118,8 @@
             }
         }
     },
-    "wishlist_title": "Wishlist",
-    "wishlist_title_count": "Wishlist ({count})",
+    "wishlist_title": "Favorites",
+    "wishlist_title_count": "Favorites ({count})",
     "@wishlist_title_count": {
         "placeholders": {
             "count": {
@@ -338,13 +338,13 @@
     "profile_language": "Language",
     "profile_reset": "Reset demo data",
     "profile_reset_title": "Reset demo data?",
-    "profile_reset_message": "Cart, wishlist, orders, addresses and notifications go back to how they were on first launch. You stay signed in.",
+    "profile_reset_message": "Cart, favorites, orders, addresses and notifications go back to how they were on first launch. You stay signed in.",
     "profile_reset_confirm": "Reset",
     "profile_reset_done": "Demo data restored",
     "profile_logout": "Log out",
     "profile_demo_note": "Demo build with sample data",
     "register_title": "Create your account",
-    "register_subtitle": "Save your wishlist, track orders and check out faster.",
+    "register_subtitle": "Save your favorites, track orders and check out faster.",
     "register_password_hint": "At least 6 characters",
     "register_password_short": "Use at least 6 characters",
     "register_button": "Create account",
@@ -383,5 +383,19 @@
         }
     },
     "profile_logout_title": "Log out?",
-    "profile_logout_message": "Your cart, wishlist and orders stay saved on this device."
+    "profile_logout_message": "Your cart, favorites and orders stay saved on this device.",
+    "nav_notifications": "Notifications",
+    "product_sold_count": "{count} sold",
+    "@product_sold_count": {
+        "placeholders": {
+            "count": {
+                "type": "String"
+            }
+        }
+    },
+    "profile_stat_orders": "Orders",
+    "profile_favorites_empty": "Tap the heart on any piece to keep it here.",
+    "profile_bag_empty": "Your cart is empty",
+    "profile_shopping": "Shopping",
+    "profile_settings": "Settings"
 }

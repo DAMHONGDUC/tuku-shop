@@ -89,9 +89,9 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
                                 SdVerticalSpacingV5(value: SdSpacingV5.s8),
                                 Text(
                                   banner.title,
-                                  style: SdTextStyleV5.heading20().wColor(
-                                    contentColor,
-                                  ),
+                                  style: SdTextStyleV5.heading24()
+                                      .wColor(contentColor)
+                                      .wDisplay(),
                                 ),
                                 Text(
                                   '${banner.subtitle} · ${banner.price}',

@@ -29,15 +29,17 @@ class PriceText extends StatelessWidget {
       TextSpan(
         children: [
           TextSpan(text: AppFormat.price(price), style: base),
-          if (onSale)
+          if (onSale) ...[
+            const TextSpan(text: '  '),
             TextSpan(
-              text: '  ${AppFormat.price(originalPrice!)}',
+              text: AppFormat.price(originalPrice!),
               style: SdTextStyleV5.body12().copyWith(
                 color: colors.textSubTitle,
                 decoration: TextDecoration.lineThrough,
                 fontFeatures: const [FontFeature.tabularFigures()],
               ),
             ),
+          ],
         ],
       ),
       maxLines: 1,

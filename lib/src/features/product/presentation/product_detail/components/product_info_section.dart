@@ -19,14 +19,17 @@ class ProductInfoSection extends StatelessWidget {
         Row(
           children: [
             Text(
-              product.brand,
-              style: SdTextStyleV5.body12().wColor(colors.textSubTitle),
+              product.brand.toUpperCase(),
+              style: SdTextStyleV5.body12()
+                  .wSemiBold()
+                  .wColor(colors.textSubTitle)
+                  .wEyebrow(),
             ),
             const Spacer(),
             Icon(
               Icons.star_rounded,
               size: SdSpacingV5.s16,
-              color: colors.warning,
+              color: colors.accent,
             ),
             SdHorizontalSpacingV5(value: SdSpacingV5.s4),
             Text(
@@ -40,7 +43,9 @@ class ProductInfoSection extends StatelessWidget {
         SdVerticalSpacingV5(value: SdSpacingV5.s8),
         Text(
           product.name,
-          style: SdTextStyleV5.heading24().wColor(colors.textDefault),
+          style: SdTextStyleV5.heading24()
+              .wColor(colors.textDefault)
+              .wDisplay(),
         ),
         SdVerticalSpacingV5(value: SdSpacingV5.s8),
         Row(
@@ -100,15 +105,16 @@ class TrustRow extends StatelessWidget {
                 horizontal: SdSpacingV5.s8,
               ),
               decoration: BoxDecoration(
-                color: colors.primarySoft,
+                color: colors.cardDefault,
                 borderRadius: BorderRadius.circular(SdSpacingV5.s12),
+                border: Border.all(color: colors.borderDefault),
               ),
               child: Column(
                 children: [
                   SdIconV5(
                     iconData: items[i].$1,
                     iconSize: SdSpacingV5.s20,
-                    color: colors.primary,
+                    color: colors.accent,
                   ),
                   SdVerticalSpacingV5(value: SdSpacingV5.s4),
                   Text(

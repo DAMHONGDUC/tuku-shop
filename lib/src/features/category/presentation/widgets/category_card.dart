@@ -13,10 +13,7 @@ void openCategory(BuildContext context, CategoryEntity category) {
   );
 }
 
-Color _parseHex(String hex) =>
-    Color(int.parse('FF${hex.replaceFirst('#', '')}', radix: 16));
-
-/// Round thumbnail and name, for the Home strip.
+/// Round photo and name, for the Home strip.
 class CategoryCard extends StatelessWidget {
   final CategoryEntity category;
 
@@ -36,14 +33,16 @@ class CategoryCard extends StatelessWidget {
               Container(
                 width: UIConstants.categoriesImageWidth,
                 height: UIConstants.categoriesImageHeight,
-                padding: EdgeInsets.all(SdSpacingV5.s4),
+                padding: EdgeInsets.all(SdSpacingV5.s2),
                 decoration: BoxDecoration(
-                  color: _parseHex(category.colorHex),
-                  borderRadius: BorderRadius.circular(SdSpacingV5.s16),
+                  shape: BoxShape.circle,
+                  border: Border.all(color: context.colorTheme.borderDefault),
                 ),
-                child: CatalogImage(
-                  path: category.imageUrl,
-                  borderRadius: SdSpacingV5.s12,
+                child: ClipOval(
+                  child: ColoredBox(
+                    color: context.colorTheme.cardOnSurface,
+                    child: CatalogImage(path: category.imageUrl),
+                  ),
                 ),
               ),
               SdVerticalSpacingV5(value: SdSpacingV5.s8),
@@ -64,7 +63,8 @@ class CategoryCard extends StatelessWidget {
   }
 }
 
-/// Color-coded card with a product photo, for the Categories tab.
+/// A neutral card with a product photo and a serif name, for the
+/// Categories tab.
 class CategoryGridCard extends StatelessWidget {
   final CategoryEntity category;
 
@@ -72,8 +72,10 @@ class CategoryGridCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+
     return Material(
-      color: _parseHex(category.colorHex),
+      color: colors.cardDefault,
       borderRadius: BorderRadius.circular(UIConstants.cardRadius),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
@@ -88,11 +90,11 @@ class CategoryGridCard extends StatelessWidget {
               child: DecoratedBox(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(UIConstants.imageRadius),
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
-                      color: Color(0x1F000000),
+                      color: colors.boxShadowDefault,
                       blurRadius: SdSpacingV5.s14,
-                      offset: Offset(0, SdSpacingV5.s6),
+                      offset: const Offset(0, SdSpacingV5.s6),
                     ),
                   ],
                 ),
@@ -112,17 +114,15 @@ class CategoryGridCard extends StatelessWidget {
                     child: Text(
                       category.name,
                       maxLines: 2,
-                      style: SdTextStyleV5.body14().wSemiBold().wColor(
-                        const Color(0xFF15151A),
-                      ),
+                      style: SdTextStyleV5.heading16()
+                          .wColor(colors.textDefault)
+                          .wDisplay(),
                     ),
                   ),
                   const Spacer(),
                   Text(
                     context.loc.common_items_count(category.numOfProduct),
-                    style: SdTextStyleV5.body12().wColor(
-                      const Color(0xFF4A4A55),
-                    ),
+                    style: SdTextStyleV5.body12().wColor(colors.textSubTitle),
                   ),
                 ],
               ),

@@ -263,7 +263,7 @@ abstract class AppLocalizations {
   /// No description provided for @nav_wishlist.
   ///
   /// In en, this message translates to:
-  /// **'Wishlist'**
+  /// **'Favorites'**
   String get nav_wishlist;
 
   /// No description provided for @nav_cart.
@@ -557,13 +557,13 @@ abstract class AppLocalizations {
   /// No description provided for @wishlist_title.
   ///
   /// In en, this message translates to:
-  /// **'Wishlist'**
+  /// **'Favorites'**
   String get wishlist_title;
 
   /// No description provided for @wishlist_title_count.
   ///
   /// In en, this message translates to:
-  /// **'Wishlist ({count})'**
+  /// **'Favorites ({count})'**
   String wishlist_title_count(int count);
 
   /// No description provided for @wishlist_empty_title.
@@ -1211,7 +1211,7 @@ abstract class AppLocalizations {
   /// No description provided for @profile_reset_message.
   ///
   /// In en, this message translates to:
-  /// **'Cart, wishlist, orders, addresses and notifications go back to how they were on first launch. You stay signed in.'**
+  /// **'Cart, favorites, orders, addresses and notifications go back to how they were on first launch. You stay signed in.'**
   String get profile_reset_message;
 
   /// No description provided for @profile_reset_confirm.
@@ -1247,7 +1247,7 @@ abstract class AppLocalizations {
   /// No description provided for @register_subtitle.
   ///
   /// In en, this message translates to:
-  /// **'Save your wishlist, track orders and check out faster.'**
+  /// **'Save your favorites, track orders and check out faster.'**
   String get register_subtitle;
 
   /// No description provided for @register_password_hint.
@@ -1355,8 +1355,50 @@ abstract class AppLocalizations {
   /// No description provided for @profile_logout_message.
   ///
   /// In en, this message translates to:
-  /// **'Your cart, wishlist and orders stay saved on this device.'**
+  /// **'Your cart, favorites and orders stay saved on this device.'**
   String get profile_logout_message;
+
+  /// No description provided for @nav_notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get nav_notifications;
+
+  /// No description provided for @product_sold_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sold'**
+  String product_sold_count(String count);
+
+  /// No description provided for @profile_stat_orders.
+  ///
+  /// In en, this message translates to:
+  /// **'Orders'**
+  String get profile_stat_orders;
+
+  /// No description provided for @profile_favorites_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap the heart on any piece to keep it here.'**
+  String get profile_favorites_empty;
+
+  /// No description provided for @profile_bag_empty.
+  ///
+  /// In en, this message translates to:
+  /// **'Your cart is empty'**
+  String get profile_bag_empty;
+
+  /// No description provided for @profile_shopping.
+  ///
+  /// In en, this message translates to:
+  /// **'Shopping'**
+  String get profile_shopping;
+
+  /// No description provided for @profile_settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get profile_settings;
 }
 
 class _AppLocalizationsDelegate

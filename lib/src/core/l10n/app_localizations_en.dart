@@ -93,7 +93,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get nav_categories => 'Categories';
 
   @override
-  String get nav_wishlist => 'Wishlist';
+  String get nav_wishlist => 'Favorites';
 
   @override
   String get nav_cart => 'Cart';
@@ -251,11 +251,11 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get wishlist_title => 'Wishlist';
+  String get wishlist_title => 'Favorites';
 
   @override
   String wishlist_title_count(int count) {
-    return 'Wishlist ($count)';
+    return 'Favorites ($count)';
   }
 
   @override
@@ -614,7 +614,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_reset_message =>
-      'Cart, wishlist, orders, addresses and notifications go back to how they were on first launch. You stay signed in.';
+      'Cart, favorites, orders, addresses and notifications go back to how they were on first launch. You stay signed in.';
 
   @override
   String get profile_reset_confirm => 'Reset';
@@ -633,7 +633,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get register_subtitle =>
-      'Save your wishlist, track orders and check out faster.';
+      'Save your favorites, track orders and check out faster.';
 
   @override
   String get register_password_hint => 'At least 6 characters';
@@ -696,5 +696,29 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_logout_message =>
-      'Your cart, wishlist and orders stay saved on this device.';
+      'Your cart, favorites and orders stay saved on this device.';
+
+  @override
+  String get nav_notifications => 'Notifications';
+
+  @override
+  String product_sold_count(String count) {
+    return '$count sold';
+  }
+
+  @override
+  String get profile_stat_orders => 'Orders';
+
+  @override
+  String get profile_favorites_empty =>
+      'Tap the heart on any piece to keep it here.';
+
+  @override
+  String get profile_bag_empty => 'Your cart is empty';
+
+  @override
+  String get profile_shopping => 'Shopping';
+
+  @override
+  String get profile_settings => 'Settings';
 }

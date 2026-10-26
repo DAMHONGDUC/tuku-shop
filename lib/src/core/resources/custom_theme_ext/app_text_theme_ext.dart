@@ -1,6 +1,5 @@
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:system_design/index.dart';
 
 class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
@@ -77,8 +76,10 @@ class AppTextThemeExt extends ThemeExtension<AppTextThemeExt> {
     required this.heading72,
   });
 
+  /// No family: the platform's own UI font (San Francisco on iOS, Roboto
+  /// on Android), as Shopee uses.
   static TextStyle _applyFont(TextStyle style) {
-    return GoogleFonts.lato(
+    return TextStyle(
       fontSize: style.fontSize,
       fontWeight: style.fontWeight,
       color: style.color,

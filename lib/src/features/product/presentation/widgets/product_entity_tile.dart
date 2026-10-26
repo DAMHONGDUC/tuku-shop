@@ -37,6 +37,7 @@ class ProductEntityTile extends StatelessWidget {
       price: product.price,
       originalPrice: product.originalPrice,
       rating: product.averageRating,
+      soldCount: product.purchaserCount,
       badgeText: badge,
       badgeColor: badgeColor,
       isFavorite: isFavorite,

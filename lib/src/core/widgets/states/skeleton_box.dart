@@ -9,11 +9,15 @@ class SkeletonBox extends StatelessWidget {
     this.width,
     this.height = SdSpacingV5.s14,
     this.radius = SdSpacingV5.s8,
+    this.color,
   });
 
   final double? width;
   final double height;
   final double radius;
+
+  /// Defaults to the theme surface; pass one for inverse (dark) cards.
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,7 @@ class SkeletonBox extends StatelessWidget {
       width: width,
       height: height,
       borderRadiusValue: radius,
-      color: context.colorTheme.cardOnSurface,
+      color: color ?? context.colorTheme.cardOnSurface,
     );
   }
 }

@@ -3,7 +3,8 @@ import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 
 /// A product card built from plain values, so any feature can show one
-/// without importing the product feature.
+/// without importing the product feature. Editorial layout: the photo
+/// carries the card, text sits on the page below it.
 class ProductTile extends StatelessWidget {
   const ProductTile({
     super.key,
@@ -14,6 +15,7 @@ class ProductTile extends StatelessWidget {
     required this.onTap,
     this.originalPrice,
     this.rating,
+    this.soldCount,
     this.badgeText,
     this.badgeColor,
     this.isFavorite,
@@ -27,6 +29,7 @@ class ProductTile extends StatelessWidget {
   final double price;
   final double? originalPrice;
   final double? rating;
+  final int? soldCount;
   final String? badgeText;
   final Color? badgeColor;
 
@@ -39,12 +42,17 @@ class ProductTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
+    final meta = [
+      if (rating != null && rating! > 0) '★ ${rating!.toStringAsFixed(1)}',
+      if (soldCount != null && soldCount! > 0)
+        context.loc.product_sold_count(AppFormat.compactCount(soldCount!)),
+    ].join('  ·  ');
 
-    return Material(
-      color: colors.cardDefault,
-      borderRadius: BorderRadius.circular(UIConstants.cardRadius),
-      clipBehavior: Clip.antiAlias,
-      child: InkWell(
+    return Semantics(
+      button: true,
+      label: '$brand, $name',
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
         onTap: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,62 +60,81 @@ class ProductTile extends StatelessWidget {
           children: [
             AspectRatio(
               aspectRatio: UIConstants.productImageAspect,
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  CatalogImage(path: imageUrl),
-                  if (isSoldOut)
-                    ColoredBox(
-                      color: colors.cardDefault.withValues(alpha: 0.55),
-                    ),
-                  if (badgeText != null)
-                    Positioned(
-                      left: SdSpacingV5.s8,
-                      top: SdSpacingV5.s8,
-                      child: TagChip(
-                        label: badgeText!,
-                        color: badgeColor ?? colors.sale,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(UIConstants.imageRadius),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    ColoredBox(color: colors.cardOnSurface),
+                    CatalogImage(path: imageUrl),
+                    if (isSoldOut) ...[
+                      ColoredBox(
+                        color: colors.pageDefault.withValues(alpha: 0.55),
                       ),
-                    ),
-                  if (isFavorite != null)
-                    Positioned(
-                      right: SdSpacingV5.s4,
-                      top: SdSpacingV5.s4,
-                      child: FavoriteButton(
-                        isFavorite: isFavorite!,
-                        onTap: onFavoriteTap,
+                      Center(
+                        child: TagChip(
+                          label: context.loc.pdp_sold_out,
+                          color: colors.textDefault,
+                        ),
                       ),
-                    ),
-                ],
+                    ],
+                    if (badgeText != null)
+                      Positioned(
+                        left: SdSpacingV5.s8,
+                        top: SdSpacingV5.s8,
+                        child: TagChip(
+                          label: badgeText!,
+                          color: badgeColor ?? colors.sale,
+                        ),
+                      ),
+                    if (isFavorite != null)
+                      Positioned(
+                        right: SdSpacingV5.s2,
+                        top: SdSpacingV5.s2,
+                        child: FavoriteButton(
+                          isFavorite: isFavorite!,
+                          onTap: onFavoriteTap,
+                        ),
+                      ),
+                  ],
+                ),
               ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(
-                SdSpacingV5.s12,
+                SdSpacingV5.s2,
                 SdSpacingV5.s8,
-                SdSpacingV5.s12,
-                SdSpacingV5.s12,
+                SdSpacingV5.s2,
+                0,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text(
+                    brand.toUpperCase(),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: SdTextStyleV5.body10()
+                        .wSemiBold()
+                        .wColor(colors.textSubTitle)
+                        .wEyebrow(),
+                  ),
+                  SdVerticalSpacingV5(value: SdSpacingV5.s2),
                   Text(
                     name,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: SdTextStyleV5.body14().wColor(colors.textDefault),
                   ),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s2),
-                  Text(
-                    rating == null
-                        ? brand
-                        : '$brand · ★ ${rating!.toStringAsFixed(1)}',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: SdTextStyleV5.body12().wColor(colors.textSubTitle),
-                  ),
                   SdVerticalSpacingV5(value: SdSpacingV5.s4),
                   PriceText(price: price, originalPrice: originalPrice),
+                  SdVerticalSpacingV5(value: SdSpacingV5.s2),
+                  Text(
+                    meta,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: SdTextStyleV5.body10().wColor(colors.textSubTitle),
+                  ),
                 ],
               ),
             ),
@@ -126,18 +153,24 @@ class TagChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final foreground = color.computeLuminance() > 0.5
+        ? AppColors.ink
+        : SdColorsV5.white;
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: SdSpacingV5.s8,
+        horizontal: SdSpacingV5.s6,
         vertical: SdSpacingV5.s2,
       ),
       decoration: BoxDecoration(
         color: color,
-        borderRadius: BorderRadius.circular(SdSpacingV5.s100),
+        borderRadius: BorderRadius.circular(SdSpacingV5.s4),
       ),
       child: Text(
-        label,
-        style: SdTextStyleV5.body10().wSemiBold().wColor(SdColorsV5.white),
+        label.toUpperCase(),
+        style: SdTextStyleV5.body10()
+            .wSemiBold()
+            .wColor(foreground)
+            .copyWith(letterSpacing: 0.8),
       ),
     );
   }
@@ -179,7 +212,7 @@ class FavoriteButton extends StatelessWidget {
                   isFavorite ? Icons.favorite : Icons.favorite_border,
                   key: ValueKey(isFavorite),
                   size: SdSpacingV5.s16,
-                  color: isFavorite ? colors.sale : const Color(0xFF15151A),
+                  color: isFavorite ? colors.sale : AppColors.ink,
                 ),
               ),
             ),
@@ -195,35 +228,31 @@ class ProductTileSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: context.colorTheme.cardDefault,
-        borderRadius: BorderRadius.circular(UIConstants.cardRadius),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          AspectRatio(
-            aspectRatio: UIConstants.productImageAspect,
-            child: SkeletonBox(radius: 0, height: double.infinity),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        AspectRatio(
+          aspectRatio: UIConstants.productImageAspect,
+          child: SkeletonBox(
+            radius: UIConstants.imageRadius,
+            height: double.infinity,
           ),
-          Padding(
-            padding: EdgeInsets.all(SdSpacingV5.s12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SkeletonBox(height: SdSpacingV5.s12),
-                SdVerticalSpacingV5(value: SdSpacingV5.s8),
-                SkeletonBox(height: SdSpacingV5.s10, width: 80),
-                SdVerticalSpacingV5(value: SdSpacingV5.s8),
-                SkeletonBox(height: SdSpacingV5.s14, width: 56),
-              ],
-            ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(vertical: SdSpacingV5.s12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SkeletonBox(height: SdSpacingV5.s12),
+              SdVerticalSpacingV5(value: SdSpacingV5.s8),
+              SkeletonBox(height: SdSpacingV5.s10, width: 80),
+              SdVerticalSpacingV5(value: SdSpacingV5.s8),
+              SkeletonBox(height: SdSpacingV5.s14, width: 56),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

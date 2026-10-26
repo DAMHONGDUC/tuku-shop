@@ -209,5 +209,12 @@
     "notifications_hours_ago": "{count} giờ trước",
     "notifications_days_ago": "{count} ngày trước",
     "profile_logout_title": "Đăng xuất?",
-    "profile_logout_message": "Giỏ hàng, yêu thích và đơn hàng vẫn được lưu trên máy này."
+    "profile_logout_message": "Giỏ hàng, yêu thích và đơn hàng vẫn được lưu trên máy này.",
+    "nav_notifications": "Thông báo",
+    "product_sold_count": "Đã bán {count}",
+    "profile_stat_orders": "Đơn hàng",
+    "profile_favorites_empty": "Chạm vào trái tim trên sản phẩm để lưu lại tại đây.",
+    "profile_bag_empty": "Giỏ hàng đang trống",
+    "profile_shopping": "Mua sắm",
+    "profile_settings": "Cài đặt"
 }

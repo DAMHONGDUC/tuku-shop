@@ -186,14 +186,16 @@ class _LoginHeader extends StatelessWidget {
             child: SdIconV5(
               iconData: Icons.shopping_bag_outlined,
               iconSize: SdSpacingV5.s32,
-              color: SdColorsV5.white,
+              color: colors.onPrimary,
             ),
           ),
         ),
         SdVerticalSpacingV5(value: SdSpacingV5.s16),
         Text(
           context.loc.app_name,
-          style: SdTextStyleV5.heading16().copyWith(color: colors.primary),
+          style: SdTextStyleV5.heading24()
+              .wColor(colors.textDefault)
+              .wDisplay(),
         ),
         SdVerticalSpacingV5(value: SdSpacingV5.s24),
         Text(

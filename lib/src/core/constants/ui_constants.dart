@@ -2,7 +2,7 @@ import 'package:system_design/index.dart';
 
 class UIConstants {
   // banner
-  static const bannerHeight = 168.0;
+  static const bannerHeight = 200.0;
   static const bannerBorderRadius = SdSpacingV5.s16;
   static const bannerTagWidth = 80.0;
 

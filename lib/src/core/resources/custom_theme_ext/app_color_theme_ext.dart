@@ -26,6 +26,15 @@ class AppColorThemeExt extends ThemeExtension<AppColorThemeExt> {
   /// Brand at low opacity: secondary buttons, chips, highlighted cards.
   final Color primarySoft;
 
+  /// Text and icons drawn on a [primary] fill.
+  final Color onPrimary;
+
+  /// Champagne: membership, ratings, editorial highlights. Never a CTA.
+  final Color accent;
+
+  /// [accent] at low opacity, for tinted badges and cards.
+  final Color accentSoft;
+
   const AppColorThemeExt({
     required this.pageDefault,
     required this.textDefault,
@@ -46,56 +55,67 @@ class AppColorThemeExt extends ThemeExtension<AppColorThemeExt> {
     required this.success,
     required this.warning,
     required this.primarySoft,
+    required this.onPrimary,
+    required this.accent,
+    required this.accentSoft,
   });
 
-  // Light theme
-  // Palette from docs/design/tuku-shop-mockups.html.
+  // Light theme: ivory page, white cards, ink CTAs, champagne accents.
+  // Palette documented in docs/full-shop-flow-plan.md ("Premium refresh").
   static AppColorThemeExt light() {
+    const shadow = Color(0xFF3A2E1E);
     return AppColorThemeExt(
-      pageDefault: const Color(0xFFF4F4F7),
-      textDefault: const Color(0xFF15151A),
-      iconDefault: const Color(0xFF2A2A33),
-      iconSecondary: const Color(0xFF6B6B78),
-      textSubTitle: const Color(0xFF6B6B78),
-      cardDefault: AppColors.white,
-      boxShadowDefault: const Color(0xFF28265A).withValues(alpha: 0.08),
-      borderDefault: const Color(0xFFE6E6EE),
+      pageDefault: AppColors.pageDefaultLight,
+      textDefault: AppColors.textDefaultLight,
+      iconDefault: AppColors.iconDefaultLight,
+      iconSecondary: AppColors.textSubTitleLight,
+      textSubTitle: AppColors.textSubTitleLight,
+      cardDefault: AppColors.cardDefaultLight,
+      boxShadowDefault: shadow.withValues(alpha: 0.08),
+      borderDefault: const Color(0xFFE7E1D8),
       indicatorActive: AppColors.primary,
-      indicatorBg: const Color(0xFF6B6B78).withValues(alpha: 0.25),
+      indicatorBg: AppColors.inkSoft.withValues(alpha: 0.25),
       primary: AppColors.primary,
       surfaceDefault: AppColors.white,
-      primaryShadowDefault: AppColors.primary.withValues(alpha: 0.2),
-      cardOnSurface: const Color(0xFFF4F4F7),
-      boxShadowSecondary: const Color(0xFF28265A).withValues(alpha: 0.06),
-      sale: const Color(0xFFE5484D),
-      success: const Color(0xFF2E9E6B),
-      warning: const Color(0xFFF2B01E),
-      primarySoft: AppColors.primary.withValues(alpha: 0.08),
+      primaryShadowDefault: AppColors.primary.withValues(alpha: 0.18),
+      cardOnSurface: AppColors.pageSecondaryLight,
+      boxShadowSecondary: shadow.withValues(alpha: 0.05),
+      sale: const Color(0xFFB3261E),
+      success: const Color(0xFF2F7A57),
+      warning: const Color(0xFFC8962E),
+      primarySoft: AppColors.primary.withValues(alpha: 0.05),
+      onPrimary: AppColors.white,
+      accent: AppColors.champagne,
+      accentSoft: AppColors.champagne.withValues(alpha: 0.12),
     );
   }
 
+  // Dark theme: espresso page, champagne CTAs with ink text.
   static AppColorThemeExt dark() {
-    const primary = Color(0xFF8B89F0);
+    const primary = AppColors.champagneLight;
     return AppColorThemeExt(
-      pageDefault: const Color(0xFF0F0F14),
-      textDefault: const Color(0xFFF2F2F7),
-      iconDefault: const Color(0xFFE2E2EA),
-      iconSecondary: const Color(0xFF9A9AAA),
-      textSubTitle: const Color(0xFF9A9AAA),
-      cardDefault: const Color(0xFF1A1A22),
+      pageDefault: const Color(0xFF0F0E0D),
+      textDefault: AppColors.textDefaultDark,
+      iconDefault: const Color(0xFFE8E3DA),
+      iconSecondary: const Color(0xFFA39C92),
+      textSubTitle: const Color(0xFFA39C92),
+      cardDefault: const Color(0xFF1A1917),
       boxShadowDefault: SdColorsV5.black.withValues(alpha: 0.4),
-      borderDefault: const Color(0xFF2A2A35),
+      borderDefault: const Color(0xFF2C2A27),
       indicatorActive: primary,
-      indicatorBg: const Color(0xFF9A9AAA).withValues(alpha: 0.3),
+      indicatorBg: const Color(0xFFA39C92).withValues(alpha: 0.3),
       primary: primary,
-      surfaceDefault: const Color(0xFF1A1A22),
+      surfaceDefault: const Color(0xFF1A1917),
       primaryShadowDefault: primary.withValues(alpha: 0.2),
-      cardOnSurface: const Color(0xFF22222C),
+      cardOnSurface: const Color(0xFF23211F),
       boxShadowSecondary: SdColorsV5.black.withValues(alpha: 0.3),
-      sale: const Color(0xFFFF6B6F),
-      success: const Color(0xFF4CC38A),
-      warning: const Color(0xFFF5C451),
-      primarySoft: primary.withValues(alpha: 0.12),
+      sale: const Color(0xFFE5626B),
+      success: const Color(0xFF5CC291),
+      warning: const Color(0xFFE7B95A),
+      primarySoft: primary.withValues(alpha: 0.1),
+      onPrimary: AppColors.ink,
+      accent: primary,
+      accentSoft: primary.withValues(alpha: 0.14),
     );
   }
 

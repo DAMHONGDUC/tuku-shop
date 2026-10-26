@@ -25,7 +25,7 @@ class AppChip extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
     final fg = selected
-        ? SdColorsV5.white
+        ? colors.onPrimary
         : enabled
         ? colors.textDefault
         : colors.textSubTitle.withValues(alpha: 0.6);
