@@ -345,7 +345,7 @@ class _CheckoutDock extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: colors.cardDefault,
+        color: colors.surfaceDefault,
         border: Border(top: BorderSide(color: colors.borderDefault)),
       ),
       padding: EdgeInsets.fromLTRB(

@@ -60,10 +60,10 @@ class AppColorThemeExt extends ThemeExtension<AppColorThemeExt> {
     required this.accentSoft,
   });
 
-  // Light theme: ivory page, white cards, ink CTAs, champagne accents.
+  // Light theme: white page, soft grey cards, ink CTAs, champagne accents.
   // Palette documented in docs/full-shop-flow-plan.md ("Premium refresh").
   static AppColorThemeExt light() {
-    const shadow = Color(0xFF3A2E1E);
+    const shadow = Color(0xFF1F1F29);
     return AppColorThemeExt(
       pageDefault: AppColors.pageDefaultLight,
       textDefault: AppColors.textDefaultLight,
@@ -72,7 +72,7 @@ class AppColorThemeExt extends ThemeExtension<AppColorThemeExt> {
       textSubTitle: AppColors.textSubTitleLight,
       cardDefault: AppColors.cardDefaultLight,
       boxShadowDefault: shadow.withValues(alpha: 0.08),
-      borderDefault: const Color(0xFFE7E1D8),
+      borderDefault: const Color(0xFFE6E6EA),
       indicatorActive: AppColors.primary,
       indicatorBg: AppColors.inkSoft.withValues(alpha: 0.25),
       primary: AppColors.primary,

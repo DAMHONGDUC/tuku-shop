@@ -49,7 +49,7 @@ class AppIconButton extends StatelessWidget {
         AppColors.ink,
       ),
       AppIconButtonStyle.outlined => (
-        colors.cardDefault,
+        colors.surfaceDefault,
         BorderSide(color: colors.borderDefault),
         colors.iconDefault,
       ),

@@ -44,7 +44,7 @@ class AppChip extends StatelessWidget {
             vertical: SdSpacingV5.s8,
           ),
           decoration: BoxDecoration(
-            color: selected ? colors.primary : colors.cardDefault,
+            color: selected ? colors.primary : colors.surfaceDefault,
             borderRadius: BorderRadius.circular(SdSpacingV5.s100),
             border: Border.all(
               color: selected ? colors.primary : colors.borderDefault,

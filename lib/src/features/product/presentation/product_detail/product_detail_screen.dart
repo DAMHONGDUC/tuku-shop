@@ -110,7 +110,7 @@ class _ViewState extends State<_View> {
                 valueListenable: _collapsed,
                 builder: (context, collapsed, _) => AppBar(
                   backgroundColor: collapsed
-                      ? colors.cardDefault
+                      ? colors.pageDefault
                       : SdColorsV5.transparent,
                   surfaceTintColor: SdColorsV5.transparent,
                   elevation: 0,
@@ -299,7 +299,7 @@ class _Dock extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        color: colors.cardDefault,
+        color: colors.surfaceDefault,
         border: Border(top: BorderSide(color: colors.borderDefault)),
       ),
       padding: EdgeInsets.fromLTRB(

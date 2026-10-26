@@ -237,7 +237,7 @@ class FloatingBottomNavBar extends StatelessWidget {
             child: Container(
               height: FloatingBottomNav.barHeight,
               decoration: BoxDecoration(
-                color: colors.cardDefault.withValues(alpha: 0.8),
+                color: colors.surfaceDefault.withValues(alpha: 0.85),
                 borderRadius: BorderRadius.circular(_radius),
                 border: Border.all(color: colors.borderDefault),
               ),

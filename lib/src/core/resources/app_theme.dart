@@ -29,7 +29,7 @@ class AppTheme {
           primary: colors.primary,
           onPrimary: colors.onPrimary,
           secondary: colors.accent,
-          surface: colors.cardDefault,
+          surface: colors.surfaceDefault,
           onSurface: colors.textDefault,
           error: colors.sale,
           outline: colors.borderDefault,
@@ -67,12 +67,12 @@ class AppTheme {
         ),
       ),
       dialogTheme: DialogThemeData(
-        backgroundColor: colors.cardDefault,
+        backgroundColor: colors.surfaceDefault,
         surfaceTintColor: SdColorsV5.transparent,
         shape: const RoundedRectangleBorder(borderRadius: radius),
       ),
       bottomSheetTheme: BottomSheetThemeData(
-        backgroundColor: colors.cardDefault,
+        backgroundColor: colors.surfaceDefault,
         surfaceTintColor: SdColorsV5.transparent,
       ),
       progressIndicatorTheme: ProgressIndicatorThemeData(color: colors.primary),

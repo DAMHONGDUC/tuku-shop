@@ -118,7 +118,7 @@ class _View extends StatelessWidget {
     return showModalBottomSheet<T>(
       context: context,
       useRootNavigator: true,
-      backgroundColor: colors.cardDefault,
+      backgroundColor: colors.surfaceDefault,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(UIConstants.sheetRadius),

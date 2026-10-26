@@ -29,7 +29,7 @@ class AddToCartSheet extends StatelessWidget {
       context: context,
       useRootNavigator: true,
       isScrollControlled: true,
-      backgroundColor: context.colorTheme.cardDefault,
+      backgroundColor: context.colorTheme.surfaceDefault,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
           top: Radius.circular(UIConstants.sheetRadius),

@@ -32,7 +32,7 @@ class AppButton extends StatelessWidget {
     final enabled = onTap != null && !isLoading;
     final isPrimary = style == AppButtonStyle.primary;
     final fg = isPrimary ? colors.onPrimary : colors.textDefault;
-    final bg = isPrimary ? colors.primary : colors.cardDefault;
+    final bg = isPrimary ? colors.primary : colors.surfaceDefault;
 
     final content = isLoading
         ? SizedBox(

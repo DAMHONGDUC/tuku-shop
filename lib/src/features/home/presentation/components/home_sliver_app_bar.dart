@@ -35,7 +35,6 @@ class HomeSliverAppBar extends StatelessWidget {
             decoration: BoxDecoration(
               color: colors.cardDefault,
               borderRadius: BorderRadius.circular(SdSpacingV5.s100),
-              border: Border.all(color: colors.borderDefault),
             ),
             child: Row(
               children: [
