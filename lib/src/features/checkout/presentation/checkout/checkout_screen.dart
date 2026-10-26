@@ -48,10 +48,9 @@ class _View extends StatelessWidget {
         return SdKeyboardDismisserV5(
           child: Scaffold(
             backgroundColor: colors.pageDefault,
-            appBar: SdAppBarV5(
-              titleText: context.loc.checkout_title,
-              backgroundColor: colors.pageDefault,
-              noElevation: true,
+            appBar: AppTopBar(
+              title: context.loc.checkout_title,
+              showCart: false,
             ),
             bottomNavigationBar: _PlaceOrderDock(state: state),
             body: ListView(

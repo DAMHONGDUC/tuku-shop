@@ -36,11 +36,7 @@ class _View extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: context.colorTheme.pageDefault,
-      appBar: SdAppBarV5(
-        titleText: title,
-        backgroundColor: context.colorTheme.pageDefault,
-        noElevation: true,
-      ),
+      appBar: AppTopBar(title: title),
       body: LoadMoreListener(
         onLoadMore: controller.loadMore,
         child: RefreshWrapper(

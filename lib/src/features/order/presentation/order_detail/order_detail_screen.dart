@@ -69,7 +69,7 @@ class _View extends StatelessWidget {
               SnackBar(content: Text(context.loc.order_cancelled_toast)),
             );
           case OrderAction.reordered:
-            context.go(CartRoutes.cart.fullPath);
+            context.push(CartRoutes.cart.fullPath);
           case OrderAction.cancelFailed || OrderAction.reorderFailed:
             messenger.showSnackBar(
               SnackBar(content: Text(context.loc.common_load_failed)),
@@ -82,12 +82,8 @@ class _View extends StatelessWidget {
         final order = state.order;
         return Scaffold(
           backgroundColor: colors.pageDefault,
-          appBar: SdAppBarV5(
-            titleText: order == null
-                ? context.loc.orders_title
-                : '#${order.id}',
-            backgroundColor: colors.pageDefault,
-            noElevation: true,
+          appBar: AppTopBar(
+            title: order == null ? context.loc.orders_title : '#${order.id}',
           ),
           bottomNavigationBar: order == null
               ? null

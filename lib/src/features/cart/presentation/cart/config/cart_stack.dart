@@ -9,6 +9,7 @@ class CartStack {
   static final List<GoRoute> routes = [
     SdGoRouteV5(
       path: CartRoutes.cart.path,
+      parentNavigatorKey: kRootNavigatorKey,
       name: CartRoutes.cart.name,
       builder: (BuildContext context, GoRouterState state) {
         return const CartScreen();

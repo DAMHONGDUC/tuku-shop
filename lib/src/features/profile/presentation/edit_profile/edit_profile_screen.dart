@@ -70,11 +70,7 @@ class _FormState extends State<_Form> {
       builder: (context, state) => SdKeyboardDismisserV5(
         child: Scaffold(
           backgroundColor: colors.pageDefault,
-          appBar: SdAppBarV5(
-            titleText: loc.profile_edit,
-            backgroundColor: colors.pageDefault,
-            noElevation: true,
-          ),
+          appBar: AppTopBar(title: loc.profile_edit, showCart: false),
           body: ListView(
             padding: EdgeInsets.all(SdSpacingV5.s16),
             children: [

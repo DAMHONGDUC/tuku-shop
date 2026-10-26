@@ -71,8 +71,10 @@ class _SearchViewState extends State<_SearchView> {
           backgroundColor: colors.pageDefault,
           surfaceTintColor: SdColorsV5.transparent,
           titleSpacing: 0,
+          actionsPadding: EdgeInsets.only(right: SdSpacingV5.s8),
+          actions: const [CartActionButton()],
           title: Padding(
-            padding: EdgeInsets.only(right: SdSpacingV5.s16),
+            padding: EdgeInsets.only(right: SdSpacingV5.s4),
             child: TextField(
               controller: _textController,
               autofocus: true,

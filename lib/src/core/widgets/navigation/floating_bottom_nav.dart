@@ -18,12 +18,12 @@ class FloatingNavDestination {
   final IconData icon;
   final IconData selectedIcon;
 
-  /// Never painted (the bar is glyph-only) but read by screen readers.
+  /// Painted under the glyph and read by screen readers.
   final String label;
   final int badgeCount;
 }
 
-/// A floating, glyph-only tab bar over its body: a V5 rebuild of the design
+/// A floating, labelled tab bar over its body: a V5 rebuild of the design
 /// kit's V3 bottom navigation, from V5 tokens only.
 ///
 /// The body scrolls behind the bar. Scrolling the tab's main list down slides
@@ -44,7 +44,7 @@ class FloatingBottomNav extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int> onSelected;
 
-  static const double barHeight = SdSpacingV5.s56;
+  static const double barHeight = SdSpacingV5.s64;
   static const double sideMargin = SdSpacingV5.s16;
   static const double _minOffset = SdSpacingV5.s16;
   static const double _maxOffset = SdSpacingV5.s20;
@@ -258,7 +258,7 @@ class FloatingBottomNavBar extends StatelessWidget {
                         padding: const EdgeInsets.all(_capsuleInset),
                         child: DecoratedBox(
                           decoration: BoxDecoration(
-                            color: colors.primary.withValues(alpha: 0.16),
+                            color: colors.primary.withValues(alpha: 0.08),
                             borderRadius: BorderRadius.circular(
                               _radius - _capsuleInset,
                             ),
@@ -314,33 +314,47 @@ class _NavCell extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         customBorder: const StadiumBorder(),
-        child: Center(
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              AnimatedSwitcher(
-                duration: UIConstants.navFast,
-                child: SdIconV5(
-                  key: ValueKey(selected),
-                  iconData: selected
-                      ? destination.selectedIcon
-                      : destination.icon,
-                  iconSize: SdSpacingV5.s24,
-                  color: color,
-                ),
-              ),
-              if (badge > 0)
-                Positioned(
-                  right: -SdSpacingV5.s10,
-                  top: -SdSpacingV5.s6,
-                  child: SdBadgeV5(
-                    count: badge,
-                    size: SdSpacingV5.s16,
-                    badgeColor: colors.sale,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Stack(
+              clipBehavior: Clip.none,
+              children: [
+                AnimatedSwitcher(
+                  duration: UIConstants.navFast,
+                  child: SdIconV5(
+                    key: ValueKey(selected),
+                    iconData: selected
+                        ? destination.selectedIcon
+                        : destination.icon,
+                    iconSize: SdSpacingV5.s22,
+                    color: color,
                   ),
                 ),
-            ],
-          ),
+                if (badge > 0)
+                  Positioned(
+                    right: -SdSpacingV5.s10,
+                    top: -SdSpacingV5.s6,
+                    child: SdBadgeV5(
+                      count: badge,
+                      size: SdSpacingV5.s16,
+                      badgeColor: colors.sale,
+                    ),
+                  ),
+              ],
+            ),
+            SdVerticalSpacingV5(value: SdSpacingV5.s2),
+            Text(
+              destination.label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style:
+                  (selected
+                          ? SdTextStyleV5.body10().wSemiBold()
+                          : SdTextStyleV5.body10())
+                      .wColor(color),
+            ),
+          ],
         ),
       ),
     );

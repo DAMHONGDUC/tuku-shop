@@ -28,9 +28,10 @@ class _View extends StatelessWidget {
     final controller = context.read<CategoriesController>();
     const spacing = SdSpacingV5.s12;
 
-    return ColoredBox(
-      color: colors.pageDefault,
-      child: SafeArea(
+    return Scaffold(
+      backgroundColor: colors.pageDefault,
+      appBar: AppTopBar(title: context.loc.categories_title, large: true),
+      body: SafeArea(
         bottom: false,
         child: RefreshWrapper(
           onRefresh: () async => controller.getData(),
@@ -39,21 +40,7 @@ class _View extends StatelessWidget {
               SliverPadding(
                 padding: EdgeInsets.fromLTRB(
                   SdSpacingV5.s16,
-                  SdSpacingV5.s16,
-                  SdSpacingV5.s16,
-                  SdSpacingV5.s16,
-                ),
-                sliver: SliverToBoxAdapter(
-                  child: Text(
-                    context.loc.categories_title,
-                    style: SdTextStyleV5.heading24().wColor(colors.textDefault),
-                  ),
-                ),
-              ),
-              SliverPadding(
-                padding: EdgeInsets.fromLTRB(
-                  SdSpacingV5.s16,
-                  0,
+                  SdSpacingV5.s8,
                   SdSpacingV5.s16,
                   FloatingBottomNav.contentInset(context),
                 ),

@@ -39,12 +39,17 @@ class MainMaterialApp extends StatelessWidget {
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
           // Status bar icons follow the theme; screens with a colored header
-          // (splash) set their own.
+          // (splash) set their own. Every app bar's cart badge reads the
+          // count from [CartCountScope].
           builder: (context, child) => AnnotatedRegion<SystemUiOverlayStyle>(
             value: Theme.of(context).brightness == Brightness.dark
                 ? SystemUiOverlayStyle.light
                 : SystemUiOverlayStyle.dark,
-            child: child!,
+            child: BlocSelector<CartController, CartState, int>(
+              selector: (state) => state.itemCount,
+              builder: (context, count) =>
+                  CartCountScope(count: count, child: child!),
+            ),
           ),
         ),
       ),

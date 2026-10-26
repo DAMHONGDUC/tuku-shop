@@ -9,7 +9,6 @@ class NotificationsStack {
     SdGoRouteV5(
       path: NotificationsRoutes.notifications.path,
       name: NotificationsRoutes.notifications.name,
-      parentNavigatorKey: kRootNavigatorKey,
       builder: (BuildContext context, GoRouterState state) {
         return const NotificationScreen();
       },

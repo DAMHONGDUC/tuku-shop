@@ -119,12 +119,11 @@ class _FormState extends State<_Form> {
         return SdKeyboardDismisserV5(
           child: Scaffold(
             backgroundColor: colors.pageDefault,
-            appBar: SdAppBarV5(
-              titleText: widget.address == null
+            appBar: AppTopBar(
+              title: widget.address == null
                   ? loc.address_add
                   : loc.address_edit,
-              backgroundColor: colors.pageDefault,
-              noElevation: true,
+              showCart: false,
             ),
             body: ListView(
               padding: EdgeInsets.all(SdSpacingV5.s16),

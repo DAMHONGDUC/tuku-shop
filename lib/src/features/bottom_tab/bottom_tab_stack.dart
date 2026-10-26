@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tuku_shop/src/core/navigation/router_config.dart';
-import 'package:tuku_shop/src/features/cart/presentation/cart/config/cart_stack.dart';
 import 'package:tuku_shop/src/features/category/presentation/categories/config/categories_stack.dart';
 import 'package:tuku_shop/src/features/home/presentation/config/home_stack.dart';
 import 'package:tuku_shop/src/features/profile/presentation/profile/config/profile_stack.dart';
-import 'package:tuku_shop/src/features/wishlist/presentation/wishlist/config/wishlist_stack.dart';
+import 'package:tuku_shop/src/features/notification/presentation/notifications/config/notifications_stack.dart';
 
 import 'bottom_tab_base_screen.dart';
 
@@ -29,12 +28,8 @@ class BottomTabStack {
         routes: <RouteBase>[...CategoriesStack.routes],
       ),
       StatefulShellBranch(
-        navigatorKey: kWishlistTabNavigatorKey,
-        routes: <RouteBase>[...WishlistStack.routes],
-      ),
-      StatefulShellBranch(
-        navigatorKey: kCartTabNavigatorKey,
-        routes: <RouteBase>[...CartStack.routes],
+        navigatorKey: kNotificationsTabNavigatorKey,
+        routes: <RouteBase>[...NotificationsStack.routes],
       ),
       StatefulShellBranch(
         navigatorKey: kProfileTabNavigatorKey,

@@ -81,10 +81,7 @@ class _ViewState extends State<_View> {
         return SdKeyboardDismisserV5(
           child: Scaffold(
             backgroundColor: colors.pageDefault,
-            appBar: SdAppBarV5(
-              backgroundColor: colors.pageDefault,
-              noElevation: true,
-            ),
+            appBar: AppTopBar(showCart: false),
             body: SafeArea(
               child: ListView(
                 padding: EdgeInsets.fromLTRB(

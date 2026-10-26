@@ -8,7 +8,6 @@ import 'package:tuku_shop/src/features/banner/presentation/banner_carousel_secti
 import 'package:tuku_shop/src/features/banner/presentation/banner_carousel_section/banner_carousel_section.dart';
 import 'package:tuku_shop/src/features/category/presentation/categories_section/categories_section.dart';
 import 'package:tuku_shop/src/features/category/presentation/categories_section/categories_section_controller.dart';
-import 'package:tuku_shop/src/features/notification/presentation/notification_badge/notification_badge_controller.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_list/product_grid_section.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_list/product_list_controller.dart';
@@ -121,10 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onRefresh: _loadAll,
             child: CustomScrollView(
               slivers: [
-                BlocBuilder<NotificationBadgeController, int>(
-                  builder: (context, unread) =>
-                      HomeSliverAppBar(unreadNotifications: unread),
-                ),
+                const HomeSliverAppBar(),
                 SliverToBoxAdapter(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,

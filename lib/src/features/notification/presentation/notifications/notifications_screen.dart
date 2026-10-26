@@ -10,6 +10,7 @@ import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'components/notification_card.dart';
 import 'components/notifications_skeleton.dart';
 import 'notifications_controller.dart';
+import '../notification_badge/notification_badge_controller.dart';
 
 class NotificationScreen extends StatelessWidget {
   const NotificationScreen({super.key});
@@ -18,7 +19,51 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (_) => getIt<NotificationsController>()..getData(),
-      child: const _NotificationView(),
+      child: const _RefreshWhenShown(child: _NotificationView()),
+    );
+  }
+}
+
+/// The tab stays mounted behind the others: reload when it comes back on
+/// screen, or a notification arrives while it is shown, so unread items are
+/// listed (and marked read) only while someone can see them.
+class _RefreshWhenShown extends StatefulWidget {
+  const _RefreshWhenShown({required this.child});
+
+  final Widget child;
+
+  @override
+  State<_RefreshWhenShown> createState() => _RefreshWhenShownState();
+}
+
+class _RefreshWhenShownState extends State<_RefreshWhenShown> {
+  bool _shown = false;
+
+  void _reloadIfUnread() {
+    final hasUnread = context.read<NotificationBadgeController>().state > 0;
+    final idle =
+        context.read<NotificationsController>().state
+            is! NotificationsLoadingState;
+    if (_shown && hasUnread && idle) {
+      context.read<NotificationsController>().getData();
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final shown = TickerMode.valuesOf(context).enabled;
+    if (shown == _shown) return;
+    _shown = shown;
+    _reloadIfUnread();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocListener<NotificationBadgeController, int>(
+      listenWhen: (before, now) => now > before,
+      listener: (_, _) => _reloadIfUnread(),
+      child: widget.child,
     );
   }
 }
@@ -32,11 +77,7 @@ class _NotificationView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colors.pageDefault,
-      appBar: SdAppBarV5(
-        titleText: context.loc.notifications_title,
-        backgroundColor: colors.pageDefault,
-        noElevation: true,
-      ),
+      appBar: AppTopBar(title: context.loc.notifications_title, large: true),
       body: BlocBuilder<NotificationsController, NotificationsState>(
         builder: (context, state) => switch (state) {
           NotificationsLoadedState() => _Body(state: state),
@@ -87,7 +128,7 @@ class _Body extends StatelessWidget {
             _List(items: earlier),
           ],
           SliverToBoxAdapter(
-            child: SdVerticalSpacingV5(value: SdSpacingV5.s32),
+            child: SizedBox(height: FloatingBottomNav.contentInset(context)),
           ),
         ],
       ),

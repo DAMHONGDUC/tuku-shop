@@ -29,4 +29,8 @@ class CartSummary {
 
   double get amountToFreeShipping =>
       (freeShippingThreshold - subtotal).clamp(0, freeShippingThreshold);
+
+  /// 0 to 1: how far the subtotal is toward free shipping.
+  double get freeShippingProgress =>
+      (subtotal / freeShippingThreshold).clamp(0, 1).toDouble();
 }

@@ -26,6 +26,12 @@ void main() {
     expect(summary.savings, 5);
     expect(summary.qualifiesForFreeShipping, isFalse);
     expect(summary.amountToFreeShipping, 20);
+    expect(summary.freeShippingProgress, 0.8);
+  });
+
+  test('free-shipping progress stops at 1 past the threshold', () {
+    expect(CartSummary([line(60, 2)]).freeShippingProgress, 1);
+    expect(const CartSummary([]).freeShippingProgress, 0);
   });
 
   test('AddToCartUsecase rejects a quantity above stock', () async {

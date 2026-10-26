@@ -46,16 +46,14 @@ class _View extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: colors.pageDefault,
-      appBar: SdAppBarV5(
-        titleText: pickMode
+      appBar: AppTopBar(
+        title: pickMode
             ? context.loc.address_pick_title
             : context.loc.address_book_title,
-        backgroundColor: colors.pageDefault,
-        noElevation: true,
       ),
       floatingActionButton: FloatingActionButton.extended(
         backgroundColor: colors.primary,
-        foregroundColor: SdColorsV5.white,
+        foregroundColor: colors.onPrimary,
         onPressed: () => _openForm(context),
         icon: const Icon(Icons.add),
         label: Text(context.loc.address_add),

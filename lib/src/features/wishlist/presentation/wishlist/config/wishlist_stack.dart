@@ -9,6 +9,7 @@ class WishlistStack {
   static final List<GoRoute> routes = [
     SdGoRouteV5(
       path: WishlistRoutes.wishlist.path,
+      parentNavigatorKey: kRootNavigatorKey,
       name: WishlistRoutes.wishlist.name,
       builder: (BuildContext context, GoRouterState state) {
         return const WishlistScreen();

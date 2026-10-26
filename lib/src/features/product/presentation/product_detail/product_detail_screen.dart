@@ -119,11 +119,21 @@ class _ViewState extends State<_View> {
                   title: collapsed && state is ProductDetailLoadedState
                       ? Text(
                           state.product.name,
-                          style: SdTextStyleV5.heading16().wColor(
-                            colors.textDefault,
-                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: SdTextStyleV5.heading16()
+                              .wColor(colors.textDefault)
+                              .wDisplay(),
                         )
                       : null,
+                  actionsPadding: EdgeInsets.only(right: SdSpacingV5.s8),
+                  actions: [
+                    CartActionButton(
+                      style: collapsed
+                          ? AppIconButtonStyle.plain
+                          : AppIconButtonStyle.floating,
+                    ),
+                  ],
                   leading: Padding(
                     padding: EdgeInsets.all(SdSpacingV5.s4),
                     child: _RoundIconButton(
@@ -176,9 +186,11 @@ class _ViewState extends State<_View> {
           ..showSnackBar(
             SnackBar(
               content: Text(context.loc.pdp_added_to_cart),
+              // An action would keep it up until tapped; let it time out.
+              persist: false,
               action: SnackBarAction(
                 label: context.loc.pdp_view_cart,
-                onPressed: () => context.go(CartRoutes.cart.fullPath),
+                onPressed: () => context.push(CartRoutes.cart.fullPath),
               ),
             ),
           );

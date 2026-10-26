@@ -27,17 +27,11 @@ class MyOrdersScreen extends StatelessWidget {
           : tabs.indexOf(initialStatus!).clamp(0, tabs.length - 1),
       child: Scaffold(
         backgroundColor: colors.pageDefault,
-        appBar: SdAppBarV5(
-          titleText: context.loc.orders_title,
-          backgroundColor: colors.pageDefault,
-          noElevation: true,
+        appBar: AppTopBar(
+          title: context.loc.orders_title,
           bottom: TabBar(
             isScrollable: true,
             tabAlignment: TabAlignment.start,
-            labelColor: colors.primary,
-            unselectedLabelColor: colors.textSubTitle,
-            indicatorColor: colors.primary,
-            dividerColor: colors.borderDefault,
             labelStyle: SdTextStyleV5.body14().wSemiBold(),
             unselectedLabelStyle: SdTextStyleV5.body14(),
             tabs: [for (final s in tabs) Tab(text: s.label(context))],

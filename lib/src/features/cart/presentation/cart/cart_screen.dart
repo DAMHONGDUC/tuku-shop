@@ -7,7 +7,8 @@ import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 
 import 'cart_controller.dart';
 
-/// The Cart tab, read from the app-wide [CartController].
+/// The cart screen, opened from the bag icon in every app bar; reads the
+/// app-wide [CartController].
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
 
@@ -26,6 +27,12 @@ class CartScreen extends StatelessWidget {
 
         return Scaffold(
           backgroundColor: colors.pageDefault,
+          appBar: AppTopBar(
+            title: state.itemCount > 0
+                ? context.loc.cart_title_count(state.itemCount)
+                : context.loc.cart_title,
+            showCart: false,
+          ),
           body: SafeArea(
             bottom: false,
             child: RefreshWrapper(
@@ -33,18 +40,11 @@ class CartScreen extends StatelessWidget {
               child: ListView(
                 padding: EdgeInsets.fromLTRB(
                   SdSpacingV5.s16,
-                  SdSpacingV5.s16,
+                  SdSpacingV5.s8,
                   SdSpacingV5.s16,
                   SdSpacingV5.s24,
                 ),
                 children: [
-                  Text(
-                    state.itemCount > 0
-                        ? context.loc.cart_title_count(state.itemCount)
-                        : context.loc.cart_title,
-                    style: SdTextStyleV5.heading24().wColor(colors.textDefault),
-                  ),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
                   switch (state.status) {
                     CartStatus.loading => const _CartSkeleton(),
                     CartStatus.error => SectionError(onRetry: controller.load),
@@ -103,25 +103,45 @@ class _CartBody extends StatelessWidget {
         Container(
           padding: EdgeInsets.all(SdSpacingV5.s12),
           decoration: BoxDecoration(
-            color: colors.primarySoft,
+            color: colors.accentSoft,
             borderRadius: BorderRadius.circular(SdSpacingV5.s12),
           ),
-          child: Row(
+          child: Column(
             children: [
-              SdIconV5(
-                iconData: Icons.local_shipping_outlined,
-                iconSize: SdSpacingV5.s20,
-                color: colors.primary,
+              Row(
+                children: [
+                  SdIconV5(
+                    iconData: summary.qualifiesForFreeShipping
+                        ? Icons.check_circle_outline_rounded
+                        : Icons.local_shipping_outlined,
+                    iconSize: SdSpacingV5.s20,
+                    color: colors.accent,
+                  ),
+                  SdHorizontalSpacingV5(value: SdSpacingV5.s8),
+                  Expanded(
+                    child: Text(
+                      summary.qualifiesForFreeShipping
+                          ? context.loc.cart_free_shipping_unlocked
+                          : context.loc.cart_free_shipping_nudge(
+                              AppFormat.price(summary.amountToFreeShipping),
+                            ),
+                      style: SdTextStyleV5.body12().wColor(colors.textDefault),
+                    ),
+                  ),
+                ],
               ),
-              SdHorizontalSpacingV5(value: SdSpacingV5.s8),
-              Expanded(
-                child: Text(
-                  summary.qualifiesForFreeShipping
-                      ? context.loc.cart_free_shipping_unlocked
-                      : context.loc.cart_free_shipping_nudge(
-                          AppFormat.price(summary.amountToFreeShipping),
-                        ),
-                  style: SdTextStyleV5.body12().wColor(colors.textDefault),
+              SdVerticalSpacingV5(value: SdSpacingV5.s8),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(SdSpacingV5.s2),
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(end: summary.freeShippingProgress),
+                  duration: UIConstants.navNormal,
+                  builder: (context, value, _) => LinearProgressIndicator(
+                    value: value,
+                    minHeight: SdSpacingV5.s4,
+                    color: colors.accent,
+                    backgroundColor: colors.accent.withValues(alpha: 0.18),
+                  ),
                 ),
               ),
             ],
@@ -175,6 +195,8 @@ class _CartLineTile extends StatelessWidget {
       ..showSnackBar(
         SnackBar(
           content: Text(message),
+          // An action would keep it up until tapped; let it time out.
+          persist: false,
           action: SnackBarAction(
             label: undo,
             onPressed: () => controller.undoRemove(removed),
@@ -330,7 +352,7 @@ class _CheckoutDock extends StatelessWidget {
         SdSpacingV5.s16,
         SdSpacingV5.s12,
         SdSpacingV5.s16,
-        FloatingBottomNav.contentInset(context) - SdSpacingV5.s4,
+        MediaQuery.paddingOf(context).bottom + SdSpacingV5.s12,
       ),
       child: Row(
         children: [
