@@ -71,3 +71,7 @@ ios/ExportOptions.plist
 *.mobileprovision
 # Melos
 pubspec_overrides.yaml
+
+# AI tool files stay local
+CLAUDE.md
+AGENTS.md
