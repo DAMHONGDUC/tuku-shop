@@ -8,16 +8,23 @@ import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/auth/domain/domain.dart';
 import 'package:tuku_shop/src/features/settings/presentation/locale_controller.dart';
 
+import 'favorites_preview/favorites_preview_controller.dart';
 import 'profile_controller.dart';
 
-/// The Profile tab: who you are, your orders at a glance, and settings.
+/// The Profile tab: who you are, your orders, favorites and cart at a
+/// glance, and settings. Each card loads on its own.
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => getIt<ProfileController>()..load(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_) => getIt<ProfileController>()..load()),
+        BlocProvider(
+          create: (_) => getIt<FavoritesPreviewController>()..load(),
+        ),
+      ],
       child: const _View(),
     );
   }
@@ -185,107 +192,112 @@ class _View extends StatelessWidget {
         final themeMode = AdaptiveTheme.of(context).mode;
         final locale = context.watch<LocaleController>().state;
         final controller = context.read<ProfileController>();
+        final favorites = context.read<FavoritesPreviewController>();
+        final cartCount = CartCountScope.of(context);
 
-        return ColoredBox(
-          color: colors.pageDefault,
-          child: SafeArea(
-            bottom: false,
-            child: RefreshWrapper(
-              onRefresh: controller.load,
-              child: ListView(
-                padding: EdgeInsets.fromLTRB(
-                  SdSpacingV5.s16,
-                  SdSpacingV5.s16,
-                  SdSpacingV5.s16,
-                  FloatingBottomNav.contentInset(context),
-                ),
-                children: [
-                  _Header(state: state),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s24),
-                  _OrdersCard(state: state),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
-                  _Group(
-                    children: [
-                      _Item(
-                        icon: Icons.location_on_outlined,
-                        label: loc.address_book_title,
-                        onTap: () =>
-                            context.push(AddressRoutes.addresses.fullPath),
-                      ),
-                      _Item(
-                        icon: Icons.favorite_border,
-                        label: loc.wishlist_title,
-                        onTap: () =>
-                            context.go(WishlistRoutes.wishlist.fullPath),
-                      ),
-                      _Item(
-                        icon: Icons.notifications_none_rounded,
-                        label: loc.notifications_title,
-                        onTap: () => context.push(
-                          NotificationsRoutes.notifications.fullPath,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
-                  _Group(
-                    children: [
-                      _Item(
-                        icon: Icons.dark_mode_outlined,
-                        label: loc.profile_theme,
-                        value: switch (themeMode) {
-                          AdaptiveThemeMode.light => loc.profile_theme_light,
-                          AdaptiveThemeMode.dark => loc.profile_theme_dark,
-                          _ => loc.profile_theme_system,
-                        },
-                        onTap: () => _pickTheme(context),
-                      ),
-                      _Item(
-                        icon: Icons.translate_rounded,
-                        label: loc.profile_language,
-                        value: switch (locale?.languageCode) {
-                          'en' => 'English',
-                          'vi' => 'Tiếng Việt',
-                          _ => loc.profile_theme_system,
-                        },
-                        onTap: () => _pickLanguage(context),
-                      ),
-                      _Item(
-                        icon: Icons.restart_alt_rounded,
-                        label: loc.profile_reset,
-                        trailing: state.isResetting
-                            ? SizedBox.square(
-                                dimension: SdSpacingV5.s16,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: colors.primary,
-                                ),
-                              )
-                            : null,
-                        onTap: () => _confirmReset(context),
-                      ),
-                    ],
-                  ),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
-                  _Group(
-                    children: [
-                      _Item(
-                        icon: Icons.logout_rounded,
-                        label: loc.profile_logout,
-                        danger: true,
-                        onTap: () => _confirmLogout(context),
-                      ),
-                    ],
-                  ),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
-                  Center(
-                    child: Text(
-                      '${AppConstants.appName} · ${loc.profile_demo_note}',
-                      style: SdTextStyleV5.body12().wColor(colors.textSubTitle),
-                    ),
-                  ),
-                ],
+        return Scaffold(
+          backgroundColor: colors.pageDefault,
+          appBar: AppTopBar(title: loc.nav_profile, large: true),
+          body: RefreshWrapper(
+            onRefresh: () => Future.wait([controller.load(), favorites.load()]),
+            child: ListView(
+              padding: EdgeInsets.fromLTRB(
+                SdSpacingV5.s16,
+                SdSpacingV5.s8,
+                SdSpacingV5.s16,
+                FloatingBottomNav.contentInset(context),
               ),
+              children: [
+                _MemberCard(state: state),
+                SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                _OrdersCard(state: state),
+                SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                const _FavoritesCard(),
+                SdVerticalSpacingV5(value: SdSpacingV5.s24),
+                _GroupTitle(loc.profile_shopping),
+                _Group(
+                  children: [
+                    _Item(
+                      icon: Icons.shopping_bag_outlined,
+                      label: loc.cart_title,
+                      value: cartCount > 0
+                          ? loc.common_items_count(cartCount)
+                          : loc.profile_bag_empty,
+                      onTap: () => context.push(CartRoutes.cart.fullPath),
+                    ),
+                    _Item(
+                      icon: Icons.favorite_border_rounded,
+                      label: loc.wishlist_title,
+                      onTap: () =>
+                          context.push(WishlistRoutes.wishlist.fullPath),
+                    ),
+                    _Item(
+                      icon: Icons.location_on_outlined,
+                      label: loc.address_book_title,
+                      onTap: () =>
+                          context.push(AddressRoutes.addresses.fullPath),
+                    ),
+                  ],
+                ),
+                SdVerticalSpacingV5(value: SdSpacingV5.s24),
+                _GroupTitle(loc.profile_settings),
+                _Group(
+                  children: [
+                    _Item(
+                      icon: Icons.dark_mode_outlined,
+                      label: loc.profile_theme,
+                      value: switch (themeMode) {
+                        AdaptiveThemeMode.light => loc.profile_theme_light,
+                        AdaptiveThemeMode.dark => loc.profile_theme_dark,
+                        _ => loc.profile_theme_system,
+                      },
+                      onTap: () => _pickTheme(context),
+                    ),
+                    _Item(
+                      icon: Icons.translate_rounded,
+                      label: loc.profile_language,
+                      value: switch (locale?.languageCode) {
+                        'en' => 'English',
+                        'vi' => 'Tiếng Việt',
+                        _ => loc.profile_theme_system,
+                      },
+                      onTap: () => _pickLanguage(context),
+                    ),
+                    _Item(
+                      icon: Icons.restart_alt_rounded,
+                      label: loc.profile_reset,
+                      trailing: state.isResetting
+                          ? SizedBox.square(
+                              dimension: SdSpacingV5.s16,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: colors.primary,
+                              ),
+                            )
+                          : null,
+                      onTap: () => _confirmReset(context),
+                    ),
+                  ],
+                ),
+                SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                _Group(
+                  children: [
+                    _Item(
+                      icon: Icons.logout_rounded,
+                      label: loc.profile_logout,
+                      danger: true,
+                      onTap: () => _confirmLogout(context),
+                    ),
+                  ],
+                ),
+                SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                Center(
+                  child: Text(
+                    '${AppConstants.appName} · ${loc.profile_demo_note}',
+                    style: SdTextStyleV5.body12().wColor(colors.textSubTitle),
+                  ),
+                ),
+              ],
             ),
           ),
         );
@@ -294,8 +306,10 @@ class _View extends StatelessWidget {
   }
 }
 
-class _Header extends StatelessWidget {
-  const _Header({required this.state});
+/// An inverse "membership card": who you are, and three counters that open
+/// favorites, the cart and orders.
+class _MemberCard extends StatelessWidget {
+  const _MemberCard({required this.state});
 
   final ProfileState state;
 
@@ -309,70 +323,322 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
+    final loc = context.loc;
+    final ink = colors.pageDefault;
     final user = state.user;
+    final favorites = context.select<FavoritesPreviewController, int?>(
+      (c) => c.state.status == FavoritesPreviewStatus.loaded
+          ? c.state.total
+          : null,
+    );
+    final orders = state.countsStatus == ProfileSectionStatus.loaded
+        ? state.counts.values.fold<int>(0, (sum, n) => sum + n)
+        : null;
 
+    final Widget identity;
     if (state.userStatus == ProfileSectionStatus.loading && user == null) {
-      return Row(
+      final shade = ink.withValues(alpha: 0.16);
+      identity = Row(
         children: [
-          const SkeletonBox(width: 64, height: 64, radius: 32),
-          SdHorizontalSpacingV5(value: SdSpacingV5.s16),
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SkeletonBox(width: 140, height: SdSpacingV5.s18),
-                SizedBox(height: SdSpacingV5.s8),
-                SkeletonBox(width: 180),
-              ],
-            ),
-          ),
-        ],
-      );
-    }
-    if (user == null) {
-      return SectionError(onRetry: context.read<ProfileController>().loadUser);
-    }
-
-    return InkWell(
-      borderRadius: BorderRadius.circular(UIConstants.cardRadius),
-      onTap: () async {
-        final updated = await context.push<UserEntity>(
-          ProfileRoutes.editProfile.fullPath,
-          extra: user,
-        );
-        if (updated != null && context.mounted) {
-          context.read<ProfileController>().showUser(updated);
-        }
-      },
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 32,
-            backgroundColor: colors.primary,
-            child: Text(
-              initials(user.fullName),
-              style: SdTextStyleV5.heading20().wColor(SdColorsV5.white),
-            ),
-          ),
+          SkeletonBox(width: 56, height: 56, radius: 28, color: shade),
           SdHorizontalSpacingV5(value: SdSpacingV5.s16),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  user.fullName,
-                  style: SdTextStyleV5.heading20().wColor(colors.textDefault),
-                ),
-                SdVerticalSpacingV5(value: SdSpacingV5.s2),
-                Text(
-                  user.email,
-                  style: SdTextStyleV5.body14().wColor(colors.textSubTitle),
-                ),
+                SkeletonBox(width: 140, height: SdSpacingV5.s18, color: shade),
+                const SizedBox(height: SdSpacingV5.s8),
+                SkeletonBox(width: 180, color: shade),
               ],
             ),
           ),
-          Icon(Icons.edit_outlined, color: colors.iconSecondary),
         ],
+      );
+    } else if (user == null) {
+      identity = SectionError(
+        onRetry: context.read<ProfileController>().loadUser,
+      );
+    } else {
+      identity = InkWell(
+        borderRadius: BorderRadius.circular(SdSpacingV5.s12),
+        onTap: () async {
+          final updated = await context.push<UserEntity>(
+            ProfileRoutes.editProfile.fullPath,
+            extra: user,
+          );
+          if (updated != null && context.mounted) {
+            context.read<ProfileController>().showUser(updated);
+          }
+        },
+        child: Row(
+          children: [
+            Container(
+              padding: EdgeInsets.all(SdSpacingV5.s2),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                border: Border.all(color: colors.accent, width: 1.5),
+              ),
+              child: CircleAvatar(
+                radius: 26,
+                backgroundColor: colors.accent,
+                child: Text(
+                  initials(user.fullName),
+                  style: SdTextStyleV5.heading18()
+                      .wColor(AppColors.ink)
+                      .wDisplay(),
+                ),
+              ),
+            ),
+            SdHorizontalSpacingV5(value: SdSpacingV5.s16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    user.fullName,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: SdTextStyleV5.heading20().wColor(ink).wDisplay(),
+                  ),
+                  SdVerticalSpacingV5(value: SdSpacingV5.s2),
+                  Text(
+                    user.email,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: SdTextStyleV5.body12().wColor(
+                      ink.withValues(alpha: 0.7),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SdIconV5(
+              iconData: Icons.edit_outlined,
+              iconSize: SdSpacingV5.s20,
+              color: ink.withValues(alpha: 0.7),
+            ),
+          ],
+        ),
+      );
+    }
+
+    return Container(
+      padding: EdgeInsets.all(SdSpacingV5.s16),
+      decoration: BoxDecoration(
+        color: colors.textDefault,
+        borderRadius: BorderRadius.circular(UIConstants.cardRadius),
+        boxShadow: [
+          BoxShadow(
+            color: colors.boxShadowDefault,
+            blurRadius: SdSpacingV5.s24,
+            offset: const Offset(0, SdSpacingV5.s8),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          identity,
+          SdVerticalSpacingV5(value: SdSpacingV5.s16),
+          Divider(height: 1, color: ink.withValues(alpha: 0.12)),
+          SdVerticalSpacingV5(value: SdSpacingV5.s8),
+          Row(
+            children: [
+              _Stat(
+                value: favorites,
+                label: loc.wishlist_title,
+                onTap: () => context.push(WishlistRoutes.wishlist.fullPath),
+              ),
+              _Stat(
+                value: CartCountScope.of(context),
+                label: loc.cart_title,
+                onTap: () => context.push(CartRoutes.cart.fullPath),
+              ),
+              _Stat(
+                value: orders,
+                label: loc.profile_stat_orders,
+                onTap: () => context.push(MyOrderRoutes.myOrder.fullPath),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Stat extends StatelessWidget {
+  const _Stat({required this.value, required this.label, required this.onTap});
+
+  /// Null while it loads.
+  final int? value;
+  final String label;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    final ink = context.colorTheme.pageDefault;
+
+    return Expanded(
+      child: InkWell(
+        borderRadius: BorderRadius.circular(SdSpacingV5.s12),
+        onTap: onTap,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: SdSpacingV5.s8),
+          child: Column(
+            children: [
+              Text(
+                value?.toString() ?? '–',
+                style: SdTextStyleV5.heading20().copyWith(
+                  color: ink,
+                  fontFeatures: const [FontFeature.tabularFigures()],
+                ),
+              ),
+              Text(
+                label,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: SdTextStyleV5.body12().wColor(
+                  ink.withValues(alpha: 0.7),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Up to six saved products, newest first; "See all" opens Favorites.
+class _FavoritesCard extends StatelessWidget {
+  const _FavoritesCard();
+
+  static const double _thumbWidth = 88;
+  static const double _thumbHeight =
+      _thumbWidth / UIConstants.productImageAspect;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+    final loc = context.loc;
+
+    return BlocBuilder<FavoritesPreviewController, FavoritesPreviewState>(
+      builder: (context, state) {
+        final Widget body = switch (state.status) {
+          FavoritesPreviewStatus.loading => Row(
+            children: [
+              for (var i = 0; i < 3; i++) ...[
+                const SkeletonBox(
+                  width: _thumbWidth,
+                  height: _thumbHeight,
+                  radius: UIConstants.imageRadius,
+                ),
+                SdHorizontalSpacingV5(value: SdSpacingV5.s12),
+              ],
+            ],
+          ),
+          FavoritesPreviewStatus.error => SectionError(
+            onRetry: context.read<FavoritesPreviewController>().load,
+          ),
+          FavoritesPreviewStatus.loaded when state.products.isEmpty => Text(
+            loc.profile_favorites_empty,
+            style: SdTextStyleV5.body14().wColor(colors.textSubTitle),
+          ),
+          FavoritesPreviewStatus.loaded => SizedBox(
+            height: _thumbHeight + SdSpacingV5.s24,
+            child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemCount: state.products.length,
+              separatorBuilder: (_, _) =>
+                  SdHorizontalSpacingV5(value: SdSpacingV5.s12),
+              itemBuilder: (context, index) {
+                final product = state.products[index];
+                return Semantics(
+                  button: true,
+                  label: product.name,
+                  child: GestureDetector(
+                    onTap: () => context.push(
+                      ProductRoutes.productDetailLocation(product.id),
+                    ),
+                    child: SizedBox(
+                      width: _thumbWidth,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CatalogImage(
+                            path: product.imageUrl,
+                            width: _thumbWidth,
+                            height: _thumbHeight,
+                            borderRadius: UIConstants.imageRadius,
+                          ),
+                          SdVerticalSpacingV5(value: SdSpacingV5.s4),
+                          PriceText(
+                            price: product.price,
+                            style: SdTextStyleV5.body12().wSemiBold(),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        };
+
+        return Container(
+          padding: EdgeInsets.fromLTRB(
+            SdSpacingV5.s16,
+            SdSpacingV5.s8,
+            SdSpacingV5.s16,
+            SdSpacingV5.s16,
+          ),
+          decoration: BoxDecoration(
+            color: colors.cardDefault,
+            borderRadius: BorderRadius.circular(UIConstants.cardRadius),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SectionHeader(
+                title: state.total > 0
+                    ? loc.wishlist_title_count(state.total)
+                    : loc.wishlist_title,
+                actionText: loc.common_see_all,
+                onActionTap: () =>
+                    context.push(WishlistRoutes.wishlist.fullPath),
+                hasBottomSpacing: false,
+              ),
+              SdVerticalSpacingV5(value: SdSpacingV5.s4),
+              body,
+            ],
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _GroupTitle extends StatelessWidget {
+  const _GroupTitle(this.title);
+
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        SdSpacingV5.s4,
+        0,
+        SdSpacingV5.s4,
+        SdSpacingV5.s8,
+      ),
+      child: Text(
+        title.toUpperCase(),
+        style: SdTextStyleV5.body12()
+            .wSemiBold()
+            .wColor(context.colorTheme.textSubTitle)
+            .wEyebrow(),
       ),
     );
   }
@@ -411,7 +677,12 @@ class _OrdersCard extends StatelessWidget {
     ];
 
     return Container(
-      padding: EdgeInsets.all(SdSpacingV5.s16),
+      padding: EdgeInsets.fromLTRB(
+        SdSpacingV5.s16,
+        SdSpacingV5.s8,
+        SdSpacingV5.s16,
+        SdSpacingV5.s12,
+      ),
       decoration: BoxDecoration(
         color: colors.cardDefault,
         borderRadius: BorderRadius.circular(UIConstants.cardRadius),
@@ -422,6 +693,7 @@ class _OrdersCard extends StatelessWidget {
             title: loc.orders_title,
             actionText: loc.common_see_all,
             onActionTap: () => context.push(MyOrderRoutes.myOrder.fullPath),
+            hasBottomSpacing: false,
           ),
           if (state.countsStatus == ProfileSectionStatus.error)
             SectionError(onRetry: context.read<ProfileController>().loadCounts)
@@ -447,7 +719,7 @@ class _OrdersCard extends StatelessWidget {
                             Stack(
                               clipBehavior: Clip.none,
                               children: [
-                                Icon(icon, color: colors.primary),
+                                Icon(icon, color: colors.iconDefault),
                                 if ((state.counts[status] ?? 0) > 0)
                                   Positioned(
                                     right: -SdSpacingV5.s10,
