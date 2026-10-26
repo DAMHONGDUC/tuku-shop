@@ -2,19 +2,31 @@ import 'package:fake_async/fake_async.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/data/mock/product_mock.dart';
+import 'package:shared_preferences_platform_interface/in_memory_shared_preferences_async.dart';
+import 'package:shared_preferences_platform_interface/shared_preferences_async_platform_interface.dart';
+import 'package:tuku_shop/src/features/seller/data/data_sources/seller_follow_local_data_source.dart';
 import 'package:tuku_shop/src/features/seller/data/data_sources/seller_remote_data_source.dart';
 import 'package:tuku_shop/src/features/seller/data/mock/seller_mock.dart';
 import 'package:tuku_shop/src/features/seller/data/repositories/seller_repository_impl.dart';
 import 'package:tuku_shop/src/features/seller/domain/domain.dart';
 
 void main() {
-  const repo = SellerRepositoryImpl(dataSource: SellerRemoteDataSourceImpl());
+  late SellerRepositoryImpl repo;
+
+  setUp(() {
+    SharedPreferencesAsyncPlatform.instance =
+        InMemorySharedPreferencesAsync.empty();
+    repo = SellerRepositoryImpl(
+      dataSource: const SellerRemoteDataSourceImpl(),
+      follows: SellerFollowLocalDataSourceImpl(),
+    );
+  });
 
   T run<T>(Future<T> Function() body) {
     late T result;
     fakeAsync((async) {
       body().then((value) => result = value);
-      async.elapse(MockLatency.max);
+      async.elapse(MockLatency.max * 3);
     });
     return result;
   }
@@ -56,5 +68,27 @@ void main() {
       location: '',
     );
     expect(seller.initials, 'AO');
+  });
+
+  test('following adds the shopper to the count and survives a reload', () {
+    final before = run(
+      () => repo.getSeller('denim-house'),
+    ).getOrElse(() => throw 'Left');
+    final followed = run(
+      () => repo.toggleFollow('denim-house'),
+    ).getOrElse(() => throw 'Left');
+    expect(followed.isFollowed, isTrue);
+    expect(followed.followerCount, before.followerCount + 1);
+
+    final again = run(
+      () => repo.getSeller('denim-house'),
+    ).getOrElse(() => throw 'Left');
+    expect(again.isFollowed, isTrue);
+
+    final unfollowed = run(
+      () => repo.toggleFollow('denim-house'),
+    ).getOrElse(() => throw 'Left');
+    expect(unfollowed.isFollowed, isFalse);
+    expect(unfollowed.followerCount, before.followerCount);
   });
 }

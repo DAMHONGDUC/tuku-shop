@@ -17,6 +17,10 @@ class Seller extends Equatable {
   /// The brand's own store ("Mall" on Shopee).
   final bool isOfficial;
 
+  /// Whether the signed-in shopper follows this shop; [followerCount]
+  /// already counts them.
+  final bool isFollowed;
+
   const Seller({
     required this.id,
     required this.name,
@@ -26,6 +30,7 @@ class Seller extends Equatable {
     required this.responseRate,
     required this.location,
     this.isOfficial = false,
+    this.isFollowed = false,
   });
 
   /// Up to two capitals for the avatar: "Aurora Official Store" → "AO".
@@ -46,5 +51,6 @@ class Seller extends Equatable {
     responseRate,
     location,
     isOfficial,
+    isFollowed,
   ];
 }

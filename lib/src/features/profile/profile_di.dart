@@ -5,6 +5,7 @@ import 'package:tuku_shop/src/features/cart/domain/domain.dart';
 import 'package:tuku_shop/src/features/notification/domain/domain.dart';
 import 'package:tuku_shop/src/features/order/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
+import 'package:tuku_shop/src/features/seller/domain/domain.dart';
 import 'package:tuku_shop/src/features/profile/presentation/edit_profile/edit_profile_controller.dart';
 import 'package:tuku_shop/src/features/profile/presentation/profile/favorites_preview/favorites_preview_controller.dart';
 import 'package:tuku_shop/src/features/profile/presentation/profile/profile_controller.dart';
@@ -29,6 +30,7 @@ class ProfileDi {
           notifications: getIt<ResetNotificationsUsecase>(),
           searches: getIt<ClearRecentSearchesUsecase>(),
           chat: getIt<ResetChatUsecase>(),
+          follows: getIt<ResetFollowedSellersUsecase>(),
         ),
       ),
     );

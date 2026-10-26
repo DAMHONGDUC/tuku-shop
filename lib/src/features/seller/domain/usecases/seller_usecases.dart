@@ -24,3 +24,23 @@ class GetSellersByIdsUsecase implements UseCase<List<Seller>, List<String>> {
     return repository.getSellersByIds(params);
   }
 }
+
+class ToggleFollowSellerUsecase implements UseCase<Seller, String> {
+  final SellerRepository repository;
+
+  ToggleFollowSellerUsecase(this.repository);
+
+  @override
+  Future<Either<Failure, Seller>> call(String params) =>
+      repository.toggleFollow(params);
+}
+
+class ResetFollowedSellersUsecase implements UseCase<Unit, NoParams> {
+  final SellerRepository repository;
+
+  ResetFollowedSellersUsecase(this.repository);
+
+  @override
+  Future<Either<Failure, Unit>> call(NoParams params) =>
+      repository.resetFollows();
+}
