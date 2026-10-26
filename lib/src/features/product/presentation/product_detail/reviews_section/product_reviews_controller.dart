@@ -5,18 +5,24 @@ import 'package:tuku_shop/src/features/product/domain/domain.dart';
 part 'product_reviews_state.dart';
 
 /// Reviews load on their own request, after the product header is already
-/// on screen, five at a time.
+/// on screen: a short preview on the product page, pages of [pageSize] on
+/// the All reviews screen.
 class ProductReviewsController extends Cubit<ProductReviewsState> {
   ProductReviewsController(this._getProductReviewsUsecase)
     : super(const ProductReviewsState());
 
   final GetProductReviewsUsecase _getProductReviewsUsecase;
   late String _productId;
+  int _pageSize = pageSize;
 
-  static const pageSize = 5;
+  static const pageSize = 10;
 
-  Future<void> load(String productId) async {
+  /// How many reviews the product page previews before "View all".
+  static const previewSize = 3;
+
+  Future<void> load(String productId, {int pageSize = pageSize}) async {
     _productId = productId;
+    _pageSize = pageSize;
     emit(const ProductReviewsState());
     final result = await _getProductReviewsUsecase.call(
       ProductReviewsParams(productId: productId, pageSize: pageSize),
@@ -42,7 +48,7 @@ class ProductReviewsController extends Cubit<ProductReviewsState> {
       ProductReviewsParams(
         productId: _productId,
         page: state.page + 1,
-        pageSize: pageSize,
+        pageSize: _pageSize,
       ),
     );
     result.fold(

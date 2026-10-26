@@ -53,12 +53,13 @@ class AddToCartSheet extends StatelessWidget {
       listenWhen: (a, b) => b.status == AddToCartStatus.added,
       listener: (context, _) => Navigator.of(context).pop(),
       child: SafeArea(
+        bottom: false,
         child: Padding(
           padding: EdgeInsets.fromLTRB(
             SdSpacingV5.s16,
             SdSpacingV5.s12,
             SdSpacingV5.s16,
-            SdSpacingV5.s16,
+            BottomActionBar.bottomGap(context),
           ),
           child: BlocBuilder<VariantSelectionController, VariantSelectionState>(
             builder: (context, selection) {

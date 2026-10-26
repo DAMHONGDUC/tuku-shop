@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/di/injector.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
-import 'package:tuku_shop/src/features/product/presentation/favorites/favorites_controller.dart';
 
 import 'add_to_cart/add_to_cart_controller.dart';
-import 'add_to_cart/add_to_cart_sheet.dart';
+import 'add_to_cart/add_to_cart_feedback.dart';
+import 'components/product_action_dock.dart';
 import 'components/product_gallery.dart';
 import 'components/product_info_section.dart';
 import 'product_detail_args.dart';
@@ -39,8 +38,11 @@ class ProductDetailScreen extends StatelessWidget {
         BlocProvider(create: (_) => getIt<VariantSelectionController>()),
         BlocProvider(create: (_) => getIt<AddToCartController>()),
         BlocProvider(
-          create: (_) =>
-              getIt<ProductReviewsController>()..load(args.productId),
+          create: (_) => getIt<ProductReviewsController>()
+            ..load(
+              args.productId,
+              pageSize: ProductReviewsController.previewSize,
+            ),
         ),
         BlocProvider(
           create: (_) =>
@@ -91,9 +93,7 @@ class _ViewState extends State<_View> {
     final colors = context.colorTheme;
     final productId = widget.productId;
 
-    return BlocListener<AddToCartController, AddToCartState>(
-      listenWhen: (a, b) => a.status != b.status,
-      listener: _onAddToCart,
+    return AddToCartFeedback(
       child: BlocConsumer<ProductDetailController, ProductDetailState>(
         listener: (context, state) {
           if (state is ProductDetailLoadedState) {
@@ -152,7 +152,7 @@ class _ViewState extends State<_View> {
               ),
             ),
             bottomNavigationBar: state is ProductDetailLoadedState
-                ? _Dock(product: state.product)
+                ? ProductActionDock(product: state.product)
                 : null,
             body: switch (state) {
               ProductDetailLoadedState(:final product) => _Content(
@@ -177,34 +177,6 @@ class _ViewState extends State<_View> {
         },
       ),
     );
-  }
-
-  void _onAddToCart(BuildContext context, AddToCartState state) {
-    final messenger = ScaffoldMessenger.of(context);
-    switch (state.status) {
-      case AddToCartStatus.added when state.buyNow:
-        context.push(CheckoutRoutes.checkoutLocation(lineIds: [state.lineId!]));
-      case AddToCartStatus.added:
-        messenger
-          ..hideCurrentSnackBar()
-          ..showSnackBar(
-            SnackBar(
-              content: Text(context.loc.pdp_added_to_cart),
-              // An action would keep it up until tapped; let it time out.
-              persist: false,
-              action: SnackBarAction(
-                label: context.loc.pdp_view_cart,
-                onPressed: () => context.push(CartRoutes.cart.fullPath),
-              ),
-            ),
-          );
-      case AddToCartStatus.failed:
-        messenger.showSnackBar(
-          SnackBar(content: Text(context.loc.pdp_add_failed)),
-        );
-      default:
-        break;
-    }
   }
 }
 
@@ -284,70 +256,6 @@ class _Content extends StatelessWidget {
         ),
         SliverToBoxAdapter(child: SdVerticalSpacingV5(value: SdSpacingV5.s32)),
       ],
-    );
-  }
-}
-
-class _Dock extends StatelessWidget {
-  const _Dock({required this.product});
-
-  final ProductEntity product;
-
-  void _addToCart(BuildContext context, {required bool buyNow}) {
-    AddToCartSheet.show(context, product: product, buyNow: buyNow);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.colorTheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: colors.surfaceDefault,
-        border: Border(top: BorderSide(color: colors.borderDefault)),
-      ),
-      padding: EdgeInsets.fromLTRB(
-        SdSpacingV5.s16,
-        SdSpacingV5.s12,
-        SdSpacingV5.s16,
-        SdSpacingV5.s12 + MediaQuery.paddingOf(context).bottom,
-      ),
-      child: Row(
-        children: [
-          BlocSelector<FavoritesController, FavoritesState, bool>(
-            selector: (state) => state.contains(product.id),
-            builder: (context, isFavorite) => AppIconButton(
-              icon: isFavorite ? Icons.favorite : Icons.favorite_border,
-              iconColor: isFavorite ? colors.sale : colors.textDefault,
-              label: context.loc.wishlist_title,
-              style: AppIconButtonStyle.outlined,
-              onTap: () =>
-                  context.read<FavoritesController>().toggle(product.id),
-            ),
-          ),
-          SdHorizontalSpacingV5(value: SdSpacingV5.s12),
-          Expanded(
-            child: AppButton(
-              label: context.loc.pdp_buy_now,
-              style: AppButtonStyle.soft,
-              onTap: product.isInStock
-                  ? () => _addToCart(context, buyNow: true)
-                  : null,
-            ),
-          ),
-          SdHorizontalSpacingV5(value: SdSpacingV5.s12),
-          Expanded(
-            child: AppButton(
-              label: product.isInStock
-                  ? context.loc.pdp_add_to_cart
-                  : context.loc.pdp_sold_out,
-              onTap: product.isInStock
-                  ? () => _addToCart(context, buyNow: false)
-                  : null,
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

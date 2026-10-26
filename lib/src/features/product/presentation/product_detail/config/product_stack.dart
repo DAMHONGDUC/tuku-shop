@@ -5,6 +5,7 @@ import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/presentation/category_products/category_products_args.dart';
 import 'package:tuku_shop/src/features/product/presentation/category_products/category_products_screen.dart';
 
+import '../../product_reviews/product_reviews_screen.dart';
 import '../product_detail_args.dart';
 import '../product_detail_screen.dart';
 
@@ -19,6 +20,16 @@ class ProductStack {
             state.extra as ProductDetailArgs? ??
             ProductDetailArgs(productId: state.uri.queryParameters['id']!);
         return ProductDetailScreen(args: args);
+      },
+    ),
+    SdGoRouteV5(
+      path: ProductRoutes.productReviews.path,
+      name: ProductRoutes.productReviews.name,
+      parentNavigatorKey: kRootNavigatorKey,
+      builder: (BuildContext context, GoRouterState state) {
+        return ProductReviewsScreen(
+          productId: state.uri.queryParameters['id'] ?? '',
+        );
       },
     ),
     SdGoRouteV5(

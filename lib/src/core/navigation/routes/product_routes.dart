@@ -14,6 +14,19 @@ class ProductRoutes {
     fullPath: '/products',
   );
 
+  /// Every review of one product, under the product page's bar and dock.
+  static const SdRouterV5 productReviews = SdRouterV5(
+    name: 'product-reviews',
+    path: '/product-reviews',
+    fullPath: '/product-reviews',
+  );
+
+  /// Location of [productReviews] for [productId].
+  static String productReviewsLocation(String productId) => Uri(
+    path: productReviews.fullPath,
+    queryParameters: {'id': productId},
+  ).toString();
+
   /// Location of [productDetail] for [productId]; usable from any feature.
   static String productDetailLocation(String productId) => Uri(
     path: productDetail.fullPath,

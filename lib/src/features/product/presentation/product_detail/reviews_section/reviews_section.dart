@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
@@ -7,7 +8,8 @@ import 'package:tuku_shop/src/features/product/presentation/widgets/review_comme
 
 import 'product_reviews_controller.dart';
 
-/// Rating summary from the product, review list from its own paged request.
+/// Rating summary from the product and the first few reviews; "View all"
+/// opens every review on its own screen.
 class ReviewsSection extends StatelessWidget {
   const ReviewsSection({super.key, required this.product});
 
@@ -35,7 +37,7 @@ class ReviewsSection extends StatelessWidget {
             SdHorizontalSpacingV5(value: SdSpacingV5.s8),
             Padding(
               padding: EdgeInsets.only(bottom: SdSpacingV5.s4),
-              child: _Stars(rating: product.averageRating),
+              child: ReviewStars(rating: product.averageRating),
             ),
             SdHorizontalSpacingV5(value: SdSpacingV5.s8),
             Padding(
@@ -77,10 +79,13 @@ class ReviewsSection extends StatelessWidget {
                     if (state.hasMore) ...[
                       SdVerticalSpacingV5(value: SdSpacingV5.s12),
                       AppButton(
-                        label: context.loc.pdp_show_more_reviews,
+                        label: context.loc.pdp_view_all_reviews(
+                          state.totalRecord,
+                        ),
                         style: AppButtonStyle.soft,
-                        isLoading: state.isLoadingMore,
-                        onTap: controller.loadMore,
+                        onTap: () => context.push(
+                          ProductRoutes.productReviewsLocation(product.id),
+                        ),
                       ),
                     ],
                   ],
@@ -93,8 +98,8 @@ class ReviewsSection extends StatelessWidget {
   }
 }
 
-class _Stars extends StatelessWidget {
-  const _Stars({required this.rating});
+class ReviewStars extends StatelessWidget {
+  const ReviewStars({super.key, required this.rating});
 
   final double rating;
 
