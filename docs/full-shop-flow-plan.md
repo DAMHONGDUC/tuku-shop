@@ -126,7 +126,7 @@ Current non-clothing categories (Toys, Cards, P&A, Pre-loved Luxury) and their i
 | `order` | Extend | Orders by status (paged), detail with status timeline, cancel, buy again | `CancelOrderUsecase`, `GetOrderCountsUsecase` |
 | `notification` | Extend | New entry when an order is placed or cancelled | `AddNotificationUsecase` (called from order flow) |
 | `profile` | Extend | User header, order counters, edit profile, theme, language, reset demo | `UpdateProfileUsecase`, `ResetDemoDataUsecase` |
-| `seller` | New | Shop card on the product page (Sold by, Official, stats, Chat, View shop), shop page = product list filtered by `sellerId` | `GetSellerUsecase`, `GetSellersByIdsUsecase` |
+| `seller` | New | Shops and follows (data + domain); the shop page lives in `product/presentation/shop_detail` (cover in the shop color with avatar, Official, city, Follow, Chat; Rating · Products · Followers · Response; tabs Shop / Products / Categories); opened from the product page shop card, View shop and the chat header | `GetSellerUsecase`, `GetSellersByIdsUsecase`, `ToggleFollowSellerUsecase`, `ResetFollowedSellersUsecase` |
 | `chat` | New (replaces `support_chat`) | Chat tab (inbox, support pinned, unread bold + badge), thread screen per shop or Tuku Care with fitting quick questions; entries from the product page (dock + shop card), Profile and order detail | `GetConversationsUsecase`, `WatchConversationsUsecase`, `OpenConversationUsecase`, `GetChatMessagesUsecase`, `WatchChatMessagesUsecase`, `SendChatMessageUsecase`, `MarkConversationReadUsecase`, `ResetChatUsecase` |
 | `auth` | Done | Login, logout, demo session | — |
 
@@ -321,6 +321,7 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | One action, one request | A user action (place order, save address, cancel) is a single data source call, not several in a row | 2026-10-18 |
 | Bottom gap | Bottom actions sit at safe area + 4; tab bar 56 pt | 2026-10-27 |
 | Marketplace | 8 shops (one per brand, plus resellers Denim House and Saigon Closet sharing Northline / Aurora listings); products carry `sellerId` | 2026-10-27 |
+| Shop page | Shopee-style shop detail at `/shop?id=`; each section (header, picks, new, sale, products, categories) is its own request; follows are stored on the device and reset with demo data | 2026-10-27 |
 | Chat | Chat tab between Categories and Notifications (5 tabs, Shopee order); one thread per shop plus Tuku Care; a real chat API or websocket replaces only `ChatLocalDataSource` | 2026-10-27 |
 | Search filters | Filter is an app bar action next to the cart (Home and Search) | 2026-10-27 |
 | Home carousel | Auto-advances every 3 s, banners in source order (no shuffle) so dots and content match | 2026-10-27 |
