@@ -8,6 +8,9 @@ class ProductModel {
   final String? id;
   final String? name;
   final String? brand;
+
+  /// The shop selling this listing.
+  final String? sellerId;
   final double? price;
   final String? imageUrl;
   final int? purchaserCount;
@@ -29,6 +32,7 @@ class ProductModel {
     this.id,
     this.name,
     this.brand,
+    this.sellerId,
     this.price,
     this.imageUrl,
     this.purchaserCount,

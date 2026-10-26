@@ -10,6 +10,9 @@ import 'package:tuku_shop/src/features/product/domain/entities/review_comment.da
 class ProductEntity extends Equatable {
   final String name;
   final String brand;
+
+  /// The shop selling this listing (seller feature id).
+  final String sellerId;
   final double price;
   final String imageUrl;
   final List<ProductColor> productColors;
@@ -33,6 +36,7 @@ class ProductEntity extends Equatable {
     this.productSizes = const [],
     required this.name,
     required this.brand,
+    this.sellerId = '',
     required this.price,
     required this.imageUrl,
     required this.id,
@@ -71,6 +75,7 @@ class ProductEntity extends Equatable {
   List<Object?> get props => [
     name,
     brand,
+    sellerId,
     price,
     imageUrl,
     productColors,

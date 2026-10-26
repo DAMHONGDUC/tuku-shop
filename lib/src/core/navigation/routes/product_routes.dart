@@ -39,6 +39,7 @@ class ProductRoutes {
     required String title,
     String? categoryId,
     String? tag,
+    String? sellerId,
     bool onSaleOnly = false,
   }) {
     return Uri(
@@ -47,6 +48,7 @@ class ProductRoutes {
         'title': title,
         'categoryId': ?categoryId,
         'tag': ?tag,
+        'seller': ?sellerId,
         if (onSaleOnly) 'sale': '1',
       },
     ).toString();

@@ -14,6 +14,7 @@ class ProductModelToProductEntityMapper {
       id: model.id ?? '',
       name: model.name ?? '',
       brand: model.brand ?? '',
+      sellerId: model.sellerId ?? '',
       price: model.price ?? 0,
       imageUrl: model.imageUrl ?? '',
       purchaserCount: model.purchaserCount ?? 0,

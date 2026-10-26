@@ -27,6 +27,9 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
 
       final keyword = query.keyword.trim().toLowerCase();
       final matched = _all.where((p) {
+        if (query.sellerId != null && p.sellerId != query.sellerId) {
+          return false;
+        }
         if (query.categoryId != null && p.categoryId != query.categoryId) {
           return false;
         }

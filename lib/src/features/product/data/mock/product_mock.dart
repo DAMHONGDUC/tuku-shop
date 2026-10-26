@@ -62,6 +62,26 @@ class ProductMock {
   static double _rating() =>
       double.parse((3.8 + _random.nextDouble() * 1.1).toStringAsFixed(1));
 
+  /// Shops carrying each brand; listings of a brand alternate between them,
+  /// so the official store and resellers both appear.
+  static const _sellersByBrand = {
+    'Aurora': ['aurora-official', 'saigon-closet'],
+    'Northline': ['northline-official', 'denim-house'],
+    'Stride': ['stride-sports'],
+    'Tuku Studio': ['tuku-studio'],
+    'Tuku Basics': ['tuku-basics'],
+    'Kinfolk Kids': ['kinfolk-kids'],
+  };
+
+  static String _sellerFor(_CatalogRow row) {
+    final shops = _sellersByBrand[row.brand] ?? const ['tuku-studio'];
+    final nth = _catalog
+        .where((r) => r.brand == row.brand)
+        .toList()
+        .indexOf(row);
+    return shops[nth % shops.length];
+  }
+
   static ProductModel _build(_CatalogRow row) {
     final colors = [
       for (var i = 0; i < row.colors.length; i++)
@@ -88,6 +108,7 @@ class ProductMock {
       categoryId: row.categoryId,
       name: row.name,
       brand: row.brand,
+      sellerId: _sellerFor(row),
       price: row.price,
       originalPrice: row.originalPrice,
       tags: row.tags.map((t) => t.name).toList(),

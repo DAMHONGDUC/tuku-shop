@@ -8,6 +8,7 @@ import 'package:tuku_shop/src/features/notification/notification_di.dart';
 import 'package:tuku_shop/src/features/order/order_di.dart';
 import 'package:tuku_shop/src/features/product/product_di.dart';
 import 'package:tuku_shop/src/features/profile/profile_di.dart';
+import 'package:tuku_shop/src/features/seller/seller_di.dart';
 import 'package:tuku_shop/src/features/settings/settings_di.dart';
 import 'package:tuku_shop/src/features/splash/config/splash_di.dart';
 import 'package:tuku_shop/src/features/support_chat/support_chat_di.dart';
@@ -33,6 +34,7 @@ class Injector {
     OrderDi.config();
     NotificationDi.config();
     ProfileDi.config();
+    SellerDi.config();
     SettingsDi.config();
     SplashDi.config();
     SupportChatDi.config();

@@ -7,6 +7,9 @@ enum ProductSort { recommended, newest, priceLowToHigh, priceHighToLow, rating }
 /// What a product list asks for: keyword, filters, order and which page.
 class ProductQuery extends Equatable {
   final String keyword;
+
+  /// Only this shop's listings (a shop page); kept when filters change.
+  final String? sellerId;
   final String? categoryId;
   final ProductTag? tag;
   final bool onSaleOnly;
@@ -22,6 +25,7 @@ class ProductQuery extends Equatable {
 
   const ProductQuery({
     this.keyword = '',
+    this.sellerId,
     this.categoryId,
     this.tag,
     this.onSaleOnly = false,
@@ -47,6 +51,7 @@ class ProductQuery extends Equatable {
   }) {
     return ProductQuery(
       keyword: keyword ?? this.keyword,
+      sellerId: sellerId,
       categoryId: categoryId ?? this.categoryId,
       tag: tag ?? this.tag,
       onSaleOnly: onSaleOnly ?? this.onSaleOnly,
@@ -80,6 +85,7 @@ class ProductQuery extends Equatable {
   ProductQuery withFilters(ProductFilters filters) {
     return ProductQuery(
       keyword: keyword,
+      sellerId: sellerId,
       categoryId: filters.categoryId,
       tag: filters.tag,
       onSaleOnly: filters.onSaleOnly,
@@ -101,6 +107,7 @@ class ProductQuery extends Equatable {
   @override
   List<Object?> get props => [
     keyword,
+    sellerId,
     categoryId,
     tag,
     onSaleOnly,
