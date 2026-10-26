@@ -78,7 +78,7 @@ class _OrdersTabState extends State<_OrdersTab>
             SdSpacingV5.s16,
             SdSpacingV5.s16,
             SdSpacingV5.s16,
-            FloatingBottomNav.contentInset(context),
+            MediaQuery.paddingOf(context).bottom + SdSpacingV5.s24,
           );
           return switch (state.status) {
             OrdersListStatus.loading => ListView(

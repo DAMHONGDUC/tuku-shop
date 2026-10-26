@@ -6,12 +6,14 @@ import 'package:tuku_shop/src/features/order/presentation/order_detail/order_det
 
 import '../my_orders_screen.dart';
 
-/// Child routes of the Profile tab.
+/// Child routes of the Profile tab, shown above the tabs.
 class MyOrderStack {
   static final List<GoRoute> routes = [
     SdGoRouteV5(
       path: MyOrderRoutes.myOrder.path,
       name: MyOrderRoutes.myOrder.name,
+      // Above the tabs: detail screens never show the bottom bar.
+      parentNavigatorKey: kRootNavigatorKey,
       builder: (BuildContext context, GoRouterState state) {
         final index = int.tryParse(state.uri.queryParameters['status'] ?? '');
         return MyOrdersScreen(
@@ -22,6 +24,7 @@ class MyOrderStack {
         SdGoRouteV5(
           path: MyOrderRoutes.myOrderDetail.path,
           name: MyOrderRoutes.myOrderDetail.name,
+          parentNavigatorKey: kRootNavigatorKey,
           builder: (BuildContext context, GoRouterState state) {
             return OrderDetailScreen(
               orderId: state.uri.queryParameters['id'] ?? '',

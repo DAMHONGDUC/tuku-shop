@@ -2,7 +2,6 @@ import 'dart:math' as math;
 import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 
@@ -26,9 +25,7 @@ class FloatingNavDestination {
 /// A floating, labelled tab bar over its body: a V5 rebuild of the design
 /// kit's V3 bottom navigation, from V5 tokens only.
 ///
-/// The body scrolls behind the bar. Scrolling the tab's main list down slides
-/// the bar away and scrolling up brings it back; it always returns on a tab
-/// change, at the top of the list, or when the list cannot scroll. A
+/// The body scrolls behind the bar, which stays fixed in place. A
 /// horizontal swipe on the body moves to the adjacent tab.
 class FloatingBottomNav extends StatefulWidget {
   const FloatingBottomNav({
@@ -64,86 +61,8 @@ class FloatingBottomNav extends StatefulWidget {
   State<FloatingBottomNav> createState() => _FloatingBottomNavState();
 }
 
-class _FloatingBottomNavState extends State<FloatingBottomNav>
-    with SingleTickerProviderStateMixin {
-  /// 0 on screen, 1 fully below the window.
-  late final AnimationController _hidden = AnimationController(vsync: this);
-  double _lastDelta = 0;
+class _FloatingBottomNavState extends State<FloatingBottomNav> {
   double _dragDistance = 0;
-
-  @override
-  void didUpdateWidget(FloatingBottomNav oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.selectedIndex != widget.selectedIndex) _settle(0);
-  }
-
-  @override
-  void dispose() {
-    _hidden.dispose();
-    super.dispose();
-  }
-
-  void _settle(double target) {
-    if (_hidden.value == target && !_hidden.isAnimating) return;
-    final binding = SchedulerBinding.instance;
-    if (binding.schedulerPhase == SchedulerPhase.persistentCallbacks) {
-      binding.addPostFrameCallback((_) {
-        if (mounted) _settle(target);
-      });
-      return;
-    }
-    final duration = MediaQuery.disableAnimationsOf(context)
-        ? Duration.zero
-        : UIConstants.navNormal;
-    _hidden.animateTo(target, duration: duration, curve: Curves.easeOutCubic);
-  }
-
-  static bool _isMainList(ScrollMetrics metrics, int depth) =>
-      depth == 0 && metrics.axis == Axis.vertical;
-
-  bool _onScroll(ScrollNotification notification) {
-    final metrics = notification.metrics;
-    if (!_isMainList(metrics, notification.depth)) return false;
-
-    if (notification is ScrollUpdateNotification) {
-      _follow(metrics, notification.scrollDelta ?? 0);
-    } else if (notification is ScrollEndNotification) {
-      _settle(metrics.extentBefore <= 0 || _lastDelta < 0 ? 0 : 1);
-    }
-    return false;
-  }
-
-  /// Moves the bar by as much as the list moved; bounces are ignored.
-  void _follow(ScrollMetrics metrics, double delta) {
-    final extent =
-        FloatingBottomNav.barOffset(context) + FloatingBottomNav.barHeight;
-    final before = metrics.pixels - delta;
-    final fits = metrics.maxScrollExtent <= metrics.minScrollExtent;
-    final pastEnd =
-        metrics.pixels > metrics.maxScrollExtent ||
-        before > metrics.maxScrollExtent;
-    final pastStart =
-        metrics.pixels < metrics.minScrollExtent ||
-        before < metrics.minScrollExtent;
-
-    if (fits ||
-        delta == 0 ||
-        (pastEnd && delta < 0) ||
-        (pastStart && delta > 0)) {
-      return;
-    }
-
-    _lastDelta = delta;
-    _hidden.stop();
-    _hidden.value = (_hidden.value + delta / extent).clamp(0.0, 1.0);
-  }
-
-  bool _onMetrics(ScrollMetricsNotification notification) {
-    final metrics = notification.metrics;
-    if (!_isMainList(metrics, notification.depth)) return false;
-    if (metrics.maxScrollExtent <= metrics.minScrollExtent) _settle(0);
-    return false;
-  }
 
   void _finishSwipe(DragEndDetails _) {
     final distance = _dragDistance;
@@ -159,32 +78,19 @@ class _FloatingBottomNavState extends State<FloatingBottomNav>
     return Scaffold(
       extendBody: true,
       backgroundColor: context.colorTheme.pageDefault,
-      body: NotificationListener<ScrollMetricsNotification>(
-        onNotification: _onMetrics,
-        child: NotificationListener<ScrollNotification>(
-          onNotification: _onScroll,
-          child: GestureDetector(
-            behavior: HitTestBehavior.translucent,
-            excludeFromSemantics: true,
-            onHorizontalDragStart: (_) => _dragDistance = 0,
-            onHorizontalDragUpdate: (d) => _dragDistance += d.primaryDelta ?? 0,
-            onHorizontalDragCancel: () => _dragDistance = 0,
-            onHorizontalDragEnd: _finishSwipe,
-            child: widget.body,
-          ),
-        ),
+      body: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        excludeFromSemantics: true,
+        onHorizontalDragStart: (_) => _dragDistance = 0,
+        onHorizontalDragUpdate: (d) => _dragDistance += d.primaryDelta ?? 0,
+        onHorizontalDragCancel: () => _dragDistance = 0,
+        onHorizontalDragEnd: _finishSwipe,
+        child: widget.body,
       ),
-      bottomNavigationBar: AnimatedBuilder(
-        animation: _hidden,
-        builder: (context, bar) => FractionalTranslation(
-          translation: Offset(0, _hidden.value),
-          child: bar,
-        ),
-        child: FloatingBottomNavBar(
-          destinations: widget.destinations,
-          selectedIndex: widget.selectedIndex,
-          onSelected: widget.onSelected,
-        ),
+      bottomNavigationBar: FloatingBottomNavBar(
+        destinations: widget.destinations,
+        selectedIndex: widget.selectedIndex,
+        onSelected: widget.onSelected,
       ),
     );
   }
