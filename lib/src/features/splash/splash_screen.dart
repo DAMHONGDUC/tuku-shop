@@ -32,9 +32,10 @@ class _SplashView extends StatelessWidget {
         }
       },
       child: SdAdaptiveStatusBarV5(
-        backgroundColor: context.colorTheme.primary,
+        // The brand purple in both themes, as the native launch screen.
+        backgroundColor: AppColors.brand,
         child: Scaffold(
-          backgroundColor: context.colorTheme.primary,
+          backgroundColor: AppColors.brand,
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

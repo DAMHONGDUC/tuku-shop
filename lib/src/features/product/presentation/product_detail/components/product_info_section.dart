@@ -29,7 +29,7 @@ class ProductInfoSection extends StatelessWidget {
             Icon(
               Icons.star_rounded,
               size: SdSpacingV5.s16,
-              color: colors.accent,
+              color: colors.warning,
             ),
             SdHorizontalSpacingV5(value: SdSpacingV5.s4),
             Text(

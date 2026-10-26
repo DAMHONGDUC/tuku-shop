@@ -57,11 +57,11 @@ class AppTheme {
         behavior: SnackBarBehavior.floating,
         backgroundColor: colors.textDefault,
         contentTextStyle: SdTextStyleV5.body14().wColor(colors.pageDefault),
-        // The snackbar inverts the page, so its action takes the champagne
+        // The snackbar inverts the page, so its action takes the purple
         // that reads on the inverted fill.
         actionTextColor: brightness == Brightness.light
-            ? AppColors.champagneLight
-            : AppColors.champagne,
+            ? AppColors.brandOnDark
+            : AppColors.brand,
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(SdSpacingV5.s12)),
         ),

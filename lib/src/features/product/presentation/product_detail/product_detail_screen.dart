@@ -134,13 +134,17 @@ class _ViewState extends State<_View> {
                           : AppIconButtonStyle.floating,
                     ),
                   ],
-                  leading: Padding(
-                    padding: EdgeInsets.all(SdSpacingV5.s4),
-                    child: _RoundIconButton(
+                  // Same button style as the cart action, so the pair match
+                  // over the photo and in the collapsed bar.
+                  leading: Center(
+                    child: AppIconButton(
                       icon: Icons.arrow_back_ios_new_rounded,
                       label: MaterialLocalizations.of(
                         context,
                       ).backButtonTooltip,
+                      style: collapsed
+                          ? AppIconButtonStyle.plain
+                          : AppIconButtonStyle.floating,
                       onTap: () => Navigator.of(context).maybePop(),
                     ),
                   ),
@@ -312,11 +316,11 @@ class _Dock extends StatelessWidget {
         children: [
           BlocSelector<FavoritesController, FavoritesState, bool>(
             selector: (state) => state.contains(product.id),
-            builder: (context, isFavorite) => _RoundIconButton(
+            builder: (context, isFavorite) => AppIconButton(
               icon: isFavorite ? Icons.favorite : Icons.favorite_border,
               iconColor: isFavorite ? colors.sale : colors.textDefault,
               label: context.loc.wishlist_title,
-              bordered: true,
+              style: AppIconButtonStyle.outlined,
               onTap: () =>
                   context.read<FavoritesController>().toggle(product.id),
             ),
@@ -343,52 +347,6 @@ class _Dock extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _RoundIconButton extends StatelessWidget {
-  const _RoundIconButton({
-    required this.icon,
-    required this.label,
-    required this.onTap,
-    this.iconColor,
-    this.bordered = false,
-  });
-
-  final IconData icon;
-  final String label;
-  final VoidCallback onTap;
-  final Color? iconColor;
-  final bool bordered;
-
-  @override
-  Widget build(BuildContext context) {
-    final colors = context.colorTheme;
-
-    return Semantics(
-      button: true,
-      label: label,
-      child: Material(
-        color: colors.cardDefault.withValues(alpha: bordered ? 1 : 0.9),
-        shape: CircleBorder(
-          side: bordered
-              ? BorderSide(color: colors.borderDefault)
-              : BorderSide.none,
-        ),
-        child: InkWell(
-          customBorder: const CircleBorder(),
-          onTap: onTap,
-          child: SizedBox.square(
-            dimension: UIConstants.minTapTarget,
-            child: Icon(
-              icon,
-              size: SdSpacingV5.s20,
-              color: iconColor ?? colors.textDefault,
-            ),
-          ),
-        ),
       ),
     );
   }

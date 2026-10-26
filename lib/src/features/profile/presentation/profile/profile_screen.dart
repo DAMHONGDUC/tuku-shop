@@ -306,8 +306,8 @@ class _View extends StatelessWidget {
   }
 }
 
-/// An inverse "membership card": who you are, and three counters that open
-/// favorites, the cart and orders.
+/// A brand-purple "membership card" (the app icon's gradient): who you are,
+/// and three counters that open favorites, the cart and orders.
 class _MemberCard extends StatelessWidget {
   const _MemberCard({required this.state});
 
@@ -324,7 +324,8 @@ class _MemberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
     final loc = context.loc;
-    final ink = colors.pageDefault;
+    // White on the brand gradient in both themes.
+    const ink = SdColorsV5.white;
     final user = state.user;
     final favorites = context.select<FavoritesPreviewController, int?>(
       (c) => c.state.status == FavoritesPreviewStatus.loaded
@@ -376,15 +377,15 @@ class _MemberCard extends StatelessWidget {
               padding: EdgeInsets.all(SdSpacingV5.s2),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                border: Border.all(color: colors.accent, width: 1.5),
+                border: Border.all(color: ink, width: 1.5),
               ),
               child: CircleAvatar(
                 radius: 26,
-                backgroundColor: colors.accent,
+                backgroundColor: ink,
                 child: Text(
                   initials(user.fullName),
                   style: SdTextStyleV5.heading18()
-                      .wColor(AppColors.ink)
+                      .wColor(AppColors.brand)
                       .wDisplay(),
                 ),
               ),
@@ -425,11 +426,15 @@ class _MemberCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(SdSpacingV5.s16),
       decoration: BoxDecoration(
-        color: colors.textDefault,
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [AppColors.brandLight, AppColors.brandDeep],
+        ),
         borderRadius: BorderRadius.circular(UIConstants.cardRadius),
         boxShadow: [
           BoxShadow(
-            color: colors.boxShadowDefault,
+            color: colors.primaryShadowDefault,
             blurRadius: SdSpacingV5.s24,
             offset: const Offset(0, SdSpacingV5.s8),
           ),
@@ -476,7 +481,7 @@ class _Stat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ink = context.colorTheme.pageDefault;
+    const ink = SdColorsV5.white;
 
     return Expanded(
       child: InkWell(
