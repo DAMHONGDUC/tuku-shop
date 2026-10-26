@@ -5,6 +5,7 @@ class UIConstants {
   static const bannerHeight = 200.0;
   static const bannerBorderRadius = SdSpacingV5.s16;
   static const bannerTagWidth = 80.0;
+  static const bannerAutoPlayInterval = Duration(seconds: 3);
 
   // categories
   static const categoriesImageWidth = 64.0;
@@ -15,6 +16,7 @@ class UIConstants {
   // motion (cloned from the V3 floating bar timings)
   static const navFast = Duration(milliseconds: 150);
   static const navNormal = Duration(milliseconds: 250);
+  static const navSlow = Duration(milliseconds: 600);
 
   // cards
   static const cardRadius = SdSpacingV5.s16;

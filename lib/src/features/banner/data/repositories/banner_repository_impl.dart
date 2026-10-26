@@ -15,7 +15,8 @@ class BannerRepositoryImpl implements BannerRepository {
       final result = await dataSource.getBanners();
 
       return Right(
-        result.map(BannerModelToBannerItemMapper.toEntity).toList()..shuffle(),
+        // In the order the source sends them: the same carousel every launch.
+        result.map(BannerModelToBannerItemMapper.toEntity).toList(),
       );
     } on ServerException {
       return Left(ServerFailure());

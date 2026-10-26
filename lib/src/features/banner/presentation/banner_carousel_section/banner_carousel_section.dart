@@ -21,9 +21,10 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<BannerCarouselController, BannerCarouselState>(
-      listener: (context, state) {
-        // TODO: implement listener if need
-      },
+      // A reload starts the carousel at its first banner; keep the dots in
+      // step with it.
+      listenWhen: (_, current) => current is BannerCarouselSuccess,
+      listener: (context, state) => setState(() => _current = 0),
       buildWhen: (previous, current) =>
           current is BannerCarouselLoading ||
           current is BannerCarouselSuccess ||
@@ -110,9 +111,15 @@ class _BannerCarouselSectionState extends State<BannerCarouselSection> {
                 carouselController: _controller,
                 options: CarouselOptions(
                   height: UIConstants.bannerHeight,
+                  // Advances on its own; a touch pauses it until the finger
+                  // lifts, and a manual swipe restarts the interval.
                   autoPlay: true,
+                  autoPlayInterval: UIConstants.bannerAutoPlayInterval,
+                  autoPlayAnimationDuration: UIConstants.navSlow,
+                  autoPlayCurve: Curves.easeInOutCubic,
+                  pauseAutoPlayOnTouch: true,
+                  pauseAutoPlayOnManualNavigate: true,
                   viewportFraction: 1,
-                  enlargeCenterPage: true,
                   onPageChanged: (index, reason) {
                     setState(() {
                       _current = index;
