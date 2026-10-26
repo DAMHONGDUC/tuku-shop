@@ -41,7 +41,7 @@ class FloatingBottomNav extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int> onSelected;
 
-  static const double barHeight = SdSpacingV5.s64;
+  static const double barHeight = SdSpacingV5.s56;
   static const double sideMargin = SdSpacingV5.s16;
   static const double _minOffset = SdSpacingV5.s16;
   static const double _maxOffset = SdSpacingV5.s20;
