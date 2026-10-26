@@ -3,6 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/data/data_sources/product_remote_data_source_impl.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_data_model.dart';
+import 'package:tuku_shop/src/features/product/data/models/product_facets_model.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 
 void main() {
@@ -72,5 +73,67 @@ void main() {
     final a = run(const ProductQuery()).items!.map((p) => p.id).toList();
     final b = run(const ProductQuery()).items!.map((p) => p.id).toList();
     expect(a, b);
+  });
+
+  test('price, rating, size, color and stock filters all narrow the list', () {
+    final all = run(const ProductQuery(pageSize: 100)).items!;
+
+    final cheap = run(
+      const ProductQuery(minPrice: 20, maxPrice: 40, pageSize: 100),
+    ).items!;
+    expect(cheap, isNotEmpty);
+    expect(cheap.every((p) => p.price! >= 20 && p.price! <= 40), isTrue);
+
+    final rated = run(const ProductQuery(minRating: 4.5, pageSize: 100)).items!;
+    expect(rated.every((p) => p.averageRating! >= 4.5), isTrue);
+    expect(rated.length, lessThan(all.length));
+
+    final sized = run(const ProductQuery(sizes: {'32'}, pageSize: 100)).items!;
+    expect(sized, isNotEmpty);
+    expect(
+      sized.every(
+        (p) => p.variants!.any((v) => v.size == '32' && v.stock! > 0),
+      ),
+      isTrue,
+    );
+
+    final black = run(
+      const ProductQuery(colors: {'Black'}, pageSize: 100),
+    ).items!;
+    expect(black, isNotEmpty);
+    expect(
+      black.every(
+        (p) => p.variants!.any((v) => v.colorName == 'Black' && v.stock! > 0),
+      ),
+      isTrue,
+    );
+
+    final inStock = run(
+      const ProductQuery(inStockOnly: true, pageSize: 100),
+    ).items!;
+    expect(inStock.every((p) => p.variants!.any((v) => v.stock! > 0)), isTrue);
+  });
+
+  test('facets list every size and color once and the price bounds', () {
+    late ProductFacetsModel facets;
+    fakeAsync((async) {
+      dataSource.getFacets().then((value) => facets = value);
+      async.elapse(MockLatency.max);
+    });
+    expect(facets.sizes, containsAll(['M', '32', 'One size']));
+    expect(facets.sizes!.toSet().length, facets.sizes!.length);
+    final names = facets.colors!.map((c) => c.name).toList();
+    expect(names.toSet().length, names.length);
+    final prices = run(
+      const ProductQuery(pageSize: 100),
+    ).items!.map((p) => p.price!);
+    expect(
+      facets.minPrice,
+      lessThanOrEqualTo(prices.reduce((a, b) => a < b ? a : b)),
+    );
+    expect(
+      facets.maxPrice,
+      greaterThanOrEqualTo(prices.reduce((a, b) => a > b ? a : b)),
+    );
   });
 }

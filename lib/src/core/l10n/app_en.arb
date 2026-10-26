@@ -106,7 +106,6 @@
             }
         }
     },
-    "pdp_show_more_reviews": "Show more reviews",
     "pdp_related": "You may also like",
     "pdp_add_to_cart": "Add to cart",
     "pdp_buy_now": "Buy now",
@@ -397,5 +396,37 @@
     "profile_favorites_empty": "Tap the heart on any piece to keep it here.",
     "profile_bag_empty": "Your cart is empty",
     "profile_shopping": "Shopping",
-    "profile_settings": "Settings"
+    "profile_settings": "Settings",
+    "pdp_view_all_reviews": "View all {count} reviews",
+    "@pdp_view_all_reviews": {
+        "placeholders": {
+            "count": {
+                "type": "int"
+            }
+        }
+    },
+    "pdp_no_reviews": "No reviews yet. Be the first to share how it fits.",
+    "filter_title": "Filters",
+    "filter_category": "Category",
+    "filter_price": "Price",
+    "filter_rating": "Rating",
+    "filter_rating_up": "{stars}★ & up",
+    "@filter_rating_up": {
+        "placeholders": {
+            "stars": {
+                "type": "String"
+            }
+        }
+    },
+    "filter_size": "Size",
+    "filter_color": "Color",
+    "filter_more": "More",
+    "filter_in_stock": "In stock",
+    "filter_new": "New arrivals",
+    "filter_best_sellers": "Best sellers",
+    "filter_all": "All",
+    "filter_reset": "Reset",
+    "filter_apply": "Show results",
+    "filter_sort": "Sort by",
+    "filter_any": "Any"
 }

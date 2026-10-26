@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/data/data_sources/product_remote_data_source.dart';
 import 'package:tuku_shop/src/features/product/data/data_sources/search_history_local_data_source.dart';
+import 'package:tuku_shop/src/features/product/data/mapper/product_facets_model_to_product_facets_mapper.dart';
 import 'package:tuku_shop/src/features/product/data/mapper/product_model_to_product_entity_mapper.dart';
 import 'package:tuku_shop/src/features/product/data/mapper/products_data_model_to_products_data_entity_mapper.dart';
 import 'package:tuku_shop/src/features/product/data/mapper/review_comment_model_to_review_comment_entity_mapper.dart';
@@ -32,6 +33,12 @@ class ProductRepositoryImpl implements ProductRepository {
         final result = await dataSource.getProducts(query);
         return ProductsDataModelToProductsDataEntityMapper.toEntity(result);
       });
+
+  @override
+  Future<Either<Failure, ProductFacets>> getFacets() => _guard(() async {
+    final result = await dataSource.getFacets();
+    return ProductFacetsModelToProductFacetsMapper.toEntity(result);
+  });
 
   @override
   Future<Either<Failure, ProductEntity>> getProductDetail({

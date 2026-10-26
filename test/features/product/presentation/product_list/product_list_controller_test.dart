@@ -136,4 +136,59 @@ void main() {
       const ProductListState(status: ProductListStatus.error, query: q1),
     ],
   );
+
+  group('filters', () {
+    const filters = ProductFilters(minPrice: 20, sizes: {'M'});
+    final filtered = const ProductQuery(
+      sort: ProductSort.priceLowToHigh,
+    ).withFilters(filters);
+
+    blocTest<ProductListController, ProductListState>(
+      'applyFilters loads filters and sort without a keyword',
+      setUp: () => when(
+        () => usecase.call(filtered),
+      ).thenAnswer((_) async => Right(tPage([p1], pages: 1))),
+      build: () => ProductListController(usecase),
+      act: (c) => c.applyFilters(filters, ProductSort.priceLowToHigh),
+      expect: () => [
+        ProductListState(status: ProductListStatus.loading, query: filtered),
+        ProductListState(
+          status: ProductListStatus.loaded,
+          query: filtered,
+          items: [p1],
+          totalRecord: 1,
+        ),
+      ],
+    );
+
+    blocTest<ProductListController, ProductListState>(
+      'clearing every filter with no keyword clears the list but keeps sort',
+      build: () => ProductListController(usecase),
+      act: (c) => c.applyFilters(const ProductFilters(), ProductSort.rating),
+      expect: () => [
+        const ProductListState(query: ProductQuery(sort: ProductSort.rating)),
+      ],
+      verify: (_) => verifyNever(() => usecase.call(any())),
+    );
+
+    blocTest<ProductListController, ProductListState>(
+      'an empty keyword keeps the filters and their results',
+      setUp: () => when(
+        () => usecase.call(any()),
+      ).thenAnswer((_) async => Right(tPage([p1], pages: 1))),
+      build: () => ProductListController(usecase),
+      seed: () => ProductListState(
+        status: ProductListStatus.loaded,
+        query: filtered.copyWith(keyword: 'jeans'),
+        items: [p2],
+      ),
+      act: (c) => c.search(''),
+      wait: ProductListController.searchDebounce * 2,
+      verify: (c) {
+        expect(c.state.query.filters, filters);
+        expect(c.state.query.keyword, isEmpty);
+        verify(() => usecase.call(filtered)).called(1);
+      },
+    );
+  });
 }

@@ -161,10 +161,18 @@ class DetailsSection extends StatelessWidget {
         SdVerticalSpacingV5(value: SdSpacingV5.s12),
         // Blank lines split the copy into paragraphs; a paragraph with more
         // than one line starts with its heading ("Care", "Size & fit").
+        // Description photos sit between paragraphs, one after each.
         if (product.description != null)
           for (final (i, block)
               in product.description!.content.split('\n\n').indexed) ...[
             if (i > 0) SdVerticalSpacingV5(value: SdSpacingV5.s16),
+            if (i > 0 && i - 1 < product.description!.images.length) ...[
+              _DescriptionImage(
+                images: product.description!.images,
+                index: i - 1,
+              ),
+              SdVerticalSpacingV5(value: SdSpacingV5.s16),
+            ],
             if (block.contains('\n')) ...[
               Text(
                 block.substring(0, block.indexOf('\n')),
@@ -204,6 +212,43 @@ class DetailsSection extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+/// A description photo; tap to see every description photo full screen.
+class _DescriptionImage extends StatelessWidget {
+  const _DescriptionImage({required this.images, required this.index});
+
+  final List<String> images;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      image: true,
+      button: true,
+      child: GestureDetector(
+        onTap: () => SdPreviewMediaViewV5.show(
+          context: context,
+          items: [
+            for (final path in images)
+              SdPreviewMediaConfigV5(
+                filePath: path,
+                isVideo: false,
+                isAsset: true,
+              ),
+          ],
+          initialIndex: index,
+        ),
+        child: AspectRatio(
+          aspectRatio: UIConstants.productImageAspect,
+          child: CatalogImage(
+            path: images[index],
+            borderRadius: UIConstants.imageRadius,
+          ),
+        ),
+      ),
     );
   }
 }

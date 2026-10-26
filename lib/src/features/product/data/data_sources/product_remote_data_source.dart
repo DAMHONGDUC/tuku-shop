@@ -1,4 +1,5 @@
 import 'package:tuku_shop/src/features/product/data/models/product_data_model.dart';
+import 'package:tuku_shop/src/features/product/data/models/product_facets_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/reviews_page_model.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
@@ -22,4 +23,7 @@ abstract class ProductRemoteDataSource {
   });
 
   Future<List<String>> getTrendingSearches();
+
+  /// Sizes, colors and the price range across the catalog.
+  Future<ProductFacetsModel> getFacets();
 }

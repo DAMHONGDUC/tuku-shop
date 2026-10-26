@@ -115,7 +115,8 @@ class ProductMock {
           material: row.material,
           fit: row.fit,
         ),
-        images: row.images.skip(1).toList(),
+        // Every product photo also illustrates the description.
+        images: row.images,
       ),
     );
   }

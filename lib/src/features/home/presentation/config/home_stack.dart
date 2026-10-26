@@ -19,7 +19,9 @@ class HomeStack {
           name: HomeRoutes.search.name,
           parentNavigatorKey: kRootNavigatorKey,
           builder: (BuildContext context, GoRouterState state) {
-            return const SearchScreen();
+            return SearchScreen(
+              openFilters: state.uri.queryParameters['filters'] == '1',
+            );
           },
         ),
       ],

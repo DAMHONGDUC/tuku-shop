@@ -31,6 +31,9 @@ class MockGetProductsUsecase extends Mock implements GetProductsUsecase {}
 class MockGetProductReviewsUsecase extends Mock
     implements GetProductReviewsUsecase {}
 
+class MockGetProductFacetsUsecase extends Mock
+    implements GetProductFacetsUsecase {}
+
 class MockGetProductsByIdsUsecase extends Mock
     implements GetProductsByIdsUsecase {}
 

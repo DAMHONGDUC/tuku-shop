@@ -235,9 +235,6 @@ class AppLocalizationsVi extends AppLocalizations {
   }
 
   @override
-  String get pdp_show_more_reviews => 'Xem thêm đánh giá';
-
-  @override
   String get pdp_related => 'Có thể bạn cũng thích';
 
   @override
@@ -721,4 +718,63 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get profile_settings => 'Cài đặt';
+
+  @override
+  String pdp_view_all_reviews(int count) {
+    return 'Xem tất cả $count đánh giá';
+  }
+
+  @override
+  String get pdp_no_reviews =>
+      'Chưa có đánh giá. Hãy là người đầu tiên chia sẻ.';
+
+  @override
+  String get filter_title => 'Bộ lọc';
+
+  @override
+  String get filter_category => 'Danh mục';
+
+  @override
+  String get filter_price => 'Giá';
+
+  @override
+  String get filter_rating => 'Đánh giá';
+
+  @override
+  String filter_rating_up(String stars) {
+    return 'Từ $stars★';
+  }
+
+  @override
+  String get filter_size => 'Kích cỡ';
+
+  @override
+  String get filter_color => 'Màu sắc';
+
+  @override
+  String get filter_more => 'Khác';
+
+  @override
+  String get filter_in_stock => 'Còn hàng';
+
+  @override
+  String get filter_new => 'Hàng mới';
+
+  @override
+  String get filter_best_sellers => 'Bán chạy';
+
+  @override
+  String get filter_all => 'Tất cả';
+
+  @override
+  String get filter_reset => 'Đặt lại';
+
+  @override
+  String get filter_apply => 'Xem kết quả';
+
+  @override
+  String get filter_sort => 'Sắp xếp';
+
+  @override
+  String get filter_any => 'Bất kỳ';
 }

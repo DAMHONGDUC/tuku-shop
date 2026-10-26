@@ -21,18 +21,36 @@ class ProductListController extends Cubit<ProductListState> {
 
   static const searchDebounce = Duration(milliseconds: 300);
 
-  /// Runs [keyword] once typing pauses; an empty keyword clears the list.
+  /// Runs [keyword] once typing pauses. With no keyword and no filters
+  /// there is nothing to show, so the list clears (keeping sort and filters
+  /// for the next search).
   void search(String keyword) {
     _debounce?.cancel();
-    if (keyword.trim().isEmpty) {
-      _requestId++;
-      emit(const ProductListState());
+    final query = state.query.copyWith(keyword: keyword.trim());
+    if (_isBlank(query)) {
+      _clear(query);
       return;
     }
-    _debounce = Timer(
-      searchDebounce,
-      () => load(state.query.copyWith(keyword: keyword.trim())),
-    );
+    _debounce = Timer(searchDebounce, () => load(query));
+  }
+
+  /// Replaces every filter and the sort, then reloads from page 1.
+  Future<void> applyFilters(ProductFilters filters, ProductSort sort) async {
+    _debounce?.cancel();
+    final query = state.query.withFilters(filters).copyWith(sort: sort);
+    if (_isBlank(query)) {
+      _clear(query);
+      return;
+    }
+    await load(query);
+  }
+
+  static bool _isBlank(ProductQuery query) =>
+      query.keyword.isEmpty && query.filters.isEmpty;
+
+  void _clear(ProductQuery query) {
+    _requestId++;
+    emit(ProductListState(query: query.firstPage()));
   }
 
   @override

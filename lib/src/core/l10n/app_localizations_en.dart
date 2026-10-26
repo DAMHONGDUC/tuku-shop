@@ -234,9 +234,6 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get pdp_show_more_reviews => 'Show more reviews';
-
-  @override
   String get pdp_related => 'You may also like';
 
   @override
@@ -721,4 +718,63 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_settings => 'Settings';
+
+  @override
+  String pdp_view_all_reviews(int count) {
+    return 'View all $count reviews';
+  }
+
+  @override
+  String get pdp_no_reviews =>
+      'No reviews yet. Be the first to share how it fits.';
+
+  @override
+  String get filter_title => 'Filters';
+
+  @override
+  String get filter_category => 'Category';
+
+  @override
+  String get filter_price => 'Price';
+
+  @override
+  String get filter_rating => 'Rating';
+
+  @override
+  String filter_rating_up(String stars) {
+    return '$stars★ & up';
+  }
+
+  @override
+  String get filter_size => 'Size';
+
+  @override
+  String get filter_color => 'Color';
+
+  @override
+  String get filter_more => 'More';
+
+  @override
+  String get filter_in_stock => 'In stock';
+
+  @override
+  String get filter_new => 'New arrivals';
+
+  @override
+  String get filter_best_sellers => 'Best sellers';
+
+  @override
+  String get filter_all => 'All';
+
+  @override
+  String get filter_reset => 'Reset';
+
+  @override
+  String get filter_apply => 'Show results';
+
+  @override
+  String get filter_sort => 'Sort by';
+
+  @override
+  String get filter_any => 'Any';
 }

@@ -5,6 +5,7 @@ import 'package:tuku_shop/src/features/product/data/data_sources/search_history_
 import 'package:tuku_shop/src/features/product/data/repositories/product_repository_impl.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/cart/domain/domain.dart';
+import 'package:tuku_shop/src/features/category/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/presentation/favorites/favorites_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/add_to_cart/add_to_cart_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_controller.dart';
@@ -12,6 +13,7 @@ import 'package:tuku_shop/src/features/product/presentation/product_detail/relat
 import 'package:tuku_shop/src/features/product/presentation/product_detail/reviews_section/product_reviews_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/variant_section/variant_selection_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_list/product_list_controller.dart';
+import 'package:tuku_shop/src/features/product/presentation/search_screen/filters/search_filters_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/search_screen/search_suggestions_controller.dart';
 import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
 
@@ -46,6 +48,9 @@ class ProductDi {
     getIt.registerLazySingleton<GetProductReviewsUsecase>(
       () => GetProductReviewsUsecase(getIt<ProductRepository>()),
     );
+    getIt.registerLazySingleton<GetProductFacetsUsecase>(
+      () => GetProductFacetsUsecase(getIt<ProductRepository>()),
+    );
     getIt.registerLazySingleton<GetSearchSuggestionsUsecase>(
       () => GetSearchSuggestionsUsecase(getIt<ProductRepository>()),
     );
@@ -73,6 +78,12 @@ class ProductDi {
     );
     getIt.registerFactory<RelatedProductsController>(
       () => RelatedProductsController(getIt<GetRelatedProductUsecase>()),
+    );
+    getIt.registerFactory<SearchFiltersController>(
+      () => SearchFiltersController(
+        getIt<GetProductFacetsUsecase>(),
+        getIt<GetCategoriesUsecase>(),
+      ),
     );
     getIt.registerFactory<SearchSuggestionsController>(
       () => SearchSuggestionsController(

@@ -524,12 +524,6 @@ abstract class AppLocalizations {
   /// **'{count} reviews'**
   String pdp_reviews_count(int count);
 
-  /// No description provided for @pdp_show_more_reviews.
-  ///
-  /// In en, this message translates to:
-  /// **'Show more reviews'**
-  String get pdp_show_more_reviews;
-
   /// No description provided for @pdp_related.
   ///
   /// In en, this message translates to:
@@ -1399,6 +1393,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get profile_settings;
+
+  /// No description provided for @pdp_view_all_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'View all {count} reviews'**
+  String pdp_view_all_reviews(int count);
+
+  /// No description provided for @pdp_no_reviews.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews yet. Be the first to share how it fits.'**
+  String get pdp_no_reviews;
+
+  /// No description provided for @filter_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Filters'**
+  String get filter_title;
+
+  /// No description provided for @filter_category.
+  ///
+  /// In en, this message translates to:
+  /// **'Category'**
+  String get filter_category;
+
+  /// No description provided for @filter_price.
+  ///
+  /// In en, this message translates to:
+  /// **'Price'**
+  String get filter_price;
+
+  /// No description provided for @filter_rating.
+  ///
+  /// In en, this message translates to:
+  /// **'Rating'**
+  String get filter_rating;
+
+  /// No description provided for @filter_rating_up.
+  ///
+  /// In en, this message translates to:
+  /// **'{stars}★ & up'**
+  String filter_rating_up(String stars);
+
+  /// No description provided for @filter_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Size'**
+  String get filter_size;
+
+  /// No description provided for @filter_color.
+  ///
+  /// In en, this message translates to:
+  /// **'Color'**
+  String get filter_color;
+
+  /// No description provided for @filter_more.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get filter_more;
+
+  /// No description provided for @filter_in_stock.
+  ///
+  /// In en, this message translates to:
+  /// **'In stock'**
+  String get filter_in_stock;
+
+  /// No description provided for @filter_new.
+  ///
+  /// In en, this message translates to:
+  /// **'New arrivals'**
+  String get filter_new;
+
+  /// No description provided for @filter_best_sellers.
+  ///
+  /// In en, this message translates to:
+  /// **'Best sellers'**
+  String get filter_best_sellers;
+
+  /// No description provided for @filter_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get filter_all;
+
+  /// No description provided for @filter_reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get filter_reset;
+
+  /// No description provided for @filter_apply.
+  ///
+  /// In en, this message translates to:
+  /// **'Show results'**
+  String get filter_apply;
+
+  /// No description provided for @filter_sort.
+  ///
+  /// In en, this message translates to:
+  /// **'Sort by'**
+  String get filter_sort;
+
+  /// No description provided for @filter_any.
+  ///
+  /// In en, this message translates to:
+  /// **'Any'**
+  String get filter_any;
 }
 
 class _AppLocalizationsDelegate

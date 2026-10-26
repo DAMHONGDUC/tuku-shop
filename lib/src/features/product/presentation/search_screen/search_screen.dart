@@ -8,12 +8,18 @@ import 'package:tuku_shop/src/features/product/presentation/product_list/product
 import 'package:tuku_shop/src/features/product/presentation/product_list/product_list_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_list/product_strip_section.dart';
 
+import 'filters/filter_sheet.dart';
+import 'filters/search_filters_controller.dart';
 import 'search_suggestions_controller.dart';
 
 /// Search that is never blank: recent, trending and recommended items
-/// before typing, live paged results after.
+/// before typing, live paged results after. Filters narrow the results and
+/// work without a keyword too.
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
+  const SearchScreen({super.key, this.openFilters = false});
+
+  /// Opens the filter sheet on arrival (Home's filter button).
+  final bool openFilters;
 
   @override
   Widget build(BuildContext context) {
@@ -23,14 +29,17 @@ class SearchScreen extends StatelessWidget {
           create: (_) => getIt<SearchSuggestionsController>()..load(),
         ),
         BlocProvider(create: (_) => getIt<ProductListController>()),
+        BlocProvider(create: (_) => getIt<SearchFiltersController>()..load()),
       ],
-      child: const _SearchView(),
+      child: _SearchView(openFilters: openFilters),
     );
   }
 }
 
 class _SearchView extends StatefulWidget {
-  const _SearchView();
+  const _SearchView({required this.openFilters});
+
+  final bool openFilters;
 
   @override
   State<_SearchView> createState() => _SearchViewState();
@@ -38,6 +47,16 @@ class _SearchView extends StatefulWidget {
 
 class _SearchViewState extends State<_SearchView> {
   final _textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.openFilters) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) _openFilters();
+      });
+    }
+  }
 
   @override
   void dispose() {
@@ -48,7 +67,6 @@ class _SearchViewState extends State<_SearchView> {
   void _search(String keyword, {bool save = false}) {
     context.read<ProductListController>().search(keyword);
     if (save) context.read<SearchSuggestionsController>().save(keyword);
-    setState(() {});
   }
 
   void _useSuggestion(String keyword) {
@@ -58,76 +76,69 @@ class _SearchViewState extends State<_SearchView> {
     _search(keyword, save: true);
   }
 
+  Future<void> _openFilters() async {
+    FocusScope.of(context).unfocus();
+    final results = context.read<ProductListController>();
+    final picked = await FilterSheet.show(
+      context,
+      filters: results.state.query.filters,
+      sort: results.state.query.sort,
+    );
+    if (picked == null) return;
+    results.applyFilters(picked.$1, picked.$2);
+  }
+
   @override
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
-    final hasQuery = _textController.text.trim().isNotEmpty;
     final results = context.read<ProductListController>();
 
     return SdKeyboardDismisserV5(
-      child: Scaffold(
-        backgroundColor: colors.pageDefault,
-        appBar: AppBar(
-          backgroundColor: colors.pageDefault,
-          surfaceTintColor: SdColorsV5.transparent,
-          titleSpacing: 0,
-          actionsPadding: EdgeInsets.only(right: SdSpacingV5.s8),
-          actions: const [CartActionButton()],
-          title: Padding(
-            padding: EdgeInsets.only(right: SdSpacingV5.s4),
-            child: TextField(
-              controller: _textController,
-              autofocus: true,
-              textInputAction: TextInputAction.search,
-              onChanged: _search,
-              onSubmitted: (value) => _search(value, save: true),
-              style: SdTextStyleV5.body14().wColor(colors.textDefault),
-              decoration: InputDecoration(
+      child: BlocBuilder<ProductListController, ProductListState>(
+        buildWhen: (a, b) => a.query != b.query,
+        builder: (context, state) {
+          final query = state.query;
+          final showResults =
+              query.keyword.isNotEmpty || !query.filters.isEmpty;
+
+          return Scaffold(
+            backgroundColor: colors.pageDefault,
+            appBar: AppBar(
+              backgroundColor: colors.pageDefault,
+              surfaceTintColor: SdColorsV5.transparent,
+              titleSpacing: 0,
+              actionsPadding: EdgeInsets.only(right: SdSpacingV5.s8),
+              actions: const [CartActionButton()],
+              title: AppSearchBar(
+                controller: _textController,
                 hintText: context.loc.search_hint,
-                hintStyle: SdTextStyleV5.body14().wColor(colors.textSubTitle),
-                filled: true,
-                fillColor: colors.cardDefault,
-                isDense: true,
-                prefixIcon: Icon(Icons.search, color: colors.iconSecondary),
-                suffixIcon: hasQuery
-                    ? IconButton(
-                        icon: Icon(Icons.close, color: colors.iconSecondary),
-                        onPressed: () {
-                          _textController.clear();
-                          _search('');
-                        },
-                      )
-                    : null,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(SdSpacingV5.s12),
-                  borderSide: BorderSide(color: colors.borderDefault),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(SdSpacingV5.s12),
-                  borderSide: BorderSide(color: colors.borderDefault),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(SdSpacingV5.s12),
-                  borderSide: BorderSide(color: colors.primary),
-                ),
+                autofocus: !widget.openFilters,
+                onChanged: _search,
+                onSubmitted: (value) => _search(value, save: true),
+                onClear: () {
+                  _textController.clear();
+                  _search('');
+                },
+                onFilterTap: _openFilters,
+                filterCount: query.filters.activeCount,
               ),
             ),
-          ),
-        ),
-        body: hasQuery
-            ? LoadMoreListener(
-                onLoadMore: results.loadMore,
-                child: ListView(
-                  padding: EdgeInsets.all(SdSpacingV5.s16),
-                  children: [
-                    ProductGridSection(
-                      emptyTitle: context.loc.search_no_results_title,
-                      emptyMessage: context.loc.search_no_results_message,
+            body: showResults
+                ? LoadMoreListener(
+                    onLoadMore: results.loadMore,
+                    child: ListView(
+                      padding: EdgeInsets.all(SdSpacingV5.s16),
+                      children: [
+                        ProductGridSection(
+                          emptyTitle: context.loc.search_no_results_title,
+                          emptyMessage: context.loc.search_no_results_message,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              )
-            : _Suggestions(onPick: _useSuggestion),
+                  )
+                : _Suggestions(onPick: _useSuggestion),
+          );
+        },
       ),
     );
   }

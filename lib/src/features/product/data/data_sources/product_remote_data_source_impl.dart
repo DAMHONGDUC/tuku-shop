@@ -3,6 +3,7 @@ import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/product/data/mock/product_mock.dart';
 import 'package:tuku_shop/src/features/product/data/mock/search_mock.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_data_model.dart';
+import 'package:tuku_shop/src/features/product/data/models/product_facets_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/reviews_page_model.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
@@ -33,6 +34,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
           return false;
         }
         if (query.onSaleOnly && p.originalPrice == null) return false;
+        if (!_matchesFilters(p, query)) return false;
         if (keyword.isEmpty) return true;
         final haystack = [
           p.name,
@@ -70,6 +72,59 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
         totalPage: total == 0 ? 0 : (total / query.pageSize).ceil(),
         currentPage: query.page,
         totalRecord: total,
+      );
+    } catch (e) {
+      throw ServerException(e.toString());
+    }
+  }
+
+  /// Price, rating, stock, size and color filters. A size or color counts
+  /// only when some variant of it is in stock.
+  static bool _matchesFilters(ProductModel p, ProductQuery query) {
+    final price = p.price ?? 0;
+    if (query.minPrice != null && price < query.minPrice!) return false;
+    if (query.maxPrice != null && price > query.maxPrice!) return false;
+    if (query.minRating != null && (p.averageRating ?? 0) < query.minRating!) {
+      return false;
+    }
+    final inStock = (p.variants ?? const []).where((v) => (v.stock ?? 0) > 0);
+    if (query.inStockOnly && inStock.isEmpty) return false;
+    if (query.sizes.isNotEmpty &&
+        !inStock.any((v) => query.sizes.contains(v.size))) {
+      return false;
+    }
+    if (query.colors.isNotEmpty &&
+        !inStock.any((v) => query.colors.contains(v.colorName))) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  Future<ProductFacetsModel> getFacets() async {
+    try {
+      await MockLatency.wait();
+      final sizes = <String>[];
+      final colors = <String, String>{};
+      for (final p in _all) {
+        for (final s in p.productSizes ?? const []) {
+          if (s.name != null && !sizes.contains(s.name)) sizes.add(s.name!);
+        }
+        for (final c in p.productColors ?? const []) {
+          if (c.colorName != null) {
+            colors.putIfAbsent(c.colorName!, () => c.colorCode ?? '');
+          }
+        }
+      }
+      final prices = _all.map((p) => p.price ?? 0);
+      return ProductFacetsModel(
+        sizes: sizes,
+        colors: [
+          for (final e in colors.entries)
+            FacetColorModel(name: e.key, hex: e.value),
+        ],
+        minPrice: prices.reduce((a, b) => a < b ? a : b).floorToDouble(),
+        maxPrice: prices.reduce((a, b) => a > b ? a : b).ceilToDouble(),
       );
     } catch (e) {
       throw ServerException(e.toString());

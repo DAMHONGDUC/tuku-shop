@@ -24,6 +24,9 @@ abstract class ProductRepository {
     required int pageSize,
   });
 
+  /// The sizes, colors and price range the catalog can be filtered by.
+  Future<Either<Failure, ProductFacets>> getFacets();
+
   Future<Either<Failure, SearchSuggestions>> getSearchSuggestions();
 
   Future<Either<Failure, Unit>> saveRecentSearch(String keyword);
