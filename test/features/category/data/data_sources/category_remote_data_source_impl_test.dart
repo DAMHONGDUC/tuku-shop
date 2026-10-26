@@ -11,10 +11,10 @@ void main() {
         (value) => result = value,
       );
 
-      async.elapse(MockLatency.duration - const Duration(milliseconds: 1));
+      async.elapse(MockLatency.min - const Duration(milliseconds: 1));
       expect(result, isNull);
 
-      async.elapse(const Duration(milliseconds: 1));
+      async.elapse(MockLatency.max - MockLatency.min);
       expect(result, isNotNull);
     });
   });

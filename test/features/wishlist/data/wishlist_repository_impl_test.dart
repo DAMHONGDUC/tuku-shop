@@ -17,7 +17,7 @@ void main() {
     late T result;
     fakeAsync((async) {
       body().then((value) => result = value);
-      async.elapse(MockLatency.duration * 4);
+      async.elapse(MockLatency.max * 4);
     });
     return result;
   }

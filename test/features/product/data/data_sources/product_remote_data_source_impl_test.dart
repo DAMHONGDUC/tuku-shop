@@ -13,7 +13,7 @@ void main() {
     late ProductsDataModel result;
     fakeAsync((async) {
       dataSource.getProducts(query).then((value) => result = value);
-      async.elapse(MockLatency.duration);
+      async.elapse(MockLatency.max);
     });
     return result;
   }
