@@ -243,16 +243,17 @@ Every screen is redesigned with the `mobile-app-ui-design` skill before it is co
 
 ### Premium refresh
 
-Upscale boutique look (ivory, ink, champagne) on a Shopee-style structure; tokens live in `app_color_theme_ext.dart`.
+Clean boutique look (white page, ink, champagne) on a Shopee-style structure; tokens live in `app_color_theme_ext.dart`.
 
 | Role | Light | Dark |
 |---|---|---|
-| `pageDefault` | `#F6F3EE` ivory | `#0F0E0D` |
-| `cardDefault` | `#FFFFFF` | `#1A1917` |
-| `cardOnSurface` (photo backdrop) | `#EEE9E1` stone | `#23211F` |
+| `pageDefault` | `#FFFFFF` white | `#0F0E0D` |
+| `cardDefault` (cards, search pill) | `#F6F6F8` mist | `#1A1917` |
+| `surfaceDefault` (sheets, dialogs, docks, nav bar, outline buttons) | `#FFFFFF` | `#1A1917` |
+| `cardOnSurface` (photo backdrop) | `#EFEFF2` cloud | `#23211F` |
 | `textDefault` | `#141414` ink | `#F4F0E8` |
-| `textSubTitle` / `iconSecondary` | `#77716A` | `#A39C92` |
-| `borderDefault` | `#E7E1D8` | `#2C2A27` |
+| `textSubTitle` / `iconSecondary` | `#6E6E73` | `#A39C92` |
+| `borderDefault` | `#E6E6EA` | `#2C2A27` |
 | `primary` (CTAs, selection) / `onPrimary` | `#141414` / white | `#D9BF8C` / `#141414` |
 | `accent` (ratings, member ring, free-shipping bar) | `#A8834A` champagne | `#D9BF8C` |
 | `sale` | `#B3261E` | `#E5626B` |
@@ -265,6 +266,7 @@ Upscale boutique look (ivory, ink, champagne) on a Shopee-style structure; token
 | Editorial product card | Photo carries the card (radius 12 on a stone backdrop), spaced-capital brand, name, price; no card box |
 | Buttons | `AppButton`: ink fill or ink hairline outline, radius 12, 48 pt |
 | Material defaults | `AppTheme` themes snackbars (floating ink), dialogs, sheets, tabs and app bars once |
+| Rich mock copy | `product_description_mock.dart`: per-category story, 3 highlights, care, size & fit (paragraphs; the PDP shows each first line as a heading). `review_comment_mock.dart`: impression + detail + buyer note (height, size, colour from the product), balanced comments under 3.8 stars |
 
 ## Phases
 
@@ -303,6 +305,7 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) — superseded 2026-10-26 | 2026-10-18 |
 | Bottom tabs v2 | Home · Categories · Notifications · Profile; Cart is a pushed screen behind the app-bar bag icon, Favorites an option in Profile | 2026-10-26 |
 | Premium refresh | Ivory / ink / champagne palette, Shopee-style structure | 2026-10-26 |
+| Light background | White page with soft grey cards; sheets, docks and the nav bar stay white | 2026-10-26 |
 | Font | Platform UI font like Shopee (replaces Lato and the Playfair Display trial); no wordmark on the Home app bar, search and cart share one row | 2026-10-26 |
 | Bottom nav widget | App-side V5 clone of the V3 floating bar; no V3 imports | 2026-10-18 |
 | Mockups approved | Owner asked to run phases 1–9 without review stops; mockups v1 taken as approved | 2026-10-18 |
