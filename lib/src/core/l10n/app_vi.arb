@@ -184,7 +184,7 @@
     "profile_language": "Ngôn ngữ",
     "profile_reset": "Đặt lại dữ liệu demo",
     "profile_reset_title": "Đặt lại dữ liệu demo?",
-    "profile_reset_message": "Giỏ hàng, yêu thích, đơn hàng, địa chỉ và thông báo trở về như lần mở đầu tiên. Bạn vẫn đăng nhập.",
+    "profile_reset_message": "Giỏ hàng, yêu thích, đơn hàng, địa chỉ, thông báo và chat hỗ trợ trở về như lần mở đầu tiên. Bạn vẫn đăng nhập.",
     "profile_reset_confirm": "Đặt lại",
     "profile_reset_done": "Đã khôi phục dữ liệu demo",
     "profile_logout": "Đăng xuất",
@@ -233,5 +233,16 @@
     "filter_reset": "Đặt lại",
     "filter_apply": "Xem kết quả",
     "filter_sort": "Sắp xếp",
-    "filter_any": "Bất kỳ"
+    "filter_any": "Bất kỳ",
+    "support_title": "Chăm sóc khách hàng",
+    "support_subtitle": "Thường trả lời trong vài phút",
+    "support_input_hint": "Nhập tin nhắn…",
+    "support_send": "Gửi",
+    "support_typing": "Đang soạn tin…",
+    "support_send_failed": "Chưa gửi được tin nhắn. Vui lòng thử lại.",
+    "support_quick_order": "Đơn hàng của tôi đâu?",
+    "support_quick_return": "Đổi hoặc trả hàng",
+    "support_quick_size": "Tư vấn kích cỡ",
+    "support_quick_voucher": "Có mã giảm giá không?",
+    "support_entry": "Chat với chúng tôi"
 }

@@ -86,6 +86,13 @@ class _View extends StatelessWidget {
           backgroundColor: colors.pageDefault,
           appBar: AppTopBar(
             title: order == null ? context.loc.orders_title : '#${order.id}',
+            actions: [
+              AppIconButton(
+                icon: Icons.support_agent_rounded,
+                label: context.loc.support_title,
+                onTap: () => context.push(SupportChatRoutes.chat.fullPath),
+              ),
+            ],
           ),
           bottomNavigationBar: order == null
               ? null

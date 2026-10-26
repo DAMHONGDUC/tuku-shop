@@ -237,6 +237,13 @@ class _View extends StatelessWidget {
                       onTap: () =>
                           context.push(AddressRoutes.addresses.fullPath),
                     ),
+                    _Item(
+                      icon: Icons.support_agent_rounded,
+                      label: loc.support_title,
+                      value: loc.support_entry,
+                      onTap: () =>
+                          context.push(SupportChatRoutes.chat.fullPath),
+                    ),
                   ],
                 ),
                 SdVerticalSpacingV5(value: SdSpacingV5.s24),

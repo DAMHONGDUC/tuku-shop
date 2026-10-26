@@ -611,7 +611,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile_reset_message =>
-      'Cart, favorites, orders, addresses and notifications go back to how they were on first launch. You stay signed in.';
+      'Cart, favorites, orders, addresses, notifications and the support chat go back to how they were on first launch. You stay signed in.';
 
   @override
   String get profile_reset_confirm => 'Reset';
@@ -777,4 +777,37 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get filter_any => 'Any';
+
+  @override
+  String get support_title => 'Customer support';
+
+  @override
+  String get support_subtitle => 'Usually replies in a few minutes';
+
+  @override
+  String get support_input_hint => 'Write a message…';
+
+  @override
+  String get support_send => 'Send';
+
+  @override
+  String get support_typing => 'Typing…';
+
+  @override
+  String get support_send_failed => 'Message not sent. Please try again.';
+
+  @override
+  String get support_quick_order => 'Where is my order?';
+
+  @override
+  String get support_quick_return => 'Return or exchange';
+
+  @override
+  String get support_quick_size => 'Help with sizing';
+
+  @override
+  String get support_quick_voucher => 'Any vouchers?';
+
+  @override
+  String get support_entry => 'Chat with us';
 }

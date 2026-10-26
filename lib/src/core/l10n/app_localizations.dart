@@ -1205,7 +1205,7 @@ abstract class AppLocalizations {
   /// No description provided for @profile_reset_message.
   ///
   /// In en, this message translates to:
-  /// **'Cart, favorites, orders, addresses and notifications go back to how they were on first launch. You stay signed in.'**
+  /// **'Cart, favorites, orders, addresses, notifications and the support chat go back to how they were on first launch. You stay signed in.'**
   String get profile_reset_message;
 
   /// No description provided for @profile_reset_confirm.
@@ -1501,6 +1501,72 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Any'**
   String get filter_any;
+
+  /// No description provided for @support_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Customer support'**
+  String get support_title;
+
+  /// No description provided for @support_subtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Usually replies in a few minutes'**
+  String get support_subtitle;
+
+  /// No description provided for @support_input_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Write a message…'**
+  String get support_input_hint;
+
+  /// No description provided for @support_send.
+  ///
+  /// In en, this message translates to:
+  /// **'Send'**
+  String get support_send;
+
+  /// No description provided for @support_typing.
+  ///
+  /// In en, this message translates to:
+  /// **'Typing…'**
+  String get support_typing;
+
+  /// No description provided for @support_send_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Message not sent. Please try again.'**
+  String get support_send_failed;
+
+  /// No description provided for @support_quick_order.
+  ///
+  /// In en, this message translates to:
+  /// **'Where is my order?'**
+  String get support_quick_order;
+
+  /// No description provided for @support_quick_return.
+  ///
+  /// In en, this message translates to:
+  /// **'Return or exchange'**
+  String get support_quick_return;
+
+  /// No description provided for @support_quick_size.
+  ///
+  /// In en, this message translates to:
+  /// **'Help with sizing'**
+  String get support_quick_size;
+
+  /// No description provided for @support_quick_voucher.
+  ///
+  /// In en, this message translates to:
+  /// **'Any vouchers?'**
+  String get support_quick_voucher;
+
+  /// No description provided for @support_entry.
+  ///
+  /// In en, this message translates to:
+  /// **'Chat with us'**
+  String get support_entry;
 }
 
 class _AppLocalizationsDelegate

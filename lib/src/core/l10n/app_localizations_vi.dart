@@ -611,7 +611,7 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get profile_reset_message =>
-      'Giỏ hàng, yêu thích, đơn hàng, địa chỉ và thông báo trở về như lần mở đầu tiên. Bạn vẫn đăng nhập.';
+      'Giỏ hàng, yêu thích, đơn hàng, địa chỉ, thông báo và chat hỗ trợ trở về như lần mở đầu tiên. Bạn vẫn đăng nhập.';
 
   @override
   String get profile_reset_confirm => 'Đặt lại';
@@ -777,4 +777,37 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get filter_any => 'Bất kỳ';
+
+  @override
+  String get support_title => 'Chăm sóc khách hàng';
+
+  @override
+  String get support_subtitle => 'Thường trả lời trong vài phút';
+
+  @override
+  String get support_input_hint => 'Nhập tin nhắn…';
+
+  @override
+  String get support_send => 'Gửi';
+
+  @override
+  String get support_typing => 'Đang soạn tin…';
+
+  @override
+  String get support_send_failed => 'Chưa gửi được tin nhắn. Vui lòng thử lại.';
+
+  @override
+  String get support_quick_order => 'Đơn hàng của tôi đâu?';
+
+  @override
+  String get support_quick_return => 'Đổi hoặc trả hàng';
+
+  @override
+  String get support_quick_size => 'Tư vấn kích cỡ';
+
+  @override
+  String get support_quick_voucher => 'Có mã giảm giá không?';
+
+  @override
+  String get support_entry => 'Chat với chúng tôi';
 }

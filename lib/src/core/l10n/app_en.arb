@@ -337,7 +337,7 @@
     "profile_language": "Language",
     "profile_reset": "Reset demo data",
     "profile_reset_title": "Reset demo data?",
-    "profile_reset_message": "Cart, favorites, orders, addresses and notifications go back to how they were on first launch. You stay signed in.",
+    "profile_reset_message": "Cart, favorites, orders, addresses, notifications and the support chat go back to how they were on first launch. You stay signed in.",
     "profile_reset_confirm": "Reset",
     "profile_reset_done": "Demo data restored",
     "profile_logout": "Log out",
@@ -428,5 +428,16 @@
     "filter_reset": "Reset",
     "filter_apply": "Show results",
     "filter_sort": "Sort by",
-    "filter_any": "Any"
+    "filter_any": "Any",
+    "support_title": "Customer support",
+    "support_subtitle": "Usually replies in a few minutes",
+    "support_input_hint": "Write a message…",
+    "support_send": "Send",
+    "support_typing": "Typing…",
+    "support_send_failed": "Message not sent. Please try again.",
+    "support_quick_order": "Where is my order?",
+    "support_quick_return": "Return or exchange",
+    "support_quick_size": "Help with sizing",
+    "support_quick_voucher": "Any vouchers?",
+    "support_entry": "Chat with us"
 }
