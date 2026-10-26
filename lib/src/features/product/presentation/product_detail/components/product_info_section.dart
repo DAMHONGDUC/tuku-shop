@@ -159,11 +159,27 @@ class DetailsSection extends StatelessWidget {
           style: SdTextStyleV5.heading16().wColor(colors.textDefault),
         ),
         SdVerticalSpacingV5(value: SdSpacingV5.s12),
+        // Blank lines split the copy into paragraphs; a paragraph with more
+        // than one line starts with its heading ("Care", "Size & fit").
         if (product.description != null)
-          Text(
-            product.description!.content,
-            style: value.copyWith(height: 1.5),
-          ),
+          for (final (i, block)
+              in product.description!.content.split('\n\n').indexed) ...[
+            if (i > 0) SdVerticalSpacingV5(value: SdSpacingV5.s16),
+            if (block.contains('\n')) ...[
+              Text(
+                block.substring(0, block.indexOf('\n')),
+                style: SdTextStyleV5.body14().wSemiBold().wColor(
+                  colors.textDefault,
+                ),
+              ),
+              SdVerticalSpacingV5(value: SdSpacingV5.s4),
+              Text(
+                block.substring(block.indexOf('\n') + 1),
+                style: value.copyWith(height: 1.5),
+              ),
+            ] else
+              Text(block, style: value.copyWith(height: 1.5)),
+          ],
         SdVerticalSpacingV5(value: SdSpacingV5.s16),
         Row(
           children: [

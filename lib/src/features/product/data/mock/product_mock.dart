@@ -106,10 +106,12 @@ class ProductMock {
       reviewComments: ReviewCommentMock.generateRandomReviews(
         reviewsPerProduct,
         photos: row.images,
+        sizes: row.sizes,
+        colors: [for (final c in row.colors) c.$1],
       ),
       description: DescriptionModel(
         content: ProductDescriptionMock.generate(
-          name: row.name,
+          categoryId: row.categoryId,
           material: row.material,
           fit: row.fit,
         ),
