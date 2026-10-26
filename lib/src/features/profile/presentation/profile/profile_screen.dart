@@ -365,7 +365,6 @@ class _MemberCard extends StatelessWidget {
         onTap: () async {
           final updated = await context.push<UserEntity>(
             ProfileRoutes.editProfile.fullPath,
-            extra: user,
           );
           if (updated != null && context.mounted) {
             context.read<ProfileController>().showUser(updated);

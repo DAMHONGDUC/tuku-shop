@@ -38,7 +38,10 @@ class ProfileDi {
       ),
     );
     getIt.registerFactory<EditProfileController>(
-      () => EditProfileController(getIt<UpdateProfileUsecase>()),
+      () => EditProfileController(
+        getIt<GetCurrentUserUsecase>(),
+        getIt<UpdateProfileUsecase>(),
+      ),
     );
   }
 }

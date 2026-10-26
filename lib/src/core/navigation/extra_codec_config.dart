@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:system_design/index.dart';
+
 import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_args.dart';
 
 class ExtraCodecConfig extends Codec<Object?, Object?> {
@@ -36,9 +38,17 @@ class _ExtraEncoder extends Converter<Object?, Object?> {
       },
       // Primitive types pass through
       String() || int() || double() || bool() => input,
-      // Unknown types
-      _ => input,
+      // go_router encodes `extra` on every navigation to report the route to
+      // the platform; in-app navigation keeps the original object. A type
+      // with no JSON form is left out instead of crashing jsonEncode, so
+      // pass ids or primitives when a route must survive a restore.
+      _ => _skip(input),
     };
+  }
+
+  static Object? _skip(Object input) {
+    SdLogV5.d('Route extra ${input.runtimeType} has no JSON form; not encoded');
+    return null;
   }
 }
 
