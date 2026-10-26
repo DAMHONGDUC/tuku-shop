@@ -323,7 +323,7 @@ abstract class AppLocalizations {
   /// No description provided for @products_count.
   ///
   /// In en, this message translates to:
-  /// **'{count} products'**
+  /// **'{count, plural, =1{1 product} other{{count} products}}'**
   String products_count(int count);
 
   /// No description provided for @sort_recommended.
@@ -1675,6 +1675,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Followers'**
   String get pdp_followers;
+
+  /// No description provided for @shop_tab_shop.
+  ///
+  /// In en, this message translates to:
+  /// **'Shop'**
+  String get shop_tab_shop;
+
+  /// No description provided for @shop_tab_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get shop_tab_products;
+
+  /// No description provided for @shop_tab_categories.
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
+  String get shop_tab_categories;
+
+  /// No description provided for @shop_follow.
+  ///
+  /// In en, this message translates to:
+  /// **'Follow'**
+  String get shop_follow;
+
+  /// No description provided for @shop_following.
+  ///
+  /// In en, this message translates to:
+  /// **'Following'**
+  String get shop_following;
+
+  /// No description provided for @shop_top_picks.
+  ///
+  /// In en, this message translates to:
+  /// **'Top picks'**
+  String get shop_top_picks;
+
+  /// No description provided for @shop_stat_products.
+  ///
+  /// In en, this message translates to:
+  /// **'Products'**
+  String get shop_stat_products;
+
+  /// No description provided for @shop_follow_failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not update. Please try again.'**
+  String get shop_follow_failed;
 }
 
 class _AppLocalizationsDelegate

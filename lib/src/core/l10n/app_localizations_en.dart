@@ -124,7 +124,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String products_count(int count) {
-    return '$count products';
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count products',
+      one: '1 product',
+    );
+    return '$_temp0';
   }
 
   @override
@@ -867,4 +873,28 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pdp_followers => 'Followers';
+
+  @override
+  String get shop_tab_shop => 'Shop';
+
+  @override
+  String get shop_tab_products => 'Products';
+
+  @override
+  String get shop_tab_categories => 'Categories';
+
+  @override
+  String get shop_follow => 'Follow';
+
+  @override
+  String get shop_following => 'Following';
+
+  @override
+  String get shop_top_picks => 'Top picks';
+
+  @override
+  String get shop_stat_products => 'Products';
+
+  @override
+  String get shop_follow_failed => 'Could not update. Please try again.';
 }

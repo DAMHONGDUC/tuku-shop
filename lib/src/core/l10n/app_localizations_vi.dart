@@ -867,4 +867,28 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get pdp_followers => 'Người theo dõi';
+
+  @override
+  String get shop_tab_shop => 'Shop';
+
+  @override
+  String get shop_tab_products => 'Sản phẩm';
+
+  @override
+  String get shop_tab_categories => 'Danh mục';
+
+  @override
+  String get shop_follow => 'Theo dõi';
+
+  @override
+  String get shop_following => 'Đang theo dõi';
+
+  @override
+  String get shop_top_picks => 'Nổi bật';
+
+  @override
+  String get shop_stat_products => 'Sản phẩm';
+
+  @override
+  String get shop_follow_failed => 'Chưa cập nhật được. Vui lòng thử lại.';
 }

@@ -15,6 +15,8 @@ import 'package:tuku_shop/src/features/product/presentation/product_detail/shop_
 import 'package:tuku_shop/src/features/product/presentation/product_detail/variant_section/variant_selection_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_list/product_list_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/search_screen/filters/search_filters_controller.dart';
+import 'package:tuku_shop/src/features/product/presentation/shop_detail/categories/shop_categories_controller.dart';
+import 'package:tuku_shop/src/features/product/presentation/shop_detail/header/shop_header_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/search_screen/search_suggestions_controller.dart';
 import 'package:tuku_shop/src/features/seller/domain/domain.dart';
 import 'package:tuku_shop/src/features/wishlist/domain/domain.dart';
@@ -80,6 +82,19 @@ class ProductDi {
     );
     getIt.registerFactory<ProductSellerController>(
       () => ProductSellerController(getIt<GetSellerUsecase>()),
+    );
+    getIt.registerFactory<ShopHeaderController>(
+      () => ShopHeaderController(
+        getIt<GetSellerUsecase>(),
+        getIt<GetProductsUsecase>(),
+        getIt<ToggleFollowSellerUsecase>(),
+      ),
+    );
+    getIt.registerFactory<ShopCategoriesController>(
+      () => ShopCategoriesController(
+        getIt<GetProductsUsecase>(),
+        getIt<GetCategoriesUsecase>(),
+      ),
     );
     getIt.registerFactory<RelatedProductsController>(
       () => RelatedProductsController(getIt<GetRelatedProductUsecase>()),

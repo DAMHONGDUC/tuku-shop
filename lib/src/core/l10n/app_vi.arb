@@ -262,5 +262,13 @@
     "pdp_view_shop": "Xem shop",
     "pdp_sold_by": "Bán bởi",
     "pdp_response_rate": "Phản hồi",
-    "pdp_followers": "Người theo dõi"
+    "pdp_followers": "Người theo dõi",
+    "shop_tab_shop": "Shop",
+    "shop_tab_products": "Sản phẩm",
+    "shop_tab_categories": "Danh mục",
+    "shop_follow": "Theo dõi",
+    "shop_following": "Đang theo dõi",
+    "shop_top_picks": "Nổi bật",
+    "shop_stat_products": "Sản phẩm",
+    "shop_follow_failed": "Chưa cập nhật được. Vui lòng thử lại."
 }

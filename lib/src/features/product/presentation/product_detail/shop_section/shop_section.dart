@@ -9,7 +9,7 @@ import 'package:tuku_shop/src/features/seller/domain/domain.dart';
 import 'product_seller_controller.dart';
 
 /// "Sold by": the shop's avatar, name, Official badge and stats, with Chat
-/// and View shop.
+/// and View shop. Tapping the card anywhere else opens the shop too.
 class ShopSection extends StatelessWidget {
   const ShopSection({super.key, required this.sellerId});
 
@@ -26,7 +26,16 @@ class ShopSection extends StatelessWidget {
             onRetry: () =>
                 context.read<ProductSellerController>().load(sellerId),
           ),
-          ProductSellerStatus.loaded => _ShopCard(seller: state.seller!),
+          ProductSellerStatus.loaded => Semantics(
+            button: true,
+            label: context.loc.pdp_view_shop,
+            child: GestureDetector(
+              behavior: HitTestBehavior.opaque,
+              onTap: () =>
+                  context.push(ShopRoutes.shopLocation(state.seller!.id)),
+              child: _ShopCard(seller: state.seller!),
+            ),
+          ),
         },
       ),
     );
@@ -166,12 +175,7 @@ class _ShopCard extends StatelessWidget {
                 label: loc.pdp_view_shop,
                 leadingIcon: Icons.storefront_outlined,
                 style: AppButtonStyle.soft,
-                onTap: () => context.push(
-                  ProductRoutes.productListLocation(
-                    title: seller.name,
-                    sellerId: seller.id,
-                  ),
-                ),
+                onTap: () => context.push(ShopRoutes.shopLocation(seller.id)),
               ),
             ),
           ],

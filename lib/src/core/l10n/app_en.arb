@@ -44,7 +44,7 @@
     "home_best_sellers": "Best sellers",
     "home_just_for_you": "Just for you",
     "categories_title": "Categories",
-    "products_count": "{count} products",
+    "products_count": "{count, plural, =1{1 product} other{{count} products}}",
     "@products_count": {
         "placeholders": {
             "count": {
@@ -470,5 +470,13 @@
     "pdp_view_shop": "View shop",
     "pdp_sold_by": "Sold by",
     "pdp_response_rate": "Response",
-    "pdp_followers": "Followers"
+    "pdp_followers": "Followers",
+    "shop_tab_shop": "Shop",
+    "shop_tab_products": "Products",
+    "shop_tab_categories": "Categories",
+    "shop_follow": "Follow",
+    "shop_following": "Following",
+    "shop_top_picks": "Top picks",
+    "shop_stat_products": "Products",
+    "shop_follow_failed": "Could not update. Please try again."
 }

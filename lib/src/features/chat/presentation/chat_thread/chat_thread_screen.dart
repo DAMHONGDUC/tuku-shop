@@ -154,12 +154,7 @@ class _Header extends StatelessWidget {
       button: true,
       label: loc.pdp_view_shop,
       child: GestureDetector(
-        onTap: () => context.push(
-          ProductRoutes.productListLocation(
-            title: seller.name,
-            sellerId: seller.id,
-          ),
-        ),
+        onTap: () => context.push(ShopRoutes.shopLocation(seller.id)),
         child: header,
       ),
     );

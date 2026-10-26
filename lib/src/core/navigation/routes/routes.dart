@@ -10,6 +10,7 @@ export 'notifications_routes.dart';
 export 'product_routes.dart';
 export 'profile_routes.dart';
 export 'register_routes.dart';
+export 'shop_routes.dart';
 export 'splash_routes.dart';
 export 'tutorial_routes.dart';
 export 'wishlist_routes.dart';
