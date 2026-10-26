@@ -3,7 +3,8 @@ import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 
 /// The one search pill: Home shows it read-only ([onTap] opens Search),
-/// Search edits it. Same height, fill, radius and icons on both.
+/// Search edits it. Same height, fill, radius and icons on both. Filters
+/// live in the app bar ([FilterActionButton]), not in the pill.
 class AppSearchBar extends StatelessWidget {
   const AppSearchBar({
     super.key,
@@ -13,8 +14,6 @@ class AppSearchBar extends StatelessWidget {
     this.onChanged,
     this.onSubmitted,
     this.onClear,
-    this.onFilterTap,
-    this.filterCount = 0,
     this.autofocus = false,
   });
 
@@ -29,9 +28,6 @@ class AppSearchBar extends StatelessWidget {
   /// Shown as a clear button while there is text.
   final VoidCallback? onClear;
 
-  /// Shows the filter button; [filterCount] badges it.
-  final VoidCallback? onFilterTap;
-  final int filterCount;
   final bool autofocus;
 
   static const double height = SdSpacingV5.s44;
@@ -50,14 +46,6 @@ class AppSearchBar extends StatelessWidget {
             label: MaterialLocalizations.of(context).deleteButtonTooltip,
             iconColor: colors.iconSecondary,
             onTap: onClear,
-          ),
-        if (onFilterTap != null)
-          AppIconButton(
-            icon: Icons.tune_rounded,
-            label: context.loc.filter_title,
-            iconColor: filterCount > 0 ? colors.primary : colors.iconSecondary,
-            badgeCount: filterCount,
-            onTap: onFilterTap,
           ),
       ],
     );
@@ -90,7 +78,7 @@ class AppSearchBar extends StatelessWidget {
             minWidth: SdSpacingV5.s44,
             minHeight: height,
           ),
-          suffixIcon: trailing(hasText),
+          suffixIcon: hasText && onClear != null ? trailing(hasText) : null,
           suffixIconConstraints: const BoxConstraints(minHeight: height),
           border: OutlineInputBorder(
             borderRadius: pill,

@@ -36,5 +36,6 @@ export 'product/product_grid.dart';
 // navigation
 export 'navigation/floating_bottom_nav.dart';
 export 'navigation/cart_action_button.dart';
+export 'navigation/filter_action_button.dart';
 export 'navigation/app_top_bar.dart';
 export 'navigation/bottom_action_bar.dart';

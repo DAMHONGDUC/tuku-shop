@@ -108,7 +108,13 @@ class _SearchViewState extends State<_SearchView> {
               surfaceTintColor: SdColorsV5.transparent,
               titleSpacing: 0,
               actionsPadding: EdgeInsets.only(right: SdSpacingV5.s8),
-              actions: const [CartActionButton()],
+              actions: [
+                FilterActionButton(
+                  onTap: _openFilters,
+                  activeCount: query.filters.activeCount,
+                ),
+                const CartActionButton(),
+              ],
               title: AppSearchBar(
                 controller: _textController,
                 hintText: context.loc.search_hint,
@@ -119,8 +125,6 @@ class _SearchViewState extends State<_SearchView> {
                   _textController.clear();
                   _search('');
                 },
-                onFilterTap: _openFilters,
-                filterCount: query.filters.activeCount,
               ),
             ),
             body: showResults
