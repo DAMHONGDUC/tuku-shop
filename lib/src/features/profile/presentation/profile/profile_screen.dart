@@ -179,13 +179,13 @@ class _View extends StatelessWidget {
           // Splash finds no session and routes to login.
           context.go(SplashRoutes.splash.fullPath);
         } else if (state.logoutFailed) {
-          ScaffoldMessenger.of(
+          AppToast.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(loc.logout_failed)));
+          ).show(loc.logout_failed, type: AppToastType.error);
         } else {
-          ScaffoldMessenger.of(
+          AppToast.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(loc.profile_reset_done)));
+          ).show(loc.profile_reset_done, type: AppToastType.success);
         }
       },
       builder: (context, state) {

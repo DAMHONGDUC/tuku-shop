@@ -18,9 +18,9 @@ class CartScreen extends StatelessWidget {
 
     return BlocConsumer<CartController, CartState>(
       listenWhen: (a, b) => b.failureCount > a.failureCount,
-      listener: (context, state) => ScaffoldMessenger.of(
+      listener: (context, state) => AppToast.of(
         context,
-      ).showSnackBar(SnackBar(content: Text(context.loc.cart_update_failed))),
+      ).show(context.loc.cart_update_failed, type: AppToastType.error),
       builder: (context, state) {
         final controller = context.read<CartController>();
         final empty = state.status == CartStatus.loaded && state.lines.isEmpty;
@@ -185,24 +185,17 @@ class _CartLineTile extends StatelessWidget {
 
   Future<void> _remove(BuildContext context) async {
     final controller = context.read<CartController>();
-    final messenger = ScaffoldMessenger.of(context);
+    // Taken before the await: the dismissed line's context is gone after.
+    final toast = AppToast.of(context);
     final message = context.loc.cart_removed(line.name);
     final undo = context.loc.common_undo;
     final removed = await controller.remove(line.id);
     if (removed == null) return;
-    messenger
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(message),
-          // An action would keep it up until tapped; let it time out.
-          persist: false,
-          action: SnackBarAction(
-            label: undo,
-            onPressed: () => controller.undoRemove(removed),
-          ),
-        ),
-      );
+    toast.show(
+      message,
+      actionLabel: undo,
+      onAction: () => controller.undoRemove(removed),
+    );
   }
 
   @override
@@ -343,17 +336,7 @@ class _CheckoutDock extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: colors.surfaceDefault,
-        border: Border(top: BorderSide(color: colors.borderDefault)),
-      ),
-      padding: EdgeInsets.fromLTRB(
-        SdSpacingV5.s16,
-        SdSpacingV5.s12,
-        SdSpacingV5.s16,
-        MediaQuery.paddingOf(context).bottom + SdSpacingV5.s12,
-      ),
+    return BottomActionBar(
       child: Row(
         children: [
           Column(

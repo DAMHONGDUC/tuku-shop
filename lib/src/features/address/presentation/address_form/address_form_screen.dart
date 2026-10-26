@@ -76,9 +76,9 @@ class _FormState extends State<_Form> {
       listener: (context, state) {
         if (state.saved != null) context.pop(true);
         if (state.saveFailed) {
-          ScaffoldMessenger.of(
+          AppToast.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(loc.address_save_failed)));
+          ).show(loc.address_save_failed, type: AppToastType.error);
         }
       },
       builder: (context, state) {

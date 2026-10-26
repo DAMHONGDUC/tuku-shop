@@ -63,14 +63,11 @@ class _ViewState extends State<_View> {
       listener: (context, state) {
         if (state.user != null) context.go(HomeRoutes.home.fullPath);
         if (state.emailTaken || state.failed) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(
-                state.emailTaken
-                    ? loc.register_email_taken
-                    : loc.login_error_unknown,
-              ),
-            ),
+          AppToast.of(context).show(
+            state.emailTaken
+                ? loc.register_email_taken
+                : loc.login_error_unknown,
+            type: AppToastType.error,
           );
         }
       },

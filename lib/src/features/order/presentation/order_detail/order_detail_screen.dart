@@ -62,17 +62,19 @@ class _View extends StatelessWidget {
     return BlocConsumer<OrderDetailController, OrderDetailState>(
       listenWhen: (a, b) => a.action != b.action,
       listener: (context, state) {
-        final messenger = ScaffoldMessenger.of(context);
+        final toast = AppToast.of(context);
         switch (state.action) {
           case OrderAction.cancelled:
-            messenger.showSnackBar(
-              SnackBar(content: Text(context.loc.order_cancelled_toast)),
+            toast.show(
+              context.loc.order_cancelled_toast,
+              type: AppToastType.success,
             );
           case OrderAction.reordered:
             context.push(CartRoutes.cart.fullPath);
           case OrderAction.cancelFailed || OrderAction.reorderFailed:
-            messenger.showSnackBar(
-              SnackBar(content: Text(context.loc.common_load_failed)),
+            toast.show(
+              context.loc.common_load_failed,
+              type: AppToastType.error,
             );
           default:
             break;
@@ -418,20 +420,9 @@ class _Dock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.colorTheme;
     final controller = context.read<OrderDetailController>();
 
-    return Container(
-      decoration: BoxDecoration(
-        color: colors.surfaceDefault,
-        border: Border(top: BorderSide(color: colors.borderDefault)),
-      ),
-      padding: EdgeInsets.fromLTRB(
-        SdSpacingV5.s16,
-        SdSpacingV5.s12,
-        SdSpacingV5.s16,
-        SdSpacingV5.s12 + MediaQuery.paddingOf(context).bottom,
-      ),
+    return BottomActionBar(
       child: Row(
         children: [
           if (order.canCancel) ...[

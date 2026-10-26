@@ -39,9 +39,9 @@ class _View extends StatelessWidget {
         if (order != null) {
           context.go(CheckoutRoutes.orderSuccessLocation(order.id));
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(context.loc.checkout_place_failed)),
-          );
+          AppToast.of(
+            context,
+          ).show(context.loc.checkout_place_failed, type: AppToastType.error);
         }
       },
       builder: (context, state) {
@@ -594,19 +594,7 @@ class _PlaceOrderDock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = context.colorTheme;
-
-    return Container(
-      decoration: BoxDecoration(
-        color: colors.surfaceDefault,
-        border: Border(top: BorderSide(color: colors.borderDefault)),
-      ),
-      padding: EdgeInsets.fromLTRB(
-        SdSpacingV5.s16,
-        SdSpacingV5.s12,
-        SdSpacingV5.s16,
-        SdSpacingV5.s12 + MediaQuery.paddingOf(context).bottom,
-      ),
+    return BottomActionBar(
       child: AppButton(
         label: context.loc.checkout_place_order(
           AppFormat.price(state.totals.total),

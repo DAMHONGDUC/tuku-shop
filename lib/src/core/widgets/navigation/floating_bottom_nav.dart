@@ -1,4 +1,3 @@
-import 'dart:math' as math;
 import 'dart:ui' show ImageFilter;
 
 import 'package:flutter/material.dart';
@@ -41,17 +40,14 @@ class FloatingBottomNav extends StatefulWidget {
   final int selectedIndex;
   final ValueChanged<int> onSelected;
 
-  static const double barHeight = SdSpacingV5.s64;
-  static const double sideMargin = SdSpacingV5.s16;
-  static const double _minOffset = SdSpacingV5.s16;
-  static const double _maxOffset = SdSpacingV5.s20;
+  static const double barHeight = SdSpacingV5.s48;
+  static const double sideMargin = SdSpacingV5.s24;
   static const double _swipeDistance = SdSpacingV5.s48;
 
-  /// How far the bar sits above the bottom edge.
-  static double barOffset(BuildContext context) {
-    final safeBottom = MediaQuery.viewPaddingOf(context).bottom;
-    return math.min(math.max(safeBottom, _minOffset), _maxOffset);
-  }
+  /// How far the bar sits above the bottom edge: the safe area + 8, like
+  /// every bottom action.
+  static double barOffset(BuildContext context) =>
+      BottomActionBar.bottomGap(context);
 
   /// Bottom padding a tab screen needs so its last row clears the bar.
   static double contentInset(BuildContext context) =>
@@ -233,7 +229,7 @@ class _NavCell extends StatelessWidget {
                     iconData: selected
                         ? destination.selectedIcon
                         : destination.icon,
-                    iconSize: SdSpacingV5.s22,
+                    iconSize: SdSpacingV5.s20,
                     color: color,
                   ),
                 ),
@@ -249,7 +245,6 @@ class _NavCell extends StatelessWidget {
                   ),
               ],
             ),
-            SdVerticalSpacingV5(value: SdSpacingV5.s2),
             Text(
               destination.label,
               maxLines: 1,

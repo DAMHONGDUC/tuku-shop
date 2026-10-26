@@ -6,7 +6,8 @@ enum AppIconButtonStyle {
   /// Bare glyph, for app bars.
   plain,
 
-  /// White disc, for buttons floating over photos.
+  /// Translucent dark-grey disc with a white glyph, for buttons floating
+  /// over photos (readable on light and dark pictures alike).
   floating,
 
   /// Card disc with a hairline, for docks and headers.
@@ -44,9 +45,9 @@ class AppIconButton extends StatelessWidget {
         colors.iconDefault,
       ),
       AppIconButtonStyle.floating => (
-        SdColorsV5.white.withValues(alpha: 0.92),
+        AppColors.ink.withValues(alpha: 0.38),
         BorderSide.none,
-        AppColors.ink,
+        SdColorsV5.white,
       ),
       AppIconButtonStyle.outlined => (
         colors.surfaceDefault,

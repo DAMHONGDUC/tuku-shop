@@ -42,8 +42,14 @@ class _View extends StatelessWidget {
       child: Scaffold(
         backgroundColor: colors.pageDefault,
         body: SafeArea(
+          bottom: false,
           child: Padding(
-            padding: EdgeInsets.all(SdSpacingV5.s24),
+            padding: EdgeInsets.fromLTRB(
+              SdSpacingV5.s24,
+              SdSpacingV5.s24,
+              SdSpacingV5.s24,
+              BottomActionBar.bottomGap(context),
+            ),
             child: Column(
               children: [
                 const Spacer(),

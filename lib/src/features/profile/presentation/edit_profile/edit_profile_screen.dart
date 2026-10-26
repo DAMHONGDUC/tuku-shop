@@ -33,9 +33,9 @@ class _View extends StatelessWidget {
       listener: (context, state) {
         if (state.saved != null) context.pop(state.saved);
         if (state.saveFailed) {
-          ScaffoldMessenger.of(
+          AppToast.of(
             context,
-          ).showSnackBar(SnackBar(content: Text(loc.address_save_failed)));
+          ).show(loc.address_save_failed, type: AppToastType.error);
         }
       },
       builder: (context, state) => SdKeyboardDismisserV5(

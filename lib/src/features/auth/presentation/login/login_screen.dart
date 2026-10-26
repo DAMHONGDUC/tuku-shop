@@ -74,9 +74,9 @@ class _LoginViewState extends State<_LoginView> {
     if (state is LoginSuccessState) {
       context.go(HomeRoutes.home.fullPath);
     } else if (state is LoginFailureState) {
-      ScaffoldMessenger.of(context)
-        ..hideCurrentSnackBar()
-        ..showSnackBar(SnackBar(content: Text(_failureText(state.reason))));
+      AppToast.of(
+        context,
+      ).show(_failureText(state.reason), type: AppToastType.error);
     }
   }
 

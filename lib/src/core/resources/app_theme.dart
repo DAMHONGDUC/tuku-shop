@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:system_design/index.dart';
-import 'app_colors.dart';
 import 'custom_theme_ext/app_color_theme_ext.dart';
 import 'custom_theme_ext/app_text_theme_ext.dart';
 
@@ -53,17 +52,19 @@ class AppTheme {
         elevation: 0,
         scrolledUnderElevation: 0,
       ),
+      // Toasts sit on the page's surface (see AppToast), not an inverted
+      // block, so they follow light and dark like the rest of the UI.
       snackBarTheme: SnackBarThemeData(
         behavior: SnackBarBehavior.floating,
-        backgroundColor: colors.textDefault,
-        contentTextStyle: SdTextStyleV5.body14().wColor(colors.pageDefault),
-        // The snackbar inverts the page, so its action takes the purple
-        // that reads on the inverted fill.
-        actionTextColor: brightness == Brightness.light
-            ? AppColors.brandOnDark
-            : AppColors.brand,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(SdSpacingV5.s12)),
+        backgroundColor: colors.surfaceDefault,
+        elevation: SdSpacingV5.s6,
+        contentTextStyle: SdTextStyleV5.body14().wColor(colors.textDefault),
+        actionTextColor: colors.primary,
+        shape: RoundedRectangleBorder(
+          borderRadius: const BorderRadius.all(
+            Radius.circular(SdSpacingV5.s12),
+          ),
+          side: BorderSide(color: colors.borderDefault),
         ),
       ),
       dialogTheme: DialogThemeData(
