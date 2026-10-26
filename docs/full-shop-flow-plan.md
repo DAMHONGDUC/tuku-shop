@@ -61,7 +61,7 @@ sequenceDiagram
 | Cart | Cart lines · Recommended for you |
 | Checkout | Address · Cart summary · Shipping methods · Payment methods · Voucher |
 | My orders | One paged list per status tab, loaded when the tab opens |
-| Profile | User header · Order status counters · Settings list |
+| Profile | Member card · Order status counters · Favorites preview · Settings list |
 
 Images use a fade-in placeholder so a card shows before its picture decodes.
 
@@ -167,11 +167,15 @@ Cart, wishlist, orders, addresses and profile edits change while the app runs; e
 
 | Tab | Root screen |
 |---|---|
-| Home | Home (search bar, cart icon with badge, notification bell) |
+| Home | Home (search pill and cart icon with badge on one row) |
 | Categories | Category grid |
-| Wishlist | Wishlist |
-| Cart | Cart |
-| Profile | Profile (My orders with status counters, addresses, settings) |
+| Notifications | Notifications (unread count on the tab) |
+| Profile | Profile (member card, My orders with status counters, Favorites preview, cart row, addresses, settings) |
+
+| Screen outside the tabs | Opened from |
+|---|---|
+| Cart (`/cart`) | `CartActionButton` in every app bar except Cart, Checkout and forms; Profile cart row |
+| Favorites (`/wishlist`) | Profile: member card counter, Favorites card "See all", Shopping list |
 
 An app-side clone of the V3 bar's look and behavior, built only from V5 tokens; nothing `*V3` is imported.
 
@@ -181,8 +185,8 @@ An app-side clone of the V3 bar's look and behavior, built only from V5 tokens; 
 | Bar shape | Floating stadium: height `SdSpacingV5.s56`, radius `s28`, side margin `s16`, bottom offset = safe-area bottom clamped to `s16`–`s20` |
 | Surface | `BackdropFilter` blur over `colorTheme.surfaceDefault` at 80 % + `borderDefault` hairline + `boxShadowDefault` (stands in for V3 liquid glass; no new package) |
 | Selected tab | Tinted capsule one segment wide, inset `s4`, `colorTheme.primary` at 22 %, slides with `AnimatedAlign` 250 ms `easeInOutCubic` |
-| Items | Glyph only, outline icon → filled icon when selected, `SdIconV5` size `s24`, `primary` vs `iconSecondary`; ARB label as semantics label |
-| Badge | `SdBadgeV5` on the Cart (count) and Wishlist (count) glyphs |
+| Items | Outline icon → filled icon when selected, `SdIconV5` size `s22`, with the ARB label under it (`body10`); `primary` vs `iconSecondary`; bar height `s64` |
+| Badge | `SdBadgeV5` on the Notifications glyph (unread count); the cart badge lives on `CartActionButton`, fed by `CartCountScope` at the app root |
 | Hide on scroll | Bar follows the tab's main vertical list, settles shown/hidden on scroll end (250 ms `easeOutCubic`), always reappears on tab change, at list top, or when the list cannot scroll |
 | Swipe | Horizontal drag ≥ `s48` switches to the adjacent tab |
 | Content inset | `FloatingBottomNav.contentInset(context)` (offset + bar height) pads the bottom of every tab screen so the last row clears the bar |
@@ -197,7 +201,7 @@ Every screen is redesigned with the `mobile-app-ui-design` skill before it is co
 
 | Skill rule | Applied as |
 |---|---|
-| 1 font family, ≤ 4 sizes, ≤ 2 weights | Lato via `SdTextStyleV5`: `body12`, `body14`, `heading16`, `heading24`; regular + semibold only |
+| 1 font family, ≤ 2 weights | The platform UI font, as Shopee uses (San Francisco on iOS, Roboto on Android), via `SdTextStyleV5` with no family set; titles use `.wDisplay()` (tighter tracking); regular + semibold only; no bundled fonts |
 | Prices and stats in a tabular style | Prices use `FontFeature.tabularFigures()`; values larger than their labels |
 | 60 / 30 / 10 color | 60 % `pageDefault` / `cardDefault`, 30 % `textDefault`, 10 % `primary` on CTAs, active states, badges |
 | Text hierarchy by opacity | `textDefault` 100 % headings, 80 % body, 60 % `textSubTitle` secondary |
@@ -215,15 +219,15 @@ Every screen is redesigned with the `mobile-app-ui-design` skill before it is co
 | Screen | Pattern from the skill |
 |---|---|
 | Home | Clear hierarchy: search → banner → categories → flash sale → new arrivals; content shown directly, no extra taps |
-| Categories | Color-coded cards with isolated images in a steady grid rhythm |
+| Categories | Neutral cards with a serif name and a product photo in a steady grid rhythm; round photos on Home |
 | Category products / Search | Search never blank: recent searches, trending, recommended; filter chips over modal filters |
 | Product detail | Large photography, rating + review count + delivery estimate as trust signals, sticky Add to cart in the thumb zone |
 | Add-to-cart sheet | Tappable size / color chips instead of text input; out-of-stock chips disabled |
-| Wishlist / Cart | Empty states with guidance and a "Start shopping" CTA; cart total and Checkout pinned at the bottom |
+| Favorites / Cart | Pushed screens with a back button; empty states with guidance and a "Start shopping" CTA; free-shipping progress bar; cart total and Checkout pinned at the bottom |
 | Checkout | One scroll, sections in decision order; Place order pinned at the bottom |
 | Order success | **Peak moment**: check animation + order summary card + "Track order" / "Continue shopping" (**end** moment) |
 | Orders / Order detail | Confident status headline, visual timeline instead of a date list |
-| Profile | Avatar header, order-status shortcuts with counts, grouped settings |
+| Profile | Inverse member card (avatar, name, Favorites / Cart / Orders counters), order-status shortcuts with counts, Favorites preview strip, grouped Shopping and Settings lists |
 | Login | Already built; refreshed to the same language in phase 8 |
 
 ### Mockup deliverable
@@ -235,7 +239,32 @@ Every screen is redesigned with the `mobile-app-ui-design` skill before it is co
 | Images | Real catalog photos from phase 1, so mockups match the shipped app |
 | Gate | Phases 3–9 build screens to the approved mockups; changes go back to the mockup first |
 | Source | [`docs/design/tuku-shop-mockups.html`](design/tuku-shop-mockups.html) (images in `docs/design/img/`), published as Artifact `https://claude.ai/artifact/73W1w6xh7Q7kVWCyEDurMm` |
-| Palette | Light: page `#F4F4F7`, card `#FFFFFF`, ink `#15151A`, secondary `#6B6B78`, line `#E6E6EE`, brand `#504EB7`, sale `#E5484D`, success `#2E9E6B`. Dark: page `#0F0F14`, card `#1A1A22`, ink `#F2F2F7`, secondary `#9A9AAA`, line `#2A2A35`, brand `#8B89F0` |
+| Palette (premium refresh, replaces the v1 indigo) | See [Premium refresh](#premium-refresh) |
+
+### Premium refresh
+
+Upscale boutique look (ivory, ink, champagne) on a Shopee-style structure; tokens live in `app_color_theme_ext.dart`.
+
+| Role | Light | Dark |
+|---|---|---|
+| `pageDefault` | `#F6F3EE` ivory | `#0F0E0D` |
+| `cardDefault` | `#FFFFFF` | `#1A1917` |
+| `cardOnSurface` (photo backdrop) | `#EEE9E1` stone | `#23211F` |
+| `textDefault` | `#141414` ink | `#F4F0E8` |
+| `textSubTitle` / `iconSecondary` | `#77716A` | `#A39C92` |
+| `borderDefault` | `#E7E1D8` | `#2C2A27` |
+| `primary` (CTAs, selection) / `onPrimary` | `#141414` / white | `#D9BF8C` / `#141414` |
+| `accent` (ratings, member ring, free-shipping bar) | `#A8834A` champagne | `#D9BF8C` |
+| `sale` | `#B3261E` | `#E5626B` |
+| `success` | `#2F7A57` | `#5CC291` |
+
+| Pattern | Applied as |
+|---|---|
+| Cart everywhere (Shopee) | `AppTopBar` (core) puts `CartActionButton` last in every app bar; PDP uses the floating white-disc style over the photo |
+| Social proof on cards (Shopee) | `ProductTile` shows `★ rating · N sold` under the price |
+| Editorial product card | Photo carries the card (radius 12 on a stone backdrop), spaced-capital brand, name, price; no card box |
+| Buttons | `AppButton`: ink fill or ink hairline outline, radius 12, 48 pt |
+| Material defaults | `AppTheme` themes snackbars (floating ink), dialogs, sheets, tabs and app bars once |
 
 ## Phases
 
@@ -271,7 +300,10 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 
 | Decision | Choice | Date |
 |---|---|---|
-| Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) | 2026-10-18 |
+| Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) — superseded 2026-10-26 | 2026-10-18 |
+| Bottom tabs v2 | Home · Categories · Notifications · Profile; Cart is a pushed screen behind the app-bar bag icon, Favorites an option in Profile | 2026-10-26 |
+| Premium refresh | Ivory / ink / champagne palette, Shopee-style structure | 2026-10-26 |
+| Font | Platform UI font like Shopee (replaces Lato and the Playfair Display trial); no wordmark on the Home app bar, search and cart share one row | 2026-10-26 |
 | Bottom nav widget | App-side V5 clone of the V3 floating bar; no V3 imports | 2026-10-18 |
 | Mockups approved | Owner asked to run phases 1–9 without review stops; mockups v1 taken as approved | 2026-10-18 |
 | One action, one request | A user action (place order, save address, cancel) is a single 1 s data source call, not several in a row | 2026-10-18 |
