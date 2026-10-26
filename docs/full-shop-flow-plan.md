@@ -190,6 +190,7 @@ An app-side clone of the V3 bar's look and behavior, built only from V5 tokens; 
 | Fixed | The bar stays in place while the tab scrolls (hide-on-scroll removed 2026-10-27) |
 | Detail screens | Every non-tab screen (product, cart, favorites, checkout, my orders, order detail, edit profile, addresses, search) uses `parentNavigatorKey: kRootNavigatorKey`, so it covers the bar |
 | Swipe | Horizontal drag ≥ `s48` switches to the adjacent tab |
+| Bottom actions | Every docked action (`BottomActionBar`: product, cart, checkout, order detail, filter sheet) and the add-to-cart sheet / order success buttons sit `safe area + 4` above the bottom edge; the floating tab bar keeps its own offset (safe area clamped to 16–20) |
 | Content inset | `FloatingBottomNav.contentInset(context)` (offset + bar height) pads the bottom of the four tab roots so the last row clears the bar; detail screens pad by the safe area only |
 | Motion constants | `UIConstants.navFast` 150 ms, `navNormal` 250 ms, in `lib/src/core/constants/ui_constants.dart` |
 | Route constants | `lib/src/core/navigation/routes/`, so any feature navigates without importing another feature's `presentation/` |
@@ -314,6 +315,8 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | Bottom nav widget | App-side V5 clone of the V3 floating bar; no V3 imports | 2026-10-18 |
 | Mockups approved | Owner asked to run phases 1–9 without review stops; mockups v1 taken as approved | 2026-10-18 |
 | One action, one request | A user action (place order, save address, cancel) is a single data source call, not several in a row | 2026-10-18 |
+| Bottom gap | Bottom actions sit at safe area + 4; tab bar back to 64 pt | 2026-10-27 |
+| Home carousel | Auto-advances every 3 s, banners in source order (no shuffle) so dots and content match | 2026-10-27 |
 | Mock latency | 300–700 ms per call from a seeded random (was a fixed 1 s) | 2026-10-27 |
 | UI redesign | New phase 2: `mobile-app-ui-design` skill mockups gate all screen work; later phases renumbered 3–9 | 2026-10-18 |
 
