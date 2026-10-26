@@ -14,7 +14,8 @@ Feature-based Clean Architecture: each feature owns its `domain` / `data` / `pre
 | `lib/src/features/wishlist/` | Saved product ids (seeded on first launch) and the Favorites screen (opened from Profile) |
 | `lib/src/features/cart/` | Cart lines (seeded), app-wide cart state, Cart screen (opened from every app bar) |
 | `lib/src/features/checkout/` | Shipping, payment, vouchers, totals math, checkout and order-success screens |
-| `lib/src/features/support_chat/` | Customer support chat: conversation stored on the device, a mock agent answering by keyword (EN + VI) after the mock latency, opened from Profile and order detail |
+| `lib/src/features/seller/` | The marketplace's shops (data + domain only): name, Official flag, rating, response rate, followers; every product has a `sellerId` |
+| `lib/src/features/chat/` | The Chat tab: one thread per shop plus Tuku Care support, stored on the device; mock replies by keyword (EN + VI) per side, unread counts, the app-wide `ChatUnreadController` badge |
 | `lib/src/features/address/` | Address book (seeded) with pick mode for checkout |
 | `lib/src/features/auth/` | Login screen + session; first launch saves the demo user, so the app opens signed in |
 | `lib/src/features/home/` | Presentation only: composes banner, category and product-strip sections, each loading on its own |

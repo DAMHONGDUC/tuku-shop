@@ -126,7 +126,8 @@ Current non-clothing categories (Toys, Cards, P&A, Pre-loved Luxury) and their i
 | `order` | Extend | Orders by status (paged), detail with status timeline, cancel, buy again | `CancelOrderUsecase`, `GetOrderCountsUsecase` |
 | `notification` | Extend | New entry when an order is placed or cancelled | `AddNotificationUsecase` (called from order flow) |
 | `profile` | Extend | User header, order counters, edit profile, theme, language, reset demo | `UpdateProfileUsecase`, `ResetDemoDataUsecase` |
-| `support_chat` | New | Chat screen (bubbles, typing dots, quick questions, composer at safe area + 4); entry from Profile → Customer support and the order detail app bar | `GetSupportMessagesUsecase`, `SendSupportMessageUsecase`, `WatchSupportMessagesUsecase`, `ResetSupportChatUsecase` |
+| `seller` | New | Shop card on the product page (Sold by, Official, stats, Chat, View shop), shop page = product list filtered by `sellerId` | `GetSellerUsecase`, `GetSellersByIdsUsecase` |
+| `chat` | New (replaces `support_chat`) | Chat tab (inbox, support pinned, unread bold + badge), thread screen per shop or Tuku Care with fitting quick questions; entries from the product page (dock + shop card), Profile and order detail | `GetConversationsUsecase`, `WatchConversationsUsecase`, `OpenConversationUsecase`, `GetChatMessagesUsecase`, `WatchChatMessagesUsecase`, `SendChatMessageUsecase`, `MarkConversationReadUsecase`, `ResetChatUsecase` |
 | `auth` | Done | Login, logout, demo session | — |
 
 ### Purchase flow
@@ -170,6 +171,7 @@ Cart, wishlist, orders, addresses and profile edits change while the app runs; e
 |---|---|
 | Home | Home (search pill and cart icon with badge on one row) |
 | Categories | Category grid |
+| Chat | Inbox: Tuku Care first, then shop threads by last message; unread count on the tab |
 | Notifications | Notifications (unread count on the tab) |
 | Profile | Profile (member card, My orders with status counters, Favorites preview, cart row, addresses, settings) |
 
@@ -309,6 +311,7 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 |---|---|---|
 | Bottom tabs | Home · Categories · Wishlist · Cart · Profile (My Orders moves under Profile) — superseded 2026-10-26 | 2026-10-18 |
 | Bottom tabs v2 | Home · Categories · Notifications · Profile; Cart is a pushed screen behind the app-bar bag icon, Favorites an option in Profile | 2026-10-26 |
+| Bottom tabs v3 | Home · Categories · Chat · Notifications · Profile (Shopee order) | 2026-10-27 |
 | Premium refresh | Shopee-style structure; palette first ivory / ink / champagne, then brand purple (below) | 2026-10-26 |
 | Brand color | The app icon's purple `#504EB7` is `primary` again (CTAs, selection, splash, member card); champagne removed | 2026-10-27 |
 | Light background | White page with soft grey cards; sheets, docks and the nav bar stay white | 2026-10-26 |
@@ -317,7 +320,8 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | Mockups approved | Owner asked to run phases 1–9 without review stops; mockups v1 taken as approved | 2026-10-18 |
 | One action, one request | A user action (place order, save address, cancel) is a single data source call, not several in a row | 2026-10-18 |
 | Bottom gap | Bottom actions sit at safe area + 4; tab bar 56 pt | 2026-10-27 |
-| Support chat | Mock agent in the data source answers by keyword; a real desk API (or websocket) replaces only `SupportChatLocalDataSource` | 2026-10-27 |
+| Marketplace | 8 shops (one per brand, plus resellers Denim House and Saigon Closet sharing Northline / Aurora listings); products carry `sellerId` | 2026-10-27 |
+| Chat | Chat tab between Categories and Notifications (5 tabs, Shopee order); one thread per shop plus Tuku Care; a real chat API or websocket replaces only `ChatLocalDataSource` | 2026-10-27 |
 | Search filters | Filter is an app bar action next to the cart (Home and Search) | 2026-10-27 |
 | Home carousel | Auto-advances every 3 s, banners in source order (no shuffle) so dots and content match | 2026-10-27 |
 | Mock latency | 300–700 ms per call from a seeded random (was a fixed 1 s) | 2026-10-27 |
