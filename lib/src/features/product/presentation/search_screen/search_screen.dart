@@ -77,13 +77,16 @@ class _SearchViewState extends State<_SearchView> {
   }
 
   Future<void> _openFilters() async {
-    FocusScope.of(context).unfocus();
+    FocusManager.instance.primaryFocus?.unfocus();
     final results = context.read<ProductListController>();
     final picked = await FilterSheet.show(
       context,
       filters: results.state.query.filters,
       sort: results.state.query.sort,
     );
+    // Closing the sheet hands focus back to the search field; the shopper
+    // is looking at results now, so keep the keyboard down.
+    FocusManager.instance.primaryFocus?.unfocus();
     if (picked == null) return;
     results.applyFilters(picked.$1, picked.$2);
   }
