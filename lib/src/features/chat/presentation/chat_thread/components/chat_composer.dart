@@ -45,6 +45,7 @@ class _ChatComposerState extends State<ChatComposer> {
     final loc = context.loc;
     // The keyboard takes the safe area; otherwise sit on it + 4.
     final keyboardUp = MediaQuery.viewInsetsOf(context).bottom > 0;
+    final ready = widget.enabled && !widget.isSending;
 
     return Container(
       decoration: BoxDecoration(
@@ -68,10 +69,16 @@ class _ChatComposerState extends State<ChatComposer> {
               itemCount: widget.quickQuestions.length,
               separatorBuilder: (_, _) =>
                   SdHorizontalSpacingV5(value: SdSpacingV5.s8),
-              itemBuilder: (context, i) => AppChip(
-                label: widget.quickQuestions[i],
-                enabled: widget.enabled && !widget.isSending,
-                onTap: () => _send(widget.quickQuestions[i]),
+              // Not `enabled: false`: that strikes the label through (a
+              // sold-out size). Dimmed and untappable while loading or
+              // sending instead.
+              itemBuilder: (context, i) => AnimatedOpacity(
+                duration: UIConstants.navFast,
+                opacity: ready ? 1 : 0.5,
+                child: AppChip(
+                  label: widget.quickQuestions[i],
+                  onTap: ready ? () => _send(widget.quickQuestions[i]) : null,
+                ),
               ),
             ),
           ),

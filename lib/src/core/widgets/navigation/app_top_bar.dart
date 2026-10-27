@@ -6,6 +6,8 @@ import 'package:tuku_shop/src/core/core.dart';
 /// cart button last in [actions] unless [showCart] is false.
 ///
 /// [large] is for tab roots: no back button, a left-aligned bigger title.
+/// [centerTitle] false puts the title right after the back button (a chat
+/// header).
 class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
   const AppTopBar({
     super.key,
@@ -14,6 +16,7 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions = const [],
     this.showCart = true,
     this.large = false,
+    this.centerTitle,
     this.bottom,
   });
 
@@ -22,6 +25,7 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
   final List<Widget> actions;
   final bool showCart;
   final bool large;
+  final bool? centerTitle;
   final PreferredSizeWidget? bottom;
 
   @override
@@ -34,6 +38,7 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
     final style = large
         ? SdTextStyleV5.heading24().wColor(colors.textDefault).wDisplay()
         : SdTextStyleV5.heading18().wColor(colors.textDefault).wDisplay();
+    final center = centerTitle ?? !large;
 
     return SdAppBarV5(
       titleWidget:
@@ -46,12 +51,16 @@ class AppTopBar extends StatelessWidget implements PreferredSizeWidget {
                   overflow: TextOverflow.ellipsis,
                   style: style,
                 )),
-      centerTitle: !large,
+      centerTitle: center,
       showBackButton: !large,
       backgroundColor: colors.pageDefault,
       backButtonIconColor: colors.iconDefault,
       noElevation: true,
-      titleSpacing: large ? SdSpacingV5.s16 : SdSpacingV5.s12,
+      titleSpacing: large
+          ? SdSpacingV5.s16
+          : center
+          ? SdSpacingV5.s12
+          : 0,
       actionPadding: EdgeInsets.only(right: SdSpacingV5.s8),
       actions: [...actions, if (showCart) const CartActionButton()],
       bottom: bottom,

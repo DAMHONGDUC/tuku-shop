@@ -63,6 +63,7 @@ class _View extends StatelessWidget {
           child: Scaffold(
             backgroundColor: colors.pageDefault,
             appBar: AppTopBar(
+              centerTitle: false,
               titleWidget: _Header(state: state, support: support),
             ),
             body: Column(
