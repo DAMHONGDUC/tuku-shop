@@ -12,7 +12,7 @@ class AppLocalizationsVi extends AppLocalizations {
   String get app_name => 'Tuku Shop';
 
   @override
-  String get splash_description => 'Any shopping just from home';
+  String get splash_description => 'Mua sắm mọi thứ ngay tại nhà';
 
   @override
   String get login_title => 'Chào mừng trở lại';
