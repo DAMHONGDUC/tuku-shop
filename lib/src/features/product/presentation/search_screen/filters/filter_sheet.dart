@@ -11,7 +11,8 @@ import 'search_filters_controller.dart';
 enum FilterSection { sort, category, price, rating, size, color, more }
 
 /// Ways to narrow search results, edited as a draft and applied with
-/// "Show results". Shows every [FilterSection] by default, or only the
+/// "Show results"; "Reset" clears the sections on show and applies at
+/// once. Shows every [FilterSection] by default, or only the
 /// given ones (a quick chip's small sheet, sized to its content). Returns
 /// the new filters and sort, or null if dismissed.
 class FilterSheet extends StatefulWidget {
@@ -84,8 +85,8 @@ class _FilterSheetState extends State<FilterSheet> {
   /// One section alone: titled by it, as tall as its options.
   bool get _single => widget.sections.length == 1;
 
-  /// Clears only the sections on show.
-  void _reset() => setState(() {
+  /// Clears only the sections on show, then applies at once.
+  void _reset() {
     for (final section in widget.sections) {
       switch (section) {
         case FilterSection.sort:
@@ -107,7 +108,8 @@ class _FilterSheetState extends State<FilterSheet> {
           _tag = null;
       }
     }
-  });
+    _apply();
+  }
 
   void _apply() {
     Navigator.of(context).pop((
