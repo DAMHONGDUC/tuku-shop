@@ -9,6 +9,7 @@ import 'package:tuku_shop/src/features/product/presentation/product_list/product
 import 'package:tuku_shop/src/features/product/presentation/product_list/product_strip_section.dart';
 
 import 'filters/filter_sheet.dart';
+import 'filters/quick_filter_chips.dart';
 import 'filters/search_filters_controller.dart';
 import 'search_suggestions_controller.dart';
 
@@ -16,10 +17,13 @@ import 'search_suggestions_controller.dart';
 /// before typing, live paged results after. Filters narrow the results and
 /// work without a keyword too.
 class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key, this.openFilters = false});
+  const SearchScreen({super.key, this.openFilters = false, this.categoryId});
 
   /// Opens the filter sheet on arrival (Home's filter button).
   final bool openFilters;
+
+  /// Starts narrowed to this category (a category card).
+  final String? categoryId;
 
   @override
   Widget build(BuildContext context) {
@@ -28,18 +32,34 @@ class SearchScreen extends StatelessWidget {
         BlocProvider(
           create: (_) => getIt<SearchSuggestionsController>()..load(),
         ),
-        BlocProvider(create: (_) => getIt<ProductListController>()),
+        BlocProvider(
+          create: (_) {
+            final results = getIt<ProductListController>();
+            if (categoryId != null) {
+              results.applyFilters(
+                ProductFilters(categoryId: categoryId),
+                ProductSort.recommended,
+              );
+            }
+            return results;
+          },
+        ),
         BlocProvider(create: (_) => getIt<SearchFiltersController>()..load()),
       ],
-      child: _SearchView(openFilters: openFilters),
+      child: _SearchView(
+        openFilters: openFilters,
+        // Arriving from a category means browsing, not typing.
+        autofocus: !openFilters && categoryId == null,
+      ),
     );
   }
 }
 
 class _SearchView extends StatefulWidget {
-  const _SearchView({required this.openFilters});
+  const _SearchView({required this.openFilters, required this.autofocus});
 
   final bool openFilters;
+  final bool autofocus;
 
   @override
   State<_SearchView> createState() => _SearchViewState();
@@ -118,10 +138,14 @@ class _SearchViewState extends State<_SearchView> {
                 ),
                 const CartActionButton(),
               ],
+              bottom: PreferredSize(
+                preferredSize: const Size.fromHeight(QuickFilterChips.height),
+                child: QuickFilterChips(onMore: _openFilters),
+              ),
               title: AppSearchBar(
                 controller: _textController,
                 hintText: context.loc.search_hint,
-                autofocus: !widget.openFilters,
+                autofocus: widget.autofocus,
                 onChanged: _search,
                 onSubmitted: (value) => _search(value, save: true),
                 onClear: () {

@@ -21,6 +21,7 @@ class HomeStack {
           builder: (BuildContext context, GoRouterState state) {
             return SearchScreen(
               openFilters: state.uri.queryParameters['filters'] == '1',
+              categoryId: state.uri.queryParameters['category'],
             );
           },
         ),

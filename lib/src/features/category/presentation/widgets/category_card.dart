@@ -4,13 +4,10 @@ import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/category/domain/domain.dart';
 
+/// A category opens Search narrowed to it, so the shopper can keep
+/// filtering or type to search inside it.
 void openCategory(BuildContext context, CategoryEntity category) {
-  context.push(
-    ProductRoutes.productListLocation(
-      title: category.name,
-      categoryId: category.id,
-    ),
-  );
+  context.push(HomeRoutes.searchLocation(categoryId: category.id));
 }
 
 /// Round photo and name, for the Home strip.
@@ -23,7 +20,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       button: true,
-      child: GestureDetector(
+      child: Pressable(
         onTap: () => openCategory(context, category),
         child: SizedBox(
           width: UIConstants.categoriesCardWidth,

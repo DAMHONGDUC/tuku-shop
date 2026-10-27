@@ -13,9 +13,11 @@ class HomeRoutes {
     fullPath: '${home.fullPath}/search',
   );
 
-  /// [search], opening its filter sheet straight away when [filters].
-  static String searchLocation({bool filters = false}) => Uri(
-    path: search.fullPath,
-    queryParameters: {if (filters) 'filters': '1'},
-  ).toString();
+  /// [search], opening its filter sheet straight away when [filters], and
+  /// already narrowed to [categoryId] when given.
+  static String searchLocation({bool filters = false, String? categoryId}) =>
+      Uri(
+        path: search.fullPath,
+        queryParameters: {if (filters) 'filters': '1', 'category': ?categoryId},
+      ).toString();
 }
