@@ -69,7 +69,7 @@ class ReviewCommentMock {
 
   /// Details for device accessories instead of garments.
   static const _deviceDetails = [
-    'The silicone feels soft and grippy, no more slipping off the sofa.',
+    'It feels soft and grippy, no more slipping off the sofa.',
     'Buttons are clicky and the camera cut-out lines up exactly.',
     'Survived a few drops already without a scratch.',
     'Slim enough that wireless charging still works.',

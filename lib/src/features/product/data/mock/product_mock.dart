@@ -28,6 +28,23 @@ class _Sizes {
     'iPhone 17 Pro',
     'iPhone 17 Pro Max',
   ];
+  static const iphonesPro = [
+    'iPhone 15 Pro',
+    'iPhone 15 Pro Max',
+    'iPhone 16 Pro',
+    'iPhone 16 Pro Max',
+    'iPhone 17 Pro',
+    'iPhone 17 Pro Max',
+  ];
+  static const galaxies = [
+    'Galaxy S23',
+    'Galaxy S23 Ultra',
+    'Galaxy S24',
+    'Galaxy S24 Ultra',
+    'Galaxy S25',
+    'Galaxy S25 Ultra',
+    'Galaxy A55',
+  ];
 }
 
 class _CatalogRow {

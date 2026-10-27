@@ -99,7 +99,7 @@ class CategoryMock {
       id: 'accessories',
       name: 'Accessories',
       imageUrl: '${_kCatalogPath}accessories/as5_1.jpg',
-      numOfProduct: 6,
+      numOfProduct: 12,
       colorHex: '#EAF1F4',
     ),
   ];

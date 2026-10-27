@@ -22,12 +22,12 @@ void main() {
   test('pages 10 at a time and reports totals', () {
     final first = run(const ProductQuery());
     expect(first.items!.length, 10);
-    expect(first.totalRecord, 70);
-    expect(first.totalPage, 7);
+    expect(first.totalRecord, 76);
+    expect(first.totalPage, 8);
 
-    final last = run(const ProductQuery(page: 7));
-    expect(last.items!.length, 10);
-    expect(run(const ProductQuery(page: 8)).items, isEmpty);
+    final last = run(const ProductQuery(page: 8));
+    expect(last.items!.length, 6);
+    expect(run(const ProductQuery(page: 9)).items, isEmpty);
   });
 
   test('filters by category', () {
@@ -59,12 +59,12 @@ void main() {
 
   test('sorts by price both ways', () {
     final up = run(
-      const ProductQuery(sort: ProductSort.priceLowToHigh, pageSize: 70),
+      const ProductQuery(sort: ProductSort.priceLowToHigh, pageSize: 76),
     ).items!.map((p) => p.price!).toList();
     expect(up, [...up]..sort());
 
     final down = run(
-      const ProductQuery(sort: ProductSort.priceHighToLow, pageSize: 70),
+      const ProductQuery(sort: ProductSort.priceHighToLow, pageSize: 76),
     ).items!.map((p) => p.price!).toList();
     expect(down, [...up.reversed]);
   });
@@ -137,13 +137,14 @@ void main() {
     );
   });
 
-  test('the phone case lists models, kept out of the size filter', () {
-    final cases = run(const ProductQuery(keyword: 'phone case')).items!;
-    expect(cases.single.secondOption, 'model');
-    expect(
-      cases.single.productSizes!.map((s) => s.name),
-      contains('iPhone 17'),
-    );
+  test('phone cases list models, kept out of the size filter', () {
+    final cases = run(const ProductQuery(keyword: 'case', pageSize: 50)).items!;
+    expect(cases.length, 7);
+    expect(cases.every((p) => p.secondOption == 'model'), isTrue);
+    final models = {
+      for (final p in cases) ...p.productSizes!.map((s) => s.name),
+    };
+    expect(models, containsAll(['iPhone 17', 'Galaxy S25 Ultra']));
 
     late ProductFacetsModel facets;
     fakeAsync((async) {
@@ -151,6 +152,7 @@ void main() {
       async.elapse(MockLatency.max);
     });
     expect(facets.sizes, isNot(contains('iPhone 17')));
+    expect(facets.sizes, isNot(contains('Galaxy S25 Ultra')));
     expect(facets.colors!.map((c) => c.name), contains('Midnight'));
   });
 
