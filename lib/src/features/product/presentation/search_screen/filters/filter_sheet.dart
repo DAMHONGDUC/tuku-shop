@@ -7,21 +7,46 @@ import 'package:tuku_shop/src/features/product/presentation/category_products/so
 
 import 'search_filters_controller.dart';
 
-/// Every way to narrow search results, edited as a draft and applied with
-/// "Show results". Returns the new filters and sort, or null if dismissed.
+/// A group of options in [FilterSheet]; a quick chip opens one alone.
+enum FilterSection { sort, category, price, rating, size, color, more }
+
+/// Ways to narrow search results, edited as a draft and applied with
+/// "Show results". Shows every [FilterSection] by default, or only the
+/// given ones (a quick chip's small sheet, sized to its content). Returns
+/// the new filters and sort, or null if dismissed.
 class FilterSheet extends StatefulWidget {
-  const FilterSheet({super.key, required this.filters, required this.sort});
+  const FilterSheet({
+    super.key,
+    required this.filters,
+    required this.sort,
+    this.sections = FilterSection.values,
+  });
 
   final ProductFilters filters;
   final ProductSort sort;
+  final List<FilterSection> sections;
 
   /// Ratings offered as "x★ & up".
   static const ratingSteps = [4.5, 4.0];
+
+  static String title(BuildContext context, FilterSection section) {
+    final loc = context.loc;
+    return switch (section) {
+      FilterSection.sort => loc.filter_sort,
+      FilterSection.category => loc.filter_category,
+      FilterSection.price => loc.filter_price,
+      FilterSection.rating => loc.filter_rating,
+      FilterSection.size => loc.filter_size,
+      FilterSection.color => loc.filter_color,
+      FilterSection.more => loc.filter_more,
+    };
+  }
 
   static Future<(ProductFilters, ProductSort)?> show(
     BuildContext context, {
     required ProductFilters filters,
     required ProductSort sort,
+    List<FilterSection> sections = FilterSection.values,
   }) {
     return showModalBottomSheet<(ProductFilters, ProductSort)>(
       context: context,
@@ -35,7 +60,7 @@ class FilterSheet extends StatefulWidget {
       ),
       builder: (_) => BlocProvider.value(
         value: context.read<SearchFiltersController>(),
-        child: FilterSheet(filters: filters, sort: sort),
+        child: FilterSheet(filters: filters, sort: sort, sections: sections),
       ),
     );
   }
@@ -56,17 +81,32 @@ class _FilterSheetState extends State<FilterSheet> {
   late final Set<String> _colors = {...widget.filters.colors};
   late double? _minRating = widget.filters.minRating;
 
+  /// One section alone: titled by it, as tall as its options.
+  bool get _single => widget.sections.length == 1;
+
+  /// Clears only the sections on show.
   void _reset() => setState(() {
-    _sort = ProductSort.recommended;
-    _categoryId = null;
-    _tag = null;
-    _onSale = false;
-    _inStock = false;
-    _minPrice = null;
-    _maxPrice = null;
-    _sizes.clear();
-    _colors.clear();
-    _minRating = null;
+    for (final section in widget.sections) {
+      switch (section) {
+        case FilterSection.sort:
+          _sort = ProductSort.recommended;
+        case FilterSection.category:
+          _categoryId = null;
+        case FilterSection.price:
+          _minPrice = null;
+          _maxPrice = null;
+        case FilterSection.rating:
+          _minRating = null;
+        case FilterSection.size:
+          _sizes.clear();
+        case FilterSection.color:
+          _colors.clear();
+        case FilterSection.more:
+          _onSale = false;
+          _inStock = false;
+          _tag = null;
+      }
+    }
   });
 
   void _apply() {
@@ -90,10 +130,35 @@ class _FilterSheetState extends State<FilterSheet> {
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
     final loc = context.loc;
+    final maxHeight = MediaQuery.sizeOf(context).height * 0.85;
+    final body = BlocBuilder<SearchFiltersController, SearchFiltersState>(
+      builder: (context, state) => switch (state.status) {
+        SearchFiltersStatus.loading => ListView(
+          shrinkWrap: _single,
+          padding: EdgeInsets.all(SdSpacingV5.s16),
+          children: [
+            for (var i = 0; i < (_single ? 1 : 5); i++) ...[
+              const SkeletonBox(width: 120),
+              SdVerticalSpacingV5(value: SdSpacingV5.s12),
+              const SkeletonBox(height: SdSpacingV5.s36),
+              SdVerticalSpacingV5(value: SdSpacingV5.s24),
+            ],
+          ],
+        ),
+        SearchFiltersStatus.error => Padding(
+          padding: EdgeInsets.all(SdSpacingV5.s16),
+          child: SectionError(
+            onRetry: context.read<SearchFiltersController>().load,
+          ),
+        ),
+        SearchFiltersStatus.loaded => _options(state),
+      },
+    );
 
-    return SizedBox(
-      height: MediaQuery.sizeOf(context).height * 0.85,
+    return ConstrainedBox(
+      constraints: BoxConstraints(maxHeight: maxHeight),
       child: Column(
+        mainAxisSize: _single ? MainAxisSize.min : MainAxisSize.max,
         children: [
           SdVerticalSpacingV5(value: SdSpacingV5.s8),
           Container(
@@ -115,7 +180,9 @@ class _FilterSheetState extends State<FilterSheet> {
               children: [
                 Expanded(
                   child: Text(
-                    loc.filter_title,
+                    _single
+                        ? FilterSheet.title(context, widget.sections.single)
+                        : loc.filter_title,
                     style: SdTextStyleV5.heading18()
                         .wColor(colors.textDefault)
                         .wDisplay(),
@@ -129,30 +196,7 @@ class _FilterSheetState extends State<FilterSheet> {
               ],
             ),
           ),
-          Expanded(
-            child: BlocBuilder<SearchFiltersController, SearchFiltersState>(
-              builder: (context, state) => switch (state.status) {
-                SearchFiltersStatus.loading => ListView(
-                  padding: EdgeInsets.all(SdSpacingV5.s16),
-                  children: [
-                    for (var i = 0; i < 5; i++) ...[
-                      const SkeletonBox(width: 120),
-                      SdVerticalSpacingV5(value: SdSpacingV5.s12),
-                      const SkeletonBox(height: SdSpacingV5.s36),
-                      SdVerticalSpacingV5(value: SdSpacingV5.s24),
-                    ],
-                  ],
-                ),
-                SearchFiltersStatus.error => Padding(
-                  padding: EdgeInsets.all(SdSpacingV5.s16),
-                  child: SectionError(
-                    onRetry: context.read<SearchFiltersController>().load,
-                  ),
-                ),
-                SearchFiltersStatus.loaded => _options(state),
-              },
-            ),
-          ),
+          if (_single) Flexible(child: body) else Expanded(child: body),
           BottomActionBar(
             child: Row(
               children: [
@@ -176,21 +220,30 @@ class _FilterSheetState extends State<FilterSheet> {
   }
 
   Widget _options(SearchFiltersState state) {
-    final loc = context.loc;
-    final facets = state.facets!;
-    final low = _minPrice ?? facets.minPrice;
-    final high = _maxPrice ?? facets.maxPrice;
-
     return ListView(
+      shrinkWrap: _single,
       padding: EdgeInsets.fromLTRB(
         SdSpacingV5.s16,
         SdSpacingV5.s8,
         SdSpacingV5.s16,
-        SdSpacingV5.s16,
+        _single ? SdSpacingV5.s8 : SdSpacingV5.s16,
       ),
       children: [
-        _Group(
-          title: loc.filter_sort,
+        for (final section in widget.sections) _section(section, state),
+      ],
+    );
+  }
+
+  Widget _section(FilterSection section, SearchFiltersState state) {
+    final loc = context.loc;
+    final facets = state.facets!;
+    // A single section is already named by the sheet title.
+    final title = _single ? null : FilterSheet.title(context, section);
+
+    switch (section) {
+      case FilterSection.sort:
+        return _Group(
+          title: title,
           child: _chips([
             for (final option in ProductSort.values)
               AppChip(
@@ -199,9 +252,10 @@ class _FilterSheetState extends State<FilterSheet> {
                 onTap: () => setState(() => _sort = option),
               ),
           ]),
-        ),
-        _Group(
-          title: loc.filter_category,
+        );
+      case FilterSection.category:
+        return _Group(
+          title: title,
           child: _chips([
             AppChip(
               label: loc.filter_all,
@@ -215,9 +269,12 @@ class _FilterSheetState extends State<FilterSheet> {
                 onTap: () => setState(() => _categoryId = category.id),
               ),
           ]),
-        ),
-        _Group(
-          title: loc.filter_price,
+        );
+      case FilterSection.price:
+        final low = _minPrice ?? facets.minPrice;
+        final high = _maxPrice ?? facets.maxPrice;
+        return _Group(
+          title: title,
           trailing: '${AppFormat.price(low)} – ${AppFormat.price(high)}',
           child: RangeSlider(
             min: facets.minPrice,
@@ -234,9 +291,10 @@ class _FilterSheetState extends State<FilterSheet> {
               _maxPrice = range.end >= facets.maxPrice ? null : range.end;
             }),
           ),
-        ),
-        _Group(
-          title: loc.filter_rating,
+        );
+      case FilterSection.rating:
+        return _Group(
+          title: title,
           child: _chips([
             AppChip(
               label: loc.filter_any,
@@ -250,9 +308,10 @@ class _FilterSheetState extends State<FilterSheet> {
                 onTap: () => setState(() => _minRating = step),
               ),
           ]),
-        ),
-        _Group(
-          title: loc.filter_size,
+        );
+      case FilterSection.size:
+        return _Group(
+          title: title,
           child: _chips([
             for (final size in facets.sizes)
               AppChip(
@@ -265,9 +324,10 @@ class _FilterSheetState extends State<FilterSheet> {
                 ),
               ),
           ]),
-        ),
-        _Group(
-          title: loc.filter_color,
+        );
+      case FilterSection.color:
+        return _Group(
+          title: title,
           child: _chips([
             for (final color in facets.colors)
               _ColorChip(
@@ -280,9 +340,10 @@ class _FilterSheetState extends State<FilterSheet> {
                 ),
               ),
           ]),
-        ),
-        _Group(
-          title: loc.filter_more,
+        );
+      case FilterSection.more:
+        return _Group(
+          title: title,
           child: _chips([
             AppChip(
               label: loc.filter_on_sale,
@@ -315,9 +376,8 @@ class _FilterSheetState extends State<FilterSheet> {
               ),
             ),
           ]),
-        ),
-      ],
-    );
+        );
+    }
   }
 
   Widget _chips(List<Widget> chips) => Wrap(
@@ -330,7 +390,8 @@ class _FilterSheetState extends State<FilterSheet> {
 class _Group extends StatelessWidget {
   const _Group({required this.title, required this.child, this.trailing});
 
-  final String title;
+  /// Null drops the heading; [trailing] still shows.
+  final String? title;
   final String? trailing;
   final Widget child;
 
@@ -343,25 +404,27 @@ class _Group extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  title,
-                  style: SdTextStyleV5.heading16().wColor(colors.textDefault),
-                ),
-              ),
-              if (trailing != null)
-                Text(
-                  trailing!,
-                  style: SdTextStyleV5.body14().copyWith(
-                    color: colors.primary,
-                    fontFeatures: const [FontFeature.tabularFigures()],
+          if (title != null || trailing != null) ...[
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    title ?? '',
+                    style: SdTextStyleV5.heading16().wColor(colors.textDefault),
                   ),
                 ),
-            ],
-          ),
-          SdVerticalSpacingV5(value: SdSpacingV5.s12),
+                if (trailing != null)
+                  Text(
+                    trailing!,
+                    style: SdTextStyleV5.body14().copyWith(
+                      color: colors.primary,
+                      fontFeatures: const [FontFeature.tabularFigures()],
+                    ),
+                  ),
+              ],
+            ),
+            SdVerticalSpacingV5(value: SdSpacingV5.s12),
+          ],
           child,
         ],
       ),

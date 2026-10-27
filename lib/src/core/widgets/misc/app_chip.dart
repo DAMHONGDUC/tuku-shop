@@ -11,6 +11,7 @@ class AppChip extends StatelessWidget {
     this.selected = false,
     this.enabled = true,
     this.icon,
+    this.trailingIcon,
   });
 
   final String label;
@@ -20,6 +21,9 @@ class AppChip extends StatelessWidget {
   /// A disabled chip stays visible, struck through (a sold-out size).
   final bool enabled;
   final IconData? icon;
+
+  /// After the label, e.g. a chevron on a chip that opens a sheet.
+  final IconData? trailingIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +75,14 @@ class AppChip extends StatelessWidget {
                               : TextDecoration.lineThrough,
                         ),
               ),
+              if (trailingIcon != null) ...[
+                SdHorizontalSpacingV5(value: SdSpacingV5.s2),
+                SdIconV5(
+                  iconData: trailingIcon,
+                  iconSize: SdSpacingV5.s16,
+                  color: fg,
+                ),
+              ],
             ],
           ),
         ),

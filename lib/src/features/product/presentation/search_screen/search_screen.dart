@@ -96,13 +96,17 @@ class _SearchViewState extends State<_SearchView> {
     _search(keyword, save: true);
   }
 
-  Future<void> _openFilters() async {
+  /// Every section by default; a quick chip passes just its own.
+  Future<void> _openFilters([
+    List<FilterSection> sections = FilterSection.values,
+  ]) async {
     FocusManager.instance.primaryFocus?.unfocus();
     final results = context.read<ProductListController>();
     final picked = await FilterSheet.show(
       context,
       filters: results.state.query.filters,
       sort: results.state.query.sort,
+      sections: sections,
     );
     // Closing the sheet hands focus back to the search field; the shopper
     // is looking at results now, so keep the keyboard down.
@@ -140,7 +144,9 @@ class _SearchViewState extends State<_SearchView> {
               ],
               bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(QuickFilterChips.height),
-                child: QuickFilterChips(onMore: _openFilters),
+                child: QuickFilterChips(
+                  onOpen: (section) => _openFilters([section]),
+                ),
               ),
               title: AppSearchBar(
                 controller: _textController,
