@@ -9,7 +9,7 @@ Turn Tuku Shop into a working clothing-store demo for client review: browse → 
 | G1 | Real-looking fashion catalog | 14 clothing categories, ~70 products, bundled images from free-license photo sites |
 | G2 | Full purchase flow | A reviewer can add to cart, check out, and see the new order in My Orders |
 | G3 | Mock data only in data sources | No mock values in domain, presentation or core; swapping in an API touches only `data/` |
-| G4 | Short mock latency | Every data source call waits 300–700 ms (seeded, same sequence every launch); no other artificial delay anywhere |
+| G4 | Short mock latency | Every data source call waits 200–800 ms (seeded, same sequence every launch); no other artificial delay anywhere |
 | G5 | Progressive loading | Every section loads and renders on its own; nothing waits for the whole screen |
 | G6 | Repeatable demo | Same data on every launch; one tap resets the demo state |
 
@@ -18,8 +18,8 @@ Turn Tuku Shop into a working clothing-store demo for client review: browse → 
 | Rule | Reason | Where |
 |---|---|---|
 | Mock data and mock state live only in `data/mock/` and the data source that reads it | Same seam a real API will replace | `data/data_sources/*_data_source.dart` |
-| Every data source method starts with `await MockLatency.wait()` (300–700 ms) | One latency knob (`MockLatency.min` / `max`) | `lib/src/core/constants/mock_latency.dart` |
-| Controllers, usecases and repositories never delay (exceptions: splash stays up ≥ 1 s; device settings such as language load instantly so the first frame is already in the right language) | Latency belongs to the "network" only | Remove `SdHelperV5.delayLoading()` from `profile_controller.dart` |
+| Every data source method starts with `await MockLatency.wait()` (200–800 ms) | One latency knob (`MockLatency.min` / `max`) | `lib/src/core/constants/mock_latency.dart` |
+| Controllers, usecases and repositories never delay (exceptions: splash stays up ≥ 1 s, its entrance animation taking the first 0.8 s; device settings such as language load instantly so the first frame is already in the right language) | Latency belongs to the "network" only | Remove `SdHelperV5.delayLoading()` from `profile_controller.dart` |
 | One Cubit + one request per screen section | A slow or failed section never blocks the others | See [Progressive loading](#progressive-loading) |
 | Every section has its own skeleton, empty state and error + Retry | Partial failure stays visible and recoverable | `presentation/<screen>/<section>/` |
 | Lists page 10 items and load more on scroll | First rows show after one short wait, not after the whole list | `SdListViewLoadMoreV5` / grid equivalent |
@@ -324,14 +324,14 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | Variation tiers | A product's second option is a size or a device `model` (`ProductOptionKind`); 7 phone cases are sold per model (`as6`–`as12`: all iPhones, Pro iPhones or Galaxy phones × 2–5 colors); models stay out of the size filter | 2026-10-28 |
 | Review filter | Each review records the variation bought; reviews filter by color and/or size (model) on the product page and All reviews, in two labeled rows (Color, Model or Size), each with its own All | 2026-10-28 |
 | Category → Search | A category opens Search narrowed to it | 2026-10-28 |
-| Quick filter chips | Under the search bar, one chip per filter section (Sort, Category, Price, Rating, Size, Color, More); a tap opens a small sheet with only that section, Reset clears just it; the app bar Filter button opens every section | 2026-10-27 |
-| Motion | `SkeletonBox` shimmers in step (clock-synced, off with reduced motion); `Pressable` scales tiles on press; `FadeSlideIn` staggers grid and strip items; `FlyToCart` arcs the product photo from the add sheet into the page's cart button, which bumps (off with reduced motion) | 2026-10-28 |
+| Quick filter chips | Under the search bar, one chip per filter section (Sort, Category, Price, Rating, Size, Color, More); a tap opens a small sheet with only that section, Reset clears just it and applies at once (sheet closes, results refresh); the app bar Filter button opens every section | 2026-10-27 |
+| Motion | `SkeletonBox` shimmers in step (clock-synced, off with reduced motion); splash (1 s, animation 0.8 s) bag pops in, draws its handle, drops its "T" and spells the name, over drifting glows and loading dots (still frame with reduced motion); `Pressable` scales tiles on press; `FadeSlideIn` staggers grid and strip items; `FlyToCart` arcs the product photo from the add sheet into the page's cart button, which bumps (off with reduced motion) | 2026-10-28 |
 | List skeletons | `ListSkeleton`: 5 start-aligned rows with varied line widths (avatar, thumbnail or none; card or divided), used by orders, addresses, cart, chat, notifications, reviews and shop categories | 2026-10-27 |
 | Shop page | Shopee-style shop detail at `/shop?id=`; each section (header, picks, new, sale, products, categories) is its own request; follows are stored on the device and reset with demo data | 2026-10-27 |
 | Chat | Chat tab between Categories and Notifications (5 tabs, Shopee order); one thread per shop plus Tuku Care; a real chat API or websocket replaces only `ChatLocalDataSource` | 2026-10-27 |
 | Search filters | Filter is an app bar action next to the cart (Home and Search) | 2026-10-27 |
 | Home carousel | Auto-advances every 3 s, banners in source order (no shuffle) so dots and content match | 2026-10-27 |
-| Mock latency | 300–700 ms per call from a seeded random (was a fixed 1 s) | 2026-10-27 |
+| Mock latency | 200–800 ms per call from a seeded random (was 300–700 ms, before that a fixed 1 s) | 2026-10-27 |
 | UI redesign | New phase 2: `mobile-app-ui-design` skill mockups gate all screen work; later phases renumbered 3–9 | 2026-10-18 |
 
 ## Open decisions
