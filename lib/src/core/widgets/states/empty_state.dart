@@ -2,23 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:system_design/index.dart';
 import 'package:tuku_shop/src/core/core.dart';
 
-/// An empty list turned into guidance: an icon, what this place is for, and
-/// one action to fill it.
+/// An empty list turned into guidance: an icon and what this place is for.
+/// Its screen centres it and puts any action to fill it in a
+/// [BottomActionBar].
 class EmptyState extends StatelessWidget {
   const EmptyState({
     super.key,
     required this.icon,
     required this.title,
     required this.message,
-    this.actionLabel,
-    this.onAction,
   });
 
   final IconData icon;
   final String title;
   final String message;
-  final String? actionLabel;
-  final VoidCallback? onAction;
 
   @override
   Widget build(BuildContext context) {
@@ -59,10 +56,6 @@ class EmptyState extends StatelessWidget {
             textAlign: TextAlign.center,
             style: SdTextStyleV5.body14().wColor(colors.textSubTitle),
           ),
-          if (actionLabel != null && onAction != null) ...[
-            SdVerticalSpacingV5(value: SdSpacingV5.s24),
-            AppButton(label: actionLabel!, onTap: onAction, expand: false),
-          ],
         ],
       ),
     );

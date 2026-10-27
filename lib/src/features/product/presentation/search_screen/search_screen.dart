@@ -163,12 +163,14 @@ class _SearchViewState extends State<_SearchView> {
             body: showResults
                 ? LoadMoreListener(
                     onLoadMore: results.loadMore,
-                    child: ListView(
-                      padding: EdgeInsets.all(SdSpacingV5.s16),
-                      children: [
-                        ProductGridSection(
-                          emptyTitle: context.loc.search_no_results_title,
-                          emptyMessage: context.loc.search_no_results_message,
+                    child: CustomScrollView(
+                      slivers: [
+                        SliverPadding(
+                          padding: EdgeInsets.all(SdSpacingV5.s16),
+                          sliver: ProductGridSection.sliver(
+                            emptyTitle: context.loc.search_no_results_title,
+                            emptyMessage: context.loc.search_no_results_message,
+                          ),
                         ),
                       ],
                     ),

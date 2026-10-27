@@ -85,7 +85,7 @@ class _View extends StatelessWidget {
                   SdSpacingV5.s16,
                   SdSpacingV5.s32 + MediaQuery.paddingOf(context).bottom,
                 ),
-                sliver: const SliverToBoxAdapter(child: ProductGridSection()),
+                sliver: const ProductGridSection.sliver(),
               ),
             ],
           ),

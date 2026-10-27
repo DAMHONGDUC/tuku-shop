@@ -112,7 +112,7 @@ class _Body extends StatelessWidget {
         slivers: [
           SliverToBoxAdapter(child: _Filters(selected: state.filter)),
           if (items.isEmpty)
-            SliverToBoxAdapter(
+            SliverFillCenter(
               child: EmptyState(
                 icon: Icons.notifications_none_rounded,
                 title: context.loc.notifications_empty_title,
@@ -127,9 +127,11 @@ class _Body extends StatelessWidget {
             _Header(context.loc.notifications_earlier),
             _List(items: earlier),
           ],
-          SliverToBoxAdapter(
-            child: SizedBox(height: FloatingBottomNav.contentInset(context)),
-          ),
+          // An empty state fills the rest instead, so it stays centred.
+          if (items.isNotEmpty)
+            SliverToBoxAdapter(
+              child: SizedBox(height: FloatingBottomNav.contentInset(context)),
+            ),
         ],
       ),
     );

@@ -25,6 +25,7 @@ export 'feedback/app_toast.dart';
 
 // states
 export 'states/empty_state.dart';
+export 'states/fill_center.dart';
 export 'states/section_error.dart';
 export 'states/skeleton_box.dart';
 export 'states/list_skeleton.dart';

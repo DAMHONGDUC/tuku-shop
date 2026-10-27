@@ -54,15 +54,12 @@ class _View extends StatelessWidget {
                 children: [SectionError(onRetry: controller.load)],
               ),
               ChatListStatus.loaded when state.conversations.isEmpty =>
-                ListView(
-                  padding: EdgeInsets.all(SdSpacingV5.s16),
-                  children: [
-                    EmptyState(
-                      icon: Icons.chat_bubble_outline_rounded,
-                      title: loc.chat_empty_title,
-                      message: loc.chat_empty_message,
-                    ),
-                  ],
+                FillCenterScrollView(
+                  child: EmptyState(
+                    icon: Icons.chat_bubble_outline_rounded,
+                    title: loc.chat_empty_title,
+                    message: loc.chat_empty_message,
+                  ),
                 ),
               ChatListStatus.loaded => ListView.separated(
                 padding: EdgeInsets.only(

@@ -358,7 +358,7 @@ class _ProductsTab extends StatelessWidget {
               SdSpacingV5.s16,
               BottomActionBar.bottomGap(context) + SdSpacingV5.s16,
             ),
-            sliver: const SliverToBoxAdapter(child: ProductGridSection()),
+            sliver: const ProductGridSection.sliver(),
           ),
         ],
       ),

@@ -71,24 +71,40 @@ class _View extends StatelessWidget {
                 : ProductActionDock(product: product),
             body: LoadMoreListener(
               onLoadMore: reviews.loadMore,
-              child: ListView(
-                padding: EdgeInsets.fromLTRB(
-                  SdSpacingV5.s16,
-                  SdSpacingV5.s8,
-                  SdSpacingV5.s16,
-                  SdSpacingV5.s24,
-                ),
-                children: [
-                  if (product == null)
-                    const SkeletonBox(height: SdSpacingV5.s64)
-                  else
-                    _Summary(product: product),
-                  if (product != null) ...[
-                    SdVerticalSpacingV5(value: SdSpacingV5.s12),
-                    ReviewFilterChips(product: product),
-                  ],
-                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
-                  _ReviewList(productId: productId),
+              child: CustomScrollView(
+                slivers: [
+                  SliverPadding(
+                    padding: EdgeInsets.fromLTRB(
+                      SdSpacingV5.s16,
+                      SdSpacingV5.s8,
+                      SdSpacingV5.s16,
+                      SdSpacingV5.s16,
+                    ),
+                    sliver: SliverToBoxAdapter(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          if (product == null)
+                            const SkeletonBox(height: SdSpacingV5.s64)
+                          else
+                            _Summary(product: product),
+                          if (product != null) ...[
+                            SdVerticalSpacingV5(value: SdSpacingV5.s12),
+                            ReviewFilterChips(product: product),
+                          ],
+                        ],
+                      ),
+                    ),
+                  ),
+                  SliverPadding(
+                    padding: EdgeInsets.fromLTRB(
+                      SdSpacingV5.s16,
+                      0,
+                      SdSpacingV5.s16,
+                      SdSpacingV5.s24,
+                    ),
+                    sliver: _ReviewList(productId: productId),
+                  ),
                 ],
               ),
             ),
@@ -152,30 +168,38 @@ class _ReviewList extends StatelessWidget {
     return BlocBuilder<ProductReviewsController, ProductReviewsState>(
       builder: (context, state) {
         final controller = context.read<ProductReviewsController>();
-        return switch (state.status) {
-          ProductReviewsStatus.loading => const ListSkeleton(lines: 3),
-          ProductReviewsStatus.error => SectionError(
-            onRetry: () => controller.load(productId),
-          ),
-          ProductReviewsStatus.loaded when state.items.isEmpty => EmptyState(
-            icon: Icons.rate_review_outlined,
-            title: context.loc.pdp_reviews,
-            message: state.isFiltered
-                ? context.loc.review_no_match
-                : context.loc.pdp_no_reviews,
-          ),
-          ProductReviewsStatus.loaded => Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              for (var i = 0; i < state.items.length; i++)
-                ReviewCommentItem(
-                  review: state.items[i],
-                  isLast: i == state.items.length - 1 && !state.hasMore,
-                ),
-              if (state.isLoadingMore) const ListSkeleton(rows: 2, lines: 3),
-            ],
-          ),
-        };
+        // No reviews fills the rest of the page, centred.
+        if (state.status == ProductReviewsStatus.loaded &&
+            state.items.isEmpty) {
+          return SliverFillCenter(
+            child: EmptyState(
+              icon: Icons.rate_review_outlined,
+              title: context.loc.pdp_reviews,
+              message: state.isFiltered
+                  ? context.loc.review_no_match
+                  : context.loc.pdp_no_reviews,
+            ),
+          );
+        }
+        return SliverToBoxAdapter(
+          child: switch (state.status) {
+            ProductReviewsStatus.loading => const ListSkeleton(lines: 3),
+            ProductReviewsStatus.error => SectionError(
+              onRetry: () => controller.load(productId),
+            ),
+            ProductReviewsStatus.loaded => Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                for (var i = 0; i < state.items.length; i++)
+                  ReviewCommentItem(
+                    review: state.items[i],
+                    isLast: i == state.items.length - 1 && !state.hasMore,
+                  ),
+                if (state.isLoadingMore) const ListSkeleton(rows: 2, lines: 3),
+              ],
+            ),
+          },
+        );
       },
     );
   }

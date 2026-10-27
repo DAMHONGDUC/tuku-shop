@@ -43,6 +43,11 @@ class _View extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
+    final empty = context.select<AddressBookController, bool>(
+      (c) =>
+          c.state.status == AddressBookStatus.loaded &&
+          c.state.addresses.isEmpty,
+    );
 
     return Scaffold(
       backgroundColor: colors.pageDefault,
@@ -51,13 +56,24 @@ class _View extends StatelessWidget {
             ? context.loc.address_pick_title
             : context.loc.address_book_title,
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        backgroundColor: colors.primary,
-        foregroundColor: colors.onPrimary,
-        onPressed: () => _openForm(context),
-        icon: const Icon(Icons.add),
-        label: Text(context.loc.address_add),
-      ),
+      // With no addresses, Add sits in the bottom bar under the empty state.
+      bottomNavigationBar: empty
+          ? BottomActionBar(
+              child: AppButton(
+                label: context.loc.address_add,
+                onTap: () => _openForm(context),
+              ),
+            )
+          : null,
+      floatingActionButton: empty
+          ? null
+          : FloatingActionButton.extended(
+              backgroundColor: colors.primary,
+              foregroundColor: colors.onPrimary,
+              onPressed: () => _openForm(context),
+              icon: const Icon(Icons.add),
+              label: Text(context.loc.address_add),
+            ),
       body: BlocBuilder<AddressBookController, AddressBookState>(
         builder: (context, state) {
           final controller = context.read<AddressBookController>();
@@ -75,8 +91,6 @@ class _View extends StatelessWidget {
                 icon: Icons.location_on_outlined,
                 title: context.loc.address_empty_title,
                 message: context.loc.address_empty_message,
-                actionLabel: context.loc.address_add,
-                onAction: () => _openForm(context),
               ),
             ),
             AddressBookStatus.loaded => ListView.separated(

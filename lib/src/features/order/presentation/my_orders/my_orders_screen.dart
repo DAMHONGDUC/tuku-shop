@@ -97,14 +97,25 @@ class _OrdersTabState extends State<_OrdersTab>
                 onRetry: () => _controller.load(widget.status),
               ),
             ),
-            OrdersListStatus.loaded when state.items.isEmpty => Center(
-              child: EmptyState(
-                icon: Icons.receipt_long_outlined,
-                title: context.loc.orders_empty_title,
-                message: context.loc.orders_empty_message,
-                actionLabel: context.loc.common_start_shopping,
-                onAction: () => context.go(HomeRoutes.home.fullPath),
-              ),
+            // A tab body: its own bar sits under the centred empty state.
+            OrdersListStatus.loaded when state.items.isEmpty => Column(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: EmptyState(
+                      icon: Icons.receipt_long_outlined,
+                      title: context.loc.orders_empty_title,
+                      message: context.loc.orders_empty_message,
+                    ),
+                  ),
+                ),
+                BottomActionBar(
+                  child: AppButton(
+                    label: context.loc.common_start_shopping,
+                    onTap: () => context.go(HomeRoutes.home.fullPath),
+                  ),
+                ),
+              ],
             ),
             OrdersListStatus.loaded => LoadMoreListener(
               onLoadMore: _controller.loadMore,

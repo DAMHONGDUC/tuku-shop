@@ -30,8 +30,18 @@ class _View extends StatelessWidget {
     return BlocBuilder<WishlistController, WishlistState>(
       builder: (context, state) {
         final controller = context.read<WishlistController>();
+        final empty =
+            state.status == WishlistStatus.loaded && state.products.isEmpty;
         return Scaffold(
           backgroundColor: colors.pageDefault,
+          bottomNavigationBar: empty
+              ? BottomActionBar(
+                  child: AppButton(
+                    label: context.loc.common_start_shopping,
+                    onTap: () => context.go(HomeRoutes.home.fullPath),
+                  ),
+                )
+              : null,
           appBar: AppTopBar(
             title:
                 state.status == WishlistStatus.loaded &&
@@ -41,55 +51,56 @@ class _View extends StatelessWidget {
           ),
           body: RefreshWrapper(
             onRefresh: controller.load,
-            child: ListView(
-              padding: EdgeInsets.fromLTRB(
-                SdSpacingV5.s16,
-                SdSpacingV5.s8,
-                SdSpacingV5.s16,
-                MediaQuery.paddingOf(context).bottom + SdSpacingV5.s24,
-              ),
-              children: [
-                switch (state.status) {
-                  WishlistStatus.loading => ProductGrid(
-                    itemCount: 0,
-                    trailingSkeletons: 4,
-                    itemBuilder: (_, _) => const SizedBox.shrink(),
-                  ),
-                  WishlistStatus.error => SectionError(
-                    onRetry: controller.load,
-                  ),
-                  WishlistStatus.loaded when state.products.isEmpty =>
-                    EmptyState(
+            child: empty
+                ? FillCenterScrollView(
+                    child: EmptyState(
                       icon: Icons.favorite_border,
                       title: context.loc.wishlist_empty_title,
                       message: context.loc.wishlist_empty_message,
-                      actionLabel: context.loc.common_start_shopping,
-                      onAction: () => context.go(HomeRoutes.home.fullPath),
                     ),
-                  WishlistStatus.loaded => ProductGrid(
-                    itemCount: state.products.length,
-                    itemBuilder: (context, index) {
-                      final product = state.products[index];
-                      return ProductTile(
-                        imageUrl: product.imageUrl,
-                        name: product.name,
-                        brand: product.brand,
-                        price: product.price,
-                        originalPrice: product.originalPrice,
-                        rating: product.averageRating,
-                        soldCount: product.purchaserCount,
-                        isFavorite: true,
-                        isSoldOut: !product.isInStock,
-                        onFavoriteTap: () => controller.remove(product.id),
-                        onTap: () => context.push(
-                          ProductRoutes.productDetailLocation(product.id),
+                  )
+                : ListView(
+                    padding: EdgeInsets.fromLTRB(
+                      SdSpacingV5.s16,
+                      SdSpacingV5.s8,
+                      SdSpacingV5.s16,
+                      MediaQuery.paddingOf(context).bottom + SdSpacingV5.s24,
+                    ),
+                    children: [
+                      switch (state.status) {
+                        WishlistStatus.loading => ProductGrid(
+                          itemCount: 0,
+                          trailingSkeletons: 4,
+                          itemBuilder: (_, _) => const SizedBox.shrink(),
                         ),
-                      );
-                    },
+                        WishlistStatus.error => SectionError(
+                          onRetry: controller.load,
+                        ),
+                        WishlistStatus.loaded => ProductGrid(
+                          itemCount: state.products.length,
+                          itemBuilder: (context, index) {
+                            final product = state.products[index];
+                            return ProductTile(
+                              imageUrl: product.imageUrl,
+                              name: product.name,
+                              brand: product.brand,
+                              price: product.price,
+                              originalPrice: product.originalPrice,
+                              rating: product.averageRating,
+                              soldCount: product.purchaserCount,
+                              isFavorite: true,
+                              isSoldOut: !product.isInStock,
+                              onFavoriteTap: () =>
+                                  controller.remove(product.id),
+                              onTap: () => context.push(
+                                ProductRoutes.productDetailLocation(product.id),
+                              ),
+                            );
+                          },
+                        ),
+                      },
+                    ],
                   ),
-                },
-              ],
-            ),
           ),
         );
       },

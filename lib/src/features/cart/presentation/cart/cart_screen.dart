@@ -37,31 +37,41 @@ class CartScreen extends StatelessWidget {
             bottom: false,
             child: RefreshWrapper(
               onRefresh: controller.load,
-              child: ListView(
-                padding: EdgeInsets.fromLTRB(
-                  SdSpacingV5.s16,
-                  SdSpacingV5.s8,
-                  SdSpacingV5.s16,
-                  SdSpacingV5.s24,
-                ),
-                children: [
-                  switch (state.status) {
-                    CartStatus.loading => const _CartSkeleton(),
-                    CartStatus.error => SectionError(onRetry: controller.load),
-                    CartStatus.loaded when empty => EmptyState(
-                      icon: Icons.shopping_bag_outlined,
-                      title: context.loc.cart_empty_title,
-                      message: context.loc.cart_empty_message,
-                      actionLabel: context.loc.common_start_shopping,
-                      onAction: () => context.go(HomeRoutes.home.fullPath),
+              child: empty
+                  ? FillCenterScrollView(
+                      child: EmptyState(
+                        icon: Icons.shopping_bag_outlined,
+                        title: context.loc.cart_empty_title,
+                        message: context.loc.cart_empty_message,
+                      ),
+                    )
+                  : ListView(
+                      padding: EdgeInsets.fromLTRB(
+                        SdSpacingV5.s16,
+                        SdSpacingV5.s8,
+                        SdSpacingV5.s16,
+                        SdSpacingV5.s24,
+                      ),
+                      children: [
+                        switch (state.status) {
+                          CartStatus.loading => const _CartSkeleton(),
+                          CartStatus.error => SectionError(
+                            onRetry: controller.load,
+                          ),
+                          CartStatus.loaded => _CartBody(state: state),
+                        },
+                      ],
                     ),
-                    CartStatus.loaded => _CartBody(state: state),
-                  },
-                ],
-              ),
             ),
           ),
-          bottomNavigationBar: state.status == CartStatus.loaded && !empty
+          bottomNavigationBar: empty
+              ? BottomActionBar(
+                  child: AppButton(
+                    label: context.loc.common_start_shopping,
+                    onTap: () => context.go(HomeRoutes.home.fullPath),
+                  ),
+                )
+              : state.status == CartStatus.loaded
               ? _CheckoutDock(summary: state.summary)
               : null,
         );
