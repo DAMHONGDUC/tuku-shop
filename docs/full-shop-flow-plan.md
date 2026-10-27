@@ -107,7 +107,7 @@ Current non-clothing categories (Toys, Cards, P&A, Pre-loved Luxury) and their i
 | Sources | Unsplash, free (non-Plus) photos only; credits kept in the manifest |
 | Avoid | Visible brand logos or trademarks on garments |
 | Format | JPEG, 800 px long edge, quality 75 (≈60–120 KB each) |
-| Volume | 69 products × 1–2 photos + 8 banners = 144 files, ≈ 19 MB (review photos recompressed to 0.6 MB) |
+| Volume | 76 products × 1–2 photos + 8 banners = 157 files, ≈ 20 MB (review photos recompressed to 0.6 MB) |
 | Layout | `assets/images/catalog/<categoryId>/<productId>_<n>.jpg` (category cards reuse one product photo), `assets/images/banner/b_<n>.jpg` |
 | Manifest | `tool/mock_images.csv`: asset path, source URL, photographer, license |
 | Fetch | `tool/fetch_mock_images.sh` downloads every manifest row at 800 px via the Unsplash image CDN, skips existing files |
@@ -321,11 +321,11 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | One action, one request | A user action (place order, save address, cancel) is a single data source call, not several in a row | 2026-10-18 |
 | Bottom gap | Bottom actions sit at safe area + 4; tab bar 56 pt | 2026-10-27 |
 | Marketplace | 8 shops (one per brand, plus resellers Denim House and Saigon Closet sharing Northline / Aurora listings); products carry `sellerId` | 2026-10-27 |
-| Variation tiers | A product's second option is a size or a device `model` (`ProductOptionKind`); the Soft Silicone Phone Case lists 7 iPhone models × 5 colors; models stay out of the size filter | 2026-10-28 |
+| Variation tiers | A product's second option is a size or a device `model` (`ProductOptionKind`); 7 phone cases are sold per model (`as6`–`as12`: all iPhones, Pro iPhones or Galaxy phones × 2–5 colors); models stay out of the size filter | 2026-10-28 |
 | Review filter | Each review records the variation bought; reviews filter by color and/or size (model) on the product page and All reviews, in two labeled rows (Color, Model or Size), each with its own All | 2026-10-28 |
 | Category → Search | A category opens Search narrowed to it | 2026-10-28 |
 | Quick filter chips | Under the search bar, one chip per filter section (Sort, Category, Price, Rating, Size, Color, More); a tap opens a small sheet with only that section, Reset clears just it; the app bar Filter button opens every section | 2026-10-27 |
-| Motion | `SkeletonBox` shimmers in step (clock-synced, off with reduced motion); `Pressable` scales tiles on press; `FadeSlideIn` staggers grid and strip items | 2026-10-28 |
+| Motion | `SkeletonBox` shimmers in step (clock-synced, off with reduced motion); `Pressable` scales tiles on press; `FadeSlideIn` staggers grid and strip items; `FlyToCart` arcs the product photo from the add sheet into the page's cart button, which bumps (off with reduced motion) | 2026-10-28 |
 | List skeletons | `ListSkeleton`: 5 start-aligned rows with varied line widths (avatar, thumbnail or none; card or divided), used by orders, addresses, cart, chat, notifications, reviews and shop categories | 2026-10-27 |
 | Shop page | Shopee-style shop detail at `/shop?id=`; each section (header, picks, new, sale, products, categories) is its own request; follows are stored on the device and reset with demo data | 2026-10-27 |
 | Chat | Chat tab between Categories and Notifications (5 tabs, Shopee order); one thread per shop plus Tuku Care; a real chat API or websocket replaces only `ChatLocalDataSource` | 2026-10-27 |
