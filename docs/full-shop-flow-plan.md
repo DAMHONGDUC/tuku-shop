@@ -228,7 +228,7 @@ Every screen is redesigned with the `mobile-app-ui-design` skill before it is co
 | Category products / Search | Search never blank: recent searches, trending, recommended; filter chips over modal filters |
 | Product detail | Large photography, rating + review count + delivery estimate as trust signals, sticky Add to cart in the thumb zone |
 | Add-to-cart sheet | Tappable size / color chips instead of text input; out-of-stock chips disabled |
-| Favorites / Cart | Pushed screens with a back button; empty states with guidance and a "Start shopping" CTA; free-shipping progress bar; cart total and Checkout pinned at the bottom |
+| Favorites / Cart | Pushed screens with a back button; centred empty states with guidance and a "Start shopping" CTA in the bottom bar; free-shipping progress bar; cart total and Checkout pinned at the bottom |
 | Checkout | One scroll, sections in decision order; Place order pinned at the bottom |
 | Order success | **Peak moment**: check animation + order summary card + "Track order" / "Continue shopping" (**end** moment) |
 | Orders / Order detail | Confident status headline, visual timeline instead of a date list |
@@ -331,6 +331,8 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | Chat | Chat tab between Categories and Notifications (5 tabs, Shopee order); one thread per shop plus Tuku Care; a real chat API or websocket replaces only `ChatLocalDataSource` | 2026-10-27 |
 | Search filters | Filter is an app bar action next to the cart (Home and Search) | 2026-10-27 |
 | Home carousel | Auto-advances every 3 s, banners in source order (no shuffle) so dots and content match | 2026-10-27 |
+| Empty states | Centred on screen: `FillCenterScrollView` (cart, wishlist, chat; still pull-to-refresh), `SliverFillCenter` under a header (notifications, reviews, `ProductGridSection.sliver` in search, category and shop), `Center` (orders, addresses); the action that fills it (Start shopping, Add address) sits in a `BottomActionBar` | 2026-10-27 |
+| Swipe to delete | `SwipeAction`: swiping a cart line left reveals a red Delete; only a tap on it removes the line (Undo toast as before); tapping the row or opening another closes it | 2026-10-27 |
 | Mock latency | 200–800 ms per call from a seeded random (was 300–700 ms, before that a fixed 1 s) | 2026-10-27 |
 | UI redesign | New phase 2: `mobile-app-ui-design` skill mockups gate all screen work; later phases renumbered 3–9 | 2026-10-18 |
 
