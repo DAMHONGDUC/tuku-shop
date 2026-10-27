@@ -94,6 +94,7 @@
     "cart_shipping_at_checkout": "Tính khi thanh toán",
     "cart_removed": "Đã xoá {name}",
     "cart_remove": "Xoá",
+    "common_delete": "Xoá",
     "cart_total": "Tổng cộng",
     "cart_checkout": "Thanh toán",
     "pdp_added_to_cart": "Đã thêm vào giỏ",

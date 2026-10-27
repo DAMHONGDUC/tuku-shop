@@ -97,14 +97,24 @@ class _CartBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
+        // Rows run edge to edge so a swiped row's Delete fills the corner.
         Container(
           decoration: card,
-          padding: EdgeInsets.symmetric(horizontal: SdSpacingV5.s16),
+          clipBehavior: Clip.antiAlias,
           child: Column(
             children: [
               for (var i = 0; i < state.lines.length; i++) ...[
-                if (i > 0) Divider(height: 1, color: colors.borderDefault),
-                _CartLineTile(line: state.lines[i]),
+                if (i > 0)
+                  Divider(
+                    height: 1,
+                    indent: SdSpacingV5.s16,
+                    endIndent: SdSpacingV5.s16,
+                    color: colors.borderDefault,
+                  ),
+                _CartLineTile(
+                  key: ValueKey(state.lines[i].id),
+                  line: state.lines[i],
+                ),
               ],
             ],
           ),
@@ -189,13 +199,13 @@ class _CartBody extends StatelessWidget {
 }
 
 class _CartLineTile extends StatelessWidget {
-  const _CartLineTile({required this.line});
+  const _CartLineTile({super.key, required this.line});
 
   final CartLine line;
 
   Future<void> _remove(BuildContext context) async {
     final controller = context.read<CartController>();
-    // Taken before the await: the dismissed line's context is gone after.
+    // Taken before the await: the removed line's context is gone after.
     final toast = AppToast.of(context);
     final message = context.loc.cart_removed(line.name);
     final undo = context.loc.common_undo;
@@ -212,18 +222,14 @@ class _CartLineTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final colors = context.colorTheme;
 
-    return Dismissible(
-      key: ValueKey(line.id),
-      direction: DismissDirection.endToStart,
-      onDismissed: (_) => _remove(context),
-      background: Container(
-        alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: SdSpacingV5.s16),
-        color: colors.sale.withValues(alpha: 0.12),
-        child: Icon(Icons.delete_outline, color: colors.sale),
-      ),
+    return SwipeAction(
+      label: context.loc.common_delete,
+      onAction: () => _remove(context),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: SdSpacingV5.s12),
+        padding: EdgeInsets.symmetric(
+          horizontal: SdSpacingV5.s16,
+          vertical: SdSpacingV5.s12,
+        ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

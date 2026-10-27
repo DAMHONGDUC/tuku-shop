@@ -316,6 +316,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get cart_remove => 'Xoá';
 
   @override
+  String get common_delete => 'Xoá';
+
+  @override
   String get cart_total => 'Tổng cộng';
 
   @override

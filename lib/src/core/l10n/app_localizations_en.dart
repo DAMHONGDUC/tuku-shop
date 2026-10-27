@@ -321,6 +321,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get cart_remove => 'Remove';
 
   @override
+  String get common_delete => 'Delete';
+
+  @override
   String get cart_total => 'Total';
 
   @override

@@ -164,6 +164,7 @@
         }
     },
     "cart_remove": "Remove",
+    "common_delete": "Delete",
     "cart_total": "Total",
     "cart_checkout": "Checkout",
     "pdp_added_to_cart": "Added to cart",

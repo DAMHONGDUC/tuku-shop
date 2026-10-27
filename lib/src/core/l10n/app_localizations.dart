@@ -662,6 +662,12 @@ abstract class AppLocalizations {
   /// **'Remove'**
   String get cart_remove;
 
+  /// No description provided for @common_delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get common_delete;
+
   /// No description provided for @cart_total.
   ///
   /// In en, this message translates to:
