@@ -64,15 +64,7 @@ class _View extends StatelessWidget {
           return switch (state.status) {
             AddressBookStatus.loading => ListView(
               padding: EdgeInsets.all(SdSpacingV5.s16),
-              children: [
-                for (var i = 0; i < 2; i++) ...[
-                  const SkeletonBox(
-                    height: 120,
-                    radius: UIConstants.cardRadius,
-                  ),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s12),
-                ],
-              ],
+              children: const [ListSkeleton(lines: 3, card: true)],
             ),
             AddressBookStatus.error => Padding(
               padding: EdgeInsets.all(SdSpacingV5.s16),

@@ -39,6 +39,14 @@ class _SkeletonBoxState extends State<SkeletonBox>
       ..repeat();
   }
 
+  /// Without a [SkeletonBox.width], fill the parent's width like a
+  /// `Container`, and collapse instead where the width is unbounded.
+  static const _fill = LimitedBox(
+    maxWidth: 0,
+    maxHeight: 0,
+    child: SizedBox.expand(),
+  );
+
   @override
   void dispose() {
     _sweep.dispose();
@@ -76,6 +84,7 @@ class _SkeletonBoxState extends State<SkeletonBox>
                   color: base,
                   borderRadius: BorderRadius.circular(widget.radius),
                 ),
+                child: _fill,
               )
             : AnimatedBuilder(
                 animation: _sweep,
@@ -92,6 +101,7 @@ class _SkeletonBoxState extends State<SkeletonBox>
                         stops: const [0.25, 0.5, 0.75],
                       ),
                     ),
+                    child: _fill,
                   );
                 },
               ),

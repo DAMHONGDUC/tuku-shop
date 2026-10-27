@@ -41,7 +41,13 @@ class _View extends StatelessWidget {
             onRefresh: controller.load,
             child: switch (state.status) {
               ChatListStatus.loading => ListView(
-                children: [for (var i = 0; i < 5; i++) const _RowSkeleton()],
+                padding: EdgeInsets.symmetric(horizontal: SdSpacingV5.s16),
+                children: const [
+                  ListSkeleton(
+                    leading: ListSkeletonLeading.avatar,
+                    divided: true,
+                  ),
+                ],
               ),
               ChatListStatus.error => ListView(
                 padding: EdgeInsets.all(SdSpacingV5.s16),
@@ -210,36 +216,6 @@ class _ConversationRow extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class _RowSkeleton extends StatelessWidget {
-  const _RowSkeleton();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: SdSpacingV5.s16,
-        vertical: SdSpacingV5.s12,
-      ),
-      child: Row(
-        children: [
-          const SkeletonBox(width: 48, height: 48, radius: 24),
-          SdHorizontalSpacingV5(value: SdSpacingV5.s12),
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SkeletonBox(width: 140),
-                SizedBox(height: SdSpacingV5.s8),
-                SkeletonBox(),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }

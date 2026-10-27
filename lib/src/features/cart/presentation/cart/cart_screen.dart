@@ -371,30 +371,10 @@ class _CartSkeleton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        for (var i = 0; i < 2; i++) ...[
-          Row(
-            children: [
-              const SkeletonBox(width: 72, height: 90, radius: 12),
-              SdHorizontalSpacingV5(value: SdSpacingV5.s12),
-              const Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SkeletonBox(width: 160),
-                    SizedBox(height: SdSpacingV5.s8),
-                    SkeletonBox(width: 96, height: SdSpacingV5.s10),
-                    SizedBox(height: SdSpacingV5.s16),
-                    SkeletonBox(width: 64),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SdVerticalSpacingV5(value: SdSpacingV5.s16),
-        ],
-      ],
+    return const ListSkeleton(
+      leading: ListSkeletonLeading.thumbnail,
+      lines: 3,
+      divided: true,
     );
   }
 }

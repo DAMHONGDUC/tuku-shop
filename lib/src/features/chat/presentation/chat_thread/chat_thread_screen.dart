@@ -203,18 +203,21 @@ class _Messages extends StatelessWidget {
 class _Skeleton extends StatelessWidget {
   const _Skeleton();
 
+  /// Bubble widths, varied like a real conversation.
+  static const _widths = [0.7, 0.5, 0.8, 0.45, 0.6];
+
   @override
   Widget build(BuildContext context) {
+    // Five bubbles from the top, all on the start side.
     return ListView(
-      reverse: true,
       padding: EdgeInsets.all(SdSpacingV5.s16),
       children: [
-        for (var i = 0; i < 4; i++) ...[
-          Align(
-            alignment: i.isEven ? Alignment.centerLeft : Alignment.centerRight,
-            child: SkeletonBox(
-              width: i.isEven ? 240 : 180,
-              height: SdSpacingV5.s48,
+        for (final w in _widths) ...[
+          FractionallySizedBox(
+            alignment: AlignmentDirectional.centerStart,
+            widthFactor: w,
+            child: const SkeletonBox(
+              height: SdSpacingV5.s44,
               radius: SdSpacingV5.s16,
             ),
           ),

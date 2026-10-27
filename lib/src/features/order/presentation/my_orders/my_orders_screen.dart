@@ -83,14 +83,12 @@ class _OrdersTabState extends State<_OrdersTab>
           return switch (state.status) {
             OrdersListStatus.loading => ListView(
               padding: padding,
-              children: [
-                for (var i = 0; i < 3; i++) ...[
-                  const SkeletonBox(
-                    height: 150,
-                    radius: UIConstants.cardRadius,
-                  ),
-                  SdVerticalSpacingV5(value: SdSpacingV5.s12),
-                ],
+              children: const [
+                ListSkeleton(
+                  leading: ListSkeletonLeading.thumbnail,
+                  lines: 3,
+                  card: true,
+                ),
               ],
             ),
             OrdersListStatus.error => Padding(

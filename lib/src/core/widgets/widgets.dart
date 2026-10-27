@@ -26,6 +26,7 @@ export 'feedback/app_toast.dart';
 export 'states/empty_state.dart';
 export 'states/section_error.dart';
 export 'states/skeleton_box.dart';
+export 'states/list_skeleton.dart';
 
 // media
 export 'media/catalog_image.dart';

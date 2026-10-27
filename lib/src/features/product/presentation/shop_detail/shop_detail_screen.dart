@@ -383,11 +383,8 @@ class _CategoriesTab extends StatelessWidget {
       builder: (context, state) => switch (state.status) {
         ShopCategoriesStatus.loading => ListView(
           padding: EdgeInsets.all(SdSpacingV5.s16),
-          children: [
-            for (var i = 0; i < 4; i++) ...[
-              const SkeletonBox(height: SdSpacingV5.s56),
-              SdVerticalSpacingV5(value: SdSpacingV5.s12),
-            ],
+          children: const [
+            ListSkeleton(leading: ListSkeletonLeading.avatar, divided: true),
           ],
         ),
         ShopCategoriesStatus.error => ListView(
