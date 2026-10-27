@@ -321,6 +321,10 @@ Each phase is one PR, ends with `fvm dart run melos run analyze` clean and its t
 | One action, one request | A user action (place order, save address, cancel) is a single data source call, not several in a row | 2026-10-18 |
 | Bottom gap | Bottom actions sit at safe area + 4; tab bar 56 pt | 2026-10-27 |
 | Marketplace | 8 shops (one per brand, plus resellers Denim House and Saigon Closet sharing Northline / Aurora listings); products carry `sellerId` | 2026-10-27 |
+| Variation tiers | A product's second option is a size or a device `model` (`ProductOptionKind`); the Soft Silicone Phone Case lists 7 iPhone models × 5 colors; models stay out of the size filter | 2026-10-28 |
+| Review filter | Each review records the variation bought; reviews filter by color and/or size (model) on the product page and All reviews | 2026-10-28 |
+| Category → Search | A category opens Search narrowed to it; quick chips under the search bar (category, On sale, In stock, 4.5★ & up, New, Best sellers) apply at once | 2026-10-28 |
+| Motion | `SkeletonBox` shimmers in step (clock-synced, off with reduced motion); `Pressable` scales tiles on press; `FadeSlideIn` staggers grid and strip items | 2026-10-28 |
 | Shop page | Shopee-style shop detail at `/shop?id=`; each section (header, picks, new, sale, products, categories) is its own request; follows are stored on the device and reset with demo data | 2026-10-27 |
 | Chat | Chat tab between Categories and Notifications (5 tabs, Shopee order); one thread per shop plus Tuku Care; a real chat API or websocket replaces only `ChatLocalDataSource` | 2026-10-27 |
 | Search filters | Filter is an app bar action next to the cart (Home and Search) | 2026-10-27 |
