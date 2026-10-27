@@ -9,16 +9,21 @@ import 'package:tuku_shop/src/features/product/presentation/product_detail/varia
 import 'add_to_cart_controller.dart';
 
 /// Pick color, size and quantity, then add. Shares the page's selection, so
-/// what was picked on the page is already selected here.
-class AddToCartSheet extends StatelessWidget {
+/// what was picked on the page is already selected here. An add (not Buy
+/// now) flies the photo into the page's cart button as the sheet closes.
+class AddToCartSheet extends StatefulWidget {
   const AddToCartSheet({
     super.key,
     required this.product,
     required this.buyNow,
+    required this.onAdded,
   });
 
   final ProductEntity product;
   final bool buyNow;
+
+  /// Where the photo was on screen, and which photo, once added.
+  final void Function(Rect from, String imagePath) onAdded;
 
   static Future<void> show(
     BuildContext context, {
@@ -40,9 +45,43 @@ class AddToCartSheet extends StatelessWidget {
           BlocProvider.value(value: context.read<VariantSelectionController>()),
           BlocProvider.value(value: context.read<AddToCartController>()),
         ],
-        child: AddToCartSheet(product: product, buyNow: buyNow),
+        child: AddToCartSheet(
+          product: product,
+          buyNow: buyNow,
+          // The page's context, so the photo lands on its cart button.
+          onAdded: (from, imagePath) =>
+              FlyToCart.launch(context, from: from, imagePath: imagePath),
+        ),
       ),
     );
+  }
+
+  @override
+  State<AddToCartSheet> createState() => _AddToCartSheetState();
+}
+
+class _AddToCartSheetState extends State<AddToCartSheet> {
+  final _imageKey = GlobalKey();
+
+  ProductEntity get product => widget.product;
+  bool get buyNow => widget.buyNow;
+
+  String _imageFor(String? colorName) =>
+      product.productColors
+          .where((c) => c.colorName == colorName)
+          .firstOrNull
+          ?.imageUrl ??
+      product.imageUrl;
+
+  void _onAdded(AddToCartState state) {
+    final box = _imageKey.currentContext?.findRenderObject();
+    if (!state.buyNow && box is RenderBox && box.hasSize) {
+      widget.onAdded(
+        box.localToGlobal(Offset.zero) & box.size,
+        _imageFor(context.read<VariantSelectionController>().state.colorName),
+      );
+    }
+    Navigator.of(context).pop();
   }
 
   @override
@@ -51,7 +90,7 @@ class AddToCartSheet extends StatelessWidget {
 
     return BlocListener<AddToCartController, AddToCartState>(
       listenWhen: (a, b) => b.status == AddToCartStatus.added,
-      listener: (context, _) => Navigator.of(context).pop(),
+      listener: (context, state) => _onAdded(state),
       child: SafeArea(
         bottom: false,
         child: Padding(
@@ -63,12 +102,7 @@ class AddToCartSheet extends StatelessWidget {
           ),
           child: BlocBuilder<VariantSelectionController, VariantSelectionState>(
             builder: (context, selection) {
-              final selectedImage =
-                  product.productColors
-                      .where((c) => c.colorName == selection.colorName)
-                      .firstOrNull
-                      ?.imageUrl ??
-                  product.imageUrl;
+              final selectedImage = _imageFor(selection.colorName);
               final stock = selection.stock;
 
               return Column(
@@ -89,6 +123,7 @@ class AddToCartSheet extends StatelessWidget {
                   Row(
                     children: [
                       CatalogImage(
+                        key: _imageKey,
                         path: selectedImage,
                         width: 72,
                         height: 90,

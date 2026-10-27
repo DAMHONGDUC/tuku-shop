@@ -18,6 +18,7 @@ export './empty/empty_view.dart';
 // motion
 export 'motion/pressable.dart';
 export 'motion/fade_slide_in.dart';
+export 'motion/fly_to_cart.dart';
 
 // feedback
 export 'feedback/app_toast.dart';
