@@ -51,8 +51,7 @@ class ProductTile extends StatelessWidget {
     return Semantics(
       button: true,
       label: '$brand, $name',
-      child: GestureDetector(
-        behavior: HitTestBehavior.opaque,
+      child: Pressable(
         onTap: onTap,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

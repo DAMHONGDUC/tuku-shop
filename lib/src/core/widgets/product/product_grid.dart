@@ -41,8 +41,12 @@ class ProductGrid extends StatelessWidget {
             mainAxisExtent: productTileExtent(tileWidth),
           ),
           itemCount: itemCount + trailingSkeletons,
+          // Tiles fade up as they land; the stagger restarts per page.
           itemBuilder: (context, index) => index < itemCount
-              ? itemBuilder(context, index)
+              ? FadeSlideIn(
+                  index: index % 10,
+                  child: itemBuilder(context, index),
+                )
               : const ProductTileSkeleton(),
         );
       },

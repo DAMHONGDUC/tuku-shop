@@ -40,7 +40,10 @@ class ProductStripSection extends StatelessWidget {
               width: _width,
               child: loading
                   ? const ProductTileSkeleton()
-                  : FavoriteProductTile(product: state.items[index]),
+                  : FadeSlideIn(
+                      index: index,
+                      child: FavoriteProductTile(product: state.items[index]),
+                    ),
             ),
           ),
         );
