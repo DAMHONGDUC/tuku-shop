@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tuku_shop/src/core/core.dart';
 
 void main() {
-  test('every delay falls between 300 and 700 ms', () {
+  test('every delay falls between 200 and 800 ms', () {
     for (var i = 0; i < 200; i++) {
       final delay = MockLatency.next();
       expect(delay, greaterThanOrEqualTo(MockLatency.min));

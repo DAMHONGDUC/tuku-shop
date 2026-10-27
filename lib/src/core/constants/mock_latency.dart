@@ -9,8 +9,8 @@ import 'dart:math';
 class MockLatency {
   const MockLatency._();
 
-  static const min = Duration(milliseconds: 300);
-  static const max = Duration(milliseconds: 700);
+  static const min = Duration(milliseconds: 200);
+  static const max = Duration(milliseconds: 800);
 
   // Fixed seed: the same sequence of waits on every launch.
   static final _random = Random(3);
