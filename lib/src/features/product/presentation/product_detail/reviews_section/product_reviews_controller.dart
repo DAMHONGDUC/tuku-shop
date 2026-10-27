@@ -49,6 +49,20 @@ class ProductReviewsController extends Cubit<ProductReviewsState> {
     return _loadFirstPage();
   }
 
+  /// Any color again; the size filter stays.
+  Future<void> clearColor() {
+    if (state.colorFilter == null) return Future.value();
+    emit(ProductReviewsState(sizeFilter: state.sizeFilter));
+    return _loadFirstPage();
+  }
+
+  /// Any size (or model) again; the color filter stays.
+  Future<void> clearSize() {
+    if (state.sizeFilter == null) return Future.value();
+    emit(ProductReviewsState(colorFilter: state.colorFilter));
+    return _loadFirstPage();
+  }
+
   /// Back to every review.
   Future<void> clearFilter() {
     emit(const ProductReviewsState());

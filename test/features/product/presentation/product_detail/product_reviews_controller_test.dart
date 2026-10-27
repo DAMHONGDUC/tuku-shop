@@ -72,4 +72,21 @@ void main() {
     expect(c.state.isFiltered, isFalse);
     await c.close();
   });
+
+  test('each row clears on its own', () async {
+    final c = ProductReviewsController(usecase);
+    await c.load('p');
+    await c.toggleColor('Midnight');
+    await c.toggleSize('iPhone 17');
+
+    await c.clearColor();
+    expect(c.state.colorFilter, isNull);
+    expect(c.state.sizeFilter, 'iPhone 17');
+
+    await c.toggleColor('Mint');
+    await c.clearSize();
+    expect(c.state.colorFilter, 'Mint');
+    expect(c.state.sizeFilter, isNull);
+    await c.close();
+  });
 }

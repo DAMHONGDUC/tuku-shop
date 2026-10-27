@@ -58,15 +58,10 @@ class ReviewsSection extends StatelessWidget {
             final controller = context.read<ProductReviewsController>();
             switch (state.status) {
               case ProductReviewsStatus.loading:
-                return Column(
-                  children: [
-                    for (var i = 0; i < 2; i++) ...[
-                      const SkeletonBox(height: SdSpacingV5.s14, width: 160),
-                      SdVerticalSpacingV5(value: SdSpacingV5.s8),
-                      const SkeletonBox(height: SdSpacingV5.s40),
-                      SdVerticalSpacingV5(value: SdSpacingV5.s16),
-                    ],
-                  ],
+                // As many rows as the preview shows.
+                return const ListSkeleton(
+                  rows: ProductReviewsController.previewSize,
+                  lines: 3,
                 );
               case ProductReviewsStatus.error:
                 return SectionError(onRetry: () => controller.load(product.id));

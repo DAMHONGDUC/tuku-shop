@@ -147,25 +147,13 @@ class _ReviewList extends StatelessWidget {
 
   final String productId;
 
-  static Widget _skeleton() => Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      const SkeletonBox(height: SdSpacingV5.s14, width: 160),
-      SdVerticalSpacingV5(value: SdSpacingV5.s8),
-      const SkeletonBox(height: SdSpacingV5.s40),
-      SdVerticalSpacingV5(value: SdSpacingV5.s16),
-    ],
-  );
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductReviewsController, ProductReviewsState>(
       builder: (context, state) {
         final controller = context.read<ProductReviewsController>();
         return switch (state.status) {
-          ProductReviewsStatus.loading => Column(
-            children: [for (var i = 0; i < 4; i++) _skeleton()],
-          ),
+          ProductReviewsStatus.loading => const ListSkeleton(lines: 3),
           ProductReviewsStatus.error => SectionError(
             onRetry: () => controller.load(productId),
           ),
@@ -184,10 +172,7 @@ class _ReviewList extends StatelessWidget {
                   review: state.items[i],
                   isLast: i == state.items.length - 1 && !state.hasMore,
                 ),
-              if (state.isLoadingMore) ...[
-                SdVerticalSpacingV5(value: SdSpacingV5.s16),
-                _skeleton(),
-              ],
+              if (state.isLoadingMore) const ListSkeleton(rows: 2, lines: 3),
             ],
           ),
         };
