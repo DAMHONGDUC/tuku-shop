@@ -10,11 +10,18 @@ import '../../../../helpers/mock_repositories.dart';
 
 void main() {
   late MockNotificationRemoteDataSource dataSource;
+  late MockNotificationLocalDataSource local;
   late NotificationRepositoryImpl repository;
 
   setUp(() {
     dataSource = MockNotificationRemoteDataSource();
-    repository = NotificationRepositoryImpl(dataSource: dataSource);
+    local = MockNotificationLocalDataSource();
+    when(() => local.getAdded()).thenAnswer((_) async => []);
+    when(() => local.getReadIds()).thenAnswer((_) async => {});
+    repository = NotificationRepositoryImpl(
+      dataSource: dataSource,
+      localDataSource: local,
+    );
   });
 
   final tNotificationModel = NotificationModel(
@@ -57,5 +64,26 @@ void main() {
     final result = await repository.getNotificationData();
 
     expect(result, Left(ServerFailure()));
+  });
+
+  test('app-raised notifications come first and read ids apply', () async {
+    when(() => local.getAdded()).thenAnswer(
+      (_) async => [
+        NotificationModel(
+          id: 'L1',
+          title: 'Order placed',
+          timestamp: DateTime(2026, 2, 1),
+          type: NotificationType.orderUpdate,
+        ),
+      ],
+    );
+    when(() => local.getReadIds()).thenAnswer((_) async => {'1'});
+    when(
+      () => dataSource.getNotifications(),
+    ).thenAnswer((_) async => [tNotificationModel]);
+
+    final count = await repository.getUnreadCount();
+
+    expect(count, const Right(1));
   });
 }

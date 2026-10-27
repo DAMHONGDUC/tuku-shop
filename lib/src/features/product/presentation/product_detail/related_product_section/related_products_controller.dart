@@ -14,7 +14,7 @@ class RelatedProductsController extends Cubit<RelatedProductsState> {
     emit(RelatedProductsLoadingState());
 
     final result = await _getRelatedProductUsecase.call(
-      GetRelatedProductParams(productId: productId, limit: 6),
+      GetRelatedProductParams(productId: productId, limit: 8),
     );
 
     result.fold(

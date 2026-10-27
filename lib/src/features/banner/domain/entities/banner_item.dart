@@ -12,6 +12,9 @@ class BannerItem extends Equatable {
   final String contentColor;
   final int id;
 
+  /// Category the banner opens; empty for none.
+  final String categoryId;
+
   const BannerItem({
     required this.imageUrl,
     required this.tag,
@@ -21,6 +24,7 @@ class BannerItem extends Equatable {
     required this.price,
     required this.contentColor,
     required this.id,
+    this.categoryId = '',
   });
 
   @override
@@ -33,5 +37,6 @@ class BannerItem extends Equatable {
     price,
     contentColor,
     id,
+    categoryId,
   ];
 }

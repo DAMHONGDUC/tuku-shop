@@ -6,10 +6,11 @@ class CategoryModelToCategoryEntityMapper {
 
   static CategoryEntity toEntity(CategoryModel model) {
     return CategoryEntity(
-      id: model.id ?? 0,
+      id: model.id ?? '',
       name: model.name ?? '',
       imageUrl: model.imageUrl ?? '',
       numOfProduct: model.numOfProduct ?? 0,
+      colorHex: model.colorHex ?? '#F2F2F2',
     );
   }
 }

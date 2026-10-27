@@ -6,6 +6,10 @@ class ReviewCommentModel {
   final String? createdAt;
   final List<ReviewAssetModel>? assets;
 
+  /// The variation the reviewer bought.
+  final String? colorName;
+  final String? size;
+
   const ReviewCommentModel({
     this.id,
     this.userName,
@@ -13,6 +17,8 @@ class ReviewCommentModel {
     this.rating,
     this.createdAt,
     this.assets,
+    this.colorName,
+    this.size,
   });
 }
 

@@ -15,6 +15,7 @@ class BannerModelToBannerItemMapper {
       subtitle: model.subtitle ?? '',
       price: model.price ?? '',
       contentColor: model.contentColor ?? '',
+      categoryId: model.categoryId ?? '',
     );
   }
 }

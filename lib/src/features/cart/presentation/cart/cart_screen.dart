@@ -1,0 +1,396 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:system_design/index.dart';
+import 'package:tuku_shop/src/core/core.dart';
+import 'package:tuku_shop/src/features/cart/domain/domain.dart';
+
+import 'cart_controller.dart';
+
+/// The cart screen, opened from the bag icon in every app bar; reads the
+/// app-wide [CartController].
+class CartScreen extends StatelessWidget {
+  const CartScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+
+    return BlocConsumer<CartController, CartState>(
+      listenWhen: (a, b) => b.failureCount > a.failureCount,
+      listener: (context, state) => AppToast.of(
+        context,
+      ).show(context.loc.cart_update_failed, type: AppToastType.error),
+      builder: (context, state) {
+        final controller = context.read<CartController>();
+        final empty = state.status == CartStatus.loaded && state.lines.isEmpty;
+
+        return Scaffold(
+          backgroundColor: colors.pageDefault,
+          appBar: AppTopBar(
+            title: state.itemCount > 0
+                ? context.loc.cart_title_count(state.itemCount)
+                : context.loc.cart_title,
+            showCart: false,
+          ),
+          body: SafeArea(
+            bottom: false,
+            child: RefreshWrapper(
+              onRefresh: controller.load,
+              child: empty
+                  ? FillCenterScrollView(
+                      child: EmptyState(
+                        icon: Icons.shopping_bag_outlined,
+                        title: context.loc.cart_empty_title,
+                        message: context.loc.cart_empty_message,
+                      ),
+                    )
+                  : ListView(
+                      padding: EdgeInsets.fromLTRB(
+                        SdSpacingV5.s16,
+                        SdSpacingV5.s8,
+                        SdSpacingV5.s16,
+                        SdSpacingV5.s24,
+                      ),
+                      children: [
+                        switch (state.status) {
+                          CartStatus.loading => const _CartSkeleton(),
+                          CartStatus.error => SectionError(
+                            onRetry: controller.load,
+                          ),
+                          CartStatus.loaded => _CartBody(state: state),
+                        },
+                      ],
+                    ),
+            ),
+          ),
+          bottomNavigationBar: empty
+              ? BottomActionBar(
+                  child: AppButton(
+                    label: context.loc.common_start_shopping,
+                    onTap: () => context.go(HomeRoutes.home.fullPath),
+                  ),
+                )
+              : state.status == CartStatus.loaded
+              ? _CheckoutDock(summary: state.summary)
+              : null,
+        );
+      },
+    );
+  }
+}
+
+class _CartBody extends StatelessWidget {
+  const _CartBody({required this.state});
+
+  final CartState state;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+    final summary = state.summary;
+    final card = BoxDecoration(
+      color: colors.cardDefault,
+      borderRadius: BorderRadius.circular(UIConstants.cardRadius),
+    );
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        // Rows run edge to edge so a swiped row's Delete fills the corner.
+        Container(
+          decoration: card,
+          clipBehavior: Clip.antiAlias,
+          child: Column(
+            children: [
+              for (var i = 0; i < state.lines.length; i++) ...[
+                if (i > 0)
+                  Divider(
+                    height: 1,
+                    indent: SdSpacingV5.s16,
+                    endIndent: SdSpacingV5.s16,
+                    color: colors.borderDefault,
+                  ),
+                _CartLineTile(
+                  key: ValueKey(state.lines[i].id),
+                  line: state.lines[i],
+                ),
+              ],
+            ],
+          ),
+        ),
+        SdVerticalSpacingV5(value: SdSpacingV5.s12),
+        Container(
+          padding: EdgeInsets.all(SdSpacingV5.s12),
+          decoration: BoxDecoration(
+            color: colors.accentSoft,
+            borderRadius: BorderRadius.circular(SdSpacingV5.s12),
+          ),
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  SdIconV5(
+                    iconData: summary.qualifiesForFreeShipping
+                        ? Icons.check_circle_outline_rounded
+                        : Icons.local_shipping_outlined,
+                    iconSize: SdSpacingV5.s20,
+                    color: colors.accent,
+                  ),
+                  SdHorizontalSpacingV5(value: SdSpacingV5.s8),
+                  Expanded(
+                    child: Text(
+                      summary.qualifiesForFreeShipping
+                          ? context.loc.cart_free_shipping_unlocked
+                          : context.loc.cart_free_shipping_nudge(
+                              AppFormat.price(summary.amountToFreeShipping),
+                            ),
+                      style: SdTextStyleV5.body12().wColor(colors.textDefault),
+                    ),
+                  ),
+                ],
+              ),
+              SdVerticalSpacingV5(value: SdSpacingV5.s8),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(SdSpacingV5.s2),
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween(end: summary.freeShippingProgress),
+                  duration: UIConstants.navNormal,
+                  builder: (context, value, _) => LinearProgressIndicator(
+                    value: value,
+                    minHeight: SdSpacingV5.s4,
+                    color: colors.accent,
+                    backgroundColor: colors.accent.withValues(alpha: 0.18),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SdVerticalSpacingV5(value: SdSpacingV5.s12),
+        Container(
+          decoration: card,
+          padding: EdgeInsets.all(SdSpacingV5.s16),
+          child: Column(
+            children: [
+              _SummaryRow(
+                label: context.loc.cart_subtotal,
+                value: AppFormat.price(summary.subtotal),
+              ),
+              if (summary.savings > 0) ...[
+                SdVerticalSpacingV5(value: SdSpacingV5.s8),
+                _SummaryRow(
+                  label: context.loc.cart_savings,
+                  value: '−${AppFormat.price(summary.savings)}',
+                  valueColor: colors.success,
+                ),
+              ],
+              SdVerticalSpacingV5(value: SdSpacingV5.s8),
+              _SummaryRow(
+                label: context.loc.cart_shipping,
+                value: context.loc.cart_shipping_at_checkout,
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CartLineTile extends StatelessWidget {
+  const _CartLineTile({super.key, required this.line});
+
+  final CartLine line;
+
+  Future<void> _remove(BuildContext context) async {
+    final controller = context.read<CartController>();
+    // Taken before the await: the removed line's context is gone after.
+    final toast = AppToast.of(context);
+    final message = context.loc.cart_removed(line.name);
+    final undo = context.loc.common_undo;
+    final removed = await controller.remove(line.id);
+    if (removed == null) return;
+    toast.show(
+      message,
+      actionLabel: undo,
+      onAction: () => controller.undoRemove(removed),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+
+    return SwipeAction(
+      label: context.loc.common_delete,
+      onAction: () => _remove(context),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: SdSpacingV5.s16,
+          vertical: SdSpacingV5.s12,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            GestureDetector(
+              onTap: () => context.push(
+                ProductRoutes.productDetailLocation(line.productId),
+              ),
+              child: CatalogImage(
+                path: line.imageUrl,
+                width: 72,
+                height: 90,
+                borderRadius: UIConstants.imageRadius,
+              ),
+            ),
+            SdHorizontalSpacingV5(value: SdSpacingV5.s12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          line.name,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: SdTextStyleV5.body14().wColor(
+                            colors.textDefault,
+                          ),
+                        ),
+                      ),
+                      Semantics(
+                        button: true,
+                        label: context.loc.cart_remove,
+                        child: InkWell(
+                          onTap: () => _remove(context),
+                          customBorder: const CircleBorder(),
+                          child: Padding(
+                            padding: EdgeInsets.all(SdSpacingV5.s4),
+                            child: Icon(
+                              Icons.close,
+                              size: SdSpacingV5.s18,
+                              color: colors.iconSecondary,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    '${line.colorName} · ${line.size}',
+                    style: SdTextStyleV5.body12().wColor(colors.textSubTitle),
+                  ),
+                  SdVerticalSpacingV5(value: SdSpacingV5.s8),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PriceText(
+                          price: line.unitPrice,
+                          originalPrice: line.originalPrice,
+                        ),
+                      ),
+                      QuantityStepper(
+                        value: line.quantity,
+                        max: line.maxQuantity,
+                        min: 0,
+                        onChanged: (q) => context
+                            .read<CartController>()
+                            .changeQuantity(line.id, q),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _SummaryRow extends StatelessWidget {
+  const _SummaryRow({
+    required this.label,
+    required this.value,
+    this.valueColor,
+  });
+
+  final String label;
+  final String value;
+  final Color? valueColor;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(label, style: SdTextStyleV5.body14().wColor(colors.textSubTitle)),
+        Text(
+          value,
+          style: SdTextStyleV5.body14().copyWith(
+            color: valueColor ?? colors.textDefault,
+            fontFeatures: const [FontFeature.tabularFigures()],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _CheckoutDock extends StatelessWidget {
+  const _CheckoutDock({required this.summary});
+
+  final CartSummary summary;
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+
+    return BottomActionBar(
+      child: Row(
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                context.loc.cart_total,
+                style: SdTextStyleV5.body12().wColor(colors.textSubTitle),
+              ),
+              PriceText(
+                price: summary.subtotal,
+                style: SdTextStyleV5.heading20(),
+              ),
+            ],
+          ),
+          SdHorizontalSpacingV5(value: SdSpacingV5.s16),
+          Expanded(
+            child: AppButton(
+              label: context.loc.cart_checkout,
+              onTap: () => context.push(CheckoutRoutes.checkout.fullPath),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _CartSkeleton extends StatelessWidget {
+  const _CartSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return const ListSkeleton(
+      leading: ListSkeletonLeading.thumbnail,
+      lines: 3,
+      divided: true,
+    );
+  }
+}

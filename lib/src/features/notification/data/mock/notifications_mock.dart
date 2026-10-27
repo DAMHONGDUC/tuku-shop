@@ -1,10 +1,7 @@
-import 'dart:math';
-
 import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/features/notification/data/models/notification_category_model.dart';
 import 'package:tuku_shop/src/features/notification/data/models/notification_model.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 
 class NotificationsMock {
   static List<NotificationCategoryModel> generateMockCategories() {
@@ -47,141 +44,108 @@ class NotificationsMock {
     ];
   }
 
-  static List<NotificationModel> generateMockNotifications({int count = 20}) {
-    final random = Random();
-    final uuid = const Uuid();
-
-    // === Order-related notifications ===
-    final orderTitles = [
-      'Order Confirmed',
-      'Order Shipped',
-      'Order Delivered',
-      'Order Cancelled',
-      'Payment Received',
+  /// Fixed seed list, newest first; order ids match `OrderMock.seed()` and
+  /// the three newest are unread.
+  static List<NotificationModel> generateMockNotifications({DateTime? now}) {
+    final today = now ?? DateTime.now();
+    const rows = <(int, NotificationType, String, String, String?)>[
+      (
+        35,
+        NotificationType.orderUpdate,
+        'Order placed',
+        'We received order #TK100012 and will confirm it shortly.',
+        'TK100012',
+      ),
+      (
+        140,
+        NotificationType.promotion,
+        'Flash sale is live',
+        'Up to 30% off scarves, bags and running gear. Ends at midnight, while stock lasts.',
+        null,
+      ),
+      (
+        320,
+        NotificationType.orderUpdate,
+        'Packing your order',
+        'Order #TK100011 is confirmed. Our team is wrapping it with care and it ships today.',
+        'TK100011',
+      ),
+      (
+        60 * 20,
+        NotificationType.orderUpdate,
+        'Out for delivery',
+        'Order #TK100010 arrives today between 2 and 6 pm. Keep your phone nearby for the courier.',
+        'TK100010',
+      ),
+      (
+        60 * 26,
+        NotificationType.newProduct,
+        'New arrivals just dropped',
+        'Floral midis, chunky knits and clean white sneakers for the new season.',
+        null,
+      ),
+      (
+        60 * 30,
+        NotificationType.orderUpdate,
+        'Order shipped',
+        'Order #TK100009 has left our warehouse and is with the courier. Track it in My orders.',
+        'TK100009',
+      ),
+      (
+        60 * 50,
+        NotificationType.promotion,
+        'Your voucher: TUKU10',
+        'Take 10% off your next order. Enter TUKU10 at checkout.',
+        null,
+      ),
+      (
+        60 * 72,
+        NotificationType.orderUpdate,
+        'Delivered',
+        'Order #TK100008 was delivered. Enjoy your new pieces, and tell us what you think in a review.',
+        'TK100008',
+      ),
+      (
+        60 * 96,
+        NotificationType.orderUpdate,
+        'Order cancelled',
+        'Order #TK100007 was cancelled. No payment was taken.',
+        'TK100007',
+      ),
+      (
+        60 * 120,
+        NotificationType.promotion,
+        'Free shipping weekend',
+        'This weekend only: use FREESHIP for free standard delivery on any order, no minimum.',
+        null,
+      ),
+      (
+        60 * 168,
+        NotificationType.account,
+        'Profile updated',
+        'Your delivery details were saved.',
+        null,
+      ),
+      (
+        60 * 240,
+        NotificationType.general,
+        'Welcome to Tuku Shop',
+        'Save favorites, track every order and get member-only offers. Happy shopping!',
+        null,
+      ),
     ];
-    final orderBodies = [
-      'Your order #{id} has been confirmed and is being processed.',
-      'Order #{id} has been shipped. Track it in your order history.',
-      'Order #{id} was successfully delivered. Enjoy your purchase!',
-      'We’re sorry, your order #{id} has been cancelled.',
-      'Payment for order #{id} has been received successfully.',
-    ];
 
-    // === Promotion notifications ===
-    final promoTitles = [
-      'Flash Sale Alert ⚡️',
-      'Weekend Mega Deal',
-      'Exclusive Member Offer',
-      'Limited-Time Discount',
-      'Buy 2 Get 1 Free!',
+    return [
+      for (var i = 0; i < rows.length; i++)
+        NotificationModel(
+          id: 'N${i + 1}',
+          title: rows[i].$3,
+          body: rows[i].$4,
+          timestamp: today.subtract(Duration(minutes: rows[i].$1)),
+          isRead: i >= 3,
+          type: rows[i].$2,
+          relatedItemId: rows[i].$5,
+        ),
     ];
-    final promoBodies = [
-      'Hurry! Get up to 70% off on selected items today only!',
-      'Enjoy 30% off sitewide this weekend only!',
-      'As our valued member, enjoy an extra 15% off your next order.',
-      'Your limited-time discount is waiting — shop before midnight!',
-      'Buy any 2 items and get the 3rd one for free. Don’t miss out!',
-    ];
-
-    // === New product notifications ===
-    final productTitles = [
-      'New Collection Just Dropped 👕',
-      'Check Out Our Latest Gadgets',
-      'Brand-New Arrivals Are Here!',
-      'Trending Now: Fresh Styles',
-      'Your Favorite Brand’s New Line',
-    ];
-    final productBodies = [
-      'Explore our new Summer Collection — available now!',
-      'Discover the latest smart gadgets in store today.',
-      'Brand-new arrivals are waiting for you. Shop the trend!',
-      'New streetwear styles just dropped. Limited stock!',
-      'Your favorite brand just released new items. Check them out!',
-    ];
-
-    // === Account notifications ===
-    final accountTitles = [
-      'Welcome to Tuku Shop 🎉',
-      'Password Changed Successfully',
-      'Verify Your Email Address',
-      'Account Update Notice',
-      'Security Alert',
-    ];
-    final accountBodies = [
-      'Thanks for joining Tuku Shop! Let’s start shopping!',
-      'Your password was changed successfully. If this wasn’t you, reset it now.',
-      'Please verify your email to activate your account.',
-      'We’ve updated our Terms of Service. Review them in your account settings.',
-      'Suspicious login detected. Please confirm it was you.',
-    ];
-
-    // === General notifications ===
-    final generalTitles = [
-      'App Update Available',
-      'We Value Your Feedback',
-      'System Maintenance Scheduled',
-      'You Earned Reward Points 🎁',
-      'Survey: Tell Us What You Think',
-    ];
-    final generalBodies = [
-      'A new version of our app is available. Update now for the best experience.',
-      'Your opinion matters! Leave feedback to help us improve.',
-      'Scheduled maintenance tonight from 1:00–3:00 AM.',
-      'You just earned 150 reward points. Redeem them today!',
-      'Take a quick survey and get a discount code as a thank you!',
-    ];
-
-    final types = NotificationType.values;
-
-    return List.generate(count, (index) {
-      final type = types[random.nextInt(types.length)];
-      final isRead = index == 0 ? true : random.nextBool();
-      final timestamp = DateTime.now().subtract(
-        Duration(minutes: random.nextInt(60 * 24 * 30)), // up to 30 days old
-      );
-      final relatedId = uuid.v4();
-      final id = uuid.v4();
-
-      String title;
-      String body;
-
-      switch (type) {
-        case NotificationType.orderUpdate:
-          final i = random.nextInt(orderTitles.length);
-          title = orderTitles[i];
-          body = orderBodies[i].replaceAll('{id}', relatedId.substring(0, 6));
-          break;
-        case NotificationType.promotion:
-          final i = random.nextInt(promoTitles.length);
-          title = promoTitles[i];
-          body = promoBodies[i];
-          break;
-        case NotificationType.newProduct:
-          final i = random.nextInt(productTitles.length);
-          title = productTitles[i];
-          body = productBodies[i];
-          break;
-        case NotificationType.account:
-          final i = random.nextInt(accountTitles.length);
-          title = accountTitles[i];
-          body = accountBodies[i];
-          break;
-        case NotificationType.general:
-          final i = random.nextInt(generalTitles.length);
-          title = generalTitles[i];
-          body = generalBodies[i];
-          break;
-      }
-
-      return NotificationModel(
-        id: id,
-        title: title,
-        body: body,
-        timestamp: timestamp,
-        isRead: isRead,
-        type: type,
-        relatedItemId: type == NotificationType.orderUpdate ? relatedId : null,
-      );
-    });
   }
 }

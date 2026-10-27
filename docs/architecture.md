@@ -6,12 +6,22 @@ Feature-based Clean Architecture: each feature owns its `domain` / `data` / `pre
 
 | Path | Contents |
 |---|---|
-| `lib/src/features/product/` | Product detail, search, recommended products |
-| `lib/src/features/order/` | My orders + order detail |
-| `lib/src/features/banner/`, `category/`, `notification/`, `profile/` | Feature slices |
-| `lib/src/features/home/` | Presentation only: composes banner / category / product sections |
-| `lib/src/features/splash/`, `tutorial/`, `login/`, `register/`, `bottom_tab/`, `preview_media/` | Screen flows |
-| `lib/src/core/` | Constants, enums, env, exceptions, failures, l10n, navigation, resources, usecase base, utils, shared widgets |
+| `lib/src/features/product/` | Catalog queries (category, tag, sale, keyword, sort, paging), product detail, reviews, search, app-wide favorites state |
+| `lib/src/features/order/` | Orders (seeded history, place, cancel), My orders by status, order detail with timeline |
+| `lib/src/features/banner/`, `category/`, `notification/` | Feature slices; `category/` owns the Categories tab, `notification/` the Notifications tab |
+| `lib/src/features/profile/` | Presentation only: Profile tab (member card, order counters, favorites preview, cart row, settings, reset demo data) and edit profile |
+| `lib/src/features/settings/` | Device preferences (app language) |
+| `lib/src/features/wishlist/` | Saved product ids (seeded on first launch) and the Favorites screen (opened from Profile) |
+| `lib/src/features/cart/` | Cart lines (seeded), app-wide cart state, Cart screen (opened from every app bar) |
+| `lib/src/features/checkout/` | Shipping, payment, vouchers, totals math, checkout and order-success screens |
+| `lib/src/features/seller/` | The marketplace's shops and which ones the shopper follows (data + domain only); every product has a `sellerId`, and the shop page is in `product/presentation/shop_detail/` |
+| `lib/src/features/chat/` | The Chat tab: one thread per shop plus Tuku Care support, stored on the device; mock replies by keyword (EN + VI) per side, unread counts, the app-wide `ChatUnreadController` badge |
+| `lib/src/features/address/` | Address book (seeded) with pick mode for checkout |
+| `lib/src/features/auth/` | Login screen + session; first launch saves the demo user, so the app opens signed in |
+| `lib/src/features/home/` | Presentation only: composes banner, category and product-strip sections, each loading on its own |
+| `lib/src/features/splash/`, `tutorial/`, `register/`, `bottom_tab/`, `preview_media/` | Screen flows |
+| `lib/src/core/` | Constants (incl. `MockLatency`), enums, env, exceptions, failures, l10n, navigation (route constants in `routes/`), resources, usecase base, utils, shared widgets (`FloatingBottomNav`, `AppTopBar`, `CartActionButton`, `ProductTile`, states) |
+| `lib/main_material_app.dart` | Provides app-wide Cubits (favorites, cart, notification badge, locale) above the router, and `CartCountScope` for the app-bar cart badge |
 | `lib/src/di/injector.dart` | Calls each feature's `<Feature>Di.config()` |
 
 ## Feature layers
@@ -31,7 +41,7 @@ flowchart LR
   featureA[featureA.domain] -->|shared concepts only| featureB[featureB.domain]
 ```
 
-A feature exposes only its `domain/domain.dart` barrel, except to the presentation-only `home/` and `bottom_tab/`, which compose other features' sections.
+A feature exposes only its `domain/domain.dart` barrel, except to the presentation-only `home/` and `bottom_tab/`, which compose other features' sections. Cross-feature navigation uses the route helpers in `core/navigation/routes/` (query parameters, no argument classes).
 
 ## Data flow
 

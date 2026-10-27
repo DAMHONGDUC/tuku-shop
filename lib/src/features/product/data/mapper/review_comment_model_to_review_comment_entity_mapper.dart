@@ -23,6 +23,8 @@ class ReviewCommentModelToReviewCommentEntityMapper {
       comment: model.comment ?? '',
       rating: model.rating ?? 0,
       createdAt: model.createdAt ?? '',
+      colorName: model.colorName ?? '',
+      size: model.size ?? '',
       assets:
           model.assets
               ?.map(

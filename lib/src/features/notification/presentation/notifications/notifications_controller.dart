@@ -6,10 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'notifications_state.dart';
 
 class NotificationsController extends Cubit<NotificationsState> {
-  NotificationsController(this._getNotificationsUsecase)
-    : super(NotificationsInitial());
+  NotificationsController(
+    this._getNotificationsUsecase,
+    this._markAllReadUsecase,
+  ) : super(NotificationsInitial());
 
   final GetNotificationsUsecase _getNotificationsUsecase;
+  final MarkAllNotificationsReadUsecase _markAllReadUsecase;
 
   Future getData() async {
     emit(NotificationsLoadingState());
@@ -22,7 +25,16 @@ class NotificationsController extends Cubit<NotificationsState> {
       },
       (r) {
         emit(NotificationsLoadedState(notificationData: r));
+        // Seen once listed; the bell badge clears.
+        _markAllReadUsecase.call(NoParams());
       },
     );
+  }
+
+  void selectFilter(NotificationFilter filter) {
+    final current = state;
+    if (current is NotificationsLoadedState) {
+      emit(current.copyWith(filter: filter));
+    }
   }
 }

@@ -1,0 +1,9 @@
+# The private certificates repo, encrypted with MATCH_PASSWORD.
+git_url(ENV["MATCH_GIT_URL"])
+storage_mode("git")
+
+# App Store distribution only; development profiles come from Xcode.
+type("appstore")
+
+# Every bundle id the archive signs.
+app_identifier(["app.dd.tuku.shop"])

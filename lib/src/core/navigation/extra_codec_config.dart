@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:tuku_shop/src/features/order/presentation/my_order/my_order_detail/my_order_detail_args.dart';
+import 'package:system_design/index.dart';
+
 import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_args.dart';
 
 class ExtraCodecConfig extends Codec<Object?, Object?> {
@@ -25,10 +26,6 @@ class _ExtraEncoder extends Converter<Object?, Object?> {
         'type': 'ProductDetailArgs',
         'data': args.toJson(),
       },
-      MyOrderDetailArgs args => {
-        'type': 'MyOrderDetailArgs',
-        'data': args.toJson(),
-      },
       List list => {
         'type': 'List',
         'data': list.map((e) => convert(e)).toList(),
@@ -41,9 +38,17 @@ class _ExtraEncoder extends Converter<Object?, Object?> {
       },
       // Primitive types pass through
       String() || int() || double() || bool() => input,
-      // Unknown types
-      _ => input,
+      // go_router encodes `extra` on every navigation to report the route to
+      // the platform; in-app navigation keeps the original object. A type
+      // with no JSON form is left out instead of crashing jsonEncode, so
+      // pass ids or primitives when a route must survive a restore.
+      _ => _skip(input),
     };
+  }
+
+  static Object? _skip(Object input) {
+    SdLogV5.d('Route extra ${input.runtimeType} has no JSON form; not encoded');
+    return null;
   }
 }
 
@@ -62,8 +67,6 @@ class _ExtraDecoder extends Converter<Object?, Object?> {
       switch (type) {
         case 'ProductDetailArgs':
           return ProductDetailArgs.fromJson(data as Map<String, dynamic>);
-        case 'MyOrderDetailArgs':
-          return MyOrderDetailArgs.fromJson(data as Map<String, dynamic>);
         case 'List':
           return (data as List).map((e) => convert(e)).toList();
         case 'Map':

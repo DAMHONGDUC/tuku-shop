@@ -1,78 +1,37 @@
-import 'package:tuku_shop/src/core/core.dart';
-import 'package:tuku_shop/src/features/home/presentation/config/home_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:ionicons/ionicons.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
+import 'package:tuku_shop/src/core/core.dart';
 
-final _kAppBarPadding = SdSpacing.s12;
-final _kAppBarPaddingTop = SdSpacing.s4;
-final _kAppBarPaddingBottom = SdSpacing.s8;
-final _kSearchBarHeight = SdSpacing.s40;
-final _kAppBarHeight =
-    _kSearchBarHeight + _kAppBarPaddingBottom + _kAppBarPaddingTop;
-final _kIconPadding = SdSpacing.s6;
-
-class HomeSliverAppBar extends StatelessWidget implements PreferredSizeWidget {
+/// The search pill, filter and cart on one row; snaps back into view on
+/// scroll up. The pill is the same [AppSearchBar] the Search screen edits.
+class HomeSliverAppBar extends StatelessWidget {
   const HomeSliverAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+
     return SliverAppBar(
-      // floating & snap => make app bar "snap" into view
       floating: true,
       snap: true,
-      pinned: false,
-      elevation: SdSpacing.s2,
-      shadowColor: context.colorTheme.primaryShadowDefault,
-      toolbarHeight: _kAppBarHeight,
-      backgroundColor: context.colorTheme.surfaceDefault,
-      surfaceTintColor: SdColors.transparent,
-      titleSpacing: 0,
-      title: Padding(
-        padding: EdgeInsets.only(
-          left: _kAppBarPadding,
-          right: _kAppBarPadding - _kIconPadding,
-          bottom: _kAppBarPaddingBottom,
-          top: _kAppBarPaddingTop,
+      backgroundColor: colors.pageDefault,
+      surfaceTintColor: SdColorsV5.transparent,
+      elevation: 0,
+      scrolledUnderElevation: 0,
+      toolbarHeight: SdSpacingV5.s64,
+      titleSpacing: SdSpacingV5.s16,
+      actionsPadding: EdgeInsets.only(right: SdSpacingV5.s8),
+      actions: [
+        FilterActionButton(
+          onTap: () => context.push(HomeRoutes.searchLocation(filters: true)),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(child: CustomSearchBar(height: _kSearchBarHeight)),
-            SdHorizontalSpacing(),
-            Row(
-              children: [
-                SdIconButton(
-                  padding: EdgeInsets.all(_kIconPadding),
-                  onPressed: () {
-                    GoRouter.of(context).push(HomeRoutes.search.fullPath);
-                  },
-                  icon: SdIcon(
-                    iconData: Ionicons.cart,
-                    color: context.colorTheme.primary,
-                  ),
-                ),
-                SdHorizontalSpacing(xRatio: 0.5),
-                SdIconButton(
-                  padding: EdgeInsets.all(_kIconPadding),
-                  onPressed: () {
-                    GoRouter.of(context).push(HomeRoutes.search.fullPath);
-                  },
-                  icon: SdIcon(
-                    iconData: Ionicons.chatbubble_ellipses_outline,
-                    color: context.colorTheme.primary,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+        const CartActionButton(),
+      ],
+      title: AppSearchBar(
+        hintText: context.loc.home_search_hint,
+        onTap: () => context.push(HomeRoutes.searchLocation()),
       ),
-      actions: null,
     );
   }
-
-  @override
-  Size get preferredSize => Size.fromHeight(_kAppBarHeight);
 }

@@ -1,7 +1,8 @@
-import 'package:tuku_shop/src/core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
+import 'package:tuku_shop/src/core/core.dart';
 
+/// Placeholder for [CategoryCard]: the round photo and a short name line.
 class CategoryCardSkeleton extends StatelessWidget {
   const CategoryCardSkeleton({super.key});
 
@@ -12,13 +13,13 @@ class CategoryCardSkeleton extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          SdSkeleton(
-            height: UIConstants.categoriesImageHeight,
+          const SkeletonBox(
             width: UIConstants.categoriesImageWidth,
-            borderRadiusValue: SdSpacing.s100,
+            height: UIConstants.categoriesImageHeight,
+            radius: UIConstants.categoriesImageWidth / 2,
           ),
-          SdVerticalSpacing(),
-          SdSkeleton(width: double.infinity),
+          SdVerticalSpacingV5(value: SdSpacingV5.s8),
+          const SkeletonBox(width: 48, height: SdSpacingV5.s10),
         ],
       ),
     );

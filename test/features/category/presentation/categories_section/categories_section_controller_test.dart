@@ -14,7 +14,7 @@ void main() {
 
   const tCategories = [
     CategoryEntity(
-      id: 0,
+      id: 'women-tops',
       name: 'Luxury',
       imageUrl: 'assets/images/category/c0.png',
       numOfProduct: 120,

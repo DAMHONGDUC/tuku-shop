@@ -3,7 +3,8 @@
 | | |
 |---|---|
 | Overview | Flutter e-commerce shopping app (*tuku* = "to buy" in Javanese), UI based on the [Kutuku Figma template](https://www.figma.com/design/MWXnUlavawxNQSMaYIsRRh/Kutuku----eCommerce-Mobile-App-UI-Kit-Figma-High-Quality-Template--Community-?node-id=0-1&p=f) |
-| Last edit | 2026-09-29 |
+| Demo | [Product film](assets/marketing/tuku-shop-film.mp4) (dark mode, 1080p 60 fps) · [Wallpaper](assets/marketing/tuku-shop-wallpaper.png) |
+| Last edit | 2026-10-27 |
 | Author | Dam Hong Duc |
 
 ## Store links
@@ -25,12 +26,12 @@
 
 | Category | Technology | Version |
 |---|---|---|
-| Framework | Flutter | 3.38.8 |
-| Language | Dart | 3.10.7 |
+| Framework | Flutter | 3.44.5 |
+| Language | Dart | 3.12.2 |
 | State management | flutter_bloc (Cubit) | 9.1.1 |
-| Backend | Firebase (`firebase_core` only); feature data comes from `data/mock/` | 4.11.0 |
+| Backend | None; feature data comes from `data/mock/` | - |
 | Local DB | None | - |
-| Special libraries | `system_design_flutter` (in-house design system, git submodule) | pinned by commit |
+| Special libraries | `system_design` v5 (in-house design system, `flutter-system-design-kit` git submodule) | pinned by commit |
 
 ## Project architecture
 

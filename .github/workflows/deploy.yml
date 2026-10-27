@@ -21,7 +21,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.38.8"
+          flutter-version: "3.44.5"
           channel: "stable"
 
       - uses: ruby/setup-ruby@v1
@@ -35,9 +35,6 @@ jobs:
 
       - name: Restore Android signing keystore
         run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > android/app/tuku-shop-upload-keystore.jks
-
-      - name: Restore google-services.json
-        run: echo "${{ secrets.ANDROID_GOOGLE_SERVICES_JSON_BASE64 }}" | base64 --decode > android/app/google-services.json
 
       - name: Write key.properties
         run: |
@@ -83,7 +80,7 @@ jobs:
 
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.38.8"
+          flutter-version: "3.44.5"
           channel: "stable"
 
       - uses: ruby/setup-ruby@v1
@@ -94,9 +91,6 @@ jobs:
 
       - name: Install Flutter dependencies
         run: flutter pub get
-
-      - name: Restore GoogleService-Info.plist
-        run: echo "${{ secrets.IOS_GOOGLE_SERVICE_INFO_PLIST_BASE64 }}" | base64 --decode > ios/Runner/GoogleService-Info.plist
 
       - name: Restore dart-define env file
         env:

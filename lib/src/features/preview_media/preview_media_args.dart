@@ -1,7 +1,7 @@
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 class PreviewMediaArgs {
-  final List<SdPreviewMediaConfig> items;
+  final List<SdPreviewMediaConfigV5> items;
 
   PreviewMediaArgs({required this.items});
 
@@ -12,7 +12,7 @@ class PreviewMediaArgs {
   factory PreviewMediaArgs.fromJson(Map<String, dynamic> json) {
     return PreviewMediaArgs(
       items: (json['items'] as List)
-          .map((e) => SdPreviewMediaConfig.fromJson(e))
+          .map((e) => SdPreviewMediaConfigV5.fromJson(e))
           .toList(),
     );
   }

@@ -1,124 +1,168 @@
 import 'dart:math';
+
 import 'package:tuku_shop/src/features/product/data/models/review_comment_model.dart';
 
-const kImgReviewPath = 'assets/images/review_comment/';
-const kVidReviewPath = 'assets/videos/review_comment/';
-
 class ReviewCommentMock {
-  static final _random = Random();
+  // Fixed seed: the same reviews on every launch.
+  static final _random = Random(7);
 
-  static final _names = [
-    'Alice',
-    'Bob',
-    'Clara',
-    'David',
-    'Ethan',
-    'Fiona',
-    'George',
-    'Hana',
-    'Ivy',
-    'Jack',
-    'Liam',
-    'Mia',
-    'Noah',
-    'Olivia',
-    'Paul',
-    'Quinn',
-    'Ruby',
-    'Sophia',
-    'Tom',
-    'Uma',
-    'Victor',
-    'Wendy',
-    'Xander',
-    'Yara',
-    'Zoe',
+  static const _names = [
+    'Linh N.',
+    'Sarah K.',
+    'Minh T.',
+    'Olivia R.',
+    'Bao P.',
+    'Hana M.',
+    'David L.',
+    'Mai A.',
+    'Ethan W.',
+    'Quynh D.',
+    'Sophia C.',
+    'Tuan H.',
+    'Clara B.',
+    'Noah F.',
+    'Thao V.',
+    'Ruby S.',
+    'Khanh L.',
+    'Mia J.',
+    'Jack O.',
+    'Ngoc T.',
+    'Zoe P.',
+    'Huy B.',
+    'Fiona G.',
+    'An N.',
+    'Victor E.',
+    'Yen H.',
+    'Paul D.',
+    'Trang L.',
   ];
 
-  static final _comments = [
-    'Great quality, worth the price!',
-    'Really stylish and durable.',
-    'Perfect size for my needs.',
-    'Looks good but could be stronger.',
-    'Comfortable and lightweight.',
-    'Material feels premium.',
-    'Nice design but a bit pricey.',
-    'Color is vibrant and beautiful.',
-    'Exactly as described, love it!',
-    'Could be improved with more pockets.',
-    'Fast shipping, very satisfied!',
-    'Exceeded my expectations.',
-    'Good value for money.',
-    'Not as described, a bit disappointed.',
-    'Packaging was excellent.',
-    'Would definitely buy again.',
-    'Customer service was helpful.',
-    'Feels cheap, expected better.',
-    'Love the texture and finish.',
-    'Perfect gift for a friend.',
+  static const _openers = [
+    'Absolutely love it.',
+    'Even nicer in person than in the photos.',
+    'This is my third order from Tuku and the quality is consistent.',
+    'Bought it on a whim and now I wear it every week.',
+    'Really impressed for the price.',
+    'Exactly what I was looking for.',
+    'Beautiful piece, it feels much more expensive than it is.',
+    'Got it as a gift for my sister and she loved it.',
+    'Honestly one of my best buys this year.',
+    'Simple, clean and so easy to wear.',
+    'Arrived quickly and well packed.',
+    'Five stars, no hesitation.',
   ];
 
-  // Assets
-  static final _imageAssets = [
-    '${kImgReviewPath}img_review_1.jpg',
-    '${kImgReviewPath}img_review_2.jpg',
-    '${kImgReviewPath}img_review_3.jpg',
-    '${kImgReviewPath}img_review_4.jpg',
-    '${kImgReviewPath}img_review_5.jpg',
-    '${kImgReviewPath}img_review_6.jpg',
-    '${kImgReviewPath}img_review_7.jpg',
-    '${kImgReviewPath}img_review_8.jpg',
+  static const _details = [
+    'The fabric is soft and has a nice weight to it.',
+    'Stitching is neat and the seams feel strong.',
+    'The colour is true to the pictures, maybe slightly richer.',
+    'It washes well, no shrinking after three washes.',
+    'The cut is really flattering and it hangs nicely.',
+    'Comfortable all day, even on a long commute.',
+    'Details like the buttons and lining feel premium.',
+    'It breathes well, which matters a lot in this weather.',
+    'Holds its shape, no bagging after a full day.',
+    'The finish looks polished and expensive.',
+    'Packaging was lovely, with a little thank-you note.',
+    'It goes with almost everything in my wardrobe.',
   ];
 
-  static final _videoAssets = [
-    '${kVidReviewPath}vid_review_1.mp4',
-    '${kVidReviewPath}vid_review_2.mp4',
-    '${kVidReviewPath}vid_review_3.mp4',
-    '${kVidReviewPath}vid_review_4.mp4',
-    '${kVidReviewPath}vid_review_5.mp4',
-    '${kVidReviewPath}vid_review_6.mp4',
-    '${kVidReviewPath}vid_review_7.mp4',
-    '${kVidReviewPath}vid_review_8.mp4',
+  /// Details for device accessories instead of garments.
+  static const _deviceDetails = [
+    'It feels soft and grippy, no more slipping off the sofa.',
+    'Buttons are clicky and the camera cut-out lines up exactly.',
+    'Survived a few drops already without a scratch.',
+    'Slim enough that wireless charging still works.',
+    'The colour is lovely and does not pick up lint.',
   ];
 
-  /// Random assets (max 9, image or video)
-  static List<ReviewAssetModel> _generateRandomAssets({int max = 5}) {
-    final assetCount = _random.nextInt(max + 1);
-    final assets = <ReviewAssetModel>[];
+  static const _critical = [
+    'Nice design, but it runs a little small, so size up.',
+    'Good quality, though the colour is a touch darker than the photos.',
+    'Comfortable, but it creases more than I expected.',
+    'Lovely fabric. Delivery took a day longer than promised.',
+    'Pretty, but the sleeves are a bit long for me.',
+    'Decent for the price, just not as thick as I hoped.',
+  ];
 
-    for (int i = 0; i < assetCount; i++) {
-      final isImage = _random.nextBool();
-      if (isImage) {
-        final url = _imageAssets[_random.nextInt(_imageAssets.length)];
-        assets.add(ReviewAssetModel(url: url, type: 'image'));
-      } else {
-        final url = _videoAssets[_random.nextInt(_videoAssets.length)];
-        assets.add(ReviewAssetModel(url: url, type: 'video'));
-      }
-    }
-    return assets;
+  static const _heights = [152, 158, 160, 163, 165, 168, 170, 174, 178, 182];
+
+  /// A buyer note about the [size] and [color] they bought, when known.
+  /// A device model reads as such instead of a fit.
+  static String _context(String size, String color, {required bool isModel}) {
+    final notes = <String>[
+      if (size.isNotEmpty && isModel)
+        'Fits my $size perfectly, buttons and camera cut-out line up.',
+      if (size.isNotEmpty && !isModel && size != 'One size')
+        'I am ${_heights[_random.nextInt(_heights.length)]} cm and took '
+            '$size, fits perfectly.',
+      if (color.isNotEmpty)
+        'Ordered it in $color and might get another colour too.',
+      if (!isModel) ...[
+        'Wore it to work and got so many compliments.',
+        'Perfect for weekend trips, it packs without wrinkling.',
+      ],
+      'Will definitely order from this shop again.',
+    ];
+    return notes[_random.nextInt(notes.length)];
   }
 
-  /// Generate a list of random review comments
-  static List<ReviewCommentModel> generateRandomReviews(int count) {
+  /// [count] reviews, newest first. Each records the variation bought (one
+  /// of [colors] × [sizes]) and combines an impression, a detail and often
+  /// a buyer note about that variation; lower ratings get a balanced
+  /// comment. About one in three carries one or two customer photos drawn
+  /// from [photos]. [sizesAreModels] when [sizes] lists phone models.
+  static List<ReviewCommentModel> generateRandomReviews(
+    int count, {
+    List<String> photos = const [],
+    List<String> sizes = const [],
+    List<String> colors = const [],
+    bool sizesAreModels = false,
+  }) {
+    final details = sizesAreModels ? _deviceDetails : _details;
+    var daysAgo = 0;
     return List.generate(count, (index) {
-      final name = _names[_random.nextInt(_names.length)];
-      final comment = _comments[_random.nextInt(_comments.length)];
-      final rating = (_random.nextDouble() * 2) + 3; // rating từ 3.0 -> 5.0
-      final daysAgo = _random.nextInt(365);
-      final date = DateTime.now()
-          .subtract(Duration(days: daysAgo))
-          .toUtc()
-          .toString();
-      final assets = _generateRandomAssets();
+      daysAgo += 1 + _random.nextInt(12);
+      // Mostly 4–5 stars, the occasional 3.
+      final rating = double.parse(
+        (3 + _random.nextDouble() * 2).toStringAsFixed(1),
+      );
+      final withPhotos = photos.isNotEmpty && _random.nextInt(3) == 0;
+      final color = colors.isEmpty
+          ? ''
+          : colors[_random.nextInt(colors.length)];
+      final size = sizes.isEmpty ? '' : sizes[_random.nextInt(sizes.length)];
+      final comment = rating < 3.8
+          ? '${_critical[_random.nextInt(_critical.length)]} '
+                '${details[_random.nextInt(details.length)]}'
+          : [
+              _openers[_random.nextInt(_openers.length)],
+              details[_random.nextInt(details.length)],
+              if (_random.nextInt(3) > 0)
+                _context(size, color, isModel: sizesAreModels),
+            ].join(' ');
 
       return ReviewCommentModel(
         id: (index + 1).toString(),
-        userName: name,
+        userName: _names[_random.nextInt(_names.length)],
         comment: comment,
-        rating: double.parse(rating.toStringAsFixed(1)),
-        createdAt: date,
-        assets: assets,
+        rating: rating,
+        colorName: color,
+        size: size,
+        createdAt: DateTime.utc(
+          2026,
+          10,
+          1,
+        ).subtract(Duration(days: daysAgo)).toString(),
+        assets: withPhotos
+            ? [
+                for (var i = 0; i <= _random.nextInt(2); i++)
+                  ReviewAssetModel(
+                    url: photos[_random.nextInt(photos.length)],
+                    type: 'image',
+                  ),
+              ]
+            : const [],
       );
     });
   }

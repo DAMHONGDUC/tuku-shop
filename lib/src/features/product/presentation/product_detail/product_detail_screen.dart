@@ -1,31 +1,31 @@
-import 'package:collection/collection.dart';
-import 'package:tuku_shop/src/core/core.dart';
-import 'package:tuku_shop/src/di/injector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sliver_tools/sliver_tools.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
+import 'package:tuku_shop/src/core/core.dart';
+import 'package:tuku_shop/src/di/injector.dart';
+import 'package:tuku_shop/src/features/product/domain/domain.dart';
 
-import 'color_selection_section/color_selection_controller.dart';
-import 'color_selection_section/color_selection_section.dart';
-import 'components/bottom_action_section.dart';
-import 'components/description_section.dart';
-import 'components/product_info_skeleton.dart';
-import 'components/product_introduce_section.dart';
-import 'components/review_section.dart';
-import 'product_detail_app_bar/product_detail_app_bar.dart';
-import 'product_detail_app_bar/product_detail_app_bar_controller.dart';
+import 'add_to_cart/add_to_cart_controller.dart';
+import 'add_to_cart/add_to_cart_feedback.dart';
+import 'components/product_action_dock.dart';
+import 'components/product_gallery.dart';
+import 'components/product_info_section.dart';
 import 'product_detail_args.dart';
 import 'product_detail_controller.dart';
 import 'related_product_section/related_products_controller.dart';
 import 'related_product_section/related_products_section.dart';
+import 'reviews_section/product_reviews_controller.dart';
+import 'reviews_section/reviews_section.dart';
+import 'shop_section/shop_section.dart';
+import 'variant_section/variant_section.dart';
+import 'variant_section/variant_selection_controller.dart';
 
-final _kImgHeight = 400.0;
-
+/// The product page. Header, reviews and related items are three requests
+/// that fill in independently.
 class ProductDetailScreen extends StatelessWidget {
-  final ProductDetailArgs args;
-
   const ProductDetailScreen({super.key, required this.args});
+
+  final ProductDetailArgs args;
 
   @override
   Widget build(BuildContext context) {
@@ -36,186 +36,270 @@ class ProductDetailScreen extends StatelessWidget {
               getIt<ProductDetailController>()
                 ..getProductDetail(productId: args.productId),
         ),
+        BlocProvider(create: (_) => getIt<VariantSelectionController>()),
+        BlocProvider(create: (_) => getIt<AddToCartController>()),
+        BlocProvider(
+          create: (_) => getIt<ProductReviewsController>()
+            ..load(
+              args.productId,
+              pageSize: ProductReviewsController.previewSize,
+            ),
+        ),
         BlocProvider(
           create: (_) =>
               getIt<RelatedProductsController>()
                 ..getData(productId: args.productId),
         ),
-        BlocProvider(create: (_) => getIt<ProductDetailAppBarController>()),
-        BlocProvider(create: (_) => getIt<ColorSelectionController>()),
       ],
-      child: _Body(args: args),
+      child: _View(productId: args.productId),
     );
   }
 }
 
-class _Body extends StatefulWidget {
-  const _Body({required this.args});
-  final ProductDetailArgs args;
+class _View extends StatefulWidget {
+  const _View({required this.productId});
+
+  final String productId;
 
   @override
-  State<_Body> createState() => _BodyState();
+  State<_View> createState() => _ViewState();
 }
 
-class _BodyState extends State<_Body> {
-  late ScrollController _scrollController;
+class _ViewState extends State<_View> {
+  final _scrollController = ScrollController();
+
+  /// True once the gallery has scrolled under the app bar.
+  final _collapsed = ValueNotifier(false);
 
   @override
   void initState() {
-    _scrollController = ScrollController();
-    _scrollController.addListener(() {
-      context.read<ProductDetailAppBarController>().setScrollOffset(
-        _scrollController.offset,
-      );
-    });
     super.initState();
+    _scrollController.addListener(() {
+      final galleryHeight = _Content.galleryHeight(context);
+      _collapsed.value =
+          _scrollController.offset >
+          galleryHeight - kToolbarHeight - MediaQuery.paddingOf(context).top;
+    });
   }
 
   @override
   void dispose() {
     _scrollController.dispose();
+    _collapsed.dispose();
     super.dispose();
   }
 
-  Future _onRefresh(BuildContext context) async {
-    context.read<ProductDetailController>().getProductDetail(
-      productId: widget.args.productId,
-    );
-    context.read<RelatedProductsController>().getData(
-      productId: widget.args.productId,
+  @override
+  Widget build(BuildContext context) {
+    final colors = context.colorTheme;
+    final productId = widget.productId;
+
+    return AddToCartFeedback(
+      child: BlocConsumer<ProductDetailController, ProductDetailState>(
+        listener: (context, state) {
+          if (state is ProductDetailLoadedState) {
+            context.read<VariantSelectionController>().init(state.product);
+          }
+        },
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: colors.pageDefault,
+            extendBodyBehindAppBar: true,
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(kToolbarHeight),
+              child: ValueListenableBuilder<bool>(
+                valueListenable: _collapsed,
+                builder: (context, collapsed, _) => AppBar(
+                  backgroundColor: collapsed
+                      ? colors.pageDefault
+                      : SdColorsV5.transparent,
+                  surfaceTintColor: SdColorsV5.transparent,
+                  elevation: 0,
+                  scrolledUnderElevation: 0,
+                  centerTitle: true,
+                  title: collapsed && state is ProductDetailLoadedState
+                      ? Text(
+                          state.product.name,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: SdTextStyleV5.heading16()
+                              .wColor(colors.textDefault)
+                              .wDisplay(),
+                        )
+                      : null,
+                  actionsPadding: EdgeInsets.only(right: SdSpacingV5.s8),
+                  actions: [
+                    CartActionButton(
+                      style: collapsed
+                          ? AppIconButtonStyle.plain
+                          : AppIconButtonStyle.floating,
+                    ),
+                  ],
+                  // Same button style as the cart action, so the pair match
+                  // over the photo and in the collapsed bar.
+                  leading: Center(
+                    child: AppIconButton(
+                      icon: Icons.arrow_back_ios_new_rounded,
+                      label: MaterialLocalizations.of(
+                        context,
+                      ).backButtonTooltip,
+                      style: collapsed
+                          ? AppIconButtonStyle.plain
+                          : AppIconButtonStyle.floating,
+                      onTap: () => Navigator.of(context).maybePop(),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            bottomNavigationBar: state is ProductDetailLoadedState
+                ? ProductActionDock(product: state.product)
+                : null,
+            body: switch (state) {
+              ProductDetailLoadedState(:final product) => _Content(
+                product: product,
+                controller: _scrollController,
+              ),
+              ProductDetailErrorState() => SafeArea(
+                child: Padding(
+                  padding: EdgeInsets.all(SdSpacingV5.s16),
+                  child: Center(
+                    child: SectionError(
+                      onRetry: () => context
+                          .read<ProductDetailController>()
+                          .getProductDetail(productId: productId),
+                    ),
+                  ),
+                ),
+              ),
+              _ => const _Skeleton(),
+            },
+          );
+        },
+      ),
     );
   }
+}
+
+class _Content extends StatelessWidget {
+  const _Content({required this.product, required this.controller});
+
+  final ProductEntity product;
+  final ScrollController controller;
+
+  static double galleryHeight(BuildContext context) =>
+      MediaQuery.sizeOf(context).width / UIConstants.productImageAspect * 0.92;
 
   @override
   Widget build(BuildContext context) {
-    return SdSafeAreaScaffold(
-      backgroundColor: context.colorTheme.surfaceDefault,
-      bottomNavigationBar: _BottomSection(),
-      child: BlocListener<ProductDetailController, ProductDetailState>(
-        listener: (context, state) {
-          if (state is ProductDetailLoadedState) {
-            context.read<ColorSelectionController>().onChangeColor(
-              state.product.productColors.firstOrNull,
-            );
-          } else if (state is ProductDetailErrorState) {
-            // handle error case
-          }
-        },
-        child: RefreshWrapper(
-          onRefresh: () => _onRefresh(context),
-          child: CustomScrollView(
-            controller: _scrollController,
-            slivers: [
-              // Info section
-              _ProductInfoSection(),
+    final card = BoxDecoration(
+      color: context.colorTheme.cardDefault,
+      borderRadius: BorderRadius.circular(UIConstants.cardRadius),
+    );
+    final pad = EdgeInsets.all(SdSpacingV5.s16);
 
-              // Related projects
-              _SeperateSection(),
-              SliverToBoxAdapter(child: RelatedProductsSection()),
+    return CustomScrollView(
+      controller: controller,
+      slivers: [
+        SliverToBoxAdapter(
+          child: SizedBox(
+            height: galleryHeight(context),
+            child: ProductGallery(product: product),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Transform.translate(
+            offset: const Offset(0, -SdSpacingV5.s16),
+            child: Container(
+              decoration: BoxDecoration(
+                color: context.colorTheme.pageDefault,
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(UIConstants.sheetRadius),
+                ),
+              ),
+              padding: EdgeInsets.fromLTRB(
+                SdSpacingV5.s16,
+                SdSpacingV5.s24,
+                SdSpacingV5.s16,
+                SdSpacingV5.s16,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  ProductInfoSection(product: product),
+                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                  Container(
+                    decoration: card,
+                    padding: pad,
+                    child: VariantSection(product: product),
+                  ),
+                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                  const TrustRow(),
+                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                  if (product.sellerId.isNotEmpty) ...[
+                    Container(
+                      decoration: card,
+                      padding: pad,
+                      child: ShopSection(sellerId: product.sellerId),
+                    ),
+                    SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                  ],
+                  Container(
+                    decoration: card,
+                    padding: pad,
+                    child: DetailsSection(product: product),
+                  ),
+                  SdVerticalSpacingV5(value: SdSpacingV5.s16),
+                  Container(
+                    decoration: card,
+                    padding: pad,
+                    child: ReviewsSection(product: product),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: RelatedProductsSection(productId: product.id),
+        ),
+        SliverToBoxAdapter(child: SdVerticalSpacingV5(value: SdSpacingV5.s32)),
+      ],
+    );
+  }
+}
+
+class _Skeleton extends StatelessWidget {
+  const _Skeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+
+    return ListView(
+      padding: EdgeInsets.zero,
+      physics: const NeverScrollableScrollPhysics(),
+      children: [
+        SkeletonBox(
+          height: width / UIConstants.productImageAspect * 0.92,
+          radius: 0,
+        ),
+        Padding(
+          padding: EdgeInsets.all(SdSpacingV5.s16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SkeletonBox(width: 120),
+              SdVerticalSpacingV5(value: SdSpacingV5.s12),
+              const SkeletonBox(height: SdSpacingV5.s24, width: 240),
+              SdVerticalSpacingV5(value: SdSpacingV5.s12),
+              const SkeletonBox(height: SdSpacingV5.s20, width: 96),
+              SdVerticalSpacingV5(value: SdSpacingV5.s24),
+              const SkeletonBox(height: 120, radius: UIConstants.cardRadius),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _ProductInfoSection extends StatelessWidget {
-  const _ProductInfoSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProductDetailController, ProductDetailState>(
-      buildWhen: (previous, current) {
-        return current is ProductDetailLoadingState ||
-            current is ProductDetailLoadedState;
-      },
-      builder: (context, state) {
-        if (state is ProductDetailLoadingState) {
-          return MultiSliver(
-            children: [
-              SliverToBoxAdapter(
-                child: ProductInfoSkeleton(imgHeight: _kImgHeight),
-              ),
-            ],
-          );
-        } else if (state is ProductDetailLoadedState) {
-          return MultiSliver(
-            children: [
-              // App Bar
-              ProductDetailAppBar(
-                product: state.product,
-                imgHeight: _kImgHeight,
-              ),
-
-              // Product introduce section
-              SliverToBoxAdapter(
-                child: ProductIntroduceSection(product: state.product),
-              ),
-
-              // Color selection section
-              if (state.product.productColors.isNotEmpty) ...[
-                _SeperateSection(),
-                SliverToBoxAdapter(
-                  child: ColorSelectionSection(
-                    productColors: state.product.productColors,
-                  ),
-                ),
-              ],
-
-              // Review section
-              _SeperateSection(),
-              SliverToBoxAdapter(child: ReviewSection(product: state.product)),
-
-              // Description section
-              if (state.product.description != null) ...[
-                _SeperateSection(),
-                SliverToBoxAdapter(
-                  child: DescriptionSection(
-                    description: state.product.description!,
-                    imgHeight: _kImgHeight / 1.5,
-                  ),
-                ),
-              ],
-            ],
-          );
-        }
-        return SliverToBoxAdapter(child: SizedBox.shrink());
-      },
-    );
-  }
-}
-
-class _BottomSection extends StatelessWidget {
-  const _BottomSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<ProductDetailController, ProductDetailState>(
-      buildWhen: (previous, current) {
-        return current is ProductDetailLoadedState ||
-            current is ProductDetailLoadingState;
-      },
-      builder: (context, state) {
-        if (state is ProductDetailLoadedState) {
-          return BottomActionSection(price: state.product.price);
-        }
-        return SizedBox.shrink();
-      },
-    );
-  }
-}
-
-class _SeperateSection extends StatelessWidget {
-  const _SeperateSection();
-
-  @override
-  Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: SdVerticalSpacing(
-        bgColor: context.colorTheme.pageDefault,
-        value: SdSpacing.s8,
-      ),
+      ],
     );
   }
 }

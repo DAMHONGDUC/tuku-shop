@@ -19,6 +19,10 @@ class ReviewComment extends Equatable {
   final String createdAt;
   final List<ReviewAsset> assets;
 
+  /// The variation the reviewer bought; empty when unknown.
+  final String colorName;
+  final String size;
+
   const ReviewComment({
     required this.id,
     required this.userName,
@@ -26,8 +30,19 @@ class ReviewComment extends Equatable {
     required this.rating,
     required this.createdAt,
     this.assets = const [],
+    this.colorName = '',
+    this.size = '',
   });
 
   @override
-  List<Object?> get props => [id, userName, comment, rating, createdAt, assets];
+  List<Object?> get props => [
+    id,
+    userName,
+    comment,
+    rating,
+    createdAt,
+    assets,
+    colorName,
+    size,
+  ];
 }

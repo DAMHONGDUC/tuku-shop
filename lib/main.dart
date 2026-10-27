@@ -4,8 +4,7 @@ import 'package:tuku_shop/src/core/core.dart';
 import 'package:tuku_shop/src/di/injector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:system_design_flutter/index.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:system_design/index.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,15 +32,12 @@ class TukuShopApp extends StatelessWidget {
 
 Future<void> initialisation() async {
   try {
-    // firebase
-    await Firebase.initializeApp();
-
     // di
     Injector.config();
 
     // bloc observer
-    Bloc.observer = SdBlocObserver();
+    Bloc.observer = SdBlocObserverV5();
   } catch (e, stackTrace) {
-    SdLog.e('Initialization Error: $e', stackTrace);
+    SdLogV5.e('Initialization Error: $e', stackTrace);
   }
 }

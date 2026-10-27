@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AppColors.primary (lib/src/core/resources/app_colors.dart): the Flutter splash background, so the native launch screen hands over without a flash. Keep in step by hand. -->
+    <color name="launch_background">#504EB7</color>
+</resources>

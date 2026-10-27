@@ -7,10 +7,7 @@ void main() {
   testWidgets('EmptyView renders the given message', (tester) async {
     await tester.pumpWidget(
       MaterialApp(
-        // EmptyView only reads context.colorTheme (AppColorThemeExt), so
-        // AppTextThemeExt.light() is intentionally omitted here: it calls
-        // GoogleFonts internally, which needs font assets unavailable to
-        // the test asset bundle.
+        // EmptyView only reads context.colorTheme (AppColorThemeExt).
         theme: ThemeData(extensions: [AppColorThemeExt.light()]),
         home: const Scaffold(body: EmptyView(message: 'No data available')),
       ),

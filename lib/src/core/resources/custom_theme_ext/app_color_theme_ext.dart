@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:system_design_flutter/index.dart';
+import 'package:system_design/index.dart';
 
 import '../app_colors.dart';
 
@@ -19,6 +19,22 @@ class AppColorThemeExt extends ThemeExtension<AppColorThemeExt> {
   final Color primaryShadowDefault;
   final Color cardOnSurface;
   final Color boxShadowSecondary;
+  final Color sale;
+  final Color success;
+  final Color warning;
+
+  /// Brand at low opacity: secondary buttons, chips, highlighted cards.
+  final Color primarySoft;
+
+  /// Text and icons drawn on a [primary] fill.
+  final Color onPrimary;
+
+  /// Brand highlights that are not CTAs: trust icons, the free-shipping
+  /// bar, the member ring. Same hue as [primary].
+  final Color accent;
+
+  /// [accent] at low opacity, for tinted badges and cards.
+  final Color accentSoft;
 
   const AppColorThemeExt({
     required this.pageDefault,
@@ -36,34 +52,72 @@ class AppColorThemeExt extends ThemeExtension<AppColorThemeExt> {
     required this.primaryShadowDefault,
     required this.cardOnSurface,
     required this.boxShadowSecondary,
+    required this.sale,
+    required this.success,
+    required this.warning,
+    required this.primarySoft,
+    required this.onPrimary,
+    required this.accent,
+    required this.accentSoft,
   });
 
-  // Light theme
+  // Light theme: white page, soft grey cards, brand purple CTAs.
+  // Palette documented in docs/full-shop-flow-plan.md ("Premium refresh").
   static AppColorThemeExt light() {
+    const shadow = Color(0xFF28265A);
     return AppColorThemeExt(
-      pageDefault: Color(0xFFf1f1f1),
+      pageDefault: AppColors.pageDefaultLight,
       textDefault: AppColors.textDefaultLight,
       iconDefault: AppColors.iconDefaultLight,
-      iconSecondary: SdColors.grey.withValues(alpha: 0.9),
+      iconSecondary: AppColors.textSubTitleLight,
       textSubTitle: AppColors.textSubTitleLight,
       cardDefault: AppColors.cardDefaultLight,
-      boxShadowDefault: SdColors.black.withValues(alpha: 0.15),
-      borderDefault: Color(0xFFe6e7eb),
+      boxShadowDefault: shadow.withValues(alpha: 0.08),
+      borderDefault: const Color(0xFFE6E6EA),
       indicatorActive: AppColors.primary,
-      indicatorBg: SdColors.grey.withValues(alpha: 0.3),
+      indicatorBg: AppColors.inkSoft.withValues(alpha: 0.25),
       primary: AppColors.primary,
       surfaceDefault: AppColors.white,
-      primaryShadowDefault: AppColors.primary.withValues(alpha: 0.2),
-      cardOnSurface: Color(0xFFf1f1f1),
-      boxShadowSecondary: SdColors.black.withValues(alpha: 0.1),
+      primaryShadowDefault: AppColors.primary.withValues(alpha: 0.18),
+      cardOnSurface: AppColors.pageSecondaryLight,
+      boxShadowSecondary: shadow.withValues(alpha: 0.05),
+      sale: const Color(0xFFE5484D),
+      success: const Color(0xFF2E9E6B),
+      warning: const Color(0xFFF2B01E),
+      primarySoft: AppColors.primary.withValues(alpha: 0.06),
+      onPrimary: AppColors.white,
+      accent: AppColors.primary,
+      accentSoft: AppColors.primary.withValues(alpha: 0.08),
     );
   }
 
-  // Dark theme
-  // TODO: create color for dark theme
-  // for now it's have same value with light
+  // Dark theme: near-black page, the brand purple lifted for contrast.
   static AppColorThemeExt dark() {
-    return AppColorThemeExt.light();
+    const primary = AppColors.brandOnDark;
+    return AppColorThemeExt(
+      pageDefault: const Color(0xFF0F0F14),
+      textDefault: AppColors.textDefaultDark,
+      iconDefault: const Color(0xFFE2E2EA),
+      iconSecondary: const Color(0xFF9A9AAA),
+      textSubTitle: const Color(0xFF9A9AAA),
+      cardDefault: const Color(0xFF1A1A22),
+      boxShadowDefault: SdColorsV5.black.withValues(alpha: 0.4),
+      borderDefault: const Color(0xFF2A2A35),
+      indicatorActive: primary,
+      indicatorBg: const Color(0xFF9A9AAA).withValues(alpha: 0.3),
+      primary: primary,
+      surfaceDefault: const Color(0xFF1A1A22),
+      primaryShadowDefault: primary.withValues(alpha: 0.2),
+      cardOnSurface: const Color(0xFF22222C),
+      boxShadowSecondary: SdColorsV5.black.withValues(alpha: 0.3),
+      sale: const Color(0xFFFF6B6F),
+      success: const Color(0xFF4CC38A),
+      warning: const Color(0xFFF5C451),
+      primarySoft: primary.withValues(alpha: 0.12),
+      onPrimary: AppColors.white,
+      accent: primary,
+      accentSoft: primary.withValues(alpha: 0.14),
+    );
   }
 
   @override
