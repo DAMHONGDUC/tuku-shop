@@ -15,6 +15,8 @@ class GetProductReviewsUsecase
       productId: params.productId,
       page: params.page,
       pageSize: params.pageSize,
+      colorName: params.colorName,
+      size: params.size,
     );
   }
 }
@@ -24,12 +26,18 @@ class ProductReviewsParams extends Equatable {
   final int page;
   final int pageSize;
 
+  /// Only reviews of this variation, when set.
+  final String? colorName;
+  final String? size;
+
   const ProductReviewsParams({
     required this.productId,
     this.page = 1,
     this.pageSize = 5,
+    this.colorName,
+    this.size,
   });
 
   @override
-  List<Object?> get props => [productId, page, pageSize];
+  List<Object?> get props => [productId, page, pageSize, colorName, size];
 }

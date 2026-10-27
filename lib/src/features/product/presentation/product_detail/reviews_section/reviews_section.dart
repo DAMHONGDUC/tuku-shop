@@ -7,6 +7,7 @@ import 'package:tuku_shop/src/features/product/domain/domain.dart';
 import 'package:tuku_shop/src/features/product/presentation/widgets/review_comment_item.dart';
 
 import 'product_reviews_controller.dart';
+import 'review_filter_chips.dart';
 
 /// Rating summary from the product and the first few reviews; "View all"
 /// opens every review on its own screen.
@@ -49,6 +50,8 @@ class ReviewsSection extends StatelessWidget {
             ),
           ],
         ),
+        SdVerticalSpacingV5(value: SdSpacingV5.s12),
+        ReviewFilterChips(product: product),
         SdVerticalSpacingV5(value: SdSpacingV5.s16),
         BlocBuilder<ProductReviewsController, ProductReviewsState>(
           builder: (context, state) {
@@ -67,6 +70,14 @@ class ReviewsSection extends StatelessWidget {
                 );
               case ProductReviewsStatus.error:
                 return SectionError(onRetry: () => controller.load(product.id));
+              case ProductReviewsStatus.loaded when state.items.isEmpty:
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: SdSpacingV5.s8),
+                  child: Text(
+                    context.loc.review_no_match,
+                    style: SdTextStyleV5.body14().wColor(colors.textSubTitle),
+                  ),
+                );
               case ProductReviewsStatus.loaded:
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

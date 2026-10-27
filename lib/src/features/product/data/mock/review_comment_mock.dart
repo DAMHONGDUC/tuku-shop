@@ -67,6 +67,15 @@ class ReviewCommentMock {
     'It goes with almost everything in my wardrobe.',
   ];
 
+  /// Details for device accessories instead of garments.
+  static const _deviceDetails = [
+    'The silicone feels soft and grippy, no more slipping off the sofa.',
+    'Buttons are clicky and the camera cut-out lines up exactly.',
+    'Survived a few drops already without a scratch.',
+    'Slim enough that wireless charging still works.',
+    'The colour is lovely and does not pick up lint.',
+  ];
+
   static const _critical = [
     'Nice design, but it runs a little small, so size up.',
     'Good quality, though the colour is a touch darker than the photos.',
@@ -78,32 +87,39 @@ class ReviewCommentMock {
 
   static const _heights = [152, 158, 160, 163, 165, 168, 170, 174, 178, 182];
 
-  /// A buyer note with the size and colour they bought, when known.
-  static String _context(List<String> sizes, List<String> colors) {
+  /// A buyer note about the [size] and [color] they bought, when known.
+  /// A device model reads as such instead of a fit.
+  static String _context(String size, String color, {required bool isModel}) {
     final notes = <String>[
-      if (sizes.length > 1)
+      if (size.isNotEmpty && isModel)
+        'Fits my $size perfectly, buttons and camera cut-out line up.',
+      if (size.isNotEmpty && !isModel && size != 'One size')
         'I am ${_heights[_random.nextInt(_heights.length)]} cm and took '
-            '${sizes[_random.nextInt(sizes.length)]}, fits perfectly.',
-      if (colors.isNotEmpty)
-        'Ordered it in ${colors[_random.nextInt(colors.length)]} and might '
-            'get another colour too.',
-      'Wore it to work and got so many compliments.',
-      'Perfect for weekend trips, it packs without wrinkling.',
+            '$size, fits perfectly.',
+      if (color.isNotEmpty)
+        'Ordered it in $color and might get another colour too.',
+      if (!isModel) ...[
+        'Wore it to work and got so many compliments.',
+        'Perfect for weekend trips, it packs without wrinkling.',
+      ],
       'Will definitely order from this shop again.',
     ];
     return notes[_random.nextInt(notes.length)];
   }
 
-  /// [count] reviews, newest first. Each comment combines an impression, a
-  /// detail and often a buyer note using the product's [sizes] and
-  /// [colors]; lower ratings get a balanced comment. About one in three
-  /// carries one or two customer photos drawn from [photos].
+  /// [count] reviews, newest first. Each records the variation bought (one
+  /// of [colors] × [sizes]) and combines an impression, a detail and often
+  /// a buyer note about that variation; lower ratings get a balanced
+  /// comment. About one in three carries one or two customer photos drawn
+  /// from [photos]. [sizesAreModels] when [sizes] lists phone models.
   static List<ReviewCommentModel> generateRandomReviews(
     int count, {
     List<String> photos = const [],
     List<String> sizes = const [],
     List<String> colors = const [],
+    bool sizesAreModels = false,
   }) {
+    final details = sizesAreModels ? _deviceDetails : _details;
     var daysAgo = 0;
     return List.generate(count, (index) {
       daysAgo += 1 + _random.nextInt(12);
@@ -112,13 +128,18 @@ class ReviewCommentMock {
         (3 + _random.nextDouble() * 2).toStringAsFixed(1),
       );
       final withPhotos = photos.isNotEmpty && _random.nextInt(3) == 0;
+      final color = colors.isEmpty
+          ? ''
+          : colors[_random.nextInt(colors.length)];
+      final size = sizes.isEmpty ? '' : sizes[_random.nextInt(sizes.length)];
       final comment = rating < 3.8
           ? '${_critical[_random.nextInt(_critical.length)]} '
-                '${_details[_random.nextInt(_details.length)]}'
+                '${details[_random.nextInt(details.length)]}'
           : [
               _openers[_random.nextInt(_openers.length)],
-              _details[_random.nextInt(_details.length)],
-              if (_random.nextInt(3) > 0) _context(sizes, colors),
+              details[_random.nextInt(details.length)],
+              if (_random.nextInt(3) > 0)
+                _context(size, color, isModel: sizesAreModels),
             ].join(' ');
 
       return ReviewCommentModel(
@@ -126,6 +147,8 @@ class ReviewCommentMock {
         userName: _names[_random.nextInt(_names.length)],
         comment: comment,
         rating: rating,
+        colorName: color,
+        size: size,
         createdAt: DateTime.utc(
           2026,
           10,

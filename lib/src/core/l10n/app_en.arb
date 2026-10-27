@@ -478,5 +478,17 @@
     "shop_following": "Following",
     "shop_top_picks": "Top picks",
     "shop_stat_products": "Products",
-    "shop_follow_failed": "Could not update. Please try again."
+    "shop_follow_failed": "Could not update. Please try again.",
+    "pdp_model": "Model",
+    "pdp_select_model": "Pick a model first",
+    "review_variation": "Variation: {variant}",
+    "@review_variation": {
+        "placeholders": {
+            "variant": {
+                "type": "String"
+            }
+        }
+    },
+    "review_filter_all": "All",
+    "review_no_match": "No reviews for this variation yet."
 }

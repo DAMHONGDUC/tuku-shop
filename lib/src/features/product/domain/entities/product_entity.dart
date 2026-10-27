@@ -2,6 +2,7 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tuku_shop/src/features/product/domain/entities/description.dart';
 import 'package:tuku_shop/src/features/product/domain/entities/product_color.dart';
+import 'package:tuku_shop/src/features/product/domain/entities/product_option_kind.dart';
 import 'package:tuku_shop/src/features/product/domain/entities/product_size.dart';
 import 'package:tuku_shop/src/features/product/domain/entities/product_tag.dart';
 import 'package:tuku_shop/src/features/product/domain/entities/product_variant.dart';
@@ -22,6 +23,9 @@ class ProductEntity extends Equatable {
   final List<ReviewComment> reviewComments;
   final double averageRating;
   final List<ProductSize> productSizes;
+
+  /// What [productSizes] holds: sizes, or device models.
+  final ProductOptionKind secondOption;
   final String categoryId;
   final List<String> images;
   final double? originalPrice;
@@ -34,6 +38,7 @@ class ProductEntity extends Equatable {
   const ProductEntity({
     this.productColors = const [],
     this.productSizes = const [],
+    this.secondOption = ProductOptionKind.size,
     required this.name,
     required this.brand,
     this.sellerId = '',
@@ -76,6 +81,7 @@ class ProductEntity extends Equatable {
     name,
     brand,
     sellerId,
+    secondOption,
     price,
     imageUrl,
     productColors,

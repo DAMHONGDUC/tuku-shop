@@ -44,4 +44,32 @@ void main() {
     expect(sent.pageSize, 10);
     await c.close();
   });
+
+  test('color and size filters combine and toggle off', () async {
+    final c = ProductReviewsController(usecase);
+    await c.load('p');
+    await c.toggleColor('Black');
+    await c.toggleSize('M');
+    expect(c.state.colorFilter, 'Black');
+    expect(c.state.sizeFilter, 'M');
+
+    await c.toggleColor('Black');
+    expect(c.state.colorFilter, isNull);
+    expect(c.state.sizeFilter, 'M');
+
+    final sent = verify(
+      () => usecase.call(captureAny()),
+    ).captured.cast<ProductReviewsParams>();
+    expect(sent.map((p) => (p.colorName, p.size)), [
+      (null, null),
+      ('Black', null),
+      ('Black', 'M'),
+      (null, 'M'),
+    ]);
+    expect(sent.every((p) => p.page == 1), isTrue);
+
+    await c.clearFilter();
+    expect(c.state.isFiltered, isFalse);
+    await c.close();
+  });
 }

@@ -45,6 +45,29 @@ class ProductDescriptionMock {
         'refresh.',
   ];
 
+  /// Copy for device accessories sold per phone model.
+  static const _deviceCopy = _CategoryCopy(
+    openers: [
+      'Everyday protection that still feels like the bare phone.',
+      'Slim, grippy and made to be picked up a hundred times a day.',
+    ],
+    highlights: [
+      'Precise cut-outs for every button, port and camera',
+      'Raised lip guards the screen and lenses when face down',
+      'Soft microfiber lining against scratches',
+      'Works with wireless and MagSafe-style charging',
+      'Drop-tested from 1.5 m',
+    ],
+    styling: [
+      'Pick the exact model below so every cut-out lines up.',
+      'Collect a few colours and swap to match your outfit.',
+    ],
+    care: [
+      'Wipe with a damp cloth and mild soap. Let it dry before refitting.',
+    ],
+    fitNotes: ['Made for one phone model; choose yours under Model.'],
+  );
+
   static const _copy = <String, _CategoryCopy>{
     'women-tops': _CategoryCopy(
       openers: [
@@ -378,10 +401,13 @@ class ProductDescriptionMock {
   /// paragraphs separated by blank lines.
   static String generate({
     required String categoryId,
+    bool forDevice = false,
     required String material,
     required String fit,
   }) {
-    final copy = _copy[categoryId] ?? _copy['accessories']!;
+    final copy = forDevice
+        ? _deviceCopy
+        : _copy[categoryId] ?? _copy['accessories']!;
     final highlights = _pickHighlights(copy.highlights);
 
     return [

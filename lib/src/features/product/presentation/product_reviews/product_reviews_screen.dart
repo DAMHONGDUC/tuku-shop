@@ -9,6 +9,7 @@ import 'package:tuku_shop/src/features/product/presentation/product_detail/add_t
 import 'package:tuku_shop/src/features/product/presentation/product_detail/components/product_action_dock.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/product_detail_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/reviews_section/product_reviews_controller.dart';
+import 'package:tuku_shop/src/features/product/presentation/product_detail/reviews_section/review_filter_chips.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/reviews_section/reviews_section.dart';
 import 'package:tuku_shop/src/features/product/presentation/product_detail/variant_section/variant_selection_controller.dart';
 import 'package:tuku_shop/src/features/product/presentation/widgets/review_comment_item.dart';
@@ -82,6 +83,10 @@ class _View extends StatelessWidget {
                     const SkeletonBox(height: SdSpacingV5.s64)
                   else
                     _Summary(product: product),
+                  if (product != null) ...[
+                    SdVerticalSpacingV5(value: SdSpacingV5.s12),
+                    ReviewFilterChips(product: product),
+                  ],
                   SdVerticalSpacingV5(value: SdSpacingV5.s16),
                   _ReviewList(productId: productId),
                 ],
@@ -167,7 +172,9 @@ class _ReviewList extends StatelessWidget {
           ProductReviewsStatus.loaded when state.items.isEmpty => EmptyState(
             icon: Icons.rate_review_outlined,
             title: context.loc.pdp_reviews,
-            message: context.loc.pdp_no_reviews,
+            message: state.isFiltered
+                ? context.loc.review_no_match
+                : context.loc.pdp_no_reviews,
           ),
           ProductReviewsStatus.loaded => Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

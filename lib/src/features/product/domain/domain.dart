@@ -7,6 +7,7 @@ export 'entities/description.dart';
 export 'entities/review_comment.dart';
 export 'entities/product_tag.dart';
 export 'entities/product_variant.dart';
+export 'entities/product_option_kind.dart';
 export 'entities/product_query.dart';
 export 'entities/product_filters.dart';
 export 'entities/product_facets.dart';

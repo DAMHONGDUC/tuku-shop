@@ -1178,4 +1178,29 @@ const _catalog = <_CatalogRow>[
       '${_kCatalogPath}accessories/as5_2.jpg',
     ],
   ),
+  // A Shopee-style two-tier listing: pick a phone model, then a color.
+  _CatalogRow(
+    id: 'as6',
+    categoryId: 'accessories',
+    name: 'Soft Silicone Phone Case',
+    brand: 'Tuku Studio',
+    price: 19.90,
+    originalPrice: 24.90,
+    tags: [ProductTag.newArrival, ProductTag.sale],
+    colors: [
+      ('Blush', '#EBD5D1'),
+      ('Midnight', '#3B3F4F'),
+      ('Mint', '#A8E3DD'),
+      ('Coral', '#EE8E97'),
+      ('Sand', '#E6D3B3'),
+    ],
+    material: 'Liquid silicone, microfiber lining',
+    fit: 'Slim',
+    sizes: _Sizes.iphones,
+    secondOption: 'model',
+    images: [
+      '${_kCatalogPath}accessories/as6_1.jpg',
+      '${_kCatalogPath}accessories/as6_2.jpg',
+    ],
+  ),
 ];

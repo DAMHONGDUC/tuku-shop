@@ -891,4 +891,21 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get shop_follow_failed => 'Chưa cập nhật được. Vui lòng thử lại.';
+
+  @override
+  String get pdp_model => 'Mẫu máy';
+
+  @override
+  String get pdp_select_model => 'Hãy chọn mẫu máy trước';
+
+  @override
+  String review_variation(String variant) {
+    return 'Phân loại: $variant';
+  }
+
+  @override
+  String get review_filter_all => 'Tất cả';
+
+  @override
+  String get review_no_match => 'Chưa có đánh giá cho phân loại này.';
 }

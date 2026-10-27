@@ -113,7 +113,10 @@ class AddToCartSheet extends StatelessWidget {
                             SdVerticalSpacingV5(value: SdSpacingV5.s4),
                             Text(
                               stock == null
-                                  ? context.loc.pdp_select_size
+                                  ? (product.secondOption ==
+                                            ProductOptionKind.model
+                                        ? context.loc.pdp_select_model
+                                        : context.loc.pdp_select_size)
                                   : context.loc.sheet_in_stock(stock),
                               style: SdTextStyleV5.body12().wColor(
                                 colors.textSubTitle,

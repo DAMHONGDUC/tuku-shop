@@ -17,6 +17,9 @@ class ProductModel {
   final double? averageRating;
   final List<ProductColorModel>? productColors;
   final List<ProductSizeModel>? productSizes;
+
+  /// `size` or `model`: what [productSizes] holds.
+  final String? secondOption;
   final DescriptionModel? description;
   final List<ReviewCommentModel>? reviewComments;
   final String? categoryId;
@@ -39,6 +42,7 @@ class ProductModel {
     this.averageRating,
     this.productColors,
     this.productSizes,
+    this.secondOption,
     this.description,
     this.reviewComments,
     this.categoryId,

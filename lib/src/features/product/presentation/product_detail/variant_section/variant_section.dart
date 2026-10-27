@@ -6,8 +6,8 @@ import 'package:tuku_shop/src/features/product/domain/domain.dart';
 
 import 'variant_selection_controller.dart';
 
-/// Color swatches and size chips; sold-out sizes stay visible, struck
-/// through.
+/// Color swatches and size (or phone model) chips; sold-out options stay
+/// visible, struck through.
 class VariantSection extends StatelessWidget {
   const VariantSection({super.key, required this.product});
 
@@ -59,7 +59,9 @@ class VariantSection extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  context.loc.pdp_size,
+                  product.secondOption == ProductOptionKind.model
+                      ? context.loc.pdp_model
+                      : context.loc.pdp_size,
                   style: SdTextStyleV5.body14().wColor(colors.textSubTitle),
                 ),
                 const Spacer(),

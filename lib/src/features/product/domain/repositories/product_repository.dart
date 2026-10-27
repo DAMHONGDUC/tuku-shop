@@ -22,6 +22,8 @@ abstract class ProductRepository {
     required String productId,
     required int page,
     required int pageSize,
+    String? colorName,
+    String? size,
   });
 
   /// The sizes, colors and price range the catalog can be filtered by.

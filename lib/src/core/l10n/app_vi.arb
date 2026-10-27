@@ -270,5 +270,10 @@
     "shop_following": "Đang theo dõi",
     "shop_top_picks": "Nổi bật",
     "shop_stat_products": "Sản phẩm",
-    "shop_follow_failed": "Chưa cập nhật được. Vui lòng thử lại."
+    "shop_follow_failed": "Chưa cập nhật được. Vui lòng thử lại.",
+    "pdp_model": "Mẫu máy",
+    "pdp_select_model": "Hãy chọn mẫu máy trước",
+    "review_variation": "Phân loại: {variant}",
+    "review_filter_all": "Tất cả",
+    "review_no_match": "Chưa có đánh giá cho phân loại này."
 }

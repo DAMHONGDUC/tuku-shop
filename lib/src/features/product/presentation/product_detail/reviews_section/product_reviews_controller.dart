@@ -20,13 +20,58 @@ class ProductReviewsController extends Cubit<ProductReviewsState> {
   /// How many reviews the product page previews before "View all".
   static const previewSize = 3;
 
-  Future<void> load(String productId, {int pageSize = pageSize}) async {
+  Future<void> load(String productId, {int pageSize = pageSize}) {
     _productId = productId;
     _pageSize = pageSize;
-    emit(const ProductReviewsState());
-    final result = await _getProductReviewsUsecase.call(
-      ProductReviewsParams(productId: productId, pageSize: pageSize),
+    return _loadFirstPage();
+  }
+
+  /// Narrows to this color, or clears it when it is already chosen; the
+  /// size filter stays.
+  Future<void> toggleColor(String colorName) {
+    emit(
+      ProductReviewsState(
+        colorFilter: colorName == state.colorFilter ? null : colorName,
+        sizeFilter: state.sizeFilter,
+      ),
     );
+    return _loadFirstPage();
+  }
+
+  /// Narrows to this size (or model), or clears it; the color filter stays.
+  Future<void> toggleSize(String size) {
+    emit(
+      ProductReviewsState(
+        colorFilter: state.colorFilter,
+        sizeFilter: size == state.sizeFilter ? null : size,
+      ),
+    );
+    return _loadFirstPage();
+  }
+
+  /// Back to every review.
+  Future<void> clearFilter() {
+    emit(const ProductReviewsState());
+    return _loadFirstPage();
+  }
+
+  Future<void> _loadFirstPage() async {
+    final colorFilter = state.colorFilter;
+    final sizeFilter = state.sizeFilter;
+    emit(ProductReviewsState(colorFilter: colorFilter, sizeFilter: sizeFilter));
+    final result = await _getProductReviewsUsecase.call(
+      ProductReviewsParams(
+        productId: _productId,
+        pageSize: _pageSize,
+        colorName: colorFilter,
+        size: sizeFilter,
+      ),
+    );
+    if (isClosed ||
+        colorFilter != state.colorFilter ||
+        sizeFilter != state.sizeFilter) {
+      return;
+    }
     result.fold(
       (_) => emit(state.copyWith(status: ProductReviewsStatus.error)),
       (page) => emit(
@@ -36,6 +81,8 @@ class ProductReviewsController extends Cubit<ProductReviewsState> {
           page: page.currentPage,
           totalRecord: page.totalRecord,
           hasMore: page.hasMore,
+          colorFilter: colorFilter,
+          sizeFilter: sizeFilter,
         ),
       ),
     );
@@ -49,6 +96,8 @@ class ProductReviewsController extends Cubit<ProductReviewsState> {
         productId: _productId,
         page: state.page + 1,
         pageSize: _pageSize,
+        colorName: state.colorFilter,
+        size: state.sizeFilter,
       ),
     );
     result.fold(

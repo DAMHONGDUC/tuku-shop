@@ -897,4 +897,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get shop_follow_failed => 'Could not update. Please try again.';
+
+  @override
+  String get pdp_model => 'Model';
+
+  @override
+  String get pdp_select_model => 'Pick a model first';
+
+  @override
+  String review_variation(String variant) {
+    return 'Variation: $variant';
+  }
+
+  @override
+  String get review_filter_all => 'All';
+
+  @override
+  String get review_no_match => 'No reviews for this variation yet.';
 }

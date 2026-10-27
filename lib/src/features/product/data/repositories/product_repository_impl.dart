@@ -73,11 +73,15 @@ class ProductRepositoryImpl implements ProductRepository {
     required String productId,
     required int page,
     required int pageSize,
+    String? colorName,
+    String? size,
   }) => _guard(() async {
     final result = await dataSource.getProductReviews(
       productId: productId,
       page: page,
       pageSize: pageSize,
+      colorName: colorName,
+      size: size,
     );
     return ReviewsPage(
       items:

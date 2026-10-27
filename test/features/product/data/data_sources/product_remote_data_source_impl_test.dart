@@ -22,11 +22,11 @@ void main() {
   test('pages 10 at a time and reports totals', () {
     final first = run(const ProductQuery());
     expect(first.items!.length, 10);
-    expect(first.totalRecord, 69);
+    expect(first.totalRecord, 70);
     expect(first.totalPage, 7);
 
     final last = run(const ProductQuery(page: 7));
-    expect(last.items!.length, 9);
+    expect(last.items!.length, 10);
     expect(run(const ProductQuery(page: 8)).items, isEmpty);
   });
 
@@ -59,12 +59,12 @@ void main() {
 
   test('sorts by price both ways', () {
     final up = run(
-      const ProductQuery(sort: ProductSort.priceLowToHigh, pageSize: 69),
+      const ProductQuery(sort: ProductSort.priceLowToHigh, pageSize: 70),
     ).items!.map((p) => p.price!).toList();
     expect(up, [...up]..sort());
 
     final down = run(
-      const ProductQuery(sort: ProductSort.priceHighToLow, pageSize: 69),
+      const ProductQuery(sort: ProductSort.priceHighToLow, pageSize: 70),
     ).items!.map((p) => p.price!).toList();
     expect(down, [...up.reversed]);
   });
@@ -135,5 +135,51 @@ void main() {
       facets.maxPrice,
       greaterThanOrEqualTo(prices.reduce((a, b) => a > b ? a : b)),
     );
+  });
+
+  test('the phone case lists models, kept out of the size filter', () {
+    final cases = run(const ProductQuery(keyword: 'phone case')).items!;
+    expect(cases.single.secondOption, 'model');
+    expect(
+      cases.single.productSizes!.map((s) => s.name),
+      contains('iPhone 17'),
+    );
+
+    late ProductFacetsModel facets;
+    fakeAsync((async) {
+      dataSource.getFacets().then((value) => facets = value);
+      async.elapse(MockLatency.max);
+    });
+    expect(facets.sizes, isNot(contains('iPhone 17')));
+    expect(facets.colors!.map((c) => c.name), contains('Midnight'));
+  });
+
+  test('reviews narrow to one variation', () {
+    late List<String?> colors;
+    late List<String?> sizes;
+    fakeAsync((async) {
+      dataSource
+          .getProductReviews(
+            productId: 'as6',
+            page: 1,
+            pageSize: 50,
+            colorName: 'Mint',
+          )
+          .then((page) => colors = [for (final r in page.items!) r.colorName]);
+      dataSource
+          .getProductReviews(
+            productId: 'as6',
+            page: 1,
+            pageSize: 50,
+            colorName: 'Mint',
+            size: 'iPhone 17',
+          )
+          .then((page) => sizes = [for (final r in page.items!) r.size]);
+      async.elapse(MockLatency.max);
+    });
+    expect(colors, isNotEmpty);
+    expect(colors.every((c) => c == 'Mint'), isTrue);
+    expect(sizes.every((s) => s == 'iPhone 17'), isTrue);
+    expect(sizes.length, lessThanOrEqualTo(colors.length));
   });
 }

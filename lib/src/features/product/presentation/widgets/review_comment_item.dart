@@ -60,6 +60,20 @@ class ReviewCommentItem extends StatelessWidget {
           review.comment,
           style: SdTextStyleV5.body14().wColor(context.colorTheme.textDefault),
         ),
+        if (review.colorName.isNotEmpty || review.size.isNotEmpty) ...[
+          const SizedBox(height: SdSpacingV5.s4),
+          Text(
+            context.loc.review_variation(
+              [
+                review.colorName,
+                review.size,
+              ].where((v) => v.isNotEmpty && v != 'One size').join(', '),
+            ),
+            style: SdTextStyleV5.body12().wColor(
+              context.colorTheme.textSubTitle,
+            ),
+          ),
+        ],
 
         const SdVerticalSpacingV5(xRatio: 0.25),
 

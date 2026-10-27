@@ -10,6 +10,10 @@ class ProductReviewsState extends Equatable {
   final bool hasMore;
   final bool isLoadingMore;
 
+  /// The variation the list is narrowed to, if any.
+  final String? colorFilter;
+  final String? sizeFilter;
+
   const ProductReviewsState({
     this.status = ProductReviewsStatus.loading,
     this.items = const [],
@@ -17,7 +21,11 @@ class ProductReviewsState extends Equatable {
     this.totalRecord = 0,
     this.hasMore = false,
     this.isLoadingMore = false,
+    this.colorFilter,
+    this.sizeFilter,
   });
+
+  bool get isFiltered => colorFilter != null || sizeFilter != null;
 
   ProductReviewsState copyWith({
     ProductReviewsStatus? status,
@@ -34,6 +42,8 @@ class ProductReviewsState extends Equatable {
       totalRecord: totalRecord ?? this.totalRecord,
       hasMore: hasMore ?? this.hasMore,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      colorFilter: colorFilter,
+      sizeFilter: sizeFilter,
     );
   }
 
@@ -45,5 +55,7 @@ class ProductReviewsState extends Equatable {
     totalRecord,
     hasMore,
     isLoadingMore,
+    colorFilter,
+    sizeFilter,
   ];
 }

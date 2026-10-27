@@ -20,6 +20,8 @@ abstract class ProductRemoteDataSource {
     required String productId,
     required int page,
     required int pageSize,
+    String? colorName,
+    String? size,
   });
 
   Future<List<String>> getTrendingSearches();

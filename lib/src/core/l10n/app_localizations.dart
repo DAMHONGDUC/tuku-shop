@@ -1723,6 +1723,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not update. Please try again.'**
   String get shop_follow_failed;
+
+  /// No description provided for @pdp_model.
+  ///
+  /// In en, this message translates to:
+  /// **'Model'**
+  String get pdp_model;
+
+  /// No description provided for @pdp_select_model.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick a model first'**
+  String get pdp_select_model;
+
+  /// No description provided for @review_variation.
+  ///
+  /// In en, this message translates to:
+  /// **'Variation: {variant}'**
+  String review_variation(String variant);
+
+  /// No description provided for @review_filter_all.
+  ///
+  /// In en, this message translates to:
+  /// **'All'**
+  String get review_filter_all;
+
+  /// No description provided for @review_no_match.
+  ///
+  /// In en, this message translates to:
+  /// **'No reviews for this variation yet.'**
+  String get review_no_match;
 }
 
 class _AppLocalizationsDelegate

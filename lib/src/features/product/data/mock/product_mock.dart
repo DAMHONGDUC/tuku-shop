@@ -19,6 +19,15 @@ class _Sizes {
   static const kids = ['2Y', '4Y', '6Y', '8Y', '10Y', '12Y'];
   static const shoes = ['36', '37', '38', '39', '40', '41', '42', '43', '44'];
   static const oneSize = ['One size'];
+  static const iphones = [
+    'iPhone 13',
+    'iPhone 14',
+    'iPhone 15',
+    'iPhone 16',
+    'iPhone 17',
+    'iPhone 17 Pro',
+    'iPhone 17 Pro Max',
+  ];
 }
 
 class _CatalogRow {
@@ -35,6 +44,9 @@ class _CatalogRow {
   final List<String> sizes;
   final List<String> images;
 
+  /// `model` when [sizes] lists device models instead of garment sizes.
+  final String secondOption;
+
   const _CatalogRow({
     required this.id,
     required this.categoryId,
@@ -48,6 +60,7 @@ class _CatalogRow {
     required this.fit,
     required this.sizes,
     required this.images,
+    this.secondOption = 'size',
   });
 }
 
@@ -115,6 +128,7 @@ class ProductMock {
       imageUrl: row.images.first,
       images: row.images,
       productColors: colors,
+      secondOption: row.secondOption,
       productSizes: [
         for (final size in row.sizes) ProductSizeModel(id: size, name: size),
       ],
@@ -129,10 +143,12 @@ class ProductMock {
         photos: row.images,
         sizes: row.sizes,
         colors: [for (final c in row.colors) c.$1],
+        sizesAreModels: row.secondOption == 'model',
       ),
       description: DescriptionModel(
         content: ProductDescriptionMock.generate(
           categoryId: row.categoryId,
+          forDevice: row.secondOption == 'model',
           material: row.material,
           fit: row.fit,
         ),

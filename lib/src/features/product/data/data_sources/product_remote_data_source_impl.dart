@@ -5,6 +5,7 @@ import 'package:tuku_shop/src/features/product/data/mock/search_mock.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_data_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_facets_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/product_model.dart';
+import 'package:tuku_shop/src/features/product/data/models/review_comment_model.dart';
 import 'package:tuku_shop/src/features/product/data/models/reviews_page_model.dart';
 import 'package:tuku_shop/src/features/product/domain/domain.dart';
 
@@ -110,8 +111,11 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
       final sizes = <String>[];
       final colors = <String, String>{};
       for (final p in _all) {
-        for (final s in p.productSizes ?? const []) {
-          if (s.name != null && !sizes.contains(s.name)) sizes.add(s.name!);
+        // Device models are not sizes; they stay out of the size filter.
+        if (p.secondOption != 'model') {
+          for (final s in p.productSizes ?? const []) {
+            if (s.name != null && !sizes.contains(s.name)) sizes.add(s.name!);
+          }
         }
         for (final c in p.productColors ?? const []) {
           if (c.colorName != null) {
@@ -185,12 +189,19 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
     required String productId,
     required int page,
     required int pageSize,
+    String? colorName,
+    String? size,
   }) async {
     await MockLatency.wait();
     final product = _all.firstWhereOrNull((e) => e.id == productId);
     if (product == null) throw const ServerException('Product not found');
 
-    final reviews = product.reviewComments ?? const [];
+    final reviews = [
+      for (final r in product.reviewComments ?? const <ReviewCommentModel>[])
+        if ((colorName == null || r.colorName == colorName) &&
+            (size == null || r.size == size))
+          r,
+    ];
     final total = reviews.length;
     final start = (page - 1) * pageSize;
     final end = (start + pageSize).clamp(0, total);
